@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Classes — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --sand:#e8dcc8; --sand-light:#f5efe3; --sand-dark:#c9b99a; --ocean:#2a7fa5; --ocean-deep:#1a5270; --ocean-light:#5aafd4; --seafoam:#4caf88; --seafoam-light:#a8d8c2; --white:#fafaf8; --text:#2c2c2c; --text-light:#6b6b6b; --nav-h:70px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); }
+  nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); background:rgba(26,82,112,0.97); backdrop-filter:blur(10px); display:flex; align-items:center; padding:0 2rem; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.2); }
+  .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
+  .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
+  .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
+  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(26,82,112,0.88),rgba(76,175,136,0.75)), url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
+  .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:0.75rem; }
+  .page-hero p { color:rgba(255,255,255,0.8); max-width:520px; line-height:1.7; font-size:0.97rem; }
+  .breadcrumb { background:var(--sand-light); padding:0.75rem 2rem; font-size:0.78rem; color:var(--text-light); }
+  .breadcrumb a { color:var(--ocean); text-decoration:none; }
+  .page-content { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .submit-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; margin-bottom:3rem; flex-wrap:wrap; }
+  .submit-banner h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.2rem; margin-bottom:0.3rem; }
+  .submit-banner p { color:rgba(255,255,255,0.75); font-size:0.875rem; }
+  .submit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.75rem 1.8rem; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all 0.2s; flex-shrink:0; }
+  .submit-btn:hover { background:var(--sand); transform:translateY(-2px); }
+  .listings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.75rem; }
+  .listing-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,0.07); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; }
+  .listing-card:nth-child(2){animation-delay:0.1s;} .listing-card:nth-child(3){animation-delay:0.2s;}
+  .listing-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.12); }
+  .listing-card-img { height:200px; width:100%; background:linear-gradient(135deg,var(--ocean-deep),var(--seafoam)); display:flex; align-items:center; justify-content:center; font-size:5rem; }
+  .listing-card-body { padding:1.5rem; }
+  .listing-card-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ocean); margin-bottom:0.5rem; }
+  .listing-card-name { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--ocean-deep); margin-bottom:0.6rem; }
+  .listing-card-desc { font-size:0.875rem; color:var(--text-light); line-height:1.7; margin-bottom:1rem; }
+  .listing-card-meta { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .listing-card-meta span { font-size:0.82rem; color:var(--text-light); }
+  .listing-card-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.2rem; }
+  .tag-pill { background:var(--sand-light); color:var(--ocean-deep); font-size:0.72rem; font-weight:600; padding:0.3rem 0.75rem; border-radius:20px; }
+  .merch-btn { width:100%; background:linear-gradient(135deg,var(--ocean),var(--seafoam)); color:#fff; border:none; border-radius:50px; padding:0.7rem; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; margin-bottom:0.75rem; }
+  .merch-btn:hover { transform:translateY(-2px); }
+  .review-toggle { background:none; border:none; color:var(--ocean); font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:0.4rem; }
+  .review-panel { display:none; margin-top:0.9rem; } .review-panel.open { display:block; }
+  .write-review-btn { width:100%; background:transparent; border:1.5px solid var(--ocean); color:var(--ocean); border-radius:50px; padding:0.55rem; font-size:0.82rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s; margin-bottom:0.7rem; }
+  .write-review-btn:hover { background:var(--ocean); color:#fff; }
+  .review-form { display:none; } .review-form.open { display:block; }
+  .star-picker { display:flex; gap:0.3rem; margin-bottom:0.75rem; font-size:1.4rem; cursor:pointer; }
+  .star-picker span { color:#ddd; transition:color 0.15s; } .star-picker span.lit { color:#f59e0b; }
+  .review-input { width:100%; border:1.5px solid var(--sand-dark); border-radius:10px; padding:0.65rem 0.85rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; resize:vertical; min-height:70px; margin-bottom:0.6rem; background:#fff; }
+  .review-name-input { width:100%; border:1.5px solid var(--sand-dark); border-radius:10px; padding:0.55rem 0.85rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; margin-bottom:0.6rem; background:#fff; }
+  .review-submit-btn { background:var(--ocean); color:#fff; border:none; border-radius:50px; padding:0.6rem 1.5rem; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
+  .review-card { background:var(--sand-light); border-radius:10px; padding:0.85rem 1rem; font-size:0.82rem; margin-bottom:0.6rem; }
+  .review-error { background:#fee2e2; border-radius:8px; padding:0.5rem 0.75rem; font-size:0.78rem; color:#991b1b; margin-bottom:0.6rem; display:none; }
+  .review-error.show { display:block; }
+  .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:4rem; }
+  .submit-section h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
+  .submit-section p { color:rgba(255,255,255,0.75); font-size:0.875rem; margin-bottom:1.5rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .form-group label { font-size:0.78rem; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:0.08em; }
+  .form-group input, .form-group textarea, .form-group select { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; padding:0.75rem 1rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9rem; width:100%; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.4); }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--seafoam-light); }
+  .form-group textarea { resize:vertical; min-height:90px; }
+  .form-group select option { background:var(--ocean-deep); }
+  .form-submit { background:var(--seafoam); color:#fff; border:none; padding:0.9rem 2.5rem; border-radius:50px; font-size:0.95rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
+  .form-submit:hover { background:#3a9a74; transform:translateY(-2px); }
+  .mod-notice { background:rgba(255,255,255,0.1); border-left:3px solid rgba(255,255,255,0.4); border-radius:0 8px 8px 0; padding:0.75rem 1rem; margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.7); }
+  footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
+  footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
+  footer a { color:var(--seafoam-light); text-decoration:none; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:768px){.form-row{grid-template-columns:1fr;}.submit-banner{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+<div class="page-hero">
+  <p class="page-hero-tag">Adults · Playas de Tijuana</p>
+  <h1>Cooking Classes</h1>
+  <p>From fresh seafood to traditional Mexican cuisine — learn to cook with local chefs in Playas de Tijuana.</p>
+</div>
+<div class="breadcrumb">
+  <a href="index.html">Home</a> › <a href="index.html#adults">Adults Activities</a> › Cooking Classes
+</div>
+<div class="page-content">
+  <div class="submit-banner">
+    <div>
+      <h3>Teach cooking in Playas?</h3>
+      <p>List your classes for free and share your culinary skills with the community.</p>
+    </div>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add a Listing</button>
+  </div>
+  <div class="listings-grid">
+    <div class="listing-card">
+      <div class="listing-card-img">👨‍🍳</div>
+      <div class="listing-card-body">
+        <p class="listing-card-tag">Cooking School</p>
+        <h2 class="listing-card-name">Cocina Playas</h2>
+        <p class="listing-card-desc">Learn traditional Baja-style cooking — fresh seafood, tacos, tamales, and more. Small group classes taught by local chefs.</p>
+        <div class="listing-card-meta">
+          <span>📍 Playas de Tijuana</span>
+          <span>🕐 Sat & Sun 10am · Wed evenings</span>
+        </div>
+        <div class="listing-card-tags">
+          <span class="tag-pill">Mexican Cuisine</span>
+          <span class="tag-pill">Seafood</span>
+          <span class="tag-pill">Baja Style</span>
+          <span class="tag-pill">Small Groups</span>
+        </div>
+        <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
+        <button class="review-toggle" onclick="toggleReviews('cocina_playas')">⭐ <span id="rev-count-cocina_playas">Reviews</span></button>
+        <div class="review-panel" id="rev-panel-cocina_playas">
+          <div id="rev-list-cocina_playas"></div>
+          <button class="write-review-btn" onclick="toggleReviewForm('cocina_playas')">✏️ Write a Review</button>
+          <div class="review-form" id="rev-form-cocina_playas">
+            <div class="star-picker" id="star-picker-cocina_playas">
+              <span onclick="setStar('cocina_playas',1)">★</span><span onclick="setStar('cocina_playas',2)">★</span><span onclick="setStar('cocina_playas',3)">★</span><span onclick="setStar('cocina_playas',4)">★</span><span onclick="setStar('cocina_playas',5)">★</span>
+            </div>
+            <input class="review-name-input" id="rev-name-cocina_playas" placeholder="Your name (optional)">
+            <textarea class="review-input" id="rev-text-cocina_playas" placeholder="Share your experience..."></textarea>
+            <div class="review-error" id="rev-error-cocina_playas"></div>
+            <button class="review-submit-btn" onclick="submitReview('cocina_playas','Cocina Playas')">Post Review</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="listing-card">
+      <div class="listing-card-img">🍳</div>
+      <div class="listing-card-body">
+        <p class="listing-card-tag">Cooking Class</p>
+        <h2 class="listing-card-name">Your Class Here</h2>
+        <p class="listing-card-desc">Know a great cooking class or chef in Playas? Submit their info and share the flavor with the community.</p>
+        <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
+        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
+      </div>
+    </div>
+  </div>
+  <div class="submit-section" id="submit-listing">
+    <h2>➕ Add a Cooking Class</h2>
+    <p>Submit a listing for review. We'll add it once approved.</p>
+    <div class="form-row">
+      <div class="form-group"><label>Class / Chef Name</label><input type="text" placeholder="e.g. Cocina con María"></div>
+      <div class="form-group"><label>Cuisine Type</label>
+        <select><option>Mexican / Baja</option><option>Seafood</option><option>Vegan / Plant-based</option><option>Baking & Pastry</option><option>International</option><option>Multiple</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address or neighborhood"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the class, what's cooked, group size, price..."></textarea></div>
+    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
+    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 👨‍🍳')">Submit for Review</button>
+    <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+  </div>
+</div>
+<footer>
+  <div class="footer-brand">🌴 Playas de Tijuana</div>
+  <p>Your neighborhood community hub</p>
+  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+</footer>
+<script>
+  const BAD_WORDS=['fuck','shit','ass','bitch','cunt','dick','pussy','bastard','piss','cock','whore','slut','puta','pinche','pendejo','cabron','joder','chinga'];
+  const starState={};const reviewData={};
+  function setStar(id,val){starState[id]=val;const p=document.getElementById('star-picker-'+id);if(p)p.querySelectorAll('span').forEach((s,i)=>s.classList.toggle('lit',i<val));}
+  function toggleReviews(id){const p=document.getElementById('rev-panel-'+id);if(p){p.classList.toggle('open');renderReviewList(id);}}
+  function toggleReviewForm(id){const f=document.getElementById('rev-form-'+id);if(f)f.classList.toggle('open');}
+  function containsProfanity(t){return t.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).some(w=>BAD_WORDS.includes(w));}
+  function sanitize(t){return t.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();}
+  function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=`${avg} ★ · ${reviews.length} review${reviews.length!==1?'s':''}`;list.innerHTML=reviews.map(r=>`<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>${sanitize(r.name||'Anonymous')}</strong><span style="font-size:0.72rem;color:var(--text-light)">${r.date}</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">${'★'.repeat(r.stars)}</div><div>${sanitize(r.text)}</div></div>`).join('');}
+  function submitReview(id,bizName){const nameEl=document.getElementById('rev-name-'+id);const textEl=document.getElementById('rev-text-'+id);const errorEl=document.getElementById('rev-error-'+id);const stars=starState[id]||0;const name=(nameEl?nameEl.value:'').trim();const text=(textEl?textEl.value:'').trim();errorEl.classList.remove('show');errorEl.textContent='';if(stars===0){errorEl.textContent='⭐ Please select a star rating.';errorEl.classList.add('show');return;}if(text.length<5){errorEl.textContent='✏️ Please write at least a sentence.';errorEl.classList.add('show');return;}if(containsProfanity(text)||containsProfanity(name)){errorEl.textContent="🚫 Your review contains language that isn't allowed.";errorEl.classList.add('show');return;}if(!reviewData[id])reviewData[id]=[];const review={name:name||'Anonymous',text,stars,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),approved:false,id:Date.now()};reviewData[id].push(review);if(textEl)textEl.value='';if(nameEl)nameEl.value='';setStar(id,0);document.getElementById('rev-form-'+id).classList.remove('open');renderReviewList(id);errorEl.style.background='#d1fae5';errorEl.style.color='#065f46';errorEl.textContent='✅ Thanks! Your review is pending approval.';errorEl.classList.add('show');setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);}
+</script>
+</body>
+</html>
