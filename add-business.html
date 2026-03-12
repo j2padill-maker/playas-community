@@ -194,7 +194,7 @@
       <p class="form-section-title">📍 Location & Contact</p>
 
       <div class="form-group">
-        <label>Address <span class="required">*</span></label>
+        <label>Address <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional)</span></label>
         <input type="text" id="address" name="Address" placeholder="e.g. Blvd. Sánchez Taboada 1234, Playas de Tijuana">
         <span class="field-error" id="err-address">Please enter your address.</span>
       </div>
@@ -286,12 +286,12 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label>Your Name <span class="required">*</span></label>
+          <label>Your Name <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional)</span></label>
           <input type="text" id="contactName" name="Contact Name" placeholder="Your full name">
           <span class="field-error" id="err-contactName">Please enter your name.</span>
         </div>
         <div class="form-group">
-          <label>Your Email <span class="required">*</span></label>
+          <label>Your Email <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional)</span></label>
           <input type="email" id="contactEmail" name="Contact Email" placeholder="your@email.com">
           <span class="field-error" id="err-contactEmail">Please enter a valid email address.</span>
         </div>
@@ -377,19 +377,6 @@ function validateForm() {
   const desc = document.getElementById('description').value.trim();
   showError('description', desc.length < 20);
   if (desc.length < 20) valid = false;
-
-  const addr = document.getElementById('address').value.trim();
-  showError('address', !addr);
-  if (!addr) valid = false;
-
-  const cname = document.getElementById('contactName').value.trim();
-  showError('contactName', !cname);
-  if (!cname) valid = false;
-
-  const cemail = document.getElementById('contactEmail').value.trim();
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cemail);
-  showError('contactEmail', !emailOk);
-  if (!emailOk) valid = false;
 
   return valid;
 }
