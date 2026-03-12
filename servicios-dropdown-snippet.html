@@ -1,0 +1,40 @@
+<!-- ── SERVICES DROPDOWN — paste this into your index.html nav ── -->
+<!-- Replace your existing Servicios/Services nav item with this block -->
+
+<div class="nav-dropdown">
+  <button class="nav-dropdown-btn">Services ▾</button>
+  <div class="nav-dropdown-menu">
+    <a href="services-mecanicos.html">🔧 Mechanics</a>
+    <a href="services-dentistas.html">🦷 Dentists</a>
+    <a href="services-medicos.html">🩺 Doctors</a>
+    <a href="services-veterinarios.html">🐾 Veterinarians</a>
+    <a href="services-bienes-raices.html">🏠 Real Estate</a>
+    <a href="services-plomeros.html">🚿 Plumbers</a>
+    <a href="services-electricistas.html">⚡ Electricians</a>
+    <a href="services-manitas.html">🛠️ Handyman & Home Repair</a>
+  </div>
+</div>
+
+<!-- ── CSS: add inside your existing <style> block ── -->
+<style>
+.nav-dropdown { position:relative; }
+.nav-dropdown-btn { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; border-radius:50px; padding:0.45rem 1.1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+.nav-dropdown-btn:hover { background:rgba(255,255,255,0.25); }
+.nav-dropdown-menu { display:none; position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); background:var(--ocean-deep); border-radius:16px; padding:0.6rem; min-width:240px; box-shadow:0 12px 40px rgba(0,0,0,0.35); z-index:2000; }
+.nav-dropdown-menu a { display:flex; align-items:center; gap:0.6rem; padding:0.65rem 1rem; border-radius:10px; color:rgba(255,255,255,0.88); text-decoration:none; font-size:0.88rem; font-weight:500; transition:background 0.15s; }
+.nav-dropdown-menu a:hover { background:rgba(255,255,255,0.12); color:#fff; }
+.nav-dropdown.open .nav-dropdown-menu { display:block; }
+</style>
+
+<!-- ── JS: add before your closing </body> tag ── -->
+<script>
+document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    btn.closest('.nav-dropdown').classList.toggle('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+});
+</script>
