@@ -913,7 +913,9 @@
     <li><a href="javascript:void(0)" id="nav-link-kids" onclick="goToSection('kids')">Niños</a></li>
     <li><a href="javascript:void(0)" id="nav-link-adults" onclick="goToSection('adults')">Adultos</a></li>
     <li><a href="javascript:void(0)" id="nav-link-eats" onclick="goToSection('restaurants')">Restaurantes</a></li>
-    <li><a href="javascript:void(0)" id="nav-link-services" onclick="goToSection('services')">Servicios</a></li>
+    <li class="dropdown" id="nav-services-dropdown-li">
+      <a href="javascript:void(0)" id="nav-link-services" onclick="toggleDropdown(event,'services-dropdown')" style="display:flex;align-items:center;gap:0.2rem;">Services <span class="dropdown-arrow">▾</span></a>
+    </li>
     <li><a href="javascript:void(0)" id="nav-link-realestate" onclick="goToSection('realestate')">Bienes Raíces</a></li>
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
   </ul>
@@ -954,14 +956,18 @@
 
 <!-- SERVICES DROPDOWN -->
 <div class="dropdown-menu" id="services-dropdown">
-  <button class="dropdown-item" onclick="dropdownGo('gyms')" id="drop-gyms"><span class="item-icon">💪</span> Gimnasios</button>
-  <button class="dropdown-item" onclick="dropdownGo('mechanics')" id="drop-mechanics"><span class="item-icon">🔧</span> Mecánicos</button>
+  <button class="dropdown-item" onclick="window.location.href='services.html'" id="drop-services-hub"><span class="item-icon">🛠️</span> All Services</button>
   <div class="dropdown-divider"></div>
-  <button class="dropdown-item" onclick="dropdownGo('health')" id="drop-dentists"><span class="item-icon">🦷</span> Dentistas</button>
-  <button class="dropdown-item" onclick="dropdownGo('health')" id="drop-doctors"><span class="item-icon">🩺</span> Médicos</button>
-  <button class="dropdown-item" onclick="dropdownGo('health')" id="drop-vets"><span class="item-icon">🐾</span> Veterinarios</button>
+  <button class="dropdown-item" onclick="window.location.href='services-mecanicos.html'" id="drop-mechanics"><span class="item-icon">🔧</span> Mechanics</button>
+  <button class="dropdown-item" onclick="window.location.href='services-plomeros.html'" id="drop-plumbers"><span class="item-icon">🪠</span> Plumbers</button>
+  <button class="dropdown-item" onclick="window.location.href='services-electricistas.html'" id="drop-electricians"><span class="item-icon">⚡</span> Electricians</button>
+  <button class="dropdown-item" onclick="window.location.href='services-manitas.html'" id="drop-handyman"><span class="item-icon">🏠</span> Handyman & Home Repair</button>
   <div class="dropdown-divider"></div>
-  <button class="dropdown-item" id="drop-realestate" onclick="dropdownGo('realestate')"><span class="item-icon">🏠</span> Bienes Raíces</button>
+  <button class="dropdown-item" onclick="window.location.href='services-dentistas.html'" id="drop-dentists"><span class="item-icon">🦷</span> Dentists</button>
+  <button class="dropdown-item" onclick="window.location.href='services-medicos.html'" id="drop-doctors"><span class="item-icon">🩺</span> Doctors</button>
+  <button class="dropdown-item" onclick="window.location.href='services-veterinarios.html'" id="drop-vets"><span class="item-icon">🐾</span> Veterinarians</button>
+  <div class="dropdown-divider"></div>
+  <button class="dropdown-item" onclick="window.location.href='services-bienes-raices.html'" id="drop-realestate"><span class="item-icon">🏡</span> Real Estate</button>
 </div>
 
 <!-- KIDS DROPDOWN -->
