@@ -807,6 +807,9 @@
     z-index: 9999;
     box-shadow: 0 12px 40px rgba(0,0,0,0.4);
     animation: dropIn 0.18s ease both;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   @keyframes dropIn {
     from { opacity: 0; transform: translateY(-8px); }
@@ -2304,9 +2307,13 @@ Just **select and delete** the old block in your `index.html` and paste this in 
     const rect = btn.getBoundingClientRect();
     // Close all other dropdowns first
     allMenus.forEach(m => { if (m.id !== menuId) m.classList.remove('show'); });
-    // Position and toggle this one
-    menu.style.top = (rect.bottom + 8) + 'px';
-    menu.style.left = Math.max(8, rect.left + rect.width / 2 - 110) + 'px';
+    // Position below button, cap height so it never runs off-screen
+    const MARGIN = 12;
+    const topPos = rect.bottom + 8;
+    const availableHeight = window.innerHeight - topPos - MARGIN;
+    menu.style.top = topPos + 'px';
+    menu.style.maxHeight = Math.max(120, availableHeight) + 'px';
+    menu.style.left = Math.max(8, Math.min(rect.left + rect.width / 2 - 110, window.innerWidth - 236)) + 'px';
     menu.classList.toggle('show');
   }
 
