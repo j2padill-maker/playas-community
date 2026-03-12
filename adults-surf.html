@@ -141,23 +141,26 @@
       </div>
     </div>
   </div>
-  <div class="submit-section" id="submit-listing">
+    <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Surf or Water Sports Business</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
+    <form id="surfForm">
     <div class="form-row">
-      <div class="form-group"><label>Business Name</label><input type="text" placeholder="e.g. Surf Playas"></div>
+      <div class="form-group"><label>Business Name</label><input id="surfName" name="Name" type="text" placeholder="e.g. Surf Playas"></div>
       <div class="form-group"><label>Type</label>
-        <select><option>Surf School</option><option>Board Rental</option><option>Paddleboard / SUP</option><option>Kayaking</option><option>Snorkeling</option><option>Swimming Lessons</option><option>Multiple</option></select>
+        <select name="Category"><option>Surf School</option><option>Board Rental</option><option>Paddleboard / SUP</option><option>Kayaking</option><option>Snorkeling</option><option>Swimming Lessons</option><option>Multiple</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Beach / Address</label><input type="text" placeholder="Beach location or street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about lessons, rentals, pricing, skill levels..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
-    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 🏄')">Submit for Review</button>
+    <div class="form-group"><label>Description</label><textarea id="surfDesc" name="Description" placeholder="Tell us about lessons, rentals, pricing, skill levels..."></textarea></div>
+    <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
+    <button type="submit" class="form-submit" id="surfSubmitBtn">Submit for Review</button>
+    <div id="surfSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;">🎉 Thank you! Your submission is pending review. We'll be in touch soon!</div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    </form>
   </div>
 </div>
 <footer>
@@ -175,6 +178,39 @@
   function sanitize(t){return t.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();}
   function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=`${avg} ★ · ${reviews.length} review${reviews.length!==1?'s':''}`;list.innerHTML=reviews.map(r=>`<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>${sanitize(r.name||'Anonymous')}</strong><span style="font-size:0.72rem;color:var(--text-light)">${r.date}</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">${'★'.repeat(r.stars)}</div><div>${sanitize(r.text)}</div></div>`).join('');}
   function submitReview(id,bizName){const nameEl=document.getElementById('rev-name-'+id);const textEl=document.getElementById('rev-text-'+id);const errorEl=document.getElementById('rev-error-'+id);const stars=starState[id]||0;const name=(nameEl?nameEl.value:'').trim();const text=(textEl?textEl.value:'').trim();errorEl.classList.remove('show');errorEl.textContent='';if(stars===0){errorEl.textContent='⭐ Please select a star rating.';errorEl.classList.add('show');return;}if(text.length<5){errorEl.textContent='✏️ Please write at least a sentence.';errorEl.classList.add('show');return;}if(containsProfanity(text)||containsProfanity(name)){errorEl.textContent="🚫 Your review contains language that isn't allowed.";errorEl.classList.add('show');return;}if(!reviewData[id])reviewData[id]=[];const review={name:name||'Anonymous',text,stars,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),approved:false,id:Date.now()};reviewData[id].push(review);if(textEl)textEl.value='';if(nameEl)nameEl.value='';setStar(id,0);document.getElementById('rev-form-'+id).classList.remove('open');renderReviewList(id);errorEl.style.background='#d1fae5';errorEl.style.color='#065f46';errorEl.textContent='✅ Thanks! Your review is pending approval.';errorEl.classList.add('show');setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);}
+
+  // ─── Listing Form Submit ─────────────────────────────────
+  document.getElementById('surfForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('surfName').value.trim();
+    const desc = document.getElementById('surfDesc').value.trim();
+    if (!name) { alert('Please enter the name.'); return; }
+    if (desc.length < 10) { alert('Please add a short description.'); return; }
+
+    const btn = document.getElementById('surfSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+
+    const data = {};
+    new FormData(this).forEach((val, key) => { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Surf & Water Sports Page';
+
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+
+      document.getElementById('surfForm').style.display = 'none';
+      document.getElementById('surfSuccess').style.display = 'block';
+    } catch(err) {
+      alert('Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+    }
+  });
 </script>
 </body>
 </html>

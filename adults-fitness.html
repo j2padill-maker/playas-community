@@ -158,25 +158,27 @@
 
   </div>
 
-  <div class="submit-section" id="submit-listing">
+    <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Gym or Fitness Center</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
+    <form id="fitnessForm">
     <div class="form-row">
-      <div class="form-group"><label>Gym Name</label><input type="text" placeholder="e.g. Gym Playas"></div>
+      <div class="form-group"><label>Gym Name</label><input id="fitnessName" name="Name" type="text" placeholder="e.g. Gym Playas"></div>
       <div class="form-group"><label>Type</label>
-        <select><option>Full Gym</option><option>CrossFit Box</option><option>Functional Training</option><option>Outdoor Fitness</option><option>Personal Training Studio</option></select>
+        <select name="Category"><option>Full Gym</option><option>CrossFit Box</option><option>Functional Training</option><option>Outdoor Fitness</option><option>Personal Training Studio</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the gym, equipment, hours, membership prices..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
-    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 💪')">Submit for Review</button>
+    <div class="form-group"><label>Description</label><textarea id="fitnessDesc" name="Description" placeholder="Tell us about the gym, equipment, hours, membership prices..."></textarea></div>
+    <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
+    <button type="submit" class="form-submit" id="fitnessSubmitBtn">Submit for Review</button>
+    <div id="fitnessSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;">🎉 Thank you! Your submission is pending review. We'll be in touch soon!</div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    </form>
   </div>
-
 </div>
 
 <footer>
@@ -218,6 +220,39 @@
     setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);
     setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);
   }
+
+  // ─── Listing Form Submit ─────────────────────────────────
+  document.getElementById('fitnessForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('fitnessName').value.trim();
+    const desc = document.getElementById('fitnessDesc').value.trim();
+    if (!name) { alert('Please enter the name.'); return; }
+    if (desc.length < 10) { alert('Please add a short description.'); return; }
+
+    const btn = document.getElementById('fitnessSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+
+    const data = {};
+    new FormData(this).forEach((val, key) => { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Adult Fitness Page';
+
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+
+      document.getElementById('fitnessForm').style.display = 'none';
+      document.getElementById('fitnessSuccess').style.display = 'block';
+    } catch(err) {
+      alert('Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+    }
+  });
 </script>
 </body>
 </html>
