@@ -164,20 +164,23 @@
   <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Dance Studio</h2>
     <p>Submit a studio for review. We'll add it once approved.</p>
+    <form id="danceStudioForm" novalidate>
     <div class="form-row">
-      <div class="form-group"><label>Studio Name</label><input type="text" placeholder="e.g. Studio Playas"></div>
+      <div class="form-group"><label>Studio Name *</label><input id="studioName" name="Business Name" type="text" placeholder="e.g. Studio Playas"></div>
       <div class="form-group"><label>Dance Style</label>
-        <select><option>Ballet</option><option>Folklórico</option><option>Hip-Hop</option><option>Contemporary</option><option>Salsa / Latin</option><option>Multiple Styles</option></select>
+        <select name="Category"><option>Ballet</option><option>Folklórico</option><option>Hip-Hop</option><option>Contemporary</option><option>Salsa / Latin</option><option>Multiple Styles</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the studio, age groups, experience level..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
-    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 💃')">Submit for Review</button>
+    <div class="form-group"><label>Description *</label><textarea id="studioDesc" name="Description" placeholder="Tell us about the studio, age groups, experience level..."></textarea></div>
+    <div class="form-group"><label>Your Name & Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
+    <button type="submit" class="form-submit" id="danceSubmitBtn">Submit for Review</button>
+    <div id="danceSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;">🎉 Thank you! Your submission is pending review. We'll be in touch soon!</div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    </form>
   </div>
 
 </div>
@@ -221,6 +224,39 @@
     setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);
     setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);
   }
+
+  // ─── Dance Studio Form Submit ─────────────────────────────────
+  document.getElementById('danceStudioForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('studioName').value.trim();
+    const desc = document.getElementById('studioDesc').value.trim();
+    if (!name) { alert('Please enter the studio name.'); return; }
+    if (desc.length < 10) { alert('Please add a short description.'); return; }
+
+    const btn = document.getElementById('danceSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+
+    const data = {};
+    new FormData(this).forEach((val, key) => { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Dance Studio Page';
+
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+
+      document.getElementById('danceStudioForm').style.display = 'none';
+      document.getElementById('danceSuccess').style.display = 'block';
+    } catch(err) {
+      alert('Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+    }
+  });
 </script>
 </body>
 </html>
