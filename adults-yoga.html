@@ -146,7 +146,7 @@
     <p>Submit a listing for review. We'll add it once approved.</p>
     <form id="yogaForm">
     <div class="form-row">
-      <div class="form-group"><label>Studio Name</label><input id="yogaName" name="Name" type="text" placeholder="e.g. Yoga Playas"></div>
+      <div class="form-group"><label>Studio Name</label><input id="yogaName" name="Business Name" type="text" placeholder="e.g. Yoga Playas"></div>
       <div class="form-group"><label>Type</label>
         <select name="Category"><option>Yoga Studio</option><option>Pilates Studio</option><option>Both Yoga & Pilates</option><option>Outdoor / Beach Classes</option><option>Private Instruction</option></select>
       </div>
@@ -158,7 +158,14 @@
     <div class="form-group"><label>Description</label><textarea id="yogaDesc" name="Description" placeholder="Tell us about the classes, instructors, schedule, pricing..."></textarea></div>
     <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
     <button type="submit" class="form-submit" id="yogaSubmitBtn">Submit for Review</button>
-    <div id="yogaSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;">🎉 Thank you! Your submission is pending review. We'll be in touch soon!</div>
+    <div id="yogaSuccess" style="display:none;">
+      <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
+        <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;margin-bottom:1.25rem;">Thank you! Your listing has been submitted for review.<br>We'll get it added to the page within 1–2 business days.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;">Questions? Reach us at <span style="color:#a8d8c2;">playasdetijuana.community@gmail.com</span></p>
+      </div>
+    </div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
     </form>
   </div>
