@@ -949,13 +949,17 @@
 
 <!-- RESTAURANTS DROPDOWN -->
 <div class="dropdown-menu" id="restaurants-dropdown">
-  <button class="dropdown-item" onclick="dropdownGo('restaurants')" id="drop-mariscos"><span class="item-icon">🦞</span> Mariscos y Pescados</button>
-  <button class="dropdown-item" onclick="dropdownGo('restaurants')" id="drop-carnes"><span class="item-icon">🌮</span> Carnes a las Brasas y Tacos</button>
-  <button class="dropdown-item" onclick="dropdownGo('restaurants')" id="drop-cafes"><span class="item-icon">☕</span> Cafés y Brunch</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html'" id="drop-all-rest"><span class="item-icon">🍽️</span> All Restaurants</button>
   <div class="dropdown-divider"></div>
-  <button class="dropdown-item" id="drop-submit-rest" onclick="dropdownGo('restaurants')"><span class="item-icon">➕</span> Agregar Restaurante</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#mariscos'" id="drop-mariscos"><span class="item-icon">🦞</span> Mariscos & Seafood</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#tacos'" id="drop-tacos"><span class="item-icon">🌮</span> Tacos & Street Food</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#cafe'" id="drop-cafes"><span class="item-icon">☕</span> Cafés & Brunch</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#pizza'" id="drop-pizza"><span class="item-icon">🍕</span> Pizza & International</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#sushi'" id="drop-sushi"><span class="item-icon">🍣</span> Sushi & Asian Cuisine</button>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#fina'" id="drop-fina"><span class="item-icon">🍷</span> Fine Dining</button>
+  <div class="dropdown-divider"></div>
+  <button class="dropdown-item" onclick="window.location.href='restaurantes.html#submit-restaurant'" id="drop-submit-rest"><span class="item-icon">➕</span> Add Your Restaurant</button>
 </div>
-
 <!-- SERVICES DROPDOWN -->
 <div class="dropdown-menu" id="services-dropdown">
   <button class="dropdown-item" onclick="window.location.href='services.html'" id="drop-services-hub"><span class="item-icon">🛠️</span> All Services</button>
