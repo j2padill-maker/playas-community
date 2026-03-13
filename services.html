@@ -55,6 +55,13 @@
   <a href="index.html">Home</a> › Services
 </div>
 <div class="page-content">
+  <!-- APPROVED LISTINGS FROM GOOGLE SHEETS -->
+  <div id="approved-section" style="margin-bottom:3rem;display:none;">
+    <p class="section-label">⭐ Community Approved Businesses</p>
+    <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;"></div>
+  </div>
+  <div id="loading-listings" style="text-align:center;padding:2rem;color:var(--text-light);font-size:0.9rem;">⏳ Loading community listings...</div>
+
   <p class="section-label">Choose a category</p>
   <div class="categories-grid">
     <a href="services-mecanicos.html" class="cat-card">
@@ -130,9 +137,68 @@
       </div>
     </a>
   </div>
-  <div class="info-banner">
-    <h2>Have a service business in Playas?</h2>
-    <p>Select your category above and add your business for free. Your community is waiting.</p>
+  <div class="submit-banner" style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));border-radius:20px;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-bottom:4rem;flex-wrap:wrap;">
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:0.3rem;">Have a service business in Playas?</h3>
+      <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;">List your business for free and connect with neighbors who need your services.</p>
+    </div>
+    <button onclick="document.getElementById('submit-service').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--ocean-deep);border:none;border-radius:50px;padding:0.75rem 1.8rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;flex-shrink:0;">+ Add Your Business</button>
+  </div>
+
+  <!-- SUBMIT FORM -->
+  <div id="submit-service" style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));border-radius:20px;padding:2.5rem;">
+    <h2 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;margin-bottom:0.4rem;">➕ Add Your Service Business</h2>
+    <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:1.5rem;">Submit your listing for review. We'll add it once approved — free community listing.</p>
+    <form id="serviceForm">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+        <div style="display:flex;flex-direction:column;gap:0.4rem;">
+          <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Business Name</label>
+          <input id="serviceName" name="Business Name" type="text" placeholder="e.g. Taller Mecánico Playas" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.4rem;">
+          <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Category</label>
+          <select name="Category" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
+            <option style="background:var(--ocean-deep);">Mechanics</option>
+            <option style="background:var(--ocean-deep);">Dentists</option>
+            <option style="background:var(--ocean-deep);">Doctors</option>
+            <option style="background:var(--ocean-deep);">Veterinarians</option>
+            <option style="background:var(--ocean-deep);">Real Estate</option>
+            <option style="background:var(--ocean-deep);">Plumbers</option>
+            <option style="background:var(--ocean-deep);">Electricians</option>
+            <option style="background:var(--ocean-deep);">Handyman & Home Repair</option>
+            <option style="background:var(--ocean-deep);">Legal Services</option>
+            <option style="background:var(--ocean-deep);">Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+        <div style="display:flex;flex-direction:column;gap:0.4rem;">
+          <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Address</label>
+          <input name="Address" type="text" placeholder="Street address in Playas" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.4rem;">
+          <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Phone / WhatsApp</label>
+          <input name="Phone" type="text" placeholder="664-xxx-xxxx" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem;">
+        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Description</label>
+        <textarea id="serviceDesc" name="Description" placeholder="Tell us about your business, services offered, hours, experience..." style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;resize:vertical;min-height:90px;"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
+        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Your Name & Contact</label>
+        <input name="Contact Name" type="text" placeholder="Name · email or phone (not published)" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
+      </div>
+      <button type="submit" id="serviceSubmitBtn" style="background:var(--seafoam);color:#fff;border:none;padding:0.9rem 2.5rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;">Submit for Review</button>
+      <div id="serviceSuccess" style="display:none;">
+        <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
+          <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
+          <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;">Thank you! Your listing has been submitted for review.<br>We'll get it added within 1–2 business days.</p>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border-left:3px solid rgba(255,255,255,0.4);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-top:1rem;font-size:0.78rem;color:rgba(255,255,255,0.7);">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    </form>
   </div>
 </div>
 <footer>
@@ -140,5 +206,104 @@
   <p>Your neighborhood community hub</p>
   <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
 </footer>
+<script>
+  // ── Fetch Approved Listings from Google Sheets ──
+  const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQIVkT18iiR4leQ87H3wMkpV5YMmxPCwW0AWcuMO5Ep7rKg7MYhaaZTgfzTlctK4ND35Rl4Y3x5ufgA/pub?gid=0&single=true&output=csv';
+
+  function parseCSV(text) {
+    const lines = text.split('\n');
+    const headers = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+      const values = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        if (line[i] === '"') { inQuotes = !inQuotes; }
+        else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
+        else { current += line[i]; }
+      }
+      values.push(current.trim());
+      const obj = {};
+      headers.forEach((h, i) => { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
+      return obj;
+    });
+  }
+
+  function getCategoryEmoji(category) {
+    const map = {
+      'Mechanics': '🔧', 'Dentists': '🦷', 'Doctors': '🩺',
+      'Veterinarians': '🐾', 'Real Estate': '🏡', 'Legal Services': '⚖️',
+      'Construction Services': '🏗️', 'Plumbers': '🪠', 'Electricians': '⚡',
+      'Handyman & Home Repair': '🛠️', 'Other': '🏪'
+    };
+    for (const key in map) { if (category && category.includes(key)) return map[key]; }
+    return '🏪';
+  }
+
+  function buildCard(row) {
+    const name = row['Business Name'] || 'Business';
+    const category = row['Category'] || '';
+    const desc = row['Description'] || '';
+    const address = row['Address'] || '';
+    const phone = row['Phone'] || '';
+    const emoji = getCategoryEmoji(category);
+    return `
+      <div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);transition:transform 0.25s,box-shadow 0.25s;animation:fadeUp 0.5s ease both;">
+        <div style="height:160px;background:linear-gradient(135deg,var(--ocean-deep),var(--seafoam));display:flex;align-items:center;justify-content:center;font-size:4rem;">${emoji}</div>
+        <div style="padding:1.5rem;">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">${category}</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">${name}</h2>
+          <p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">${desc}</p>
+          ${address ? `<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ${address}</p>` : ''}
+          ${phone ? `<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1rem;">📞 ${phone}</p>` : ''}
+        </div>
+      </div>`;
+  }
+
+  async function loadApprovedListings() {
+    try {
+      const res = await fetch(SHEET_CSV);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      const approved = rows.filter(r => r['Status'] && r['Status'].toLowerCase() === 'approved');
+      document.getElementById('loading-listings').style.display = 'none';
+      if (approved.length > 0) {
+        document.getElementById('approved-section').style.display = 'block';
+        document.getElementById('approved-grid').innerHTML = approved.map(buildCard).join('');
+      }
+    } catch(err) {
+      document.getElementById('loading-listings').style.display = 'none';
+    }
+  }
+
+  loadApprovedListings();
+</script>
+
+    e.preventDefault();
+    const name = document.getElementById('serviceName').value.trim();
+    const desc = document.getElementById('serviceDesc').value.trim();
+    if (!name) { alert('Please enter your business name.'); return; }
+    if (desc.length < 10) { alert('Please add a short description.'); return; }
+    const btn = document.getElementById('serviceSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+    const data = {};
+    new FormData(this).forEach((val, key) => { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Services Page';
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
+      document.getElementById('serviceForm').style.display = 'none';
+      document.getElementById('serviceSuccess').style.display = 'block';
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
 </body>
 </html>
