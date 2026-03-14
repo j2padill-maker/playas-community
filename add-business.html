@@ -333,12 +333,43 @@
 </footer>
 
 <script>
-// ─── Photo Upload & Base64 ────────────────────────────────────
+// ─── Photo Upload & Base64 with Auto-Resize ──────────────────
 const MAX_PHOTOS = 5;
-const MAX_SIZE_MB = 1;
+const MAX_WIDTH = 1200;  // max pixel width after resize
+const TARGET_QUALITY = 0.82; // JPEG quality (0-1)
 let selectedPhotos = []; // stores {base64, name} objects
 
-document.getElementById('photoInput').addEventListener('change', function(e) {
+function resizeImage(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Scale down if wider than MAX_WIDTH
+        if (width > MAX_WIDTH) {
+          height = Math.round(height * MAX_WIDTH / width);
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const base64 = canvas.toDataURL('image/jpeg', TARGET_QUALITY);
+        resolve({ base64, name: file.name.replace(/\.[^.]+$/, '.jpg') });
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById('photoInput').addEventListener('change', async function(e) {
   const files = Array.from(e.target.files);
   const errorEl = document.getElementById('photoError');
   errorEl.style.display = 'none';
@@ -347,31 +378,21 @@ document.getElementById('photoInput').addEventListener('change', function(e) {
   if (remaining <= 0) {
     errorEl.textContent = `Maximum ${MAX_PHOTOS} photos allowed.`;
     errorEl.style.display = 'block';
+    this.value = '';
     return;
   }
 
   const toProcess = files.slice(0, remaining);
-  let oversized = [];
 
-  toProcess.forEach(file => {
-    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-      oversized.push(file.name);
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      selectedPhotos.push({ base64: ev.target.result, name: file.name });
-      renderPreviews();
-    };
-    reader.readAsDataURL(file);
-  });
+  // Show processing indicator
+  const zone = document.getElementById('photoDropZone');
+  zone.querySelector('p').textContent = '⏳ Processing photos...';
 
-  if (oversized.length > 0) {
-    errorEl.textContent = `These photos are over 1MB and were skipped: ${oversized.join(', ')}. Please resize them and try again.`;
-    errorEl.style.display = 'block';
-  }
+  // Resize all photos in parallel
+  const resized = await Promise.all(toProcess.map(file => resizeImage(file)));
+  resized.forEach(photo => selectedPhotos.push(photo));
 
-  // Reset input so same file can be re-selected if needed
+  renderPreviews();
   this.value = '';
 });
 
