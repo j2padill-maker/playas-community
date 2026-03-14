@@ -189,6 +189,18 @@
         <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Your Name & Contact</label>
         <input name="Contact Name" type="text" placeholder="Name · email or phone (not published)" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:0.75rem 1rem;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;">
       </div>
+      <!-- Photo Upload -->
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
+        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
+        <div id="svcPhotoDropZone" onclick="document.getElementById('svcPhotoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
+          <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
+          <p id="svcPhotoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Any size — auto resized</p>
+          <input type="file" id="svcPhotoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+        </div>
+        <div id="svcPhotoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;"></div>
+        <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;"></div>
+      </div>
       <button type="submit" id="serviceSubmitBtn" style="background:var(--seafoam);color:#fff;border:none;padding:0.9rem 2.5rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;">Submit for Review</button>
       <div id="serviceSuccess" style="display:none;">
         <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
@@ -278,6 +290,64 @@
 
   loadApprovedListings();
 
+  // ── Photo Upload & Auto-Resize ──
+  const SVC_MAX_PHOTOS = 5;
+  const SVC_MAX_WIDTH = 1200;
+  const SVC_QUALITY = 0.82;
+  let svcPhotos = [];
+
+  function svcResizeImage(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > SVC_MAX_WIDTH) { h = Math.round(h * SVC_MAX_WIDTH / w); w = SVC_MAX_WIDTH; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve({ base64: canvas.toDataURL('image/jpeg', SVC_QUALITY), name: file.name.replace(/\.[^.]+$/, '.jpg') });
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function svcRenderPreviews() {
+    const preview = document.getElementById('svcPhotoPreview');
+    preview.innerHTML = '';
+    svcPhotos.forEach((photo, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'position:relative;display:inline-block;';
+      const img = document.createElement('img');
+      img.src = photo.base64;
+      img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.3);';
+      const btn = document.createElement('button');
+      btn.textContent = '✕'; btn.type = 'button';
+      btn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;font-weight:700;';
+      btn.onclick = () => { svcPhotos.splice(index, 1); svcRenderPreviews(); };
+      wrapper.appendChild(img); wrapper.appendChild(btn);
+      preview.appendChild(wrapper);
+    });
+    const remaining = SVC_MAX_PHOTOS - svcPhotos.length;
+    document.getElementById('svcPhotoLabel').textContent = remaining > 0 ? `Click to add more photos (${svcPhotos.length}/${SVC_MAX_PHOTOS})` : `Maximum photos reached (${SVC_MAX_PHOTOS}/${SVC_MAX_PHOTOS})`;
+  }
+
+  document.getElementById('svcPhotoInput').addEventListener('change', async function(e) {
+    const files = Array.from(e.target.files);
+    const errorEl = document.getElementById('svcPhotoError');
+    errorEl.style.display = 'none';
+    const remaining = SVC_MAX_PHOTOS - svcPhotos.length;
+    if (remaining <= 0) { errorEl.textContent = `Maximum ${SVC_MAX_PHOTOS} photos allowed.`; errorEl.style.display = 'block'; this.value = ''; return; }
+    document.getElementById('svcPhotoLabel').textContent = '⏳ Processing photos...';
+    const resized = await Promise.all(files.slice(0, remaining).map(f => svcResizeImage(f)));
+    resized.forEach(p => svcPhotos.push(p));
+    svcRenderPreviews();
+    this.value = '';
+  });
+
   // ── Form Submit ──
   document.getElementById('serviceForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -292,6 +362,10 @@
     new FormData(this).forEach((val, key) => { data[key] = val; });
     data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
     data['Source'] = 'Services Page';
+    if (svcPhotos.length > 0) {
+      svcPhotos.forEach((photo, i) => { data[`Photo_${i+1}`] = photo.base64; data[`Photo_${i+1}_Name`] = photo.name; });
+      data['Photo Count'] = svcPhotos.length;
+    }
     try {
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
       const params = new URLSearchParams();
