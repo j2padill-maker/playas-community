@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niños — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --sand:#e8dcc8; --sand-light:#f5efe3; --sand-dark:#c9b99a; --ocean:#2a7fa5; --ocean-deep:#1a5270; --ocean-light:#5aafd4; --seafoam:#4caf88; --seafoam-light:#a8d8c2; --white:#fafaf8; --text:#2c2c2c; --text-light:#6b6b6b; --nav-h:70px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); }
+  nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); background:rgba(26,82,112,0.97); backdrop-filter:blur(10px); display:flex; align-items:center; padding:0 2rem; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.2); }
+  .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
+  .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
+  .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
+  .page-hero { min-height:420px; background:linear-gradient(135deg,rgba(76,175,136,0.85),rgba(26,82,112,0.80)), url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
+  .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.8rem); color:#fff; margin-bottom:0.75rem; }
+  .page-hero p { color:rgba(255,255,255,0.82); max-width:560px; line-height:1.75; font-size:1rem; }
+  .breadcrumb { background:var(--sand-light); padding:0.75rem 2rem; font-size:0.78rem; color:var(--text-light); }
+  .breadcrumb a { color:var(--ocean); text-decoration:none; }
+  .page-content { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .section-label { font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ocean); font-weight:700; margin-bottom:1.25rem; }
+  .categories-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-bottom:4rem; }
+  .cat-card { background:#fff; border-radius:20px; box-shadow:0 2px 20px rgba(0,0,0,0.07); overflow:hidden; text-decoration:none; color:var(--text); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; display:flex; flex-direction:column; }
+  .cat-card:nth-child(2){animation-delay:.1s;} .cat-card:nth-child(3){animation-delay:.2s;}
+  .cat-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.13); }
+  .cat-card-img { height:200px; display:flex; align-items:center; justify-content:center; font-size:5rem; }
+  .cat-card-body { padding:1.5rem 1.75rem 1.75rem; flex:1; display:flex; flex-direction:column; }
+  .cat-card-name { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--ocean-deep); margin-bottom:0.5rem; }
+  .cat-card-desc { font-size:0.875rem; color:var(--text-light); line-height:1.7; flex:1; }
+  .cat-card-cta { margin-top:1.25rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.85rem; font-weight:700; color:var(--ocean); }
+  .cat-card-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--seafoam); margin-bottom:0.5rem; }
+  .info-banner { background:linear-gradient(135deg,var(--seafoam),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; margin-bottom:3rem; }
+  .info-banner h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
+  .info-banner p { color:rgba(255,255,255,0.85); font-size:0.9rem; line-height:1.7; max-width:560px; margin:0 auto; }
+  .suggest-banner { background:var(--sand-light); border-radius:20px; padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+  .suggest-banner h3 { font-family:'Playfair Display',serif; color:var(--ocean-deep); font-size:1.1rem; margin-bottom:0.3rem; }
+  .suggest-banner p { color:var(--text-light); font-size:0.875rem; }
+  .suggest-btn { background:var(--ocean); color:#fff; border:none; border-radius:50px; padding:0.7rem 1.6rem; font-size:0.875rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; text-decoration:none; transition:all 0.2s; }
+  .suggest-btn:hover { background:var(--ocean-deep); transform:translateY(-2px); }
+  footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
+  footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
+  footer a { color:var(--seafoam-light); text-decoration:none; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:600px){ .categories-grid{grid-template-columns:1fr;} .suggest-banner{flex-direction:column;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
+  <a href="index.html" class="nav-back">← Home</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-tag">Playas de Tijuana · Niños</p>
+  <h1>Clases para Niños</h1>
+  <p>Fun, enriching activities and classes for kids of all ages right here in Playas de Tijuana.</p>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a> › Niños
+</div>
+
+<div class="page-content">
+
+  <div class="info-banner">
+    <h2>🌟 Activities for Every Kid</h2>
+    <p>From martial arts to dancing and art, Playas de Tijuana has great options to keep your kids active, creative, and engaged.</p>
+  </div>
+
+  <p class="section-label">Choose an activity</p>
+  <div class="categories-grid">
+
+    <a href="kids-art.html" class="cat-card">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#4a2a1a,#c47a3a);">🎨</div>
+      <div class="cat-card-body">
+        <p class="cat-card-tag">Creative Arts</p>
+        <h2 class="cat-card-name">Art Classes</h2>
+        <p class="cat-card-desc">Painting, drawing, and creative workshops that spark imagination and build artistic skills in kids of all ages.</p>
+        <span class="cat-card-cta">View classes →</span>
+      </div>
+    </a>
+
+    <a href="kids-dance.html" class="cat-card">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#6a1a5a,#c43a9a);">💃</div>
+      <div class="cat-card-body">
+        <p class="cat-card-tag">Dance & Movement</p>
+        <h2 class="cat-card-name">Dance Classes</h2>
+        <p class="cat-card-desc">Fun and energetic dance classes for kids — from ballet and folklórico to modern and hip hop styles.</p>
+        <span class="cat-card-cta">View classes →</span>
+      </div>
+    </a>
+
+    <a href="kids-martial-arts.html" class="cat-card">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#1a1a3a,#3a3a7a);">🥋</div>
+      <div class="cat-card-body">
+        <p class="cat-card-tag">Discipline & Fitness</p>
+        <h2 class="cat-card-name">Martial Arts</h2>
+        <p class="cat-card-desc">Build focus, discipline, and confidence through karate, judo, and other martial arts programs for kids.</p>
+        <span class="cat-card-cta">View classes →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="suggest-banner">
+    <div>
+      <h3>Know a great kids activity in Playas?</h3>
+      <p>Help other families discover it — suggest a class or activity to add to the directory.</p>
+    </div>
+    <a href="add-business.html" class="suggest-btn">➕ Suggest an Activity</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">🌴 Playas de Tijuana</div>
+  <p>Your neighborhood community hub</p>
+  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+</footer>
+
+</body>
+</html>
