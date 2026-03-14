@@ -2317,11 +2317,23 @@
     menu.classList.toggle('show');
   }
 
-  // Close all dropdowns when clicking anywhere else
+  
+  
+  
+// Close all dropdowns when clicking anywhere else
   document.addEventListener('click', function() {
     document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
   });
 
+  // Keep dropdown open when mouse is over it
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.addEventListener('mouseenter', function() {
+      this.classList.add('show');
+    });
+    menu.addEventListener('mouseleave', function() {
+      this.classList.remove('show');
+    });
+  });
   function dropdownGo(sectionId) {
     document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
     goToSection(sectionId);
