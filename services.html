@@ -277,8 +277,9 @@
   }
 
   loadApprovedListings();
-</script>
 
+  // ── Form Submit ──
+  document.getElementById('serviceForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('serviceName').value.trim();
     const desc = document.getElementById('serviceDesc').value.trim();
