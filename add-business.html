@@ -270,14 +270,16 @@
       <p class="form-section-title">📸 Photos</p>
 
       <div class="form-group">
-        <label>Upload Photos (optional)</label>
-        <div style="background:rgba(255,255,255,0.08);border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:2rem;text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:0.75rem;">📷</div>
-          <p style="color:rgba(255,255,255,0.85);font-size:0.9rem;margin-bottom:0.5rem;font-weight:600;">Upload your business photos to our shared folder</p>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.8rem;margin-bottom:1.25rem;">JPG, PNG or WEBP · Up to 5 photos recommended</p>
-          <a href="https://drive.google.com/drive/folders/1KxNuAFhHL802wdzcDFJukB08HARR7oZM?usp=sharing" target="_blank" style="display:inline-block;background:var(--seafoam);color:#fff;text-decoration:none;padding:0.75rem 1.75rem;border-radius:50px;font-size:0.9rem;font-weight:700;font-family:'DM Sans',sans-serif;">📁 Open Photo Upload Folder</a>
-          <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin-top:1rem;">Please name your photos with your business name so we can match them to your submission.<br>Example: <em>TacoElGuero_1.jpg</em></p>
+        <label>Upload Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
+        <div class="photo-upload-area" id="photoDropZone" onclick="document.getElementById('photoInput').click()">
+          <div class="photo-upload-icon">📷</div>
+          <p style="color:rgba(255,255,255,0.85);font-size:0.9rem;font-weight:600;margin-bottom:0.25rem;">Click to upload photos</p>
+          <p style="color:rgba(255,255,255,0.5);font-size:0.78rem;">JPG, PNG or WEBP · Max 1MB per photo · Up to 5 photos</p>
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
         </div>
+        <div class="photo-preview" id="photoPreview"></div>
+        <div id="photoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;margin-top:0.5rem;"></div>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.72rem;margin-top:0.5rem;">Photos will be included with your submission and displayed on your listing once approved.</p>
       </div>
 
       <!-- Contact person -->
@@ -330,22 +332,70 @@
   <p style="margin-top:0.75rem;font-size:0.78rem;"><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="add-business.html">Add Your Business</a></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ─── Photo Preview ───────────────────────────────────────────
-function previewPhotos(event) {
-  const preview = document.getElementById('photoPreview');
-  preview.innerHTML = '';
-  const files = Array.from(event.target.files).slice(0, 5);
-  files.forEach(file => {
-    if (!file.type.startsWith('image/')) return;
+<script>
+// ─── Photo Upload & Base64 ────────────────────────────────────
+const MAX_PHOTOS = 5;
+const MAX_SIZE_MB = 1;
+let selectedPhotos = []; // stores {base64, name} objects
+
+document.getElementById('photoInput').addEventListener('change', function(e) {
+  const files = Array.from(e.target.files);
+  const errorEl = document.getElementById('photoError');
+  errorEl.style.display = 'none';
+
+  const remaining = MAX_PHOTOS - selectedPhotos.length;
+  if (remaining <= 0) {
+    errorEl.textContent = `Maximum ${MAX_PHOTOS} photos allowed.`;
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  const toProcess = files.slice(0, remaining);
+  let oversized = [];
+
+  toProcess.forEach(file => {
+    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+      oversized.push(file.name);
+      return;
+    }
     const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      preview.appendChild(img);
+    reader.onload = function(ev) {
+      selectedPhotos.push({ base64: ev.target.result, name: file.name });
+      renderPreviews();
     };
     reader.readAsDataURL(file);
   });
+
+  if (oversized.length > 0) {
+    errorEl.textContent = `These photos are over 1MB and were skipped: ${oversized.join(', ')}. Please resize them and try again.`;
+    errorEl.style.display = 'block';
+  }
+
+  // Reset input so same file can be re-selected if needed
+  this.value = '';
+});
+
+function renderPreviews() {
+  const preview = document.getElementById('photoPreview');
+  preview.innerHTML = '';
+  selectedPhotos.forEach((photo, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:relative;display:inline-block;';
+    const img = document.createElement('img');
+    img.src = photo.base64;
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '✕';
+    removeBtn.type = 'button';
+    removeBtn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1;';
+    removeBtn.onclick = () => { selectedPhotos.splice(index, 1); renderPreviews(); };
+    wrapper.appendChild(img);
+    wrapper.appendChild(removeBtn);
+    preview.appendChild(wrapper);
+  });
+  // Update drop zone text
+  const zone = document.getElementById('photoDropZone');
+  const remaining = MAX_PHOTOS - selectedPhotos.length;
+  zone.querySelector('p').textContent = remaining > 0 ? `Click to add more photos (${selectedPhotos.length}/${MAX_PHOTOS})` : `Maximum photos reached (${MAX_PHOTOS}/${MAX_PHOTOS})`;
 }
 
 // ─── Validation ───────────────────────────────────────────────
@@ -394,11 +444,19 @@ document.getElementById('businessForm').addEventListener('submit', async functio
   const data = {};
   new FormData(form).forEach((val, key) => { data[key] = val; });
   data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+  data['Source'] = 'Add Business Page';
+
+  // Attach photos as Base64
+  if (selectedPhotos.length > 0) {
+    selectedPhotos.forEach((photo, i) => {
+      data[`Photo_${i + 1}`] = photo.base64;
+      data[`Photo_${i + 1}_Name`] = photo.name;
+    });
+    data['Photo Count'] = selectedPhotos.length;
+  }
 
   try {
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
-
-    // Send as URLSearchParams - works correctly with Google Apps Script
     const params = new URLSearchParams();
     params.append('payload', JSON.stringify(data));
 
