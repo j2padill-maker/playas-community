@@ -160,12 +160,12 @@
       <!-- Photo Upload -->
       <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
         <span style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></span>
-        <label for="photoInput" id="photoDropZone" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;display:block;position:relative;z-index:5;">
+        <div id="photoDropZone" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;z-index:5;">
           <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
           <p id="photoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
           <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Auto resized</p>
-          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
-        </label>
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;">
+        </div>
         <div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;"></div>
         <p id="profilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
         <div id="photoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;margin-top:0.4rem;"></div>
