@@ -141,21 +141,21 @@
       </div>
     </div>
   </div>
-    <div class="submit-section" id="submit-listing">
+  <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Martial Arts Academy</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
-    <form id="martialArtsForm" onsubmit="return false;">
+    <form id="martialArtsForm">
     <div class="form-row">
-      <div class="form-group"><label>Academy Name</label><input id="martialArtsName" name="Business Name" type="text" placeholder="e.g. Academia Playas"></div>
+      <div class="form-group"><label>Academy Name</label><input type="text" placeholder="e.g. Academia Playas"></div>
       <div class="form-group"><label>Discipline</label>
-        <select name="Category"><option>Jiu-Jitsu</option><option>Muay Thai</option><option>Boxing</option><option>Karate</option><option>Taekwondo</option><option>MMA</option><option>Self Defense</option><option>Multiple</option></select>
+        <select><option>Jiu-Jitsu</option><option>Muay Thai</option><option>Boxing</option><option>Karate</option><option>Taekwondo</option><option>MMA</option><option>Self Defense</option><option>Multiple</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea id="martialArtsDesc" name="Description" placeholder="Tell us about the academy, instructors, class schedule..."></textarea></div>
+    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the academy, instructors, class schedule..."></textarea></div>
     <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
       <!-- Photo Upload -->
       <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
@@ -170,14 +170,12 @@
         <p id="svcProfilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
         <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;"></div>
       </div>
-
-<button type="submit" class="form-submit" id="martialArtsSubmitBtn">Submit for Review</button>
+    <button type="submit" class="form-submit" id="martialArtsSubmitBtn">Submit for Review</button>
     <div id="martialArtsSuccess" style="display:none;">
       <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
         <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
         <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
-        <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;margin-bottom:1.25rem;">Thank you! Your listing has been submitted for review.<br>We'll get it added to the page within 1–2 business days.</p>
-        <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;">Questions? Reach us at <span style="color:#a8d8c2;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="354559544c54465150415c5f40545b541b565a5858405b5c414c755258545c591b565a58">[email&#160;protected]</a></span></p>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;">Thank you! Your listing has been submitted for review.<br>We'll get it added within 1–2 business days.</p>
       </div>
     </div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
@@ -199,8 +197,8 @@
   function sanitize(t){return t.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();}
   function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=`${avg} ★ · ${reviews.length} review${reviews.length!==1?'s':''}`;list.innerHTML=reviews.map(r=>`<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>${sanitize(r.name||'Anonymous')}</strong><span style="font-size:0.72rem;color:var(--text-light)">${r.date}</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">${'★'.repeat(r.stars)}</div><div>${sanitize(r.text)}</div></div>`).join('');}
   function submitReview(id,bizName){const nameEl=document.getElementById('rev-name-'+id);const textEl=document.getElementById('rev-text-'+id);const errorEl=document.getElementById('rev-error-'+id);const stars=starState[id]||0;const name=(nameEl?nameEl.value:'').trim();const text=(textEl?textEl.value:'').trim();errorEl.classList.remove('show');errorEl.textContent='';if(stars===0){errorEl.textContent='⭐ Please select a star rating.';errorEl.classList.add('show');return;}if(text.length<5){errorEl.textContent='✏️ Please write at least a sentence.';errorEl.classList.add('show');return;}if(containsProfanity(text)||containsProfanity(name)){errorEl.textContent="🚫 Your review contains language that isn't allowed.";errorEl.classList.add('show');return;}if(!reviewData[id])reviewData[id]=[];const review={name:name||'Anonymous',text,stars,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),approved:false,id:Date.now()};reviewData[id].push(review);if(textEl)textEl.value='';if(nameEl)nameEl.value='';setStar(id,0);document.getElementById('rev-form-'+id).classList.remove('open');renderReviewList(id);errorEl.style.background='#d1fae5';errorEl.style.color='#065f46';errorEl.textContent='✅ Thanks! Your review is pending approval.';errorEl.classList.add('show');setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);}
-// ─── Listing Form Submit ─────────────────────────────────
-    // ── Photo Upload & Auto-Resize ──
+
+  // ── Photo Upload & Profile Pic Selection ──
   const SVC_MAX_PHOTOS = 5;
   const SVC_MAX_WIDTH = 1200;
   const SVC_QUALITY = 0.82;
@@ -266,38 +264,36 @@
     this.value = '';
   });
 
-document.getElementById('martialArtsForm').addEventListener('submit', async function(e) {
+  // ── Form Submit ──
+  document.getElementById('martialArtsForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-
     const name = document.getElementById('martialArtsName').value.trim();
     const desc = document.getElementById('martialArtsDesc').value.trim();
-    if (!name) { alert('Please enter the name.'); return; }
+    if (!name) { alert('Please enter the academy name.'); return; }
     if (desc.length < 10) { alert('Please add a short description.'); return; }
-
     const btn = document.getElementById('martialArtsSubmitBtn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Submitting...';
-
+    btn.disabled = true; btn.textContent = '⏳ Submitting...';
     const data = {};
     new FormData(this).forEach((val, key) => { data[key] = val; });
     data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
     data['Source'] = 'Martial Arts Page';
-if (svcPhotos.length > 0) {
+    if (svcPhotos.length > 0) {
       svcPhotos.forEach((photo, i) => { data['Photo_' + (i+1)] = photo.base64; data['Photo_' + (i+1) + '_Name'] = photo.name; });
       data['Photo Count'] = svcPhotos.length;
       data['Profile Photo'] = svcProfileIndex + 1;
     }
-if (photos.length > 0) {
-      photos.forEach((photo, i) => { data[`Photo_${i+1}`] = photo.base64; data[`Photo_${i+1}_Name`] = photo.name; });
-      data['Photo Count'] = photos.length;
-      data['Profile Photo'] = profilePhotoIndex + 1;
-    }
-
     try {
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
       const params = new URLSearchParams();
       params.append('payload', JSON.stringify(data));
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-
       document.getElementById('martialArtsForm').style.display = 'none';
-      document.ge
+      document.getElementById('martialArtsSuccess').style.display = 'block';
+    } catch(err) {
+      btn.disabled = false; btn.textContent = 'Submit for Review';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
+</body>
+</html>
