@@ -157,13 +157,26 @@
     </div>
     <div class="form-group"><label>Description</label><textarea id="languageDesc" name="Description" placeholder="Tell us about the classes, format, levels offered, pricing..."></textarea></div>
     <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
+      <!-- Photo Upload -->
+      <div class="form-group">
+        <label>Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
+        <div id="photoDropZone" onclick="document.getElementById('photoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
+          <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
+          <p id="photoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Auto resized</p>
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+        </div>
+        <div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;"></div>
+        <p id="profilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
+        <div id="photoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;margin-top:0.4rem;"></div>
+      </div>
     <button type="submit" class="form-submit" id="languageSubmitBtn">Submit for Review</button>
     <div id="languageSuccess" style="display:none;">
       <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
         <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
         <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
         <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;margin-bottom:1.25rem;">Thank you! Your listing has been submitted for review.<br>We'll get it added to the page within 1–2 business days.</p>
-        <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;">Questions? Reach us at <span style="color:#a8d8c2;">playasdetijuana.community@gmail.com</span></p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;">Questions? Reach us at <span style="color:#a8d8c2;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89f9e5e8f0e8faedecfde0e3fce8e7e8a7eae6e4e4fce7e0fdf0c9eee4e8e0e5a7eae6e4">[email&#160;protected]</a></span></p>
       </div>
     </div>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
@@ -175,7 +188,7 @@
   <p>Your neighborhood community hub</p>
   <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const BAD_WORDS=['fuck','shit','ass','bitch','cunt','dick','pussy','bastard','piss','cock','whore','slut','puta','pinche','pendejo','cabron','joder','chinga'];
   const starState={};const reviewData={};
   function setStar(id,val){starState[id]=val;const p=document.getElementById('star-picker-'+id);if(p)p.querySelectorAll('span').forEach((s,i)=>s.classList.toggle('lit',i<val));}
@@ -185,6 +198,73 @@
   function sanitize(t){return t.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();}
   function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=`${avg} ★ · ${reviews.length} review${reviews.length!==1?'s':''}`;list.innerHTML=reviews.map(r=>`<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>${sanitize(r.name||'Anonymous')}</strong><span style="font-size:0.72rem;color:var(--text-light)">${r.date}</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">${'★'.repeat(r.stars)}</div><div>${sanitize(r.text)}</div></div>`).join('');}
   function submitReview(id,bizName){const nameEl=document.getElementById('rev-name-'+id);const textEl=document.getElementById('rev-text-'+id);const errorEl=document.getElementById('rev-error-'+id);const stars=starState[id]||0;const name=(nameEl?nameEl.value:'').trim();const text=(textEl?textEl.value:'').trim();errorEl.classList.remove('show');errorEl.textContent='';if(stars===0){errorEl.textContent='⭐ Please select a star rating.';errorEl.classList.add('show');return;}if(text.length<5){errorEl.textContent='✏️ Please write at least a sentence.';errorEl.classList.add('show');return;}if(containsProfanity(text)||containsProfanity(name)){errorEl.textContent="🚫 Your review contains language that isn't allowed.";errorEl.classList.add('show');return;}if(!reviewData[id])reviewData[id]=[];const review={name:name||'Anonymous',text,stars,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),approved:false,id:Date.now()};reviewData[id].push(review);if(textEl)textEl.value='';if(nameEl)nameEl.value='';setStar(id,0);document.getElementById('rev-form-'+id).classList.remove('open');renderReviewList(id);errorEl.style.background='#d1fae5';errorEl.style.color='#065f46';errorEl.textContent='✅ Thanks! Your review is pending approval.';errorEl.classList.add('show');setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);}
+
+  // ── Photo Upload & Profile Pic Selection ──
+  const MAX_PHOTOS = 5;
+  const MAX_WIDTH = 1200;
+  const IMG_QUALITY = 0.82;
+  let photos = [];
+  let profilePhotoIndex = 0;
+
+  function resizeImage(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > MAX_WIDTH) { h = Math.round(h * MAX_WIDTH / w); w = MAX_WIDTH; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve({ base64: canvas.toDataURL('image/jpeg', IMG_QUALITY), name: file.name.replace(/\.[^.]+$/, '.jpg') });
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderPreviews() {
+    const preview = document.getElementById('photoPreview');
+    preview.innerHTML = '';
+    photos.forEach((photo, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'position:relative;display:inline-block;cursor:pointer;';
+      wrapper.title = 'Tap to set as profile photo';
+      const img = document.createElement('img');
+      img.src = photo.base64;
+      const isProfile = index === profilePhotoIndex;
+      img.style.cssText = `width:80px;height:80px;object-fit:cover;border-radius:8px;border:3px solid ${isProfile ? '#4caf88' : 'rgba(255,255,255,0.3)'};transition:border 0.2s;`;
+      const star = document.createElement('div');
+      star.textContent = '⭐';
+      star.style.cssText = `position:absolute;top:-8px;left:-8px;font-size:0.9rem;display:${isProfile ? 'block' : 'none'};`;
+      const btn = document.createElement('button');
+      btn.textContent = '✕'; btn.type = 'button';
+      btn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;font-weight:700;';
+      btn.onclick = (e) => { e.stopPropagation(); photos.splice(index, 1); if (profilePhotoIndex >= photos.length) profilePhotoIndex = 0; renderPreviews(); };
+      wrapper.onclick = () => { profilePhotoIndex = index; renderPreviews(); };
+      wrapper.appendChild(img); wrapper.appendChild(star); wrapper.appendChild(btn);
+      preview.appendChild(wrapper);
+    });
+    const remaining = MAX_PHOTOS - photos.length;
+    document.getElementById('photoLabel').textContent = remaining > 0 ? `Click to add more photos (${photos.length}/${MAX_PHOTOS})` : `Maximum photos reached (${MAX_PHOTOS}/${MAX_PHOTOS})`;
+    const pickerLabel = document.getElementById('profilePickerLabel');
+    if (pickerLabel) pickerLabel.style.display = photos.length > 1 ? 'block' : 'none';
+  }
+
+  document.getElementById('photoInput').addEventListener('change', async function(e) {
+    const files = Array.from(e.target.files);
+    const errorEl = document.getElementById('photoError');
+    errorEl.style.display = 'none';
+    const remaining = MAX_PHOTOS - photos.length;
+    if (remaining <= 0) { errorEl.textContent = `Maximum ${MAX_PHOTOS} photos allowed.`; errorEl.style.display = 'block'; this.value = ''; return; }
+    document.getElementById('photoLabel').textContent = '⏳ Processing photos...';
+    const resized = await Promise.all(files.slice(0, remaining).map(f => resizeImage(f)));
+    resized.forEach(p => photos.push(p));
+    renderPreviews();
+    this.value = '';
+  });
 
   // ─── Listing Form Submit ─────────────────────────────────
   document.getElementById('languageForm').addEventListener('submit', async function(e) {
@@ -203,6 +283,11 @@
     new FormData(this).forEach((val, key) => { data[key] = val; });
     data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
     data['Source'] = 'Language Class Page';
+if (photos.length > 0) {
+      photos.forEach((photo, i) => { data[`Photo_${i+1}`] = photo.base64; data[`Photo_${i+1}_Name`] = photo.name; });
+      data['Photo Count'] = photos.length;
+      data['Profile Photo'] = profilePhotoIndex + 1;
+    }
 
     try {
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
@@ -211,13 +296,4 @@
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
 
       document.getElementById('languageForm').style.display = 'none';
-      document.getElementById('languageSuccess').style.display = 'block';
-    } catch(err) {
-      alert('Something went wrong. Please try again.');
-      btn.disabled = false;
-      btn.textContent = 'Submit for Review';
-    }
-  });
-</script>
-</body>
-</html>
+      document
