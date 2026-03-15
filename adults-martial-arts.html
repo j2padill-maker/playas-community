@@ -144,7 +144,7 @@
     <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Martial Arts Academy</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
-    <form id="martialArtsForm">
+    <form id="martialArtsForm" onsubmit="return false;">
     <div class="form-row">
       <div class="form-group"><label>Academy Name</label><input id="martialArtsName" name="Business Name" type="text" placeholder="e.g. Academia Playas"></div>
       <div class="form-group"><label>Discipline</label>
@@ -164,7 +164,7 @@
           <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
           <p id="photoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
           <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Auto resized</p>
-          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple onclick="event.stopPropagation()" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;">
         </div>
         <div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;"></div>
         <p id="profilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
