@@ -20,6 +20,11 @@
   .breadcrumb { background:var(--sand-light); padding:0.75rem 2rem; font-size:0.78rem; color:var(--text-light); }
   .breadcrumb a { color:var(--ocean); text-decoration:none; }
   .page-content { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .submit-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; margin-bottom:3rem; flex-wrap:wrap; }
+  .submit-banner h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.2rem; margin-bottom:0.3rem; }
+  .submit-banner p { color:rgba(255,255,255,0.75); font-size:0.875rem; }
+  .submit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.75rem 1.8rem; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all 0.2s; flex-shrink:0; }
+  .submit-btn:hover { background:var(--sand); transform:translateY(-2px); }
   .section-label { font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ocean); font-weight:700; margin-bottom:1.25rem; }
   .categories-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; margin-bottom:4rem; }
   .cat-card { background:#fff; border-radius:20px; box-shadow:0 2px 20px rgba(0,0,0,0.07); overflow:hidden; text-decoration:none; color:var(--text); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; display:flex; flex-direction:column; }
@@ -30,13 +35,29 @@
   .cat-card-name { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--ocean-deep); margin-bottom:0.4rem; }
   .cat-card-desc { font-size:0.83rem; color:var(--text-light); line-height:1.65; flex:1; }
   .cat-card-cta { margin-top:1rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; color:var(--ocean); }
-  .info-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; }
+  .info-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; margin-bottom:4rem; }
   .info-banner h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
   .info-banner p { color:rgba(255,255,255,0.78); font-size:0.9rem; line-height:1.7; max-width:560px; margin:0 auto; }
+  /* Form styles */
+  .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:2rem; }
+  .submit-section h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
+  .submit-section p { color:rgba(255,255,255,0.75); font-size:0.875rem; margin-bottom:1.5rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .form-group label { font-size:0.78rem; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:0.08em; }
+  .form-group input, .form-group textarea, .form-group select { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; padding:0.75rem 1rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9rem; width:100%; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.4); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--seafoam-light); }
+  .form-group textarea { resize:vertical; min-height:90px; }
+  .form-group select option { background:var(--ocean-deep); color:#fff; }
+  .form-submit { background:var(--seafoam); color:#fff; border:none; padding:0.9rem 2.5rem; border-radius:50px; font-size:0.95rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
+  .form-submit:hover { background:#3a9a74; transform:translateY(-2px); }
+  .mod-notice { background:rgba(255,255,255,0.1); border-left:3px solid rgba(255,255,255,0.4); border-radius:0 8px 8px 0; padding:0.75rem 1rem; margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.7); }
   footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
   footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
   footer a { color:var(--seafoam-light); text-decoration:none; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:768px){ .form-row { grid-template-columns:1fr; } .submit-banner { flex-direction:column; text-align:center; } }
   @media(max-width:600px){ .categories-grid { grid-template-columns:1fr 1fr; } }
   @media(max-width:400px){ .categories-grid { grid-template-columns:1fr; } }
 </style>
@@ -59,6 +80,16 @@
 </div>
 
 <div class="page-content">
+
+  <!-- Add Business Banner -->
+  <div class="submit-banner">
+    <div>
+      <h3>Teach or run an activity in Playas?</h3>
+      <p>List your class or business for free and connect with adults in the community.</p>
+    </div>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add Your Business</button>
+  </div>
+
   <p class="section-label">Choose an activity</p>
   <div class="categories-grid">
 
@@ -141,6 +172,74 @@
     <p>All classes and activities listed here are offered by local instructors and businesses in Playas de Tijuana. Contact them directly to sign up or learn more.</p>
   </div>
 
+  <!-- Add Business Form -->
+  <div class="submit-section" id="submit-listing">
+    <h2>➕ Add Your Business or Class</h2>
+    <p>Submit your listing for review. We'll add it once approved — free community listing.</p>
+    <form id="adultosForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Business / Class Name</label>
+          <input id="adultosName" name="Business Name" type="text" placeholder="e.g. Studio Playas">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select name="Category">
+            <option>Fitness & Gym</option>
+            <option>Dance Classes</option>
+            <option>Yoga & Pilates</option>
+            <option>Martial Arts</option>
+            <option>Surf</option>
+            <option>Art Classes</option>
+            <option>Cooking Classes</option>
+            <option>Language Classes</option>
+            <option>Other Adult Activity</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Address</label>
+          <input name="Address" type="text" placeholder="Street address in Playas">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input name="Phone" type="text" placeholder="664-xxx-xxxx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="adultosDesc" name="Description" placeholder="Tell us about your classes, schedule, experience level, pricing..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Your Name & Contact</label>
+        <input name="Contact Name" type="text" placeholder="Name · email or phone (not published)">
+      </div>
+      <!-- Photo Upload -->
+      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
+        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
+        <div id="svcPhotoDropZone" onclick="document.getElementById('svcPhotoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
+          <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
+          <p id="svcPhotoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Any size — auto resized</p>
+          <input type="file" id="svcPhotoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+        </div>
+        <div id="svcPhotoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;"></div>
+        <p id="svcProfilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
+        <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;"></div>
+      </div>
+      <button type="submit" class="form-submit" id="adultosSubmitBtn">Submit for Review</button>
+      <div id="adultosSuccess" style="display:none;">
+        <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
+          <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
+          <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;">Thank you! Your listing has been submitted for review.<br>We'll get it added within 1–2 business days.</p>
+        </div>
+      </div>
+      <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    </form>
+  </div>
+
 </div>
 
 <footer>
@@ -149,5 +248,105 @@
   <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
 </footer>
 
+<script>
+  // ── Photo Upload & Profile Pic Selection ──
+  const SVC_MAX_PHOTOS = 5;
+  const SVC_MAX_WIDTH = 1200;
+  const SVC_QUALITY = 0.82;
+  let svcPhotos = [];
+  let svcProfileIndex = 0;
+
+  function svcResizeImage(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > SVC_MAX_WIDTH) { h = Math.round(h * SVC_MAX_WIDTH / w); w = SVC_MAX_WIDTH; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve({ base64: canvas.toDataURL('image/jpeg', SVC_QUALITY), name: file.name.replace(/\.[^.]+$/, '.jpg') });
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function svcRenderPreviews() {
+    const preview = document.getElementById('svcPhotoPreview');
+    preview.innerHTML = '';
+    svcPhotos.forEach((photo, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'position:relative;display:inline-block;cursor:pointer;';
+      const img = document.createElement('img');
+      img.src = photo.base64;
+      const isProfile = index === svcProfileIndex;
+      img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:3px solid ' + (isProfile ? '#4caf88' : 'rgba(255,255,255,0.3)') + ';';
+      const star = document.createElement('div');
+      star.textContent = '⭐';
+      star.style.cssText = 'position:absolute;top:-8px;left:-8px;font-size:0.9rem;display:' + (isProfile ? 'block' : 'none') + ';';
+      const btn = document.createElement('button');
+      btn.textContent = '✕'; btn.type = 'button';
+      btn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;font-weight:700;';
+      btn.onclick = () => { svcPhotos.splice(index, 1); if (svcProfileIndex >= svcPhotos.length) svcProfileIndex = 0; svcRenderPreviews(); };
+      wrapper.onclick = () => { svcProfileIndex = index; svcRenderPreviews(); };
+      wrapper.appendChild(img); wrapper.appendChild(star); wrapper.appendChild(btn);
+      preview.appendChild(wrapper);
+    });
+    const remaining = SVC_MAX_PHOTOS - svcPhotos.length;
+    document.getElementById('svcPhotoLabel').textContent = remaining > 0 ? 'Click to add more photos (' + svcPhotos.length + '/' + SVC_MAX_PHOTOS + ')' : 'Maximum photos reached (' + SVC_MAX_PHOTOS + '/' + SVC_MAX_PHOTOS + ')';
+    const pickerLabel = document.getElementById('svcProfilePickerLabel');
+    if (pickerLabel) pickerLabel.style.display = svcPhotos.length > 1 ? 'block' : 'none';
+  }
+
+  document.getElementById('svcPhotoInput').addEventListener('change', async function(e) {
+    const files = Array.from(e.target.files);
+    const errorEl = document.getElementById('svcPhotoError');
+    errorEl.style.display = 'none';
+    const remaining = SVC_MAX_PHOTOS - svcPhotos.length;
+    if (remaining <= 0) { errorEl.textContent = 'Maximum ' + SVC_MAX_PHOTOS + ' photos allowed.'; errorEl.style.display = 'block'; this.value = ''; return; }
+    document.getElementById('svcPhotoLabel').textContent = '⏳ Processing photos...';
+    const resized = await Promise.all(files.slice(0, remaining).map(f => svcResizeImage(f)));
+    resized.forEach(p => svcPhotos.push(p));
+    svcRenderPreviews();
+    this.value = '';
+  });
+
+  // ── Form Submit ──
+  document.getElementById('adultosForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('adultosName').value.trim();
+    const desc = document.getElementById('adultosDesc').value.trim();
+    if (!name) { alert('Please enter your business name.'); return; }
+    if (desc.length < 10) { alert('Please add a short description.'); return; }
+    const btn = document.getElementById('adultosSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+    const data = {};
+    new FormData(this).forEach((val, key) => { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Adult Activities Page';
+    if (svcPhotos.length > 0) {
+      svcPhotos.forEach((photo, i) => { data['Photo_' + (i+1)] = photo.base64; data['Photo_' + (i+1) + '_Name'] = photo.name; });
+      data['Photo Count'] = svcPhotos.length;
+      data['Profile Photo'] = svcProfileIndex + 1;
+    }
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
+      document.getElementById('adultosForm').style.display = 'none';
+      document.getElementById('adultosSuccess').style.display = 'block';
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
 </body>
 </html>
