@@ -91,13 +91,6 @@
   </div>
 
 
-  <!-- Approved Listings -->
-  <div id="approved-section" style="margin-bottom:3rem;display:none;">
-    <p class="section-label">Featured businesses & classes</p>
-    <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
-  </div>
-  <div id="loading-listings" style="text-align:center;padding:2rem;color:var(--text-light);font-size:0.9rem;">Loading listings...</div>
-
   <p class="section-label">Choose an activity</p>
   <div class="categories-grid">
 
@@ -336,7 +329,8 @@
     const data = {};
     new FormData(this).forEach((val, key) => { data[key] = val; });
     data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
-    data['Source'] = 'Adult Activities Page';
+    const categorySourceMap = {'Fitness & Gym':'Adult Fitness Page','Dance Classes':'Adult Dance Page','Yoga & Pilates':'Adult Yoga Page','Martial Arts':'Adult Martial Arts Page','Surf':'Adult Surf Page','Art Classes':'Adult Art Page','Cooking Classes':'Adult Cooking Page','Language Classes':'Adult Language Page','Other Adult Activity':'Adult Activities Page'};
+    data['Source'] = categorySourceMap[data['Category']] || 'Adult Activities Page';
     if (svcPhotos.length > 0) {
       svcPhotos.forEach((photo, i) => { data['Photo_' + (i+1)] = photo.base64; data['Photo_' + (i+1) + '_Name'] = photo.name; });
       data['Photo Count'] = svcPhotos.length;
@@ -355,84 +349,6 @@
       alert('Something went wrong. Please try again.');
     }
   });
-
-  // ── Fetch Approved Listings from Google Sheets ──
-  const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
-
-  function parseCSV(text) {
-    const lines = text.split('\n');
-    const headers = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
-    return lines.slice(1).filter(l => l.trim()).map(line => {
-      const values = [];
-      let current = '';
-      let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        if (line[i] === '"') { inQuotes = !inQuotes; }
-        else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
-        else { current += line[i]; }
-      }
-      values.push(current.trim());
-      const obj = {};
-      headers.forEach((h, i) => { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
-      return obj;
-    });
-  }
-
-  function getCategoryEmoji(category) {
-    const map = {
-      'Fitness': '🏋️', 'Gym': '🏋️', 'Dance': '💃', 'Yoga': '🧘',
-      'Pilates': '🧘', 'Martial': '🥋', 'Surf': '🏄', 'Art': '🎨',
-      'Cook': '🍳', 'Language': '🗣️'
-    };
-    for (const key in map) { if (category && category.includes(key)) return map[key]; }
-    return '🌴';
-  }
-
-  function buildCard(row) {
-    const name = row['Business Name'] || 'Business';
-    const category = row['Category'] || '';
-    const desc = row['Description'] || '';
-    const address = row['Address'] || '';
-    const phone = row['Phone'] || '';
-    const emoji = getCategoryEmoji(category);
-    const profileNum = parseInt(row['Profile Photo']) || 1;
-    const profilePhoto = row['Photo ' + profileNum] || '';
-    const imgHtml = profilePhoto && profilePhoto.startsWith('data:image')
-      ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;">'
-      : '<div style="height:200px;background:linear-gradient(135deg,var(--ocean-deep),var(--seafoam));display:flex;align-items:center;justify-content:center;font-size:5rem;">' + emoji + '</div>';
-    let html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);">';
-    html += imgHtml;
-    html += '<div style="padding:1.5rem;">';
-    html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
-    html += '<h2 style="font-family:Playfair Display,serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
-    html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
-    if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
-    if (phone) html += '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>';
-    html += '</div></div>';
-    return html;
-  }
-
-  async function loadApprovedListings() {
-    try {
-      const res = await fetch(SHEET_CSV);
-      const text = await res.text();
-      const rows = parseCSV(text);
-      const approved = rows.filter(r => {
-        const status = r['Status'] || r['status'] || '';
-        const source = r['Source'] || '';
-        return status.toLowerCase() === 'approved' && source.includes('Adult');
-      });
-      document.getElementById('loading-listings').style.display = 'none';
-      if (approved.length > 0) {
-        document.getElementById('approved-section').style.display = 'block';
-        document.getElementById('approved-grid').innerHTML = approved.map(buildCard).join('');
-      }
-    } catch(err) {
-      document.getElementById('loading-listings').style.display = 'none';
-    }
-  }
-
-  loadApprovedListings();
 </script>
 </body>
 </html>

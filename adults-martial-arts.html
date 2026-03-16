@@ -115,58 +115,13 @@
   </div>
 
   <!-- Approved Listings -->
-  <div id="approved-section" style="margin-bottom:2rem;display:none;">
+  <div id="approved-section" style="margin-bottom:2rem;">
     <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;">Featured Academies</p>
     <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
   </div>
   <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;">Loading listings...</div>
 
-  <div class="listings-grid">
-    <div class="listing-card">
-      <div class="listing-card-img">🥋</div>
-      <div class="listing-card-body">
-        <p class="listing-card-tag">Martial Arts Academy</p>
-        <h2 class="listing-card-name">Academia de Artes Marciales Playas</h2>
-        <p class="listing-card-desc">Adult classes in Jiu-Jitsu, Muay Thai, and self-defense. Train with experienced instructors in a respectful and focused environment.</p>
-        <div class="listing-card-meta">
-          <span>📍 Playas de Tijuana</span>
-          <span>🕐 Mon–Fri 6am & 7pm · Sat 9am</span>
-        </div>
-        <div class="listing-card-tags">
-          <span class="tag-pill">Jiu-Jitsu</span>
-          <span class="tag-pill">Muay Thai</span>
-          <span class="tag-pill">Self Defense</span>
-          <span class="tag-pill">All Levels</span>
-        </div>
-        <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
-        <button class="review-toggle" onclick="toggleReviews('artes_marciales')">⭐ <span id="rev-count-artes_marciales">Reviews</span></button>
-        <div class="review-panel" id="rev-panel-artes_marciales">
-          <div id="rev-list-artes_marciales"></div>
-          <button class="write-review-btn" onclick="toggleReviewForm('artes_marciales')">✏️ Write a Review</button>
-          <div class="review-form" id="rev-form-artes_marciales">
-            <div class="star-picker" id="star-picker-artes_marciales">
-              <span onclick="setStar('artes_marciales',1)">★</span><span onclick="setStar('artes_marciales',2)">★</span><span onclick="setStar('artes_marciales',3)">★</span><span onclick="setStar('artes_marciales',4)">★</span><span onclick="setStar('artes_marciales',5)">★</span>
-            </div>
-            <input class="review-name-input" id="rev-name-artes_marciales" placeholder="Your name (optional)">
-            <textarea class="review-input" id="rev-text-artes_marciales" placeholder="Share your experience..."></textarea>
-            <div class="review-error" id="rev-error-artes_marciales"></div>
-            <button class="review-submit-btn" onclick="submitReview('artes_marciales','Academia de Artes Marciales Playas')">Post Review</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="listing-card">
-      <div class="listing-card-img">🥊</div>
-      <div class="listing-card-body">
-        <p class="listing-card-tag">Martial Arts</p>
-        <h2 class="listing-card-name">Your Academy Here</h2>
-        <p class="listing-card-desc">Know a great martial arts school in Playas? Submit their info and help neighbors find great training.</p>
-        <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
-        <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
-      </div>
-    </div>
-  </div>
+
   <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Martial Arts Academy</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
@@ -333,12 +288,14 @@
       const approved = rows.filter(r => {
         const status = r['Status'] || r['status'] || '';
         const category = r['Category'] || '';
-        return status.toLowerCase() === 'approved' && category.toLowerCase().includes('martial');
+        const source = r['Source'] || '';
+        return status.toLowerCase() === 'approved' && (category.toLowerCase().includes('martial') || source === 'Adult Martial Arts Page');
       });
       document.getElementById('loading-listings').style.display = 'none';
       if (approved.length > 0) {
-        document.getElementById('approved-section').style.display = 'block';
         document.getElementById('approved-grid').innerHTML = approved.map(buildListingCard).join('');
+      } else {
+        document.getElementById('approved-grid').innerHTML = '<p style="color:var(--text-light);font-size:0.9rem;padding:1rem 0;">No listings yet — be the first to add yours!</p>';
       }
     } catch(err) {
       document.getElementById('loading-listings').style.display = 'none';
