@@ -144,42 +144,20 @@
   <div class="submit-section" id="submit-listing">
     <h2>➕ Add a Martial Arts Academy</h2>
     <p>Submit a listing for review. We'll add it once approved.</p>
-    <form id="martialArtsForm">
     <div class="form-row">
-      <div class="form-group"><label>Academy Name</label><input type="text" placeholder="e.g. Academia Playas"></div>
+      <div class="form-group"><label>Academy Name</label><input id="martialArtsName" name="Business Name" type="text" placeholder="e.g. Academia Playas"></div>
       <div class="form-group"><label>Discipline</label>
-        <select><option>Jiu-Jitsu</option><option>Muay Thai</option><option>Boxing</option><option>Karate</option><option>Taekwondo</option><option>MMA</option><option>Self Defense</option><option>Multiple</option></select>
+        <select name="Category"><option>Jiu-Jitsu</option><option>Muay Thai</option><option>Boxing</option><option>Karate</option><option>Taekwondo</option><option>MMA</option><option>Self Defense</option><option>Multiple</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
+      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the academy, instructors, class schedule..."></textarea></div>
-    <div class="form-group"><label>Your Name &amp; Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
-      <!-- Photo Upload -->
-      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
-        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
-        <div id="svcPhotoDropZone" onclick="document.getElementById('svcPhotoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
-          <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
-          <p id="svcPhotoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
-          <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Any size — auto resized</p>
-          <input type="file" id="svcPhotoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
-        </div>
-        <div id="svcPhotoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;"></div>
-        <p id="svcProfilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
-        <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;"></div>
-      </div>
-    <button type="submit" class="form-submit" id="martialArtsSubmitBtn">Submit for Review</button>
-    <div id="martialArtsSuccess" style="display:none;">
-      <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
-        <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
-        <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;font-size:1.4rem;margin-bottom:0.5rem;">Submission Received!</h3>
-        <p style="color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.7;">Thank you! Your listing has been submitted for review.<br>We'll get it added within 1–2 business days.</p>
-      </div>
-    </div>
+    <div class="form-group"><label>Description</label><textarea id="martialArtsDesc" name="Description" placeholder="Tell us about the academy, instructors, class schedule..."></textarea></div>
+    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
+    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 🥋')">Submit for Review</button>
     <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
-    </form>
   </div>
 </div>
 <footer>
