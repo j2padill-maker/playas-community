@@ -36,11 +36,11 @@
   .cat-card-desc { font-size:0.83rem; color:var(--text-light); line-height:1.65; flex:1; }
   .cat-card-cta { margin-top:1rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; color:var(--ocean); }
   .info-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; margin-bottom:4rem; }
-  .info-banner h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
+  .info-banner h2 { font-family:Playfair Display,serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
   .info-banner p { color:rgba(255,255,255,0.78); font-size:0.9rem; line-height:1.7; max-width:560px; margin:0 auto; }
   /* Form styles */
   .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:2rem; }
-  .submit-section h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
+  .submit-section h2 { font-family:Playfair Display,serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
   .submit-section p { color:rgba(255,255,255,0.75); font-size:0.875rem; margin-bottom:1.5rem; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
   .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
@@ -398,20 +398,21 @@
     const profileNum = parseInt(row['Profile Photo']) || 1;
     const profilePhoto = row['Photo ' + profileNum] || '';
     const imgHtml = profilePhoto && profilePhoto.startsWith('data:image')
-      ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;" />'
+      ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;">'
       : '<div style="height:200px;background:linear-gradient(135deg,var(--ocean-deep),var(--seafoam));display:flex;align-items:center;justify-content:center;font-size:5rem;">' + emoji + '</div>';
-    return '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);transition:transform 0.25s,box-shadow 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform=''">'+
-      imgHtml +
-      '<div style="padding:1.5rem;">'+
-      '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>'+
-      '<h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>'+
-      '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>'+
-      (address ? '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>' : '')+
-      (phone ? '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>' : '')+
-      '</div></div>';
+    let html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);">';
+    html += imgHtml;
+    html += '<div style="padding:1.5rem;">';
+    html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
+    html += '<h2 style="font-family:Playfair Display,serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
+    html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
+    if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
+    if (phone) html += '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>';
+    html += '</div></div>';
+    return html;
   }
 
-  async function loadApprovedListings() {
+  async function  async function loadApprovedListings() {
     try {
       const res = await fetch(SHEET_CSV);
       const text = await res.text();
