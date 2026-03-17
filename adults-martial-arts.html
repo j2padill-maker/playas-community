@@ -283,7 +283,8 @@
     const gallery = document.getElementById('modalGallery');
     if (photos.length > 1) {
       gallery.innerHTML = photos.map((p, i) =>
-       `<img src="${p}" class="${i === profileNum - 1 ? 'active' : ''}" onclick="switchPhoto(this, '${p}')">`
+        '<img src="' + p + '" class="' + (i === profileNum - 1 ? 'active' : '') + '" onclick="switchPhoto(this, '' + p + '')">'
+      ).join('');
       gallery.style.display = 'flex';
     } else {
       gallery.style.display = 'none';
@@ -364,3 +365,4 @@
 </div>
 </body>
 </html>
+
