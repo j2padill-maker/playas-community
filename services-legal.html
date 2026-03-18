@@ -156,7 +156,7 @@
       <h3>Are you a lawyer or notary in Playas?</h3>
       <p>List your practice for free and connect with clients in the community.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add a Listing</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add Your Business</button>
   </div>
 
   <!-- Approved Listings -->
@@ -246,8 +246,17 @@
 
   // ── CSV Parser ───────────────────────────────────────────
   function parseCSV(text) {
-    const lines = text.split('\n');
-    const headers = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
+    const lines = text.replace(/\r/g, '').split('\n');
+    // Quote-aware header parse
+    const rawHeaders = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < lines[0].length; i++) {
+      if (lines[0][i] === '"') { inQ = !inQ; }
+      else if (lines[0][i] === ',' && !inQ) { rawHeaders.push(cur.trim()); cur = ''; }
+      else { cur += lines[0][i]; }
+    }
+    rawHeaders.push(cur.trim());
+    const headers = rawHeaders.map(h => h.replace(/"/g,'').trim());
     return lines.slice(1).filter(l => l.trim()).map(line => {
       const values = [];
       let current = '', inQuotes = false;
@@ -346,10 +355,14 @@
       const text = await res.text();
       const rows = parseCSV(text);
       const approved = rows.filter(r => {
-        const status = (r['Status'] || '').toLowerCase().trim();
+        const status = Object.keys(r).reduce(function(val, k) {
+          return k.toLowerCase().trim() === 'status' ? (r[k] || '') : val;
+        }, '').toLowerCase().trim();
         const category = (r['Category'] || '').toLowerCase();
         const source = (r['Source'] || '').toLowerCase();
-        return status === 'approved' && (category.includes('immigration') || category.includes('family') || category.includes('business') || category.includes('criminal') || category.includes('notary') || category.includes('real estate') || category.includes('labor') || source.includes('legal'));
+        const isApproved = status === 'approved';
+        const isLegal = category.includes('immigration') || category.includes('family') || category.includes('business') || category.includes('criminal') || category.includes('notary') || category.includes('real estate') || category.includes('labor') || category.includes('legal') || category.includes('general practice') || category.includes('general') || source.includes('legal');
+        return isApproved && isLegal;
       });
       const grid = document.getElementById('approved-grid');
       const section = document.getElementById('approved-section');
@@ -559,6 +572,11 @@
       'Description':   desc,
       'Address':       (document.getElementById('legalAddress').value || '').trim(),
       'Phone':         (document.getElementById('legalPhone').value || '').trim(),
+      'Email':         (document.getElementById('legalEmail') ? document.getElementById('legalEmail').value.trim() : ''),
+      'Website':       (document.getElementById('legalWebsite') ? document.getElementById('legalWebsite').value.trim() : ''),
+      'Instagram':     (document.getElementById('legalInstagram') ? document.getElementById('legalInstagram').value.trim() : ''),
+      'Facebook':      (document.getElementById('legalFacebook') ? document.getElementById('legalFacebook').value.trim() : ''),
+      'WhatsApp':      (document.getElementById('legalWhatsapp') ? document.getElementById('legalWhatsapp').value.trim() : ''),
       'Contact Name':  (document.getElementById('legalContact').value || '').trim(),
       'Source':        'Legal Services Page',
       'Photo Count':   0,
