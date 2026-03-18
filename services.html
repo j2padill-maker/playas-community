@@ -54,6 +54,13 @@
 <div class="breadcrumb">
   <a href="index.html">Home</a> › Services
 </div>
+<div style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));padding:1.75rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+  <div>
+    <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:0.3rem;">Have a service business in Playas?</h3>
+    <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;">List your business for free and connect with neighbors who need your services.</p>
+  </div>
+  <button onclick="document.getElementById('submit-service').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--ocean-deep);border:none;border-radius:50px;padding:0.75rem 1.8rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;flex-shrink:0;">+ Add Your Business</button>
+</div>
 <div class="page-content">
   <!-- APPROVED LISTINGS FROM GOOGLE SHEETS -->
   <div id="approved-section" style="margin-bottom:3rem;display:none;">
@@ -137,14 +144,6 @@
       </div>
     </a>
   </div>
-  <div class="submit-banner" style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));border-radius:20px;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-bottom:4rem;flex-wrap:wrap;">
-    <div>
-      <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:0.3rem;">Have a service business in Playas?</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;">List your business for free and connect with neighbors who need your services.</p>
-    </div>
-    <button onclick="document.getElementById('submit-service').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--ocean-deep);border:none;border-radius:50px;padding:0.75rem 1.8rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;flex-shrink:0;">+ Add Your Business</button>
-  </div>
-
   <!-- SUBMIT FORM -->
   <div id="submit-service" style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));border-radius:20px;padding:2.5rem;">
     <h2 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;margin-bottom:0.4rem;">➕ Add Your Service Business</h2>
@@ -295,6 +294,7 @@
   const SVC_MAX_WIDTH = 1200;
   const SVC_QUALITY = 0.82;
   let svcPhotos = [];
+  let svcProfileIndex = 0;
 
   function svcResizeImage(file) {
     return new Promise((resolve) => {
@@ -318,19 +318,35 @@
   function svcRenderPreviews() {
     const preview = document.getElementById('svcPhotoPreview');
     preview.innerHTML = '';
+    if (svcProfileIndex >= svcPhotos.length) svcProfileIndex = 0;
     svcPhotos.forEach((photo, index) => {
+      const isProfile = index === svcProfileIndex;
       const wrapper = document.createElement('div');
-      wrapper.style.cssText = 'position:relative;display:inline-block;';
+      wrapper.style.cssText = 'position:relative;display:inline-block;cursor:pointer;';
+      wrapper.title = 'Tap to set as profile photo';
       const img = document.createElement('img');
       img.src = photo.base64;
-      img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.3);';
+      img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:' + (isProfile ? '3px solid #fff' : '2px solid rgba(255,255,255,0.25)') + ';display:block;';
+      if (isProfile) {
+        const star = document.createElement('div');
+        star.textContent = '★';
+        star.style.cssText = 'position:absolute;bottom:3px;left:3px;background:#f59e0b;color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.75rem;display:flex;align-items:center;justify-content:center;font-weight:700;pointer-events:none;';
+        wrapper.appendChild(star);
+      }
+      wrapper.onclick = () => { svcProfileIndex = index; svcRenderPreviews(); };
       const btn = document.createElement('button');
       btn.textContent = '✕'; btn.type = 'button';
-      btn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;font-weight:700;';
-      btn.onclick = () => { svcPhotos.splice(index, 1); svcRenderPreviews(); };
+      btn.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;font-weight:700;z-index:2;';
+      btn.onclick = (e) => { e.stopPropagation(); svcPhotos.splice(index, 1); if (svcProfileIndex >= svcPhotos.length) svcProfileIndex = 0; svcRenderPreviews(); };
       wrapper.appendChild(img); wrapper.appendChild(btn);
       preview.appendChild(wrapper);
     });
+    if (svcPhotos.length > 1) {
+      const hint = document.createElement('p');
+      hint.textContent = '★ = profile photo shown on your card. Tap any photo to change it.';
+      hint.style.cssText = 'width:100%;font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:0.4rem;';
+      preview.appendChild(hint);
+    }
     const remaining = SVC_MAX_PHOTOS - svcPhotos.length;
     document.getElementById('svcPhotoLabel').textContent = remaining > 0 ? `Click to add more photos (${svcPhotos.length}/${SVC_MAX_PHOTOS})` : `Maximum photos reached (${SVC_MAX_PHOTOS}/${SVC_MAX_PHOTOS})`;
   }
@@ -365,9 +381,10 @@
     if (svcPhotos.length > 0) {
       svcPhotos.forEach((photo, i) => { data[`Photo_${i+1}`] = photo.base64; data[`Photo_${i+1}_Name`] = photo.name; });
       data['Photo Count'] = svcPhotos.length;
+      data['Profile Photo'] = svcProfileIndex + 1;
     }
     try {
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
       const params = new URLSearchParams();
       params.append('payload', JSON.stringify(data));
       await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
