@@ -378,25 +378,24 @@
   let ownerToken = null;
   let ownerBizName = '';
 
-  async function checkOwnerToken() {
+  function handleTokenResponse(data) {
+    if (data.valid) {
+      ownerToken = new URLSearchParams(window.location.search).get('update');
+      ownerBizName = data.business || '';
+      document.getElementById('ownerBannerName').textContent = ownerBizName;
+      document.getElementById('ownerBanner').classList.add('show');
+      prefillUpdateForm(data);
+    }
+  }
+
+  function checkOwnerToken() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('update');
     if (!token) return;
-    try {
-      const res = await fetch(SCRIPT_URL + '?token=' + encodeURIComponent(token));
-      const data = await res.json();
-      if (data.valid) {
-        ownerToken = token;
-        ownerBizName = data.business || '';
-        const banner = document.getElementById('ownerBanner');
-        document.getElementById('ownerBannerName').textContent = ownerBizName;
-        banner.classList.add('show');
-        // Pre-fill update form with their data
-        prefillUpdateForm(data);
-      }
-    } catch(err) {
-      console.error('Token check failed:', err);
-    }
+    const script = document.createElement('script');
+    script.src = SCRIPT_URL + '?token=' + encodeURIComponent(token) + '&callback=handleTokenResponse';
+    script.onerror = function() { console.error('Token check failed'); };
+    document.head.appendChild(script);
   }
 
   function prefillUpdateForm(data) {
