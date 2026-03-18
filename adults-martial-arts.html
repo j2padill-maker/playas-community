@@ -90,6 +90,43 @@
   .modal-meta a { font-size:0.88rem; color:var(--ocean); text-decoration:none; font-weight:600; }
   .modal-call-btn { display:block; background:var(--seafoam); color:#fff; text-align:center; padding:0.85rem; border-radius:50px; font-weight:700; font-size:0.95rem; text-decoration:none; transition:all 0.2s; }
   .modal-call-btn:hover { background:#3a9a74; }
+  .modal-masonry { column-count:2; column-gap:0.5rem; padding:1rem 1rem 0; overflow:hidden; }
+  .modal-masonry img { width:100%; display:block; margin-bottom:0.5rem; border-radius:10px; object-fit:cover; break-inside:avoid; }
+  .modal-masonry.single img { border-radius:12px 12px 0 0; }
+  @media(max-width:480px){ .modal-masonry { column-count:1; } }
+
+  /* ── Update Listing Modal ── */
+  .update-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center; padding:1rem; overflow-y:auto; }
+  .update-overlay.open { display:flex; }
+  .update-box { background:#fff; border-radius:20px; max-width:620px; width:100%; max-height:90vh; overflow-y:auto; position:relative; padding:2rem; margin:auto; }
+  .update-box h3 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--ocean-deep); margin-bottom:0.25rem; }
+  .update-sub { font-size:0.83rem; color:var(--text-light); margin-bottom:1.5rem; }
+  .update-tabs { display:flex; gap:0.5rem; margin-bottom:1.5rem; }
+  .update-tab { flex:1; padding:0.6rem; border:1.5px solid #e2e8f0; border-radius:50px; background:#fff; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; cursor:pointer; color:var(--text-light); transition:all 0.2s; }
+  .update-tab.active { background:var(--ocean); border-color:var(--ocean); color:#fff; }
+  .update-section { display:none; } .update-section.active { display:block; }
+  .update-field { margin-bottom:1rem; }
+  .update-field label { display:block; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ocean-deep); margin-bottom:0.4rem; }
+  .update-field input, .update-field textarea { width:100%; padding:0.7rem 1rem; border:1.5px solid #e2e8f0; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; box-sizing:border-box; color:var(--text); }
+  .update-field input:focus, .update-field textarea:focus { outline:none; border-color:var(--ocean); }
+  .update-field textarea { resize:vertical; min-height:90px; }
+  .update-photo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin-top:0.5rem; }
+  .update-photo-slot { aspect-ratio:1; border:2px dashed #cbd5e1; border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; position:relative; background:#f8fafc; font-size:1.2rem; transition:border-color 0.2s; }
+  .update-photo-slot:hover { border-color:var(--ocean); }
+  .update-photo-slot img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
+  .update-photo-slot .rm-btn { position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:0.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .update-submit-btn { width:100%; background:var(--seafoam); color:#fff; border:none; padding:0.9rem; border-radius:50px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:1.2rem; transition:all 0.2s; }
+  .update-submit-btn:hover { background:#3a9a74; } .update-submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
+  .delete-btn { width:100%; background:transparent; border:1.5px solid #ef4444; color:#ef4444; padding:0.8rem; border-radius:50px; font-size:0.9rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:0.75rem; transition:all 0.2s; }
+  .delete-btn:hover { background:#ef4444; color:#fff; }
+  .update-done { display:none; text-align:center; padding:2rem 1rem; }
+  .update-done .big-check { font-size:3rem; margin-bottom:0.75rem; }
+  /* ── Token banner ── */
+  .owner-banner { display:none; background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:16px; padding:1rem 1.5rem; margin-bottom:2rem; color:#fff; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  .owner-banner.show { display:flex; }
+  .owner-banner p { font-size:0.88rem; opacity:0.9; margin-top:0.2rem; }
+  .owner-banner strong { font-size:1rem; }
+  .owner-edit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.55rem 1.4rem; font-size:0.85rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -104,6 +141,14 @@
 </div>
 <div class="breadcrumb">
   <a href="index.html">Home</a> › <a href="index.html#adults">Adults Activities</a> › Martial Arts & Self Defense
+</div>
+<!-- Owner banner — only visible when ?update=token is in URL -->
+<div class="owner-banner" id="ownerBanner">
+  <div>
+    <strong id="ownerBannerName">Your Listing</strong>
+    <p>You are viewing your listing as the owner.</p>
+  </div>
+  <button class="owner-edit-btn" onclick="openUpdateModal()">✏️ Edit / Update Listing</button>
 </div>
 <div class="page-content">
   <div class="submit-banner">
@@ -192,6 +237,10 @@
   <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
 </footer>
 <script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
+  const SHEET_CSV  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+
+  // ── Reviews ──────────────────────────────────────────────
   const BAD_WORDS=['fuck','shit','ass','bitch','cunt','dick','pussy','bastard','piss','cock','whore','slut','puta','pinche','pendejo','cabron','joder','chinga'];
   const starState={};const reviewData={};
   function setStar(id,val){starState[id]=val;const p=document.getElementById('star-picker-'+id);if(p)p.querySelectorAll('span').forEach((s,i)=>s.classList.toggle('lit',i<val));}
@@ -199,19 +248,16 @@
   function toggleReviewForm(id){const f=document.getElementById('rev-form-'+id);if(f)f.classList.toggle('open');}
   function containsProfanity(t){return t.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).some(w=>BAD_WORDS.includes(w));}
   function sanitize(t){return t.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();}
-  function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=`${avg} ★ · ${reviews.length} review${reviews.length!==1?'s':''}`;list.innerHTML=reviews.map(r=>`<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>${sanitize(r.name||'Anonymous')}</strong><span style="font-size:0.72rem;color:var(--text-light)">${r.date}</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">${'★'.repeat(r.stars)}</div><div>${sanitize(r.text)}</div></div>`).join('');}
+  function renderReviewList(id){const list=document.getElementById('rev-list-'+id);const countEl=document.getElementById('rev-count-'+id);if(!list)return;const reviews=(reviewData[id]||[]).filter(r=>r.approved);if(reviews.length===0){list.innerHTML='<p style="font-size:0.78rem;color:var(--text-light);margin-bottom:0.5rem;">No reviews yet!</p>';if(countEl)countEl.textContent='— be the first!';return;}const avg=(reviews.reduce((s,r)=>s+r.stars,0)/reviews.length).toFixed(1);if(countEl)countEl.textContent=avg+' ★ · '+reviews.length+' review'+(reviews.length!==1?'s':'');list.innerHTML=reviews.map(r=>'<div class="review-card"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><strong>'+sanitize(r.name||'Anonymous')+'</strong><span style="font-size:0.72rem;color:var(--text-light)">'+r.date+'</span></div><div style="color:#f59e0b;margin-bottom:0.25rem;">'+'★'.repeat(r.stars)+'</div><div>'+sanitize(r.text)+'</div></div>').join('');}
   function submitReview(id,bizName){const nameEl=document.getElementById('rev-name-'+id);const textEl=document.getElementById('rev-text-'+id);const errorEl=document.getElementById('rev-error-'+id);const stars=starState[id]||0;const name=(nameEl?nameEl.value:'').trim();const text=(textEl?textEl.value:'').trim();errorEl.classList.remove('show');errorEl.textContent='';if(stars===0){errorEl.textContent='⭐ Please select a star rating.';errorEl.classList.add('show');return;}if(text.length<5){errorEl.textContent='✏️ Please write at least a sentence.';errorEl.classList.add('show');return;}if(containsProfanity(text)||containsProfanity(name)){errorEl.textContent="🚫 Your review contains language that isn't allowed.";errorEl.classList.add('show');return;}if(!reviewData[id])reviewData[id]=[];const review={name:name||'Anonymous',text,stars,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),approved:false,id:Date.now()};reviewData[id].push(review);if(textEl)textEl.value='';if(nameEl)nameEl.value='';setStar(id,0);document.getElementById('rev-form-'+id).classList.remove('open');renderReviewList(id);errorEl.style.background='#d1fae5';errorEl.style.color='#065f46';errorEl.textContent='✅ Thanks! Your review is pending approval.';errorEl.classList.add('show');setTimeout(()=>{errorEl.classList.remove('show');errorEl.style.background='';errorEl.style.color='';},4000);setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);}
 
-  // ── Fetch Approved Martial Arts Listings ──
-  const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
-
+  // ── CSV Parser ───────────────────────────────────────────
   function parseCSV(text) {
     const lines = text.split('\n');
     const headers = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
     return lines.slice(1).filter(l => l.trim()).map(line => {
       const values = [];
-      let current = '';
-      let inQuotes = false;
+      let current = '', inQuotes = false;
       for (let i = 0; i < line.length; i++) {
         if (line[i] === '"') { inQuotes = !inQuotes; }
         else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
@@ -224,7 +270,7 @@
     });
   }
 
-  // Store row data for modal
+  // ── Listing Cards ─────────────────────────────────────────
   const listingData = [];
 
   function buildListingCard(row) {
@@ -244,7 +290,7 @@
     html += imgHtml;
     html += '<div style="padding:1.5rem;">';
     html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
-    html += '<h2 style="font-family:Playfair Display,serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
+    html += '<h2 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
     html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
     if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
     if (phone) html += '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>';
@@ -253,6 +299,7 @@
     return html;
   }
 
+  // ── Photo Gallery Modal ───────────────────────────────────
   function openModal(idx) {
     const row = listingData[idx];
     const name = row['Business Name'] || 'Business';
@@ -260,40 +307,28 @@
     const desc = row['Description'] || '';
     const address = row['Address'] || '';
     const phone = row['Phone'] || '';
-    const photoCount = parseInt(row['Photo Count']) || 0;
     const profileNum = parseInt(row['Profile Photo']) || 1;
-
-    // Collect all photos
     const photos = [];
     for (let i = 1; i <= 5; i++) {
       const p = row['Photo_' + i];
       if (p && p.startsWith('data:image')) photos.push(p);
     }
-
-    // Build masonry photo grid
     const masonry = document.getElementById('modalMasonry');
     if (photos.length > 0) {
-      // Put profile photo first
       const profileIdx = (profileNum - 1 < photos.length) ? profileNum - 1 : 0;
-      const ordered = [photos[profileIdx], ...photos.filter((_, i) => i !== profileIdx)];
+      const ordered = [photos[profileIdx], ...photos.filter((_,i) => i !== profileIdx)];
       masonry.innerHTML = ordered.map(p => '<img src="' + p + '" alt="">').join('');
       masonry.className = 'modal-masonry' + (photos.length === 1 ? ' single' : '');
       masonry.style.display = 'block';
     } else {
       masonry.style.display = 'none';
     }
-
-    // Set text content
     document.getElementById('modalCategory').textContent = category;
     document.getElementById('modalName').textContent = name;
     document.getElementById('modalDesc').textContent = desc;
-
-    // Meta info
     let meta = '';
     if (address) meta += '<span>📍 ' + address + '</span>';
     document.getElementById('modalMeta').innerHTML = meta;
-
-    // Call button
     const callBtn = document.getElementById('modalCallBtn');
     if (phone) {
       callBtn.href = 'tel:' + phone.replace(/\D/g,'');
@@ -302,7 +337,6 @@
     } else {
       callBtn.style.display = 'none';
     }
-
     document.getElementById('listingModal').classList.add('open');
   }
 
@@ -312,41 +346,213 @@
     }
   }
 
+  // ── Load Listings ─────────────────────────────────────────
   async function loadApprovedListings() {
-    console.log('🔍 [Martial Arts] loadApprovedListings() started');
-    console.log('🔍 CSV URL:', SHEET_CSV);
     try {
       const res = await fetch(SHEET_CSV);
-      console.log('🔍 Fetch response status:', res.status, res.ok);
       const text = await res.text();
-      console.log('🔍 Raw CSV (first 500 chars):', text.substring(0, 500));
       const rows = parseCSV(text);
-      console.log('🔍 Total rows parsed:', rows.length);
-      console.log('🔍 First row sample:', rows[0]);
       const approved = rows.filter(r => {
-        const status = (r['Status'] || '').toLowerCase();
+        const status = (r['Status'] || '').toLowerCase().trim();
         const category = (r['Category'] || '').toLowerCase();
-        console.log('🔍 Row:', r['Business Name'], '| Status:', status, '| Category:', category);
-        return status === 'approved' && category.includes('martial');
+        const source = (r['Source'] || '').toLowerCase();
+        return status === 'approved' && (category.includes('martial') || source.includes('martial'));
       });
-      console.log('🔍 Approved martial arts rows:', approved.length, approved);
-      document.getElementById('loading-listings').style.display = 'none';
+      const grid = document.getElementById('approved-grid');
+      const section = document.getElementById('approved-section');
+      const loading = document.getElementById('loading-listings');
+      loading.style.display = 'none';
       if (approved.length > 0) {
-        document.getElementById('approved-section').style.display = 'block';
-        document.getElementById('approved-grid').innerHTML = approved.map(buildListingCard).join('');
-        console.log('✅ Cards rendered successfully');
-      } else {
-        console.log('⚠️ No approved martial arts rows found');
+        grid.innerHTML = approved.map(buildListingCard).join('');
+        section.style.display = 'block';
       }
     } catch(err) {
-      console.error('❌ Error in loadApprovedListings:', err);
-      document.getElementById('loading-listings').textContent = 'Error loading listings — check console.';
+      console.error('Error loading listings:', err);
+      document.getElementById('loading-listings').textContent = 'Error loading listings.';
     }
   }
 
   loadApprovedListings();
-</script>
 
+  // ── Token System ──────────────────────────────────────────
+  let ownerToken = null;
+  let ownerBizName = '';
+
+  async function checkOwnerToken() {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('update');
+    if (!token) return;
+    try {
+      const res = await fetch(SCRIPT_URL + '?token=' + encodeURIComponent(token));
+      const data = await res.json();
+      if (data.valid) {
+        ownerToken = token;
+        ownerBizName = data.business || '';
+        const banner = document.getElementById('ownerBanner');
+        document.getElementById('ownerBannerName').textContent = ownerBizName;
+        banner.classList.add('show');
+        // Pre-fill update form with their data
+        prefillUpdateForm(data);
+      }
+    } catch(err) {
+      console.error('Token check failed:', err);
+    }
+  }
+
+  function prefillUpdateForm(data) {
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+    set('u-name',      data.business  || '');
+    set('u-category',  data.category  || '');
+    set('u-desc',      data.description || '');
+    set('u-address',   data.address   || '');
+    set('u-phone',     data.phone     || '');
+    set('u-email',     data.email     || '');
+    set('u-website',   data.website   || '');
+    set('u-instagram', data.instagram || '');
+    set('u-facebook',  data.facebook  || '');
+    set('u-whatsapp',  data.whatsapp  || '');
+    set('u-mon',       data.monday    || '');
+    set('u-tue',       data.tuesday   || '');
+    set('u-wed',       data.wednesday || '');
+    set('u-thu',       data.thursday  || '');
+    set('u-fri',       data.friday    || '');
+    set('u-sat',       data.saturday  || '');
+    set('u-sun',       data.sunday    || '');
+  }
+
+  checkOwnerToken();
+
+  // ── Update Modal ──────────────────────────────────────────
+  function openUpdateModal() {
+    document.getElementById('updateFormWrap').style.display = 'block';
+    document.getElementById('updateDone').style.display = 'none';
+    document.getElementById('updateModal').classList.add('open');
+  }
+
+  function closeUpdateModal(e) {
+    if (e.target === document.getElementById('updateModal')) {
+      document.getElementById('updateModal').classList.remove('open');
+    }
+  }
+
+  function switchTab(name) {
+    document.querySelectorAll('.update-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.update-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ── Photo Upload ──────────────────────────────────────────
+  const updatePhotos = [null,null,null,null,null];
+
+  function triggerPhoto(i) {
+    document.getElementById('updatePhotoGrid').children[i].querySelector('input[type=file]').click();
+  }
+
+  function handlePhoto(input, i) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const data = canvas.toDataURL('image/jpeg', 0.82);
+        updatePhotos[i] = data;
+        const slot = document.getElementById('updatePhotoGrid').children[i];
+        let imgEl = slot.querySelector('img');
+        if (!imgEl) { imgEl = document.createElement('img'); slot.appendChild(imgEl); }
+        imgEl.src = data;
+        slot.childNodes[0].textContent = '';
+        let rmBtn = slot.querySelector('.rm-btn');
+        if (!rmBtn) {
+          rmBtn = document.createElement('button');
+          rmBtn.className = 'rm-btn';
+          rmBtn.textContent = '✕';
+          rmBtn.onclick = function(ev) {
+            ev.stopPropagation();
+            updatePhotos[i] = null;
+            imgEl.remove();
+            rmBtn.remove();
+            slot.childNodes[0].textContent = '📷';
+          };
+          slot.appendChild(rmBtn);
+        }
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  // ── Submit Update ─────────────────────────────────────────
+  async function submitUpdate() {
+    if (!ownerToken) return;
+    const btn = document.getElementById('updateSubmitBtn');
+    const photos = updatePhotos.filter(p => p !== null);
+    const payload = {
+      'Business Name':    document.getElementById('u-name').value.trim(),
+      'Category':         document.getElementById('u-category').value.trim(),
+      'Description':      document.getElementById('u-desc').value.trim(),
+      'Address':          document.getElementById('u-address').value.trim(),
+      'Phone':            document.getElementById('u-phone').value.trim(),
+      'Email':            document.getElementById('u-email').value.trim(),
+      'Website':          document.getElementById('u-website').value.trim(),
+      'Instagram':        document.getElementById('u-instagram').value.trim(),
+      'Facebook':         document.getElementById('u-facebook').value.trim(),
+      'WhatsApp':         document.getElementById('u-whatsapp').value.trim(),
+      'Monday Hours':     document.getElementById('u-mon').value.trim(),
+      'Tuesday Hours':    document.getElementById('u-tue').value.trim(),
+      'Wednesday Hours':  document.getElementById('u-wed').value.trim(),
+      'Thursday Hours':   document.getElementById('u-thu').value.trim(),
+      'Friday Hours':     document.getElementById('u-fri').value.trim(),
+      'Saturday Hours':   document.getElementById('u-sat').value.trim(),
+      'Sunday Hours':     document.getElementById('u-sun').value.trim(),
+      'Source':           'Martial Arts Update',
+      'Update Token':     ownerToken,
+      'Photo Count':      photos.length,
+    };
+    photos.forEach(function(p, i) { payload['Photo_' + (i+1)] = p; });
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+    const params = new URLSearchParams();
+    params.append('payload', JSON.stringify(payload));
+    try {
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
+      document.getElementById('updateFormWrap').style.display = 'none';
+      document.getElementById('updateDoneMsg').textContent = 'Your changes are under review and will go live shortly.';
+      document.getElementById('updateDone').style.display = 'block';
+    } catch(err) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit Changes for Review'; }
+      alert('Something went wrong. Please try again.');
+    }
+  }
+
+  // ── Submit Delete ─────────────────────────────────────────
+  async function submitDelete() {
+    if (!ownerToken) return;
+    if (!confirm('Are you sure you want to remove your listing? It will be hidden immediately.')) return;
+    const payload = {
+      'Business Name': ownerBizName,
+      'Source':        'Delete Request',
+      'Update Token':  ownerToken,
+      'Status':        'Deleted',
+    };
+    const params = new URLSearchParams();
+    params.append('payload', JSON.stringify(payload));
+    try {
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
+      document.getElementById('updateFormWrap').style.display = 'none';
+      document.getElementById('updateDoneMsg').textContent = 'Your listing has been removed from the site.';
+      document.getElementById('updateDone').style.display = 'block';
+      document.getElementById('ownerBanner').classList.remove('show');
+    } catch(err) {
+      alert('Something went wrong. Please try again.');
+    }
+  }
+</script>
 <!-- Photo Gallery Modal -->
 <div class="modal-overlay" id="listingModal" onclick="closeModal(event)">
   <div class="modal-box" id="modalBox">
@@ -358,6 +564,83 @@
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-meta" id="modalMeta"></div>
       <a class="modal-call-btn" id="modalCallBtn" href="#">📞 Call / WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- Update Listing Modal -->
+<div class="update-overlay" id="updateModal" onclick="closeUpdateModal(event)">
+  <div class="update-box">
+    <button style="position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.12);color:#555;border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;cursor:pointer;" onclick="document.getElementById('updateModal').classList.remove('open')">✕</button>
+
+    <div id="updateFormWrap">
+      <h3>✏️ Update Your Listing</h3>
+      <p class="update-sub">Changes will be reviewed before going live. Only fill in what you want to change.</p>
+
+      <div class="update-tabs">
+        <button class="update-tab active" onclick="switchTab('info')">📋 Info</button>
+        <button class="update-tab" onclick="switchTab('hours')">🕐 Hours</button>
+        <button class="update-tab" onclick="switchTab('photos')">📷 Photos</button>
+        <button class="update-tab" onclick="switchTab('delete')">🗑️ Remove</button>
+      </div>
+
+      <!-- Info tab -->
+      <div class="update-section active" id="tab-info">
+        <div class="update-field"><label>Business Name</label><input type="text" id="u-name" placeholder="Your business name"></div>
+        <div class="update-field"><label>Category</label><input type="text" id="u-category" placeholder="e.g. Martial Arts"></div>
+        <div class="update-field"><label>Description</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
+        <div class="update-field"><label>Address</label><input type="text" id="u-address" placeholder="Street address"></div>
+        <div class="update-field"><label>Phone / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
+        <div class="update-field"><label>Email</label><input type="text" id="u-email" placeholder="contact@email.com"></div>
+        <div class="update-field"><label>Website</label><input type="text" id="u-website" placeholder="https://"></div>
+        <div class="update-field"><label>Instagram</label><input type="text" id="u-instagram" placeholder="@handle"></div>
+        <div class="update-field"><label>Facebook</label><input type="text" id="u-facebook" placeholder="facebook.com/page"></div>
+        <div class="update-field"><label>WhatsApp Link</label><input type="text" id="u-whatsapp" placeholder="https://wa.me/..."></div>
+        <button class="update-submit-btn" id="updateSubmitBtn" onclick="submitUpdate()">Submit Changes for Review</button>
+      </div>
+
+      <!-- Hours tab -->
+      <div class="update-section" id="tab-hours">
+        <div class="update-field"><label>Monday</label><input type="text" id="u-mon" placeholder="e.g. 9am–6pm or Closed"></div>
+        <div class="update-field"><label>Tuesday</label><input type="text" id="u-tue" placeholder="e.g. 9am–6pm or Closed"></div>
+        <div class="update-field"><label>Wednesday</label><input type="text" id="u-wed" placeholder="e.g. 9am–6pm or Closed"></div>
+        <div class="update-field"><label>Thursday</label><input type="text" id="u-thu" placeholder="e.g. 9am–6pm or Closed"></div>
+        <div class="update-field"><label>Friday</label><input type="text" id="u-fri" placeholder="e.g. 9am–6pm or Closed"></div>
+        <div class="update-field"><label>Saturday</label><input type="text" id="u-sat" placeholder="e.g. 9am–2pm or Closed"></div>
+        <div class="update-field"><label>Sunday</label><input type="text" id="u-sun" placeholder="e.g. Closed"></div>
+        <button class="update-submit-btn" onclick="submitUpdate()">Submit Changes for Review</button>
+      </div>
+
+      <!-- Photos tab -->
+      <div class="update-section" id="tab-photos">
+        <p style="font-size:0.83rem;color:var(--text-light);margin-bottom:1rem;">Upload up to 5 photos. These will replace your current photos once approved.</p>
+        <div class="update-photo-grid" id="updatePhotoGrid">
+          <div class="update-photo-slot" onclick="triggerPhoto(0)">📷<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,0)"></div>
+          <div class="update-photo-slot" onclick="triggerPhoto(1)">📷<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,1)"></div>
+          <div class="update-photo-slot" onclick="triggerPhoto(2)">📷<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,2)"></div>
+          <div class="update-photo-slot" onclick="triggerPhoto(3)">📷<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,3)"></div>
+          <div class="update-photo-slot" onclick="triggerPhoto(4)">📷<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,4)"></div>
+        </div>
+        <button class="update-submit-btn" onclick="submitUpdate()">Submit Photos for Review</button>
+      </div>
+
+      <!-- Delete tab -->
+      <div class="update-section" id="tab-delete">
+        <div style="background:#fef2f2;border-radius:16px;padding:1.5rem;text-align:center;margin-bottom:1rem;">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem;">⚠️</div>
+          <h4 style="color:#991b1b;font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Remove Your Listing</h4>
+          <p style="font-size:0.85rem;color:#7f1d1d;line-height:1.6;">Your listing will be immediately hidden from the site. This cannot be undone automatically — contact us if you change your mind.</p>
+        </div>
+        <button class="delete-btn" onclick="submitDelete()">Yes, Remove My Listing</button>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="update-done" id="updateDone">
+      <div class="big-check">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;color:var(--ocean-deep);margin-bottom:0.5rem;">Submitted!</h3>
+      <p style="font-size:0.88rem;color:var(--text-light);" id="updateDoneMsg">Your changes are under review and will go live shortly.</p>
+      <button style="margin-top:1.25rem;padding:0.55rem 1.5rem;background:var(--ocean);color:#fff;border:none;border-radius:50px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="document.getElementById('updateModal').classList.remove('open')">Close</button>
     </div>
   </div>
 </div>
