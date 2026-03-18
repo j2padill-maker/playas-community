@@ -67,6 +67,16 @@
   .form-submit { background:var(--seafoam); color:#fff; border:none; padding:0.9rem 2.5rem; border-radius:50px; font-size:0.95rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
   .form-submit:hover { background:#3a9a74; transform:translateY(-2px); }
   .mod-notice { background:rgba(255,255,255,0.1); border-left:3px solid rgba(255,255,255,0.4); border-radius:0 8px 8px 0; padding:0.75rem 1rem; margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.7); }
+  .form-photo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin-top:0.5rem; }
+  .form-photo-slot { aspect-ratio:1; border:2px dashed rgba(255,255,255,0.35); border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; position:relative; background:rgba(255,255,255,0.08); font-size:1.2rem; transition:border-color 0.2s; }
+  .form-photo-slot:hover { border-color:rgba(255,255,255,0.7); }
+  .form-photo-slot img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
+  .form-photo-slot .rm-btn { position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:0.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .profile-picker { display:none; margin-top:1rem; }
+  .profile-picker label { font-size:0.82rem; color:rgba(255,255,255,0.8); display:block; margin-bottom:0.5rem; font-weight:600; }
+  .profile-thumbs { display:flex; gap:0.5rem; flex-wrap:wrap; }
+  .profile-thumb { width:52px; height:52px; border-radius:8px; object-fit:cover; border:3px solid transparent; cursor:pointer; transition:border-color 0.2s; }
+  .profile-thumb.selected { border-color:#fff; box-shadow:0 0 0 2px var(--seafoam); }
   footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
   footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
   footer a { color:var(--seafoam-light); text-decoration:none; }
@@ -220,6 +230,20 @@
     </div>
     <div class="form-group"><label>Description</label><textarea id="legalDesc" placeholder="Tell us about your practice areas, experience, languages spoken, consultation fees..."></textarea></div>
     <div class="form-group"><label>Your Name & Contact</label><input id="legalContact" type="text" placeholder="Name · email or phone (not published)"></div>
+    <div class="form-group">
+      <label>Photos <span style="font-weight:400;opacity:0.75;">(optional &mdash; up to 5)</span></label>
+      <div class="form-photo-grid" id="formPhotoGrid">
+        <div class="form-photo-slot" onclick="triggerFormPhoto(0)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,0)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(1)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,1)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(2)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,2)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(3)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,3)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(4)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,4)"></div>
+      </div>
+      <div class="profile-picker" id="formProfilePicker">
+        <label>★ Choose your profile photo (shown on the listing card)</label>
+        <div class="profile-thumbs" id="formProfileThumbs"></div>
+      </div>
+    </div>
     <button class="form-submit" id="legalSubmitBtn" onclick="submitLegalForm()">Submit for Review</button>
     <div id="legalSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;">Submission Received!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;">Your listing has been submitted for review.</p></div></div><div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
   </div>
@@ -558,6 +582,83 @@
     }
   }
 
+  // -- Form Photo Upload ------------------------------------------------
+  const formPhotos = [null,null,null,null,null];
+  let formProfilePhoto = 1;
+
+  function triggerFormPhoto(i) {
+    document.getElementById('formPhotoGrid').children[i].querySelector('input[type=file]').click();
+  }
+
+  function handleFormPhoto(input, i) {
+    if (!input.files || !input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const data = canvas.toDataURL('image/jpeg', 0.82);
+        formPhotos[i] = data;
+        const slot = document.getElementById('formPhotoGrid').children[i];
+        let imgEl = slot.querySelector('img');
+        if (!imgEl) { imgEl = document.createElement('img'); slot.appendChild(imgEl); }
+        imgEl.src = data;
+        slot.childNodes[0].textContent = '';
+        let rmBtn = slot.querySelector('.rm-btn');
+        if (!rmBtn) {
+          rmBtn = document.createElement('button');
+          rmBtn.className = 'rm-btn';
+          rmBtn.textContent = '✕';
+          rmBtn.onclick = function(ev) {
+            ev.stopPropagation();
+            formPhotos[i] = null;
+            imgEl.remove();
+            rmBtn.remove();
+            slot.childNodes[0].textContent = '📷';
+            updateFormProfilePicker();
+          };
+          slot.appendChild(rmBtn);
+        }
+        updateFormProfilePicker();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  function updateFormProfilePicker() {
+    const filled = formPhotos.filter(function(p) { return p !== null; });
+    const picker = document.getElementById('formProfilePicker');
+    const thumbsEl = document.getElementById('formProfileThumbs');
+    if (filled.length === 0) { picker.style.display = 'none'; return; }
+    picker.style.display = 'block';
+    thumbsEl.innerHTML = '';
+    formPhotos.forEach(function(p, i) {
+      if (!p) return;
+      const realIdx = i + 1;
+      const th = document.createElement('img');
+      th.src = p;
+      th.className = 'profile-thumb' + (formProfilePhoto === realIdx ? ' selected' : '');
+      th.title = 'Photo ' + realIdx;
+      th.onclick = function() {
+        formProfilePhoto = realIdx;
+        thumbsEl.querySelectorAll('.profile-thumb').forEach(function(t) { t.classList.remove('selected'); });
+        th.classList.add('selected');
+      };
+      thumbsEl.appendChild(th);
+    });
+    if (!formPhotos[formProfilePhoto - 1]) {
+      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
+      const first = thumbsEl.querySelector('.profile-thumb');
+      if (first) first.classList.add('selected');
+    }
+  }
+
   // ── Legal Services Form Submit ──────────────────────────────
   async function submitLegalForm() {
     const name = (document.getElementById('legalName').value || '').trim();
@@ -579,9 +680,11 @@
       'WhatsApp':      (document.getElementById('legalWhatsapp') ? document.getElementById('legalWhatsapp').value.trim() : ''),
       'Contact Name':  (document.getElementById('legalContact').value || '').trim(),
       'Source':        'Legal Services Page',
-      'Photo Count':   0,
+      'Photo Count':   formPhotos.filter(function(p) { return p !== null; }).length,
+      'Profile Photo': formProfilePhoto,
     };
     const params = new URLSearchParams();
+    formPhotos.forEach(function(p, i) { if (p) data['Photo_' + (i+1)] = p; });
     params.append('payload', JSON.stringify(data));
     try {
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
