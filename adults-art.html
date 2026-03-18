@@ -353,7 +353,7 @@
         const status = (r['Status'] || '').toLowerCase().trim();
         const category = (r['Category'] || '').toLowerCase();
         const source = (r['Source'] || '').toLowerCase();
-        return status === 'approved' && (category.includes('art') || category.includes('paint') || category.includes('drawing') || source.includes('art'));
+        return status === 'approved' && (category.includes('art class') || category.includes('paint') || category.includes('drawing') || category.includes('sculpture') || category.includes('ceramics') || category.includes('photography') || category.includes('mixed media') || source.includes('art studio'));
       });
       const grid = document.getElementById('approved-grid');
       const section = document.getElementById('approved-section');
