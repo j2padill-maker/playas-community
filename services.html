@@ -111,28 +111,12 @@
         <span class="cat-card-cta">View agents →</span>
       </div>
     </a>
-    <a href="services-plomeros.html" class="cat-card">
-      <div class="cat-card-img">🚿</div>
+    <a href="services-construccion.html" class="cat-card">
+      <div class="cat-card-img">🏗️</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name">Plumbers</h2>
-        <p class="cat-card-desc">Leak repairs, water installations, water heaters, drainage, and more.</p>
-        <span class="cat-card-cta">View plumbers →</span>
-      </div>
-    </a>
-    <a href="services-electricistas.html" class="cat-card">
-      <div class="cat-card-img">⚡</div>
-      <div class="cat-card-body">
-        <h2 class="cat-card-name">Electricians</h2>
-        <p class="cat-card-desc">Electrical installations, panels, lighting, and certified repairs.</p>
-        <span class="cat-card-cta">View electricians →</span>
-      </div>
-    </a>
-    <a href="services-manitas.html" class="cat-card">
-      <div class="cat-card-img">🛠️</div>
-      <div class="cat-card-body">
-        <h2 class="cat-card-name">Handyman & Home Repair</h2>
-        <p class="cat-card-desc">Painting, carpentry, ironwork, waterproofing, and general home repairs.</p>
-        <span class="cat-card-cta">View handymen →</span>
+        <h2 class="cat-card-name">Construction Services</h2>
+        <p class="cat-card-desc">General contractors, builders, remodeling, plumbing, electrical, and all home construction needs.</p>
+        <span class="cat-card-cta">View construction →</span>
       </div>
     </a>
     <a href="services-legal.html" class="cat-card">
@@ -162,9 +146,7 @@
             <option style="background:var(--ocean-deep);">Doctors</option>
             <option style="background:var(--ocean-deep);">Veterinarians</option>
             <option style="background:var(--ocean-deep);">Real Estate</option>
-            <option style="background:var(--ocean-deep);">Plumbers</option>
-            <option style="background:var(--ocean-deep);">Electricians</option>
-            <option style="background:var(--ocean-deep);">Handyman & Home Repair</option>
+            <option style="background:var(--ocean-deep);">Construction Services</option>
             <option style="background:var(--ocean-deep);">Legal Services</option>
             <option style="background:var(--ocean-deep);">Other</option>
           </select>
@@ -312,8 +294,7 @@
     const map = {
       'Mechanics': '🔧', 'Dentists': '🦷', 'Doctors': '🩺',
       'Veterinarians': '🐾', 'Real Estate': '🏡', 'Legal Services': '⚖️',
-      'Construction Services': '🏗️', 'Plumbers': '🪠', 'Electricians': '⚡',
-      'Handyman & Home Repair': '🛠️', 'Other': '🏪'
+      'Construction Services': '🏗️', 'Other': '🏪'
     };
     for (const key in map) { if (category && category.includes(key)) return map[key]; }
     return '🏪';
