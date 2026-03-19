@@ -88,12 +88,13 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Back to Home">← Back to Home</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag">Comunidad · Playas de Tijuana</p>
-  <h1>Próximos Eventos</h1>
+  <p class="page-hero-tag" data-es="Comunidad · Playas de Tijuana" data-en="Community · Playas de Tijuana">Comunidad · Playas de Tijuana</p>
+  <h1 data-es="Próximos Eventos" data-en="Upcoming Events">Próximos Eventos</h1>
   <p>Discover what's happening in Playas — markets, concerts, sports, culture, and more.</p>
 </div>
 
@@ -296,8 +297,8 @@
 
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Your neighborhood community hub</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Back to main site</a></p>
 </footer>
 
 <script>
@@ -345,5 +346,6 @@
     }
   });
 </script>
+<script src="lang-persist.js"></script>
 </body>
 </html>
