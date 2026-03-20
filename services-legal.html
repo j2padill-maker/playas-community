@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Legal Services — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -142,39 +143,40 @@
 <body>
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="services.html" class="nav-back" data-es="← Servicios" data-en="← Services">← Servicios</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 <div class="page-hero">
-  <p class="page-hero-tag">Services · Playas de Tijuana</p>
-  <h1>Legal Services</h1>
-  <p>Find trusted lawyers and notaries for immigration, real estate, family law, and business matters in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Servicios · Playas de Tijuana" data-en="Services · Playas de Tijuana">Servicios · Playas de Tijuana</p>
+  <h1 data-es="Servicios Legales" data-en="Legal Services">Servicios Legales</h1>
+  <p data-es="Encuentra abogados y notarios de confianza para inmigración, bienes raíces, derecho familiar y negocios en Playas de Tijuana." data-en="Find trusted lawyers and notaries for immigration, real estate, family law, and business matters in Playas de Tijuana.">Encuentra abogados y notarios de confianza para inmigración, bienes raíces, derecho familiar y negocios en Playas de Tijuana.</p>
 </div>
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="services.html">Services</a> › Legal Services
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="services.html" data-es="Servicios" data-en="Services">Servicios</a> › <span data-es="Servicios Legales" data-en="Legal Services">Servicios Legales</span>
 </div>
 <!-- Owner banner — only visible when ?update=token is in URL -->
 <div class="owner-banner" id="ownerBanner">
   <div>
     <strong id="ownerBannerName">Your Listing</strong>
-    <p>You are viewing your listing as the owner.</p>
+    <p data-es="Estás viendo tu listado como propietario." data-en="You are viewing your listing as the owner.">Estás viendo tu listado como propietario.</p>
   </div>
-  <button class="owner-edit-btn" onclick="openUpdateModal()">✏️ Edit / Update Listing</button>
+  <button class="owner-edit-btn" onclick="openUpdateModal()" data-es="✏️ Editar / Actualizar Listado" data-en="✏️ Edit / Update Listing">✏️ Editar / Actualizar Listado</button>
 </div>
 <div class="page-content">
   <div class="submit-banner">
     <div>
       <h3>Are you a lawyer or notary in Playas?</h3>
-      <p>List your practice for free and connect with clients in the community.</p>
+      <p data-es="Lista tu despacho gratis y conecta con clientes de la comunidad." data-en="List your practice for free and connect with clients in the community.">Lista tu despacho gratis y conecta con clientes de la comunidad.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add Your Business</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Despacho" data-en="+ Add Your Business">+ Agregar tu Despacho</button>
   </div>
 
   <!-- Approved Listings -->
   <div id="approved-section" style="margin-bottom:2rem;display:none;">
-    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;">Featured Legal Practices</p>
+    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;" data-es="Despachos Legales Destacados" data-en="Featured Legal Practices">Despachos Legales Destacados</p>
     <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
   </div>
-  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;">Loading listings...</div>
+  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;" data-es="Cargando listados..." data-en="Loading listings...">Cargando listados...</div>
 
   <div class="listings-grid">
     <div class="listing-card">
@@ -188,18 +190,18 @@
           <span>🕐 Mon–Fri 9am–6pm</span>
         </div>
         <div class="listing-card-tags"><span class="tag-pill">Immigration</span><span class="tag-pill">Real Estate</span><span class="tag-pill">Family Law</span></div>
-        <button class="review-toggle" onclick="toggleReviews('despacho_playas')">⭐ <span id="rev-count-despacho_playas">Reviews</span></button>
+        <button class="review-toggle" onclick="toggleReviews('despacho_playas')">⭐ <span id="rev-count-despacho_playas" data-es="Reseñas" data-en="Reviews">Reseñas</span></button>
         <div class="review-panel" id="rev-panel-despacho_playas">
           <div id="rev-list-despacho_playas"></div>
-          <button class="write-review-btn" onclick="toggleReviewForm('despacho_playas')">✏️ Write a Review</button>
+          <button class="write-review-btn" onclick="toggleReviewForm('despacho_playas')" data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</button>
           <div class="review-form" id="rev-form-despacho_playas">
             <div class="star-picker" id="star-picker-despacho_playas">
               <span onclick="setStar('despacho_playas',1)">★</span><span onclick="setStar('despacho_playas',2)">★</span><span onclick="setStar('despacho_playas',3)">★</span><span onclick="setStar('despacho_playas',4)">★</span><span onclick="setStar('despacho_playas',5)">★</span>
             </div>
-            <input class="review-name-input" id="rev-name-despacho_playas" placeholder="Your name (optional)">
-            <textarea class="review-input" id="rev-text-despacho_playas" placeholder="Share your experience..."></textarea>
+            <input class="review-name-input" id="rev-name-despacho_playas" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+            <textarea class="review-input" id="rev-text-despacho_playas" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
             <div class="review-error" id="rev-error-despacho_playas"></div>
-            <button class="review-submit-btn" onclick="submitReview('despacho_playas','Despacho Playas')">Post Review</button>
+            <button class="review-submit-btn" onclick="submitReview('despacho_playas','Despacho Playas')" data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</button>
           </div>
         </div>
       </div>
@@ -208,30 +210,30 @@
       <div class="listing-card-img">📋</div>
       <div class="listing-card-body">
         <p class="listing-card-tag">Legal Services</p>
-        <h2 class="listing-card-name">Your Practice Here</h2>
-        <p class="listing-card-desc">Know a great lawyer or notary in Playas? Submit their info and help neighbors find trusted legal help.</p>
+        <h2 class="listing-card-name" data-es="Tu Negocio Aquí" data-en="Your Business Here">Tu Negocio Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces un buen negocio en Playas? Envía su info y ayuda a los vecinos a encontrar servicios de confianza." data-en="Know a great business in Playas? Submit their info and help neighbors find trusted services.">¿Conoces un buen negocio en Playas? Envía su info y ayuda a los vecinos a encontrar servicios de confianza.</p>
         <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
       </div>
     </div>
   </div>
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add a Legal Practice</h2>
-    <p>Submit your practice for review. We'll add it once approved.</p>
+    <h2 data-es="➕ Agregar un Despacho Legal" data-en="➕ Add a Legal Practice">➕ Agregar un Despacho Legal</h2>
+    <p data-es="Envía tu despacho para revisión. Lo agregaremos una vez aprobado." data-en="Submit your practice for review. We'll add it once approved.">Envía tu despacho para revisión. Lo agregaremos una vez aprobado.</p>
     <div class="form-row">
-      <div class="form-group"><label>Practice / Business Name</label><input id="legalName" type="text" placeholder="e.g. Despacho Jurídico Playas"></div>
-      <div class="form-group"><label>Practice Area</label>
+      <div class="form-group"><label data-es="Nombre del Negocio / Consultorio" data-en="Practice / Business Name">Nombre del Negocio / Consultorio</label><input id="legalName" type="text" placeholder="e.g. Despacho Jurídico Playas"></div>
+      <div class="form-group"><label data-es="Área de Práctica" data-en="Practice Area">Área de Práctica</label>
         <select id="legalCategory"><option>Immigration Law</option><option>Family Law</option><option>Real Estate Law</option><option>Business Law</option><option>Criminal Law</option><option>Labor Law</option><option>Notary</option><option>General Practice</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input id="legalAddress" type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input id="legalPhone" type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input id="legalAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+      <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input id="legalPhone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea id="legalDesc" placeholder="Tell us about your practice areas, experience, languages spoken, consultation fees..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input id="legalContact" type="text" placeholder="Name · email or phone (not published)"></div>
+    <div class="form-group"><label data-es="Descripción" data-en="Description">Descripción</label><textarea id="legalDesc" data-placeholder-es="Cuéntanos sobre tu negocio, servicios, especialidades..." data-placeholder-en="Tell us about your practice areas, experience, languages spoken, consultation fees..." placeholder="Cuéntanos sobre tu negocio, servicios, especialidades..."></textarea></div>
+    <div class="form-group"><label>Your Name & Contact</label><input id="legalContact" type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
     <div class="form-group">
-      <label>Photos <span style="font-weight:400;opacity:0.75;">(optional &mdash; up to 5)</span></label>
+      <label><span data-es="Fotos" data-en="Photos">Fotos</span> <span style="font-weight:400;opacity:0.75;" data-es="(opcional — hasta 5)" data-en="(optional — up to 5)">(opcional — hasta 5)</span></label>
       <div class="form-photo-grid" id="formPhotoGrid">
         <div class="form-photo-slot" onclick="triggerFormPhoto(0)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,0)"></div>
         <div class="form-photo-slot" onclick="triggerFormPhoto(1)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,1)"></div>
@@ -240,18 +242,18 @@
         <div class="form-photo-slot" onclick="triggerFormPhoto(4)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,4)"></div>
       </div>
       <div class="profile-picker" id="formProfilePicker">
-        <label>★ Choose your profile photo (shown on the listing card)</label>
+        <label data-es="★ Elige tu foto de perfil (se muestra en la tarjeta)" data-en="★ Choose your profile photo (shown on the listing card)">★ Elige tu foto de perfil (se muestra en la tarjeta)</label>
         <div class="profile-thumbs" id="formProfileThumbs"></div>
       </div>
     </div>
-    <button class="form-submit" id="legalSubmitBtn" onclick="submitLegalForm()">Submit for Review</button>
-    <div id="legalSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;">Submission Received!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;">Your listing has been submitted for review.</p></div></div><div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    <button class="form-submit" id="legalSubmitBtn" onclick="submitLegalForm()"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div id="legalSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;" data-es="Tu listado ha sido enviado para revisión." data-en="Your listing has been submitted for review.">Tu listado ha sido enviado para revisión.</p></div></div><div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
   </div>
 </div>
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
@@ -398,7 +400,7 @@
       }
     } catch(err) {
       console.error('Error loading listings:', err);
-      document.getElementById('loading-listings').textContent = 'Error loading listings.';
+      document.getElementById('loading-listings').textContent = getLang()==='en' ? 'Error loading listings.' : 'Error al cargar listados.';
     }
   }
 
@@ -555,7 +557,7 @@
       document.getElementById('updateDone').style.display = 'block';
     } catch(err) {
       if (btn) { btn.disabled = false; btn.textContent = 'Submit Changes for Review'; }
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 
@@ -578,7 +580,7 @@
       document.getElementById('updateDone').style.display = 'block';
       document.getElementById('ownerBanner').classList.remove('show');
     } catch(err) {
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 
@@ -666,7 +668,7 @@
     if (!name) { alert('Please enter the name.'); return; }
     if (!desc) { alert('Please enter a description.'); return; }
     const btn = document.getElementById('legalSubmitBtn');
-    btn.disabled = true; btn.textContent = '⏳ Submitting...';
+    btn.disabled = true; btn.textContent = '⏳ ' + (getLang()==='en' ? 'Submitting...' : 'Enviando...');
     const data = {
       'Business Name': name,
       'Category':      document.getElementById('legalCategory').value,
@@ -691,8 +693,8 @@
       document.getElementById('legalSuccess').style.display = 'block';
       btn.style.display = 'none';
     } catch(err) {
-      btn.disabled = false; btn.textContent = 'Submit for Review';
-      alert('Something went wrong. Please try again.');
+      btn.disabled = false; btn.textContent = getLang()==='en' ? 'Submit for Review' : 'Enviar para Revisión';
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 </script>
@@ -731,7 +733,7 @@
       <div class="update-section active" id="tab-info">
         <div class="update-field"><label>Business Name</label><input type="text" id="u-name" placeholder="Your business name"></div>
         <div class="update-field"><label>Category</label><input type="text" id="u-category" placeholder="e.g. Immigration Law"></div>
-        <div class="update-field"><label>Description</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
+        <div class="update-field"><label data-es="Descripción" data-en="Description">Descripción</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
         <div class="update-field"><label>Address</label><input type="text" id="u-address" placeholder="Street address"></div>
         <div class="update-field"><label>Phone / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
         <div class="update-field"><label>Email</label><input type="text" id="u-email" placeholder="contact@email.com"></div>
@@ -787,5 +789,6 @@
     </div>
   </div>
 </div>
+<script src="lang-persist.js"></script>
 </body>
 </html>
