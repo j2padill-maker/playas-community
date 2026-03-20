@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adult Martial Arts & Self Defense — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -132,47 +133,48 @@
 <body>
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="adultos.html" class="nav-back" data-es="← Adultos" data-en="← Adults">← Adultos</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 <div class="page-hero">
-  <p class="page-hero-tag">Adults · Playas de Tijuana</p>
-  <h1>Martial Arts & Self Defense</h1>
-  <p>Build strength, discipline, and confidence with martial arts academies in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Adultos · Playas de Tijuana" data-en="Adults · Playas de Tijuana">Adultos · Playas de Tijuana</p>
+  <h1 data-es="Artes Marciales y Defensa Personal" data-en="Martial Arts & Self Defense">Artes Marciales y Defensa Personal</h1>
+  <p data-es="Desarrolla fuerza, disciplina y confianza con academias de artes marciales en Playas de Tijuana." data-en="Build strength, discipline, and confidence with martial arts academies in Playas de Tijuana.">Desarrolla fuerza, disciplina y confianza con academias de artes marciales en Playas de Tijuana.</p>
 </div>
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="index.html#adults">Adults Activities</a> › Martial Arts & Self Defense
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="adultos.html" data-es="Actividades para Adultos" data-en="Adults Activities">Actividades para Adultos</a> › <span data-es="Artes Marciales y Defensa Personal" data-en="Martial Arts & Self Defense">Artes Marciales y Defensa Personal</span>
 </div>
 <!-- Owner banner — only visible when ?update=token is in URL -->
 <div class="owner-banner" id="ownerBanner">
   <div>
     <strong id="ownerBannerName">Your Listing</strong>
-    <p>You are viewing your listing as the owner.</p>
+    <p data-es="Estás viendo tu listado como propietario." data-en="You are viewing your listing as the owner.">Estás viendo tu listado como propietario.</p>
   </div>
-  <button class="owner-edit-btn" onclick="openUpdateModal()">✏️ Edit / Update Listing</button>
+  <button class="owner-edit-btn" onclick="openUpdateModal()" data-es="✏️ Editar / Actualizar Listado" data-en="✏️ Edit / Update Listing">✏️ Editar / Actualizar Listado</button>
 </div>
 <div class="page-content">
   <div class="submit-banner">
     <div>
-      <h3>Run a martial arts school in Playas?</h3>
-      <p>List your academy for free and connect with students in the community.</p>
+      <h3 data-es="¿Tienes una academia de artes marciales en Playas?" data-en="Run a martial arts school in Playas?">¿Tienes una academia de artes marciales en Playas?</h3>
+      <p data-es="Lista tu academia gratis y conecta con alumnos de la comunidad." data-en="List your academy for free and connect with students in the community.">Lista tu academia gratis y conecta con alumnos de la comunidad.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add a Listing</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar un Listado" data-en="+ Add a Listing">+ Agregar un Listado</button>
   </div>
 
   <!-- Approved Listings -->
   <div id="approved-section" style="margin-bottom:2rem;display:none;">
-    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;">Featured Academies</p>
+    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;" data-es="Academias Destacadas" data-en="Featured Academies">Academias Destacadas</p>
     <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
   </div>
-  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;">Loading listings...</div>
+  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;" data-es="Cargando listados..." data-en="Loading listings...">Cargando listados...</div>
 
   <div class="listings-grid">
     <div class="listing-card">
       <div class="listing-card-img">🥋</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Martial Arts Academy</p>
+        <p class="listing-card-tag" data-es="Academia de Artes Marciales" data-en="Martial Arts Academy">Academia de Artes Marciales</p>
         <h2 class="listing-card-name">Academia de Artes Marciales Playas</h2>
-        <p class="listing-card-desc">Adult classes in Jiu-Jitsu, Muay Thai, and self-defense. Train with experienced instructors in a respectful and focused environment.</p>
+        <p class="listing-card-desc" data-es="Clases para adultos de Jiu-Jitsu, Muay Thai y defensa personal. Entrena con instructores experimentados en un ambiente respetuoso y enfocado." data-en="Adult classes in Jiu-Jitsu, Muay Thai, and self-defense. Train with experienced instructors in a respectful and focused environment.">Clases para adultos de Jiu-Jitsu, Muay Thai y defensa personal. Entrena con instructores experimentados en un ambiente respetuoso y enfocado.</p>
         <div class="listing-card-meta">
           <span>📍 Playas de Tijuana</span>
           <span>🕐 Mon–Fri 6am & 7pm · Sat 9am</span>
@@ -180,22 +182,22 @@
         <div class="listing-card-tags">
           <span class="tag-pill">Jiu-Jitsu</span>
           <span class="tag-pill">Muay Thai</span>
-          <span class="tag-pill">Self Defense</span>
-          <span class="tag-pill">All Levels</span>
+          <span class="tag-pill" data-es="Defensa Personal" data-en="Self Defense">Defensa Personal</span>
+          <span class="tag-pill" data-es="Todos los Niveles" data-en="All Levels">Todos los Niveles</span>
         </div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
-        <button class="review-toggle" onclick="toggleReviews('artes_marciales')">⭐ <span id="rev-count-artes_marciales">Reviews</span></button>
+        <button class="review-toggle" onclick="toggleReviews('artes_marciales')">⭐ <span id="rev-count-artes_marciales" data-es="Reseñas" data-en="Reviews">Reseñas</span></button>
         <div class="review-panel" id="rev-panel-artes_marciales">
           <div id="rev-list-artes_marciales"></div>
-          <button class="write-review-btn" onclick="toggleReviewForm('artes_marciales')">✏️ Write a Review</button>
+          <button class="write-review-btn" onclick="toggleReviewForm('artes_marciales')"><span data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</span></button>
           <div class="review-form" id="rev-form-artes_marciales">
             <div class="star-picker" id="star-picker-artes_marciales">
               <span onclick="setStar('artes_marciales',1)">★</span><span onclick="setStar('artes_marciales',2)">★</span><span onclick="setStar('artes_marciales',3)">★</span><span onclick="setStar('artes_marciales',4)">★</span><span onclick="setStar('artes_marciales',5)">★</span>
             </div>
-            <input class="review-name-input" id="rev-name-artes_marciales" placeholder="Your name (optional)">
-            <textarea class="review-input" id="rev-text-artes_marciales" placeholder="Share your experience..."></textarea>
+            <input class="review-name-input" id="rev-name-artes_marciales" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+            <textarea class="review-input" id="rev-text-artes_marciales" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
             <div class="review-error" id="rev-error-artes_marciales"></div>
-            <button class="review-submit-btn" onclick="submitReview('artes_marciales','Academia de Artes Marciales Playas')">Post Review</button>
+            <button class="review-submit-btn" onclick="submitReview('artes_marciales','Academia de Artes Marciales Playas')"><span data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</span></button>
           </div>
         </div>
       </div>
@@ -203,38 +205,38 @@
     <div class="listing-card">
       <div class="listing-card-img">🥊</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Martial Arts</p>
-        <h2 class="listing-card-name">Your Academy Here</h2>
-        <p class="listing-card-desc">Know a great martial arts school in Playas? Submit their info and help neighbors find great training.</p>
+        <p class="listing-card-tag" data-es="Artes Marciales" data-en="Martial Arts">Artes Marciales</p>
+        <h2 class="listing-card-name" data-es="Tu Negocio Aquí" data-en="Your Business Here">Tu Negocio Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces una gran academia de artes marciales en Playas? Envía su info y ayuda a los vecinos a encontrar buen entrenamiento." data-en="Know a great martial arts school in Playas? Submit their info and help neighbors find great training.">¿Conoces una gran academia de artes marciales en Playas? Envía su info y ayuda a los vecinos a encontrar buen entrenamiento.</p>
         <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
       </div>
     </div>
   </div>
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add a Martial Arts Academy</h2>
-    <p>Submit a listing for review. We'll add it once approved.</p>
+    <h2 data-es="➕ Agregar una Academia de Artes Marciales" data-en="➕ Add a Martial Arts Academy">➕ Agregar una Academia de Artes Marciales</h2>
+    <p data-es="Envía un listado para revisión. Lo agregaremos una vez aprobado." data-en="Submit a listing for review. We'll add it once approved.">Envía un listado para revisión. Lo agregaremos una vez aprobado.</p>
     <div class="form-row">
-      <div class="form-group"><label>Academy Name</label><input type="text" placeholder="e.g. Academia Playas"></div>
-      <div class="form-group"><label>Discipline</label>
+      <div class="form-group"><label data-es="Nombre de la Academia" data-en="Academy Name">Nombre de la Academia</label><input type="text" placeholder="e.g. Academia Playas"></div>
+      <div class="form-group"><label data-es="Disciplina" data-en="Discipline">Disciplina</label>
         <select><option>Jiu-Jitsu</option><option>Muay Thai</option><option>Boxing</option><option>Karate</option><option>Taekwondo</option><option>MMA</option><option>Self Defense</option><option>Multiple</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+      <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the academy, instructors, class schedule..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
+    <div class="form-group"><label data-es="Descripción" data-en="Description">Descripción</label><textarea data-placeholder-es="Cuéntanos sobre tu negocio, servicios y especialidades..." data-placeholder-en="Tell us about the academy, instructors, class schedule..." placeholder="Cuéntanos sobre tu negocio, servicios y especialidades..."></textarea></div>
+    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label><input type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
     <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 🥋')">Submit for Review</button>
-    <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
   </div>
 </div>
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
@@ -368,7 +370,7 @@
       }
     } catch(err) {
       console.error('Error loading listings:', err);
-      document.getElementById('loading-listings').textContent = 'Error loading listings.';
+      document.getElementById('loading-listings').textContent = getLang()==='en' ? 'Error loading listings.' : 'Error al cargar listados.';
     }
   }
 
@@ -525,7 +527,7 @@
       document.getElementById('updateDone').style.display = 'block';
     } catch(err) {
       if (btn) { btn.disabled = false; btn.textContent = 'Submit Changes for Review'; }
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 
@@ -548,7 +550,7 @@
       document.getElementById('updateDone').style.display = 'block';
       document.getElementById('ownerBanner').classList.remove('show');
     } catch(err) {
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 </script>
@@ -587,9 +589,9 @@
       <div class="update-section active" id="tab-info">
         <div class="update-field"><label>Business Name</label><input type="text" id="u-name" placeholder="Your business name"></div>
         <div class="update-field"><label>Category</label><input type="text" id="u-category" placeholder="e.g. Martial Arts"></div>
-        <div class="update-field"><label>Description</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
-        <div class="update-field"><label>Address</label><input type="text" id="u-address" placeholder="Street address"></div>
-        <div class="update-field"><label>Phone / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
+        <div class="update-field"><label data-es="Descripción" data-en="Description">Descripción</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
+        <div class="update-field"><label data-es="Dirección" data-en="Address">Dirección</label><input type="text" id="u-address" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+        <div class="update-field"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
         <div class="update-field"><label>Email</label><input type="text" id="u-email" placeholder="contact@email.com"></div>
         <div class="update-field"><label>Website</label><input type="text" id="u-website" placeholder="https://"></div>
         <div class="update-field"><label>Instagram</label><input type="text" id="u-instagram" placeholder="@handle"></div>
@@ -643,5 +645,6 @@
     </div>
   </div>
 </div>
+<script src="lang-persist.js"></script>
 </body>
 </html>

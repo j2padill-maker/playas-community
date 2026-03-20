@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Language Classes — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -132,31 +133,32 @@
 <body>
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="adultos.html" class="nav-back" data-es="← Adultos" data-en="← Adults">← Adultos</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 <div class="page-hero">
-  <p class="page-hero-tag">Adults · Playas de Tijuana</p>
-  <h1>Language Classes</h1>
-  <p>English, Spanish, and more — find language tutors and schools right here in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Adultos · Playas de Tijuana" data-en="Adults · Playas de Tijuana">Adultos · Playas de Tijuana</p>
+  <h1 data-es="Clases de Idiomas" data-en="Language Classes">Clases de Idiomas</h1>
+  <p data-es="Inglés, español y más — encuentra tutores e idiomas aquí mismo en Playas de Tijuana." data-en="English, Spanish, and more — find language tutors and schools right here in Playas de Tijuana.">Inglés, español y más — encuentra tutores e idiomas aquí mismo en Playas de Tijuana.</p>
 </div>
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="index.html#adults">Adults Activities</a> › Language Classes
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="adultos.html" data-es="Actividades para Adultos" data-en="Adults Activities">Actividades para Adultos</a> › <span data-es="Clases de Idiomas" data-en="Language Classes">Clases de Idiomas</span>
 </div>
 <!-- Owner banner — only visible when ?update=token is in URL -->
 <div class="owner-banner" id="ownerBanner">
   <div>
     <strong id="ownerBannerName">Your Listing</strong>
-    <p>You are viewing your listing as the owner.</p>
+    <p data-es="Estás viendo tu listado como propietario." data-en="You are viewing your listing as the owner.">Estás viendo tu listado como propietario.</p>
   </div>
-  <button class="owner-edit-btn" onclick="openUpdateModal()">✏️ Edit / Update Listing</button>
+  <button class="owner-edit-btn" onclick="openUpdateModal()" data-es="✏️ Editar / Actualizar Listado" data-en="✏️ Edit / Update Listing">✏️ Editar / Actualizar Listado</button>
 </div>
 <div class="page-content">
   <div class="submit-banner">
     <div>
-      <h3>Teach a language in Playas?</h3>
-      <p>List your classes or tutoring services for free and reach local learners.</p>
+      <h3 data-es="¿Enseñas idiomas en Playas?" data-en="Teach a language in Playas?">¿Enseñas idiomas en Playas?</h3>
+      <p data-es="Lista tus clases o servicios de tutoría gratis y llega a los estudiantes locales." data-en="List your classes or tutoring services for free and reach local learners.">Lista tus clases o servicios de tutoría gratis y llega a los estudiantes locales.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">+ Add a Listing</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar un Listado" data-en="+ Add a Listing">+ Agregar un Listado</button>
   </div>
 
   <!-- Approved Listings -->
@@ -164,32 +166,32 @@
     <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;">Featured Schools & Tutors</p>
     <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
   </div>
-  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;">Loading listings...</div>
+  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;" data-es="Cargando listados..." data-en="Loading listings...">Cargando listados...</div>
 
   <div class="listings-grid">
     <div class="listing-card">
       <div class="listing-card-img">🗣️</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Language School</p>
+        <p class="listing-card-tag" data-es="Escuela de Idiomas" data-en="Language School">Escuela de Idiomas</p>
         <h2 class="listing-card-name">Idiomas Playas</h2>
-        <p class="listing-card-desc">English and Spanish classes for adults. Conversational focus with small groups and personalized attention from certified teachers.</p>
+        <p class="listing-card-desc" data-es="Clases de inglés y español para adultos. Enfoque conversacional con grupos pequeños y atención personalizada de maestros certificados." data-en="English and Spanish classes for adults. Conversational focus with small groups and personalized attention from certified teachers.">Clases de inglés y español para adultos. Enfoque conversacional con grupos pequeños y atención personalizada de maestros certificados.</p>
         <div class="listing-card-meta">
           <span>📍 Playas de Tijuana</span>
           <span>🕐 Mon–Fri 8am–8pm</span>
         </div>
-        <div class="listing-card-tags"><span class="tag-pill">English</span><span class="tag-pill">Spanish</span><span class="tag-pill">All Levels</span></div>
-        <button class="review-toggle" onclick="toggleReviews('idiomas_playas')">⭐ <span id="rev-count-idiomas_playas">Reviews</span></button>
+        <div class="listing-card-tags"><span class="tag-pill">English</span><span class="tag-pill">Spanish</span><span class="tag-pill" data-es="Todos los Niveles" data-en="All Levels">Todos los Niveles</span></div>
+        <button class="review-toggle" onclick="toggleReviews('idiomas_playas')">⭐ <span id="rev-count-idiomas_playas" data-es="Reseñas" data-en="Reviews">Reseñas</span></button>
         <div class="review-panel" id="rev-panel-idiomas_playas">
           <div id="rev-list-idiomas_playas"></div>
-          <button class="write-review-btn" onclick="toggleReviewForm('idiomas_playas')">✏️ Write a Review</button>
+          <button class="write-review-btn" onclick="toggleReviewForm('idiomas_playas')"><span data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</span></button>
           <div class="review-form" id="rev-form-idiomas_playas">
             <div class="star-picker" id="star-picker-idiomas_playas">
               <span onclick="setStar('idiomas_playas',1)">★</span><span onclick="setStar('idiomas_playas',2)">★</span><span onclick="setStar('idiomas_playas',3)">★</span><span onclick="setStar('idiomas_playas',4)">★</span><span onclick="setStar('idiomas_playas',5)">★</span>
             </div>
-            <input class="review-name-input" id="rev-name-idiomas_playas" placeholder="Your name (optional)">
-            <textarea class="review-input" id="rev-text-idiomas_playas" placeholder="Share your experience..."></textarea>
+            <input class="review-name-input" id="rev-name-idiomas_playas" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+            <textarea class="review-input" id="rev-text-idiomas_playas" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
             <div class="review-error" id="rev-error-idiomas_playas"></div>
-            <button class="review-submit-btn" onclick="submitReview('idiomas_playas','Idiomas Playas')" >Post Review</button>
+            <button class="review-submit-btn" onclick="submitReview('idiomas_playas','Idiomas Playas')" ><span data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</span></button>
           </div>
         </div>
       </div>
@@ -197,37 +199,37 @@
     <div class="listing-card">
       <div class="listing-card-img">📚</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Language Class</p>
-        <h2 class="listing-card-name">Your Class Here</h2>
-        <p class="listing-card-desc">Know a great language class or tutor in Playas? Submit their info and help the community learn together.</p>
+        <p class="listing-card-tag" data-es="Clase de Idiomas" data-en="Language Class">Clase de Idiomas</p>
+        <h2 class="listing-card-name" data-es="Tu Negocio Aquí" data-en="Your Business Here">Tu Negocio Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces una gran clase de idiomas en Playas? Envía su info y ayuda a la comunidad a aprender juntos." data-en="Know a great language class or tutor in Playas? Submit their info and help the community learn together.">¿Conoces una gran clase de idiomas en Playas? Envía su info y ayuda a la comunidad a aprender juntos.</p>
         <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
       </div>
     </div>
   </div>
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add a Language Class or Tutor</h2>
-    <p>Submit your language class or tutoring service for review. We'll add it once approved.</p>
+    <h2 data-es="➕ Agregar una Clase de Idiomas o Tutor" data-en="➕ Add a Language Class or Tutor">➕ Agregar una Clase de Idiomas o Tutor</h2>
+    <p data-es="Envía tu clase de idiomas para revisión. La agregaremos una vez aprobada." data-en="Submit your language class or tutoring service for review. We'll add it once approved.">Envía tu clase de idiomas para revisión. La agregaremos una vez aprobada.</p>
     <div class="form-row">
-      <div class="form-group"><label>School / Tutor Name</label><input id="languageName" type="text" placeholder="e.g. English with Sara"></div>
-      <div class="form-group"><label>Language</label>
+      <div class="form-group"><label data-es="Nombre de la Escuela / Tutor" data-en="School / Tutor Name">Nombre de la Escuela / Tutor</label><input id="languageName" type="text" placeholder="e.g. English with Sara"></div>
+      <div class="form-group"><label data-es="Idioma" data-en="Language">Idioma</label>
         <select id="languageCategory"><option>English</option><option>Spanish</option><option>French</option><option>Portuguese</option><option>Mandarin</option><option>Other</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input id="languageAddress" type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input id="languagePhone" type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input id="languageAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+      <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input id="languagePhone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea id="languageDesc" placeholder="Tell us about your classes, teaching style, schedule, pricing..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input id="languageContact" type="text" placeholder="Name · email or phone (not published)"></div>
-    <button class="form-submit" id="languageSubmitBtn" onclick="submitLanguageForm()">Submit for Review</button>
-    <div id="languageSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;">Submission Received!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;">Your listing has been submitted for review.</p></div></div><div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    <div class="form-group"><label>Description</label><textarea id="languageDesc" data-placeholder-es="Cuéntanos sobre tu negocio, servicios y especialidades..." data-placeholder-en="Tell us about your classes, teaching style, schedule, pricing..." placeholder="Cuéntanos sobre tu negocio, servicios y especialidades..."></textarea></div>
+    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label><input id="languageContact" type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
+    <button class="form-submit" id="languageSubmitBtn" onclick="submitLanguageForm()"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div id="languageSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;" data-es="Tu listado ha sido enviado para revisión." data-en="Your listing has been submitted for review.">Tu listado ha sido enviado para revisión.</p></div></div><div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
   </div>
 </div>
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
@@ -361,7 +363,7 @@
       }
     } catch(err) {
       console.error('Error loading listings:', err);
-      document.getElementById('loading-listings').textContent = 'Error loading listings.';
+      document.getElementById('loading-listings').textContent = getLang()==='en' ? 'Error loading listings.' : 'Error al cargar listados.';
     }
   }
 
@@ -518,7 +520,7 @@
       document.getElementById('updateDone').style.display = 'block';
     } catch(err) {
       if (btn) { btn.disabled = false; btn.textContent = 'Submit Changes for Review'; }
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 
@@ -541,7 +543,7 @@
       document.getElementById('updateDone').style.display = 'block';
       document.getElementById('ownerBanner').classList.remove('show');
     } catch(err) {
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 
@@ -549,10 +551,10 @@
   async function submitLanguageForm() {
     const name = (document.getElementById('languageName').value || '').trim();
     const desc = (document.getElementById('languageDesc').value || '').trim();
-    if (!name) { alert('Please enter the name.'); return; }
+    if (!name) { alert(getLang()==='en' ? 'Please enter the name.' : 'Por favor ingresa el nombre.'); return; }
     if (!desc) { alert('Please enter a description.'); return; }
     const btn = document.getElementById('languageSubmitBtn');
-    btn.disabled = true; btn.textContent = '⏳ Submitting...';
+    btn.disabled = true; btn.textContent = '⏳ ' + (getLang()==='en' ? 'Submitting...' : 'Enviando...');
     const data = {
       'Business Name': name,
       'Category':      document.getElementById('languageCategory').value,
@@ -570,8 +572,8 @@
       document.getElementById('languageSuccess').style.display = 'block';
       btn.style.display = 'none';
     } catch(err) {
-      btn.disabled = false; btn.textContent = 'Submit for Review';
-      alert('Something went wrong. Please try again.');
+      btn.disabled = false; btn.textContent = getLang()==='en' ? 'Submit for Review' : 'Enviar para Revisión';
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 </script>
@@ -611,8 +613,8 @@
         <div class="update-field"><label>Business Name</label><input type="text" id="u-name" placeholder="Your business name"></div>
         <div class="update-field"><label>Category</label><input type="text" id="u-category" placeholder="e.g. English"></div>
         <div class="update-field"><label>Description</label><textarea id="u-desc" placeholder="Describe your business..."></textarea></div>
-        <div class="update-field"><label>Address</label><input type="text" id="u-address" placeholder="Street address"></div>
-        <div class="update-field"><label>Phone / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
+        <div class="update-field"><label data-es="Dirección" data-en="Address">Dirección</label><input type="text" id="u-address" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+        <div class="update-field"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input type="text" id="u-phone" placeholder="664-xxx-xxxx"></div>
         <div class="update-field"><label>Email</label><input type="text" id="u-email" placeholder="contact@email.com"></div>
         <div class="update-field"><label>Website</label><input type="text" id="u-website" placeholder="https://"></div>
         <div class="update-field"><label>Instagram</label><input type="text" id="u-instagram" placeholder="@handle"></div>
@@ -666,5 +668,6 @@
     </div>
   </div>
 </div>
+<script src="lang-persist.js"></script>
 </body>
 </html>
