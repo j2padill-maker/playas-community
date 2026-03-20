@@ -91,18 +91,18 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Home">← Home</a>
+  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Home">← Inicio</a>
   <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag" data-es="Playas de Tijuana · Comida y Restaurantes" data-en="Playas de Tijuana · Food & Dining">Playas de Tijuana · Food & Dining</p>
+  <p class="page-hero-tag" data-es="Playas de Tijuana · Comida y Restaurantes" data-en="Playas de Tijuana · Food & Dining">Playas de Tijuana · Comida y Restaurantes</p>
   <h1 data-es="Restaurantes" data-en="Restaurants">Restaurantes</h1>
-  <p>Discover the best local restaurants, cafés, taquerías, and mariscos spots in Playas de Tijuana.</p>
+  <p data-es="Descubre los mejores restaurantes, cafés, taquerías y marisquerías locales en Playas de Tijuana." data-en="Discover the best local restaurants, cafés, taquerías, and mariscos spots in Playas de Tijuana.">Descubre los mejores restaurantes, cafés, taquerías y marisquerías locales en Playas de Tijuana.</p>
 </div>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › Restaurantes
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <span data-es="Restaurantes" data-en="Restaurants">Restaurantes</span>
 </div>
 
 <div class="page-content">
@@ -116,21 +116,21 @@
 
 <!-- FILTER TABS -->
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterCards('all', this)">🍽️ All</button>
-    <button class="filter-btn" onclick="filterCards('mariscos', this)">🦞 Mariscos & Seafood</button>
-    <button class="filter-btn" onclick="filterCards('tacos', this)">🌮 Tacos & Street Food</button>
-    <button class="filter-btn" onclick="filterCards('cafe', this)">☕ Cafés & Brunch</button>
-    <button class="filter-btn" onclick="filterCards('pizza', this)">🍕 Pizza & International</button>
-    <button class="filter-btn" onclick="filterCards('fina', this)">🍷 Fine Dining</button>
-    <button class="filter-btn" onclick="filterCards('sushi', this)">🍣 Sushi & Asian Cuisine</button>
+    <button class="filter-btn active" onclick="filterCards('all', this)" data-es="🍽️ Todos" data-en="🍽️ All">🍽️ Todos</button>
+    <button class="filter-btn" onclick="filterCards('mariscos', this)" data-es="🦞 Mariscos y Marisquería" data-en="🦞 Mariscos & Seafood">🦞 Mariscos y Marisquería</button>
+    <button class="filter-btn" onclick="filterCards('tacos', this)" data-es="🌮 Tacos y Antojitos" data-en="🌮 Tacos & Street Food">🌮 Tacos y Antojitos</button>
+    <button class="filter-btn" onclick="filterCards('cafe', this)" data-es="☕ Cafés y Brunch" data-en="☕ Cafés & Brunch">☕ Cafés y Brunch</button>
+    <button class="filter-btn" onclick="filterCards('pizza', this)" data-es="🍕 Pizza e Internacional" data-en="🍕 Pizza & International">🍕 Pizza e Internacional</button>
+    <button class="filter-btn" onclick="filterCards('fina', this)" data-es="🍷 Alta Cocina" data-en="🍷 Fine Dining">🍷 Alta Cocina</button>
+    <button class="filter-btn" onclick="filterCards('sushi', this)" data-es="🍣 Sushi y Cocina Asiática" data-en="🍣 Sushi & Asian Cuisine">🍣 Sushi y Cocina Asiática</button>
   </div>
   <!-- SUBMIT BANNER -->
   <div class="submit-banner">
     <div>
-      <h3>Own a restaurant in Playas?</h3>
-      <p>List your restaurant for free and connect with hungry neighbors.</p>
+      <h3 data-es="¿Tienes un restaurante en Playas?" data-en="Own a restaurant in Playas?">¿Tienes un restaurante en Playas?</h3>
+      <p data-es="Publica tu restaurante gratis y conecta con los vecinos del barrio." data-en="List your restaurant for free and connect with hungry neighbors.">Publica tu restaurante gratis y conecta con los vecinos del barrio.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-restaurant').scrollIntoView({behavior:'smooth'})">+ Add Your Restaurant</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-restaurant').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Restaurante" data-en="+ Add Your Restaurant">+ Agregar tu Restaurante</button>
   </div>
 
   <!-- PLACEHOLDER CARDS -->
@@ -274,8 +274,8 @@
 
   <!-- SUBMIT FORM -->
   <div class="submit-section" id="submit-restaurant">
-    <h2>➕ Add Your Restaurant</h2>
-    <p>Submit your listing for review. Free community listing — we'll add it once approved.</p>
+    <h2 data-es="➕ Agrega tu Restaurante" data-en="➕ Add Your Restaurant">➕ Agrega tu Restaurante</h2>
+    <p data-es="Envía tu listado para revisión. Listado comunitario gratuito — lo agregaremos una vez aprobado." data-en="Submit your listing for review. Free community listing — we'll add it once approved.">Envía tu listado para revisión. Listado comunitario gratuito — lo agregaremos una vez aprobado.</p>
     <form id="restaurantForm">
       <div class="form-row">
         <div class="form-group"><label>Restaurant Name</label><input id="restaurantName" name="Business Name" type="text" placeholder="e.g. Mariscos El Güero"></div>
@@ -318,8 +318,8 @@
 
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 
 <script>

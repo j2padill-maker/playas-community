@@ -44,23 +44,23 @@
 <body>
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Home">← Home</a>
+  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Home">← Inicio</a>
   <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 <div class="page-hero">
-  <p class="page-hero-tag" data-es="Playas de Tijuana · Directorio" data-en="Playas de Tijuana · Directory">Playas de Tijuana · Directory</p>
-  <h1 data-es="Servicios Locales" data-en="Local Services">Local Services</h1>
-  <p>Find the best service professionals and businesses in your neighborhood — all community-verified.</p>
+  <p class="page-hero-tag" data-es="Playas de Tijuana · Directorio" data-en="Playas de Tijuana · Directory">Playas de Tijuana · Directorio</p>
+  <h1 data-es="Servicios Locales" data-en="Local Services">Servicios Locales</h1>
+  <p data-es="Encuentra a los mejores profesionales y negocios de servicios en tu vecindario — todos verificados por la comunidad." data-en="Find the best service professionals and businesses in your neighborhood — all community-verified.">Encuentra a los mejores profesionales y negocios de servicios en tu vecindario — todos verificados por la comunidad.</p>
 </div>
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › Services
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <span data-es="Servicios" data-en="Services">Servicios</span>
 </div>
 <div style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));padding:1.75rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;">
   <div>
-    <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:0.3rem;">Have a service business in Playas?</h3>
-    <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;">List your business for free and connect with neighbors who need your services.</p>
+    <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;margin-bottom:0.3rem;" data-es="¿Tienes un negocio de servicios en Playas?" data-en="Have a service business in Playas?">¿Tienes un negocio de servicios en Playas?</h3>
+    <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;" data-es="Publica tu negocio gratis y conecta con vecinos que necesitan tus servicios." data-en="List your business for free and connect with neighbors who need your services.">Publica tu negocio gratis y conecta con vecinos que necesitan tus servicios.</p>
   </div>
-  <button onclick="document.getElementById('submit-service').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--ocean-deep);border:none;border-radius:50px;padding:0.75rem 1.8rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;flex-shrink:0;">+ Add Your Business</button>
+  <button onclick="document.getElementById('submit-service').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--ocean-deep);border:none;border-radius:50px;padding:0.75rem 1.8rem;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;flex-shrink:0;" data-es="+ Agregar tu Negocio" data-en="+ Add Your Business">+ Agregar tu Negocio</button>
 </div>
 <div class="page-content">
   <!-- APPROVED LISTINGS FROM GOOGLE SHEETS -->
@@ -70,62 +70,62 @@
   </div>
   <div id="loading-listings" style="text-align:center;padding:2rem;color:var(--text-light);font-size:0.9rem;">⏳ Loading community listings...</div>
 
-  <p class="section-label" data-es="Elige una categoría" data-en="Choose a category">Choose a category</p>
+  <p class="section-label" data-es="Elige una categoría" data-en="Choose a category">Elige una categoría</p>
   <div class="categories-grid">
     <a href="services-mecanicos.html" class="cat-card">
       <div class="cat-card-img">🔧</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Mecánicos" data-en="Mechanics">Mechanics</h2>
-        <p class="cat-card-desc" data-es="Talleres de confianza para mantenimiento y reparaciones de tu vehículo en Playas." data-en="Trusted auto repair shops for maintenance and repairs on your vehicle in Playas.">Trusted auto repair shops for maintenance and repairs on your vehicle in Playas.</p>
-        <span class="cat-card-cta" data-es="Ver talleres →" data-en="View shops →">View shops →</span>
+        <h2 class="cat-card-name" data-es="Mecánicos" data-en="Mechanics">Mecánicos</h2>
+        <p class="cat-card-desc" data-es="Talleres de confianza para mantenimiento y reparaciones de tu vehículo en Playas." data-en="Trusted auto repair shops for maintenance and repairs on your vehicle in Playas.">Talleres de confianza para mantenimiento y reparaciones de tu vehículo en Playas.</p>
+        <span class="cat-card-cta" data-es="Ver talleres →" data-en="View shops →">Ver talleres →</span>
       </div>
     </a>
     <a href="services-dentistas.html" class="cat-card">
       <div class="cat-card-img">🦷</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Dentistas" data-en="Dentists">Dentists</h2>
-        <p class="cat-card-desc" data-es="Clínicas dentales para toda la familia: limpiezas, brackets, implantes y más." data-en="Dental clinics for the whole family: cleanings, braces, implants, and more.">Dental clinics for the whole family: cleanings, braces, implants, and more.</p>
-        <span class="cat-card-cta" data-es="Ver dentistas →" data-en="View dentists →">View dentists →</span>
+        <h2 class="cat-card-name" data-es="Dentistas" data-en="Dentists">Dentistas</h2>
+        <p class="cat-card-desc" data-es="Clínicas dentales para toda la familia: limpiezas, brackets, implantes y más." data-en="Dental clinics for the whole family: cleanings, braces, implants, and more.">Clínicas dentales para toda la familia: limpiezas, brackets, implantes y más.</p>
+        <span class="cat-card-cta" data-es="Ver dentistas →" data-en="View dentists →">Ver dentistas →</span>
       </div>
     </a>
     <a href="services-medicos.html" class="cat-card">
       <div class="cat-card-img">🩺</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Médicos" data-en="Doctors">Doctors</h2>
-        <p class="cat-card-desc" data-es="Médicos generales y especialistas de confianza para toda la familia." data-en="Trusted general practitioners and specialists for the whole family.">Trusted general practitioners and specialists for the whole family.</p>
-        <span class="cat-card-cta" data-es="Ver médicos →" data-en="View doctors →">View doctors →</span>
+        <h2 class="cat-card-name" data-es="Médicos" data-en="Doctors">Médicos</h2>
+        <p class="cat-card-desc" data-es="Médicos generales y especialistas de confianza para toda la familia." data-en="Trusted general practitioners and specialists for the whole family.">Médicos generales y especialistas de confianza para toda la familia.</p>
+        <span class="cat-card-cta" data-es="Ver médicos →" data-en="View doctors →">Ver médicos →</span>
       </div>
     </a>
     <a href="services-veterinarios.html" class="cat-card">
       <div class="cat-card-img">🐾</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Veterinarios" data-en="Veterinarians">Veterinarians</h2>
-        <p class="cat-card-desc" data-es="Clínicas veterinarias para el cuidado y salud de tus mascotas en Playas." data-en="Veterinary clinics for the care and health of your pets in Playas.">Veterinary clinics for the care and health of your pets in Playas.</p>
-        <span class="cat-card-cta" data-es="Ver veterinarios →" data-en="View vets →">View vets →</span>
+        <h2 class="cat-card-name" data-es="Veterinarios" data-en="Veterinarians">Veterinarios</h2>
+        <p class="cat-card-desc" data-es="Clínicas veterinarias para el cuidado y salud de tus mascotas en Playas." data-en="Veterinary clinics for the care and health of your pets in Playas.">Clínicas veterinarias para el cuidado y salud de tus mascotas en Playas.</p>
+        <span class="cat-card-cta" data-es="Ver veterinarios →" data-en="View vets →">Ver veterinarios →</span>
       </div>
     </a>
     <a href="services-bienes-raices.html" class="cat-card">
       <div class="cat-card-img">🏠</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Bienes Raíces" data-en="Real Estate">Real Estate</h2>
-        <p class="cat-card-desc" data-es="Agentes y agencias para comprar, vender o rentar tu propiedad en Playas." data-en="Agents and agencies to buy, sell, or rent your property in Playas.">Agents and agencies to buy, sell, or rent your property in Playas.</p>
-        <span class="cat-card-cta" data-es="Ver agentes →" data-en="View agents →">View agents →</span>
+        <h2 class="cat-card-name" data-es="Bienes Raíces" data-en="Real Estate">Bienes Raíces</h2>
+        <p class="cat-card-desc" data-es="Agentes y agencias para comprar, vender o rentar tu propiedad en Playas." data-en="Agents and agencies to buy, sell, or rent your property in Playas.">Agentes y agencias para comprar, vender o rentar tu propiedad en Playas.</p>
+        <span class="cat-card-cta" data-es="Ver agentes →" data-en="View agents →">Ver agentes →</span>
       </div>
     </a>
     <a href="services-construccion.html" class="cat-card">
       <div class="cat-card-img">🏗️</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Servicios de Construcción" data-en="Construction Services">Construction Services</h2>
-        <p class="cat-card-desc" data-es="Contratistas generales, remodelación, plomería, electricidad y todas las necesidades del hogar." data-en="General contractors, builders, remodeling, plumbing, electrical, and all home construction needs.">General contractors, builders, remodeling, plumbing, electrical, and all home construction needs.</p>
-        <span class="cat-card-cta" data-es="Ver construcción →" data-en="View construction →">View construction →</span>
+        <h2 class="cat-card-name" data-es="Servicios de Construcción" data-en="Construction Services">Servicios de Construcción</h2>
+        <p class="cat-card-desc" data-es="Contratistas generales, remodelación, plomería, electricidad y todas las necesidades del hogar." data-en="General contractors, builders, remodeling, plumbing, electrical, and all home construction needs.">Contratistas generales, remodelación, plomería, electricidad y todas las necesidades del hogar.</p>
+        <span class="cat-card-cta" data-es="Ver construcción →" data-en="View construction →">Ver construcción →</span>
       </div>
     </a>
     <a href="services-legal.html" class="cat-card">
       <div class="cat-card-img" style="background:linear-gradient(135deg,#2c3e6b,#4a6fa5);">⚖️</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Servicios Legales" data-en="Legal Services">Legal Services</h2>
-        <p class="cat-card-desc" data-es="Abogados y notarios para inmigración, bienes raíces, derecho familiar y negocios en Playas." data-en="Lawyers and notaries for immigration, real estate, family law, and business matters in Playas.">Lawyers and notaries for immigration, real estate, family law, and business matters in Playas.</p>
-        <span class="cat-card-cta" data-es="Ver abogados →" data-en="View lawyers →">View lawyers →</span>
+        <h2 class="cat-card-name" data-es="Servicios Legales" data-en="Legal Services">Servicios Legales</h2>
+        <p class="cat-card-desc" data-es="Abogados y notarios para inmigración, bienes raíces, derecho familiar y negocios en Playas." data-en="Lawyers and notaries for immigration, real estate, family law, and business matters in Playas.">Abogados y notarios para inmigración, bienes raíces, derecho familiar y negocios en Playas.</p>
+        <span class="cat-card-cta" data-es="Ver abogados →" data-en="View lawyers →">Ver abogados →</span>
       </div>
     </a>
   </div>
@@ -265,8 +265,8 @@
 </div>
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 <script>
   // ── Fetch Approved Listings from Google Sheets ──
