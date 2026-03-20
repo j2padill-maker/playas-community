@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kids Dance Classes — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -86,27 +87,28 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="ninos.html" class="nav-back" data-es="← Niños" data-en="← Kids">← Niños</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag">Classes & Activities for Kids</p>
-  <h1>💃 Dance Classes</h1>
-  <p>From ballet and folklórico to hip-hop — find the perfect dance class for your child in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Clases y Actividades para Niños" data-en="Classes & Activities for Kids">Clases y Actividades para Niños</p>
+  <h1 data-es="💃 Clases de Baile" data-en="💃 Dance Classes">💃 Clases de Baile</h1>
+  <p data-es="Desde ballet y folklórico hasta hip-hop — encuentra la clase de baile perfecta para tu hijo en Playas de Tijuana." data-en="From ballet and folklórico to hip-hop — find the perfect dance class for your child in Playas de Tijuana.">Desde ballet y folklórico hasta hip-hop — encuentra la clase de baile perfecta para tu hijo en Playas de Tijuana.</p>
 </div>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="index.html#kids">Kids Activities</a> › Dance Classes
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="ninos.html" data-es="Actividades para Niños" data-en="Kids Activities">Actividades para Niños</a> › <span data-es="Clases de Baile" data-en="Dance Classes">Clases de Baile</span>
 </div>
 
 <div class="page-content">
 
   <div class="submit-banner">
     <div>
-      <h3>Teach dance in Playas?</h3>
-      <p>Get your studio listed here for free — reach hundreds of local families.</p>
+      <h3 data-es="¿Enseñas baile en Playas?" data-en="Teach dance in Playas?">¿Enseñas baile en Playas?</h3>
+      <p data-es="Lista tu estudio gratis aquí — llega a cientos de familias locales." data-en="Get your studio listed here for free — reach hundreds of local families.">Lista tu estudio gratis aquí — llega a cientos de familias locales.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">➕ Add Your Studio</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="➕ Agregar tu Estudio" data-en="➕ Add Your Studio">➕ Agregar tu Estudio</button>
   </div>
 
   <div class="listings-grid">
@@ -114,33 +116,33 @@
     <div class="listing-card">
       <div class="listing-card-img">💃</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Ballet · Folklórico · Hip-Hop</p>
+        <p class="listing-card-tag" data-es="Ballet · Folklórico · Hip-Hop" data-en="Ballet · Folklórico · Hip-Hop">Ballet · Folklórico · Hip-Hop</p>
         <h2 class="listing-card-name">Academia de Danza Playas</h2>
-        <p class="listing-card-desc">Ballet, folklórico, and hip-hop for ages 4–16. Professional instructors in a welcoming environment. First class free!</p>
+        <p class="listing-card-desc" data-es="Ballet, folklórico e hip-hop para edades de 4 a 16 años. Instructores profesionales en un ambiente acogedor. ¡Primera clase gratis!" data-en="Ballet, folklórico, and hip-hop for ages 4–16. Professional instructors in a welcoming environment. First class free!">Ballet, folklórico e hip-hop para edades de 4 a 16 años. Instructores profesionales en un ambiente acogedor. ¡Primera clase gratis!</p>
         <div class="listing-card-meta">
           <span>📍 Blvd. Sánchez Taboada 1234, Playas</span>
           <span>🕐 Mon–Sat · Various times</span>
           <span>📞 Coming soon</span>
         </div>
         <div class="listing-card-tags">
-          <span class="tag-pill">Ages 4–16</span>
-          <span class="tag-pill">First Class Free</span>
-          <span class="tag-pill">All Levels</span>
+          <span class="tag-pill" data-es="4–16 Años" data-en="Ages 4–16">4–16 Años</span>
+          <span class="tag-pill" data-es="Primera Clase Gratis" data-en="First Class Free">Primera Clase Gratis</span>
+          <span class="tag-pill" data-es="Todos los Niveles" data-en="All Levels">Todos los Niveles</span>
         </div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Academia de Danza Merch</button>
         <div style="border-top:1.5px solid var(--sand);padding-top:1rem;">
           <button class="review-toggle" onclick="toggleReviews('academia_danza')">⭐ Reviews <span id="rev-count-academia_danza">— be the first!</span></button>
           <div class="review-panel" id="rev-panel-academia_danza">
             <div id="rev-list-academia_danza"></div>
-            <button class="write-review-btn" onclick="toggleReviewForm('academia_danza')">✏️ Write a Review</button>
+            <button class="write-review-btn" onclick="toggleReviewForm('academia_danza')"><span data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</span></button>
             <div class="review-form" id="rev-form-academia_danza">
               <div class="star-picker" id="star-picker-academia_danza">
                 <span onclick="setStar('academia_danza',1)">★</span><span onclick="setStar('academia_danza',2)">★</span><span onclick="setStar('academia_danza',3)">★</span><span onclick="setStar('academia_danza',4)">★</span><span onclick="setStar('academia_danza',5)">★</span>
               </div>
-              <input class="review-name-input" id="rev-name-academia_danza" placeholder="Your name (optional)">
-              <textarea class="review-input" id="rev-text-academia_danza" placeholder="Share your experience..."></textarea>
+              <input class="review-name-input" id="rev-name-academia_danza" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+              <textarea class="review-input" id="rev-text-academia_danza" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
               <div class="review-error" id="rev-error-academia_danza"></div>
-              <button class="review-submit-btn" onclick="submitReview('academia_danza','Academia de Danza Playas')">Post Review</button>
+              <button class="review-submit-btn" onclick="submitReview('academia_danza','Academia de Danza Playas')"><span data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</span></button>
             </div>
           </div>
         </div>
@@ -150,11 +152,11 @@
     <div class="listing-card">
       <div class="listing-card-img">🩰</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Dance Studio</p>
-        <h2 class="listing-card-name">Your Studio Here</h2>
-        <p class="listing-card-desc">Know a great dance studio in Playas? Submit their info below and help the community discover them.</p>
+        <p class="listing-card-tag" data-es="Estudio de Baile" data-en="Dance Studio">Estudio de Baile</p>
+        <h2 class="listing-card-name" data-es="Tu Estudio Aquí" data-en="Your Studio Here">Tu Estudio Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces un gran estudio de baile en Playas? Envía su info y ayuda a la comunidad a descubrirlo." data-en="Know a great dance studio in Playas? Submit their info below and help the community discover them.">¿Conoces un gran estudio de baile en Playas? Envía su info y ayuda a la comunidad a descubrirlo.</p>
         <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
       </div>
     </div>
@@ -162,24 +164,24 @@
   </div>
 
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add a Dance Studio</h2>
-    <p>Submit a studio for review. We'll add it once approved.</p>
+    <h2 data-es="➕ Agregar un Estudio de Baile" data-en="➕ Add a Dance Studio">➕ Agregar un Estudio de Baile</h2>
+    <p data-es="Envía un estudio para revisión. Lo agregaremos una vez aprobado." data-en="Submit a studio for review. We'll add it once approved.">Envía un estudio para revisión. Lo agregaremos una vez aprobado.</p>
     <form id="danceStudioForm" novalidate>
     <div class="form-row">
-      <div class="form-group"><label>Studio Name *</label><input id="studioName" name="Business Name" type="text" placeholder="e.g. Studio Playas"></div>
-      <div class="form-group"><label>Dance Style</label>
+      <div class="form-group"><label data-es="Nombre del Estudio *" data-en="Studio Name *">Nombre del Estudio *</label><input id="studioName" name="Business Name" type="text" placeholder="e.g. Studio Playas"></div>
+      <div class="form-group"><label data-es="Estilo de Baile" data-en="Dance Style">Estilo de Baile</label>
         <select name="Category"><option>Ballet</option><option>Folklórico</option><option>Hip-Hop</option><option>Contemporary</option><option>Salsa / Latin</option><option>Multiple Styles</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input name="Address" type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input name="Address" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+      <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input name="Phone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description *</label><textarea id="studioDesc" name="Description" placeholder="Tell us about the studio, age groups, experience level..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input name="Contact Name" type="text" placeholder="Name · email or phone (not published)"></div>
-    <button type="submit" class="form-submit" id="danceSubmitBtn">Submit for Review</button>
-    <div id="danceSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;">🎉 Thank you! Your submission is pending review. We'll be in touch soon!</div>
-    <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    <div class="form-group"><label data-es="Descripción *" data-en="Description *">Descripción *</label><textarea id="studioDesc" name="Description" data-placeholder-es="Cuéntanos sobre el negocio, grupos de edad, horarios..." data-placeholder-en="Tell us about the studio, age groups, experience level..." placeholder="Cuéntanos sobre el negocio, grupos de edad, horarios..."></textarea></div>
+    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label><input name="Contact Name" type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
+    <button type="submit" class="form-submit" id="danceSubmitBtn"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div id="danceSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(76,175,136,0.2);border-radius:10px;color:#a8d8c2;text-align:center;" data-es="🎉 ¡Gracias! Tu solicitud está pendiente de revisión. ¡Nos pondremos en contacto pronto!" data-en="🎉 Thank you! Your submission is pending review. We'll be in touch soon!">🎉 ¡Gracias! Tu solicitud está pendiente de revisión. ¡Nos pondremos en contacto pronto!</div>
+    <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
     </form>
   </div>
 
@@ -187,8 +189,8 @@
 
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 
 <script>
@@ -231,12 +233,12 @@
 
     const name = document.getElementById('studioName').value.trim();
     const desc = document.getElementById('studioDesc').value.trim();
-    if (!name) { alert('Please enter the studio name.'); return; }
-    if (desc.length < 10) { alert('Please add a short description.'); return; }
+    if (!name) { alert(getLang()==='en' ? 'Please enter the name.' : 'Por favor ingresa el nombre.'); return; }
+    if (desc.length < 10) { alert(getLang()==='en' ? 'Please add a description.' : 'Por favor agrega una descripción.'); return; }
 
     const btn = document.getElementById('danceSubmitBtn');
     btn.disabled = true;
-    btn.textContent = '⏳ Submitting...';
+    btn.textContent = '⏳ ' + (getLang()==='en' ? 'Submitting...' : 'Enviando...');
 
     const data = {};
     new FormData(this).forEach((val, key) => { data[key] = val; });
@@ -252,11 +254,12 @@
       document.getElementById('danceStudioForm').style.display = 'none';
       document.getElementById('danceSuccess').style.display = 'block';
     } catch(err) {
-      alert('Something went wrong. Please try again.');
+      alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
       btn.disabled = false;
-      btn.textContent = 'Submit for Review';
+      btn.textContent = getLang()==='en' ? 'Submit for Review' : 'Enviar para Revisión';
     }
   });
 </script>
+<script src="lang-persist.js"></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kids Martial Arts — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -232,29 +233,28 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="ninos.html" class="nav-back" data-es="← Niños" data-en="← Kids">← Niños</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag">Classes & Activities for Kids</p>
-  <h1>🥋 Martial Arts</h1>
-  <p>Discipline, confidence, and fitness for kids of all ages. Find the best martial arts schools in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Clases y Actividades para Niños" data-en="Classes & Activities for Kids">Clases y Actividades para Niños</p>
+  <h1 data-es="🥋 Artes Marciales" data-en="🥋 Martial Arts">🥋 Artes Marciales</h1>
+  <p data-es="Disciplina, confianza y estado físico para niños de todas las edades. Encuentra las mejores escuelas de artes marciales en Playas de Tijuana." data-en="Discipline, confidence, and fitness for kids of all ages. Find the best martial arts schools in Playas de Tijuana.">Disciplina, confianza y estado físico para niños de todas las edades. Encuentra las mejores escuelas de artes marciales en Playas de Tijuana.</p>
 </div>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="index.html#kids">Kids Activities</a> › Martial Arts
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="ninos.html" data-es="Actividades para Niños" data-en="Kids Activities">Actividades para Niños</a> › <span data-es="Artes Marciales" data-en="Martial Arts">Artes Marciales</span>
 </div>
 
 <div class="page-content">
 
   <div class="submit-banner">
     <div>
-      <h3>Own a martial arts school in Playas?</h3>
-      <p>Get your school listed here for free — reach hundreds of local families.</p>
+      <h3 data-es="¿Tienes una escuela de artes marciales en Playas?" data-en="Own a martial arts school in Playas?">¿Tienes una escuela de artes marciales en Playas?</h3>
+      <p data-es="Lista tu escuela gratis aquí — llega a cientos de familias locales." data-en="Get your school listed here for free — reach hundreds of local families.">Lista tu escuela gratis aquí — llega a cientos de familias locales.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">
-      ➕ Add Your School
-    </button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="➕ Agregar tu Escuela" data-en="➕ Add Your School">➕ Agregar tu Escuela</button>
   </div>
 
   <div class="listings-grid" id="listings-grid">
@@ -263,18 +263,18 @@
     <div class="listing-card">
       <div class="listing-card-img">🥋</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Karate · Shotokan</p>
+        <p class="listing-card-tag" data-es="Karate · Shotokan" data-en="Karate · Shotokan">Karate · Shotokan</p>
         <h2 class="listing-card-name">Karate Kids Dojo</h2>
-        <p class="listing-card-desc">Traditional Shotokan karate building discipline and confidence in children. Beginner through advanced levels with certified instructors.</p>
+        <p class="listing-card-desc" data-es="Karate Shotokan tradicional que construye disciplina y confianza en los niños. Niveles desde principiante hasta avanzado con instructores certificados." data-en="Traditional Shotokan karate building discipline and confidence in children. Beginner through advanced levels with certified instructors.">Karate Shotokan tradicional que construye disciplina y confianza en los niños. Niveles desde principiante hasta avanzado con instructores certificados.</p>
         <div class="listing-card-meta">
           <span>📍 Calle Agua Caliente 56, Playas de Tijuana</span>
           <span>🕐 Mon, Wed, Fri · 4:00 PM – 7:00 PM</span>
           <span>📞 Coming soon</span>
         </div>
         <div class="listing-card-tags">
-          <span class="tag-pill">Ages 5–16</span>
-          <span class="tag-pill">Beginner Friendly</span>
-          <span class="tag-pill">Uniforms Provided</span>
+          <span class="tag-pill" data-es="5–16 Años" data-en="Ages 5–16">5–16 Años</span>
+          <span class="tag-pill" data-es="Apto para Principiantes" data-en="Beginner Friendly">Apto para Principiantes</span>
+          <span class="tag-pill" data-es="Uniformes Incluidos" data-en="Uniforms Provided">Uniformes Incluidos</span>
         </div>
         <div class="card-video" id="video-karate_kids_dojo">
           <div class="card-video-placeholder">
@@ -289,7 +289,7 @@
           </button>
           <div class="review-panel" id="rev-panel-karate_kids_dojo">
             <div class="review-list" id="rev-list-karate_kids_dojo"></div>
-            <button class="write-review-btn" onclick="toggleReviewForm('karate_kids_dojo')">✏️ Write a Review</button>
+            <button class="write-review-btn" onclick="toggleReviewForm('karate_kids_dojo')"><span data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</span></button>
             <div class="review-form" id="rev-form-karate_kids_dojo">
               <div class="star-picker" id="star-picker-karate_kids_dojo">
                 <span onclick="setStar('karate_kids_dojo',1)">★</span>
@@ -298,10 +298,10 @@
                 <span onclick="setStar('karate_kids_dojo',4)">★</span>
                 <span onclick="setStar('karate_kids_dojo',5)">★</span>
               </div>
-              <input class="review-name-input" id="rev-name-karate_kids_dojo" placeholder="Your name (optional)">
-              <textarea class="review-input" id="rev-text-karate_kids_dojo" placeholder="Share your experience..."></textarea>
+              <input class="review-name-input" id="rev-name-karate_kids_dojo" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+              <textarea class="review-input" id="rev-text-karate_kids_dojo" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
               <div class="review-error" id="rev-error-karate_kids_dojo"></div>
-              <button class="review-submit-btn" onclick="submitReview('karate_kids_dojo','Karate Kids Dojo')">Post Review</button>
+              <button class="review-submit-btn" onclick="submitReview('karate_kids_dojo','Karate Kids Dojo')"><span data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</span></button>
             </div>
           </div>
         </div>
@@ -312,14 +312,14 @@
     <div class="listing-card">
       <div class="listing-card-img">🤼</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">MMA · Jiu-Jitsu</p>
-        <h2 class="listing-card-name">Your School Here</h2>
-        <p class="listing-card-desc">Know a great martial arts school in Playas? Submit their info and help the community discover them.</p>
+        <p class="listing-card-tag" data-es="MMA · Jiu-Jitsu" data-en="MMA · Jiu-Jitsu">MMA · Jiu-Jitsu</p>
+        <h2 class="listing-card-name" data-es="Tu Escuela Aquí" data-en="Your School Here">Tu Escuela Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces una gran escuela de artes marciales en Playas? Envía su info y ayuda a la comunidad a descubrirla." data-en="Know a great martial arts school in Playas? Submit their info and help the community discover them.">¿Conoces una gran escuela de artes marciales en Playas? Envía su info y ayuda a la comunidad a descubrirla.</p>
         <div class="listing-card-meta">
           <span>📍 Playas de Tijuana</span>
         </div>
         <div class="listing-card-tags">
-          <span class="tag-pill">Coming Soon</span>
+          <span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span>
         </div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
       </div>
@@ -329,15 +329,15 @@
 
   <!-- SUBMIT FORM -->
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add a Martial Arts School</h2>
-    <p>Submit a school for review. We'll add it to the page once approved.</p>
+    <h2 data-es="➕ Agregar una Escuela de Artes Marciales" data-en="➕ Add a Martial Arts School">➕ Agregar una Escuela de Artes Marciales</h2>
+    <p data-es="Envía una escuela para revisión. La agregaremos una vez aprobada." data-en="Submit a school for review. We'll add it to the page once approved.">Envía una escuela para revisión. La agregaremos una vez aprobada.</p>
     <div class="form-row">
       <div class="form-group">
-        <label>School Name</label>
+        <label data-es="Nombre de la Escuela" data-en="School Name">Nombre de la Escuela</label>
         <input type="text" placeholder="e.g. Dojo Playas">
       </div>
       <div class="form-group">
-        <label>Style / Discipline</label>
+        <label data-es="Estilo / Disciplina" data-en="Style / Discipline">Estilo / Disciplina</label>
         <select>
           <option>Karate</option>
           <option>Taekwondo</option>
@@ -351,36 +351,36 @@
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>Address</label>
-        <input type="text" placeholder="Street address">
+        <label data-es="Dirección" data-en="Address">Dirección</label>
+        <input type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas">
       </div>
       <div class="form-group">
-        <label>Phone / WhatsApp</label>
+        <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
         <input type="text" placeholder="664-xxx-xxxx">
       </div>
     </div>
     <div class="form-group">
-      <label>Class Schedule</label>
+      <label data-es="Horario de Clases" data-en="Class Schedule">Horario de Clases</label>
       <input type="text" placeholder="e.g. Mon/Wed/Fri 4–7pm">
     </div>
     <div class="form-group">
-      <label>Description</label>
-      <textarea placeholder="Tell us about the school, age groups, experience level..."></textarea>
+      <label data-es="Descripción" data-en="Description">Descripción</label>
+      <textarea data-placeholder-es="Cuéntanos sobre el negocio, grupos de edad, horarios..." data-placeholder-en="Tell us about the school, age groups, experience level..." placeholder="Cuéntanos sobre el negocio, grupos de edad, horarios..."></textarea>
     </div>
     <div class="form-group">
-      <label>Your Name & Contact</label>
-      <input type="text" placeholder="Name · email or phone (not published)">
+      <label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label>
+      <input type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)">
     </div>
-    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 🥋')">Submit for Review</button>
-    <div class="mod-notice">⚠️ All submissions are reviewed before publishing. This is a free community listing.</div>
+    <button class="form-submit" onclick="alert(getLang()==='en' ? 'Thank you! Your submission is pending review. 🥋' : '¡Gracias! Tu solicitud está pendiente de revisión. 🥋')"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Este es un listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. This is a free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Este es un listado comunitario gratuito.</div>
   </div>
 
 </div>
 
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 
 <script>
@@ -461,5 +461,6 @@
     setTimeout(() => { const r = reviewData[id].find(x => x.id===review.id); if(r){ r.approved=true; renderReviewList(id); } }, 3000);
   }
 </script>
+<script src="lang-persist.js"></script>
 </body>
 </html>

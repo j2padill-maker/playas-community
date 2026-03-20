@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="notranslate">
 <head>
 <meta charset="UTF-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kids Art & Creativity — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -78,27 +79,28 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
+  <a href="ninos.html" class="nav-back" data-es="← Niños" data-en="← Kids">← Niños</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag">Classes & Activities for Kids</p>
-  <h1>🎨 Art & Creativity</h1>
-  <p>Painting, ceramics, mixed media and more — nurture your child's creative spirit in Playas de Tijuana.</p>
+  <p class="page-hero-tag" data-es="Clases y Actividades para Niños" data-en="Classes & Activities for Kids">Clases y Actividades para Niños</p>
+  <h1 data-es="🎨 Arte y Creatividad" data-en="🎨 Art & Creativity">🎨 Arte y Creatividad</h1>
+  <p data-es="Pintura, cerámica, técnicas mixtas y más — nutre el espíritu creativo de tu hijo en Playas de Tijuana." data-en="Painting, ceramics, mixed media and more — nurture your child's creative spirit in Playas de Tijuana.">Pintura, cerámica, técnicas mixtas y más — nutre el espíritu creativo de tu hijo en Playas de Tijuana.</p>
 </div>
 
 <div class="breadcrumb">
-  <a href="index.html">Home</a> › <a href="index.html#kids">Kids Activities</a> › Art & Creativity
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <a href="ninos.html" data-es="Actividades para Niños" data-en="Kids Activities">Actividades para Niños</a> › <span data-es="Arte y Creatividad" data-en="Art & Creativity">Arte y Creatividad</span>
 </div>
 
 <div class="page-content">
 
   <div class="submit-banner">
     <div>
-      <h3>Teach art or crafts in Playas?</h3>
-      <p>Get your studio listed here for free — reach hundreds of local families.</p>
+      <h3 data-es="¿Enseñas arte o manualidades en Playas?" data-en="Teach art or crafts in Playas?">¿Enseñas arte o manualidades en Playas?</h3>
+      <p data-es="Lista tu estudio gratis aquí — llega a cientos de familias locales." data-en="Get your studio listed here for free — reach hundreds of local families.">Lista tu estudio gratis aquí — llega a cientos de familias locales.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})">➕ Add Your Studio</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="➕ Agregar tu Estudio" data-en="➕ Add Your Studio">➕ Agregar tu Estudio</button>
   </div>
 
   <div class="listings-grid">
@@ -106,33 +108,33 @@
     <div class="listing-card">
       <div class="listing-card-img">🎨</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Painting · Ceramics · Mixed Media</p>
+        <p class="listing-card-tag" data-es="Pintura · Cerámica · Técnicas Mixtas" data-en="Painting · Ceramics · Mixed Media">Pintura · Cerámica · Técnicas Mixtas</p>
         <h2 class="listing-card-name">Taller de Arte Infantil</h2>
-        <p class="listing-card-desc">Painting, ceramics, and mixed media for kids 5–12. Small groups mean lots of personal attention and big creativity.</p>
+        <p class="listing-card-desc" data-es="Pintura, cerámica y técnicas mixtas para niños de 5 a 12 años. Grupos pequeños con mucha atención personal y gran creatividad." data-en="Painting, ceramics, and mixed media for kids 5–12. Small groups mean lots of personal attention and big creativity.">Pintura, cerámica y técnicas mixtas para niños de 5 a 12 años. Grupos pequeños con mucha atención personal y gran creatividad.</p>
         <div class="listing-card-meta">
           <span>📍 Paseo del Mar 890, Playas de Tijuana</span>
           <span>🕐 Tue, Thu, Sat · 10:00 AM – 1:00 PM</span>
           <span>📞 Coming soon</span>
         </div>
         <div class="listing-card-tags">
-          <span class="tag-pill">Ages 5–12</span>
-          <span class="tag-pill">Small Groups</span>
-          <span class="tag-pill">Materials Included</span>
+          <span class="tag-pill" data-es="5–12 Años" data-en="Ages 5–12">5–12 Años</span>
+          <span class="tag-pill" data-es="Grupos Pequeños" data-en="Small Groups">Grupos Pequeños</span>
+          <span class="tag-pill" data-es="Materiales Incluidos" data-en="Materials Included">Materiales Incluidos</span>
         </div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Taller de Arte Merch</button>
         <div style="border-top:1.5px solid var(--sand);padding-top:1rem;">
           <button class="review-toggle" onclick="toggleReviews('taller_arte')">⭐ Reviews <span id="rev-count-taller_arte">— be the first!</span></button>
           <div class="review-panel" id="rev-panel-taller_arte">
             <div id="rev-list-taller_arte"></div>
-            <button class="write-review-btn" onclick="toggleReviewForm('taller_arte')">✏️ Write a Review</button>
+            <button class="write-review-btn" onclick="toggleReviewForm('taller_arte')"><span data-es="✏️ Escribir una Reseña" data-en="✏️ Write a Review">✏️ Escribir una Reseña</span></button>
             <div class="review-form" id="rev-form-taller_arte">
               <div class="star-picker" id="star-picker-taller_arte">
                 <span onclick="setStar('taller_arte',1)">★</span><span onclick="setStar('taller_arte',2)">★</span><span onclick="setStar('taller_arte',3)">★</span><span onclick="setStar('taller_arte',4)">★</span><span onclick="setStar('taller_arte',5)">★</span>
               </div>
-              <input class="review-name-input" id="rev-name-taller_arte" placeholder="Your name (optional)">
-              <textarea class="review-input" id="rev-text-taller_arte" placeholder="Share your experience..."></textarea>
+              <input class="review-name-input" id="rev-name-taller_arte" data-placeholder-es="Tu nombre (opcional)" data-placeholder-en="Your name (optional)" placeholder="Tu nombre (opcional)">
+              <textarea class="review-input" id="rev-text-taller_arte" data-placeholder-es="Comparte tu experiencia..." data-placeholder-en="Share your experience..." placeholder="Comparte tu experiencia..."></textarea>
               <div class="review-error" id="rev-error-taller_arte"></div>
-              <button class="review-submit-btn" onclick="submitReview('taller_arte','Taller de Arte Infantil')">Post Review</button>
+              <button class="review-submit-btn" onclick="submitReview('taller_arte','Taller de Arte Infantil')"><span data-es="Publicar Reseña" data-en="Post Review">Publicar Reseña</span></button>
             </div>
           </div>
         </div>
@@ -142,11 +144,11 @@
     <div class="listing-card">
       <div class="listing-card-img">✏️</div>
       <div class="listing-card-body">
-        <p class="listing-card-tag">Art Studio</p>
-        <h2 class="listing-card-name">Your Studio Here</h2>
-        <p class="listing-card-desc">Know a great art studio in Playas? Submit their info below and help the community discover them.</p>
+        <p class="listing-card-tag" data-es="Estudio de Arte" data-en="Art Studio">Estudio de Arte</p>
+        <h2 class="listing-card-name" data-es="Tu Estudio Aquí" data-en="Your Studio Here">Tu Estudio Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces un gran estudio de arte en Playas? Envía su info y ayuda a la comunidad a descubrirlo." data-en="Know a great art studio in Playas? Submit their info below and help the community discover them.">¿Conoces un gran estudio de arte en Playas? Envía su info y ayuda a la comunidad a descubrirlo.</p>
         <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-        <div class="listing-card-tags"><span class="tag-pill">Coming Soon</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
         <button class="merch-btn" onclick="alert('Merch store coming soon! 🛍️')">🛍️ Shop Merch</button>
       </div>
     </div>
@@ -154,30 +156,30 @@
   </div>
 
   <div class="submit-section" id="submit-listing">
-    <h2>➕ Add an Art Studio</h2>
-    <p>Submit a studio for review. We'll add it once approved.</p>
+    <h2 data-es="➕ Agregar un Estudio de Arte" data-en="➕ Add an Art Studio">➕ Agregar un Estudio de Arte</h2>
+    <p data-es="Envía un estudio para revisión. Lo agregaremos una vez aprobado." data-en="Submit a studio for review. We'll add it once approved.">Envía un estudio para revisión. Lo agregaremos una vez aprobado.</p>
     <div class="form-row">
-      <div class="form-group"><label>Studio Name</label><input type="text" placeholder="e.g. Arte Playas"></div>
-      <div class="form-group"><label>Art Type</label>
+      <div class="form-group"><label data-es="Nombre del Estudio" data-en="Studio Name">Nombre del Estudio</label><input type="text" placeholder="e.g. Arte Playas"></div>
+      <div class="form-group"><label data-es="Tipo de Arte" data-en="Art Type">Tipo de Arte</label>
         <select><option>Painting</option><option>Ceramics</option><option>Drawing</option><option>Mixed Media</option><option>Crafts</option><option>Multiple</option></select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label>Address</label><input type="text" placeholder="Street address"></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
+      <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
+      <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea placeholder="Tell us about the studio, age groups, what materials are used..."></textarea></div>
-    <div class="form-group"><label>Your Name & Contact</label><input type="text" placeholder="Name · email or phone (not published)"></div>
-    <button class="form-submit" onclick="alert('Thank you! Your submission is pending review. 🎨')">Submit for Review</button>
-    <div class="mod-notice">⚠️ All submissions are reviewed before publishing. Free community listing.</div>
+    <div class="form-group"><label>Description</label><textarea data-placeholder-es="Cuéntanos sobre el negocio, grupos de edad, horarios..." data-placeholder-en="Tell us about the studio, age groups, what materials are used..." placeholder="Cuéntanos sobre el negocio, grupos de edad, horarios..."></textarea></div>
+    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label><input type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
+    <button class="form-submit" onclick="alert(getLang()==='en' ? 'Thank you! Your submission is pending review. 🎨' : '¡Gracias! Tu solicitud está pendiente de revisión. 🎨')"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
   </div>
 
 </div>
 
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
-  <p>Your neighborhood community hub</p>
-  <p style="margin-top:0.5rem"><a href="index.html">← Back to main site</a></p>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 
 <script>
@@ -214,5 +216,6 @@
     setTimeout(()=>{const r=reviewData[id].find(x=>x.id===review.id);if(r){r.approved=true;renderReviewList(id);}},3000);
   }
 </script>
+<script src="lang-persist.js"></script>
 </body>
 </html>
