@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bares Deportivos & Juegos | Bares — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --sand:#e8dcc8; --sand-light:#f5efe3; --sand-dark:#c9b99a; --ocean:#2a7fa5; --ocean-deep:#1a5270; --ocean-light:#5aafd4; --seafoam:#4caf88; --seafoam-light:#a8d8c2; --white:#fafaf8; --text:#2c2c2c; --text-light:#6b6b6b; --nav-h:70px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); }
+  nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); background:rgba(26,82,112,0.97); backdrop-filter:blur(10px); display:flex; align-items:center; padding:0 2rem; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.2); }
+  .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
+  .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
+  .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
+  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(10,30,10,0.90),rgba(20,90,20,0.80)), url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
+  .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:0.75rem; }
+  .page-hero p { color:rgba(255,255,255,0.8); max-width:520px; line-height:1.7; font-size:0.97rem; }
+  .breadcrumb { background:var(--sand-light); padding:0.75rem 2rem; font-size:0.78rem; color:var(--text-light); }
+  .breadcrumb a { color:var(--ocean); text-decoration:none; }
+  .page-content { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .submit-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; margin-bottom:3rem; flex-wrap:wrap; }
+  .submit-banner h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.2rem; margin-bottom:0.3rem; }
+  .submit-banner p { color:rgba(255,255,255,0.75); font-size:0.875rem; }
+  .submit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.75rem 1.8rem; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all 0.2s; flex-shrink:0; text-decoration:none; display:inline-block; }
+  .submit-btn:hover { background:var(--sand); transform:translateY(-2px); }
+  .listings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.75rem; }
+  .listing-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,0.07); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; }
+  .listing-card:nth-child(2){animation-delay:0.1s;} .listing-card:nth-child(3){animation-delay:0.2s;}
+  .listing-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.12); }
+  .listing-card-img { height:200px; width:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; }
+  .listing-card-body { padding:1.5rem; }
+  .listing-card-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ocean); margin-bottom:0.5rem; }
+  .listing-card-name { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--ocean-deep); margin-bottom:0.6rem; }
+  .listing-card-desc { font-size:0.875rem; color:var(--text-light); line-height:1.7; margin-bottom:1rem; }
+  .listing-card-meta { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .listing-card-meta span { font-size:0.82rem; color:var(--text-light); }
+  .listing-card-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.2rem; }
+  .tag-pill { background:var(--sand-light); color:var(--ocean-deep); font-size:0.72rem; font-weight:600; padding:0.3rem 0.75rem; border-radius:20px; }
+  .contact-btn { width:100%; background:linear-gradient(135deg,var(--ocean),var(--seafoam)); color:#fff; border:none; border-radius:50px; padding:0.7rem; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; margin-bottom:0.75rem; }
+  .contact-btn:hover { transform:translateY(-2px); }
+  .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:4rem; }
+  .submit-section h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
+  .submit-section > p { color:rgba(255,255,255,0.75); font-size:0.875rem; margin-bottom:1.5rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .form-group label { font-size:0.78rem; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:0.08em; }
+  .form-group input, .form-group textarea, .form-group select { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; padding:0.75rem 1rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9rem; width:100%; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.4); }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--seafoam-light); }
+  .form-group textarea { resize:vertical; min-height:90px; }
+  .form-group select option { background:var(--ocean-deep); }
+  .photo-upload-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin-top:0.5rem; }
+  .photo-slot { aspect-ratio:1; border:2px dashed rgba(255,255,255,0.3); border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; position:relative; background:rgba(255,255,255,0.06); font-size:1.4rem; transition:border-color 0.2s; }
+  .photo-slot:hover { border-color:var(--seafoam-light); }
+  .photo-slot img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
+  .photo-slot .rm-btn { position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:0.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .photo-hint { font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:0.4rem; }
+  .form-submit { background:var(--seafoam); color:#fff; border:none; padding:0.9rem 2.5rem; border-radius:50px; font-size:0.95rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
+  .form-submit:hover { background:#3a9a74; transform:translateY(-2px); }
+  .mod-notice { background:rgba(255,255,255,0.1); border-left:3px solid rgba(255,255,255,0.4); border-radius:0 8px 8px 0; padding:0.75rem 1rem; margin-top:1rem; font-size:0.78rem; color:rgba(255,255,255,0.7); }
+  footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
+  footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
+  footer a { color:var(--seafoam-light); text-decoration:none; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:768px){ .form-row{grid-template-columns:1fr;} .submit-banner{flex-direction:column;text-align:center;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
+  <a href="bares.html" class="nav-back" data-es="← Bares" data-en="← Bars">← Bares</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-tag" data-es="Bares · Playas de Tijuana" data-en="Bars · Playas de Tijuana">Bares · Playas de Tijuana</p>
+  <h1 data-es="Bares Deportivos & Juegos" data-en="Sports Bars & Games">Bares Deportivos & Juegos</h1>
+  <p data-es="Pantallas para ver la Liga, NFL y fútbol americano con bebidas frías." data-en="Screens for Liga, NFL, and American football with cold drinks.">Pantallas para ver la Liga, NFL y fútbol americano con bebidas frías.</p>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> ›
+  <a href="bares.html" data-es="Bares & Cervecerías" data-en="Bars & Breweries">Bares & Cervecerías</a> ›
+  <span data-es="Bares Deportivos & Juegos" data-en="Sports Bars & Games">Bares Deportivos & Juegos</span>
+</div>
+
+<div class="page-content">
+  <div class="submit-banner">
+    <div>
+      <h3 data-es="¿Tienes un bar deportivo o de juegos en Playas?" data-en="Own a sports bar or games bar in Playas?">¿Tienes un bar deportivo o de juegos en Playas?</h3>
+      <p data-es="Lista tu negocio gratis y conecta con los aficionados al deporte en la comunidad." data-en="List your business for free and connect with sports fans in the community.">Lista tu negocio gratis y conecta con los aficionados al deporte en la comunidad.</p>
+    </div>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Bar" data-en="+ Add Your Bar">+ Agregar tu Bar</button>
+  </div>
+
+  <div id="approved-section" style="margin-bottom:2rem;display:none;">
+    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;" data-es="Bares Deportivos Destacados" data-en="Featured Sports Bars">Bares Deportivos Destacados</p>
+    <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
+  </div>
+  <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;" data-es="Cargando listados..." data-en="Loading listings...">Cargando listados...</div>
+
+  <div class="listings-grid">
+    <div class="listing-card">
+      <div class="listing-card-img" style="background:linear-gradient(135deg,#0a1e0a,#145a14);">⚽</div>
+      <div class="listing-card-body">
+        <p class="listing-card-tag" data-es="Bar Deportivo / Juegos" data-en="Sports Bar / Games">Bar Deportivo / Juegos</p>
+        <h2 class="listing-card-name" data-es="Tu Bar Aquí" data-en="Your Bar Here">Tu Bar Aquí</h2>
+        <p class="listing-card-desc" data-es="¿Conoces un buen bar deportivo en Playas? Envía su info y ayuda a los aficionados del barrio a encontrar dónde ver el partido." data-en="Know a great sports bar in Playas? Submit their info and help sports fans in the neighborhood find the best place to watch the game.">¿Conoces un buen bar deportivo en Playas? Envía su info y ayuda a los aficionados del barrio a encontrar dónde ver el partido.</p>
+        <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
+        <div class="listing-card-tags"><span class="tag-pill" data-es="Próximamente" data-en="Coming Soon">Próximamente</span></div>
+        <button class="contact-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="➕ Agregar Bar" data-en="➕ Add a Bar">➕ Agregar Bar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-section" id="submit-listing">
+    <h2 data-es="➕ Agregar un Bar Deportivo" data-en="➕ Add a Sports Bar">➕ Agregar un Bar Deportivo</h2>
+    <p data-es="Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your listing for review. We'll add it once approved — free community listing.">Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
+    <form id="barForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label data-es="Nombre del Negocio *" data-en="Business Name *">Nombre del Negocio *</label>
+          <input id="barName" name="Business Name" type="text" data-placeholder-es="ej. Bar El Gol" data-placeholder-en="e.g. El Gol Sports Bar" placeholder="ej. Bar El Gol">
+        </div>
+        <div class="form-group">
+          <label data-es="Categoría" data-en="Category">Categoría</label>
+          <select name="Category">
+            <option>Bar Deportivo / Juegos</option>
+            <option>Cervecería Artesanal</option>
+            <option>Bar de Cocteles</option>
+            <option>Cantina / Bar de Barrio</option>
+            <option>Bar de Playa / Terraza</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-es="Dirección" data-en="Address">Dirección <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Address" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address in Playas" placeholder="Dirección en Playas">
+        </div>
+        <div class="form-group">
+          <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Phone" type="text" placeholder="664-xxx-xxxx">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-es="Horario" data-en="Hours">Horario <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Hours" type="text" data-placeholder-es="ej. Lun–Dom 12pm–1am" data-placeholder-en="e.g. Mon–Sun 12pm–1am" placeholder="ej. Lun–Dom 12pm–1am">
+        </div>
+        <div class="form-group">
+          <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Social" type="text" placeholder="@tubar">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-es="Sitio web" data-en="Website">Sitio web <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Website" type="text" placeholder="www.tubar.com">
+        </div>
+        <div class="form-group">
+          <label data-es="Tu correo electrónico" data-en="Your email">Tu correo <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input name="Email" type="email" placeholder="hola@correo.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-es="Descripción *" data-en="Description *">Descripción *</label>
+        <textarea id="barDesc" name="Description" data-placeholder-es="Cuéntanos sobre tu bar — qué deportes transmiten, juegos disponibles, cuántas pantallas, ambiente..." data-placeholder-en="Tell us about your bar — what sports you show, games available, number of screens, vibe..." placeholder="Cuéntanos sobre tu bar — qué deportes transmiten, juegos disponibles, cuántas pantallas, ambiente..."></textarea>
+      </div>
+      <div class="form-group">
+        <label data-es="Fotos" data-en="Photos">Fotos <span data-es="(opcional, máx. 5)" data-en="(optional, max 5)">(opcional, máx. 5)</span></label>
+        <div class="photo-upload-grid" id="photoGrid">
+          <div class="photo-slot" onclick="triggerPhoto(0)">➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,0)"></div>
+          <div class="photo-slot" onclick="triggerPhoto(1)">➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,1)"></div>
+          <div class="photo-slot" onclick="triggerPhoto(2)">➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,2)"></div>
+          <div class="photo-slot" onclick="triggerPhoto(3)">➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,3)"></div>
+          <div class="photo-slot" onclick="triggerPhoto(4)">➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,4)"></div>
+        </div>
+        <p class="photo-hint" data-es="Se redimensionarán automáticamente. Formatos: JPG, PNG, WEBP." data-en="Will be resized automatically. Formats: JPG, PNG, WEBP.">Se redimensionarán automáticamente. Formatos: JPG, PNG, WEBP.</p>
+      </div>
+      <div class="form-group">
+        <label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto <span data-es="(no se publica)" data-en="(not published)">(no se publica)</span></label>
+        <input name="Contact Name" type="text" data-placeholder-es="Nombre · email o teléfono" data-placeholder-en="Name · email or phone" placeholder="Nombre · email o teléfono">
+      </div>
+      <button type="submit" class="form-submit" id="barSubmitBtn" data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</button>
+      <div id="barSuccess" style="display:none;">
+        <div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;">
+          <div style="font-size:3rem;margin-bottom:0.5rem;">✅</div>
+          <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.9rem;" data-es="Tu listado ha sido enviado para revisión." data-en="Your listing has been submitted for review.">Tu listado ha sido enviado para revisión.</p>
+        </div>
+      </div>
+      <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">🌴 Playas de Tijuana</div>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
+</footer>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+  const SHEET_CSV  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+
+  function parseCSV(text){const lines=text.split('\n');const headers=lines[0].split(',').map(h=>h.replace(/"/g,'').trim());return lines.slice(1).filter(l=>l.trim()).map(line=>{const values=[];let current='',inQuotes=false;for(let i=0;i<line.length;i++){if(line[i]==='"'){inQuotes=!inQuotes;}else if(line[i]===','&&!inQuotes){values.push(current.trim());current='';}else{current+=line[i];}}values.push(current.trim());const obj={};headers.forEach((h,i)=>{obj[h]=(values[i]||'').replace(/"/g,'').trim();});return obj;});}
+
+  function buildCard(row) {
+    var name = row['Business Name'] || 'Business';
+    var category = row['Category'] || '';
+    var desc = row['Description'] || '';
+    var address = row['Address'] || '';
+    var phone = row['Phone'] || '';
+    var hours = row['Hours'] || '';
+    var profileNum = parseInt(row['Profile Photo']) || 1;
+    var profilePhoto = row['Photo_' + profileNum] || '';
+    var imgHtml = (profilePhoto && profilePhoto.startsWith('data:image'))
+      ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;">'
+      : '<div style="height:200px;background:linear-gradient(135deg,#0a1e0a,#145a14);display:flex;align-items:center;justify-content:center;font-size:5rem;">⚽</div>';
+    var html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);">';
+    html += imgHtml;
+    html += '<div style="padding:1.5rem;">';
+    html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
+    html += '<h2 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
+    html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
+    if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
+    if (hours) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">🕐 ' + hours + '</p>';
+    if (phone) html += '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>';
+    html += '</div></div>';
+    return html;
+  }
+
+  async function loadApproved() {
+    try {
+      var res = await fetch(SHEET_CSV);
+      var text = await res.text();
+      var rows = parseCSV(text);
+      var approved = rows.filter(function(r) {
+        var status = (r['Status'] || '').toLowerCase().trim();
+        var source = (r['Source'] || '').toLowerCase();
+        return status === 'approved' && source.includes('sports bar page');
+      });
+      document.getElementById('loading-listings').style.display = 'none';
+      if (approved.length > 0) {
+        document.getElementById('approved-section').style.display = 'block';
+        document.getElementById('approved-grid').innerHTML = approved.map(buildCard).join('');
+      }
+    } catch(err) {
+      document.getElementById('loading-listings').textContent = getLang() === 'en' ? 'Error loading listings.' : 'Error al cargar listados.';
+    }
+  }
+  loadApproved();
+
+  var uploadedPhotos = [null,null,null,null,null];
+  function triggerPhoto(i) { document.getElementById('photoGrid').children[i].querySelector('input[type=file]').click(); }
+  function handlePhoto(input, i) {
+    var file = input.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var maxW = 1200; var scale = img.width > maxW ? maxW / img.width : 1;
+        canvas.width = Math.round(img.width * scale); canvas.height = Math.round(img.height * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        var data = canvas.toDataURL('image/jpeg', 0.82);
+        uploadedPhotos[i] = data;
+        var slot = document.getElementById('photoGrid').children[i];
+        slot.innerHTML = '<img src="' + data + '"><button class="rm-btn" onclick="removePhoto(event,' + i + ')">✕</button><input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,' + i + ')">';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  function removePhoto(e, i) {
+    e.stopPropagation(); uploadedPhotos[i] = null;
+    var slot = document.getElementById('photoGrid').children[i];
+    slot.innerHTML = '➕<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(this,' + i + ')">';
+    slot.onclick = function(){ triggerPhoto(i); };
+  }
+
+  document.getElementById('barForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var name = document.getElementById('barName').value.trim();
+    var desc = document.getElementById('barDesc').value.trim();
+    if (!name) { alert(getLang() === 'en' ? 'Please enter the business name.' : 'Por favor ingresa el nombre del negocio.'); return; }
+    if (desc.length < 10) { alert(getLang() === 'en' ? 'Please add a short description.' : 'Por favor agrega una descripción breve.'); return; }
+    var btn = document.getElementById('barSubmitBtn');
+    btn.disabled = true; btn.textContent = '⏳ ' + (getLang() === 'en' ? 'Submitting...' : 'Enviando...');
+    var data = {};
+    new FormData(this).forEach(function(val, key) { data[key] = val; });
+    data['Submitted At'] = new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'});
+    data['Source'] = 'Sports Bar Page';
+    var photos = uploadedPhotos.filter(function(p){ return p !== null; });
+    data['Photo Count'] = photos.length;
+    photos.forEach(function(p, i) { data['Photo_' + (i+1)] = p; });
+    try {
+      var params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', body:params});
+      document.getElementById('barForm').style.display = 'none';
+      document.getElementById('barSuccess').style.display = 'block';
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = getLang() === 'en' ? 'Submit for Review' : 'Enviar para Revisión';
+      alert(getLang() === 'en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
+    }
+  });
+</script>
+<script src="lang-persist.js"></script>
+</body>
+</html>
