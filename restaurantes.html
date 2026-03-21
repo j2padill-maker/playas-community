@@ -46,6 +46,19 @@
   @media(max-width:600px){ .categories-grid { grid-template-columns:1fr 1fr; } }
   @media(max-width:400px){ .categories-grid { grid-template-columns:1fr; } }
   @media(max-width:768px){ .submit-banner { flex-direction:column; text-align:center; } }
+
+  /* Category picker modal */
+  .cat-modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:1rem; }
+  .cat-modal-overlay.open { display:flex; }
+  .cat-modal-box { background:#fff; border-radius:24px; max-width:500px; width:100%; padding:2rem; position:relative; animation:fadeUp 0.25s ease; max-height:90vh; overflow-y:auto; }
+  .cat-modal-box h3 { font-family:'Playfair Display',serif; color:var(--ocean-deep); font-size:1.4rem; margin-bottom:0.4rem; }
+  .cat-modal-box p { color:var(--text-light); font-size:0.88rem; margin-bottom:1.5rem; }
+  .cat-modal-close { position:absolute; top:1rem; right:1rem; background:rgba(0,0,0,0.08); border:none; border-radius:50%; width:32px; height:32px; font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .cat-picker-list { display:flex; flex-direction:column; gap:0.6rem; }
+  .cat-picker-item { display:flex; align-items:center; gap:0.9rem; padding:0.85rem 1.1rem; border:1.5px solid #e8dcc8; border-radius:14px; text-decoration:none; color:var(--text); transition:all 0.18s; font-size:0.93rem; font-weight:500; }
+  .cat-picker-item:hover { border-color:var(--ocean); background:var(--sand-light); color:var(--ocean-deep); transform:translateX(4px); }
+  .cat-picker-item .cat-icon { font-size:1.5rem; flex-shrink:0; }
+  .cat-picker-item .cat-arrow { margin-left:auto; color:var(--ocean); font-weight:700; }
 </style>
 </head>
 <body>
@@ -73,7 +86,7 @@
       <h3 data-es="¿Tienes un restaurante en Playas?" data-en="Own a restaurant in Playas?">¿Tienes un restaurante en Playas?</h3>
       <p data-es="Publica tu restaurante gratis y conecta con los vecinos del barrio." data-en="List your restaurant for free and connect with hungry neighbors.">Publica tu restaurante gratis y conecta con los vecinos del barrio.</p>
     </div>
-    <a href="restaurantes-mariscos.html" class="submit-btn" data-es="+ Agregar tu Restaurante" data-en="+ Add Your Restaurant">+ Agregar tu Restaurante</a>
+    <button class="submit-btn" onclick="document.getElementById('catPickerModal').classList.add('open')" data-es="+ Agregar tu Restaurante" data-en="+ Add Your Restaurant">+ Agregar tu Restaurante</button>
   </div>
 
   <p class="section-label" data-es="Elige una categoría" data-en="Choose a category">Elige una categoría</p>
@@ -82,7 +95,7 @@
     <a href="restaurantes-mariscos.html" class="cat-card">
       <div class="cat-card-img" style="background:linear-gradient(135deg,#1a4a6a,#2a8aaa);">🦞</div>
       <div class="cat-card-body">
-        <h2 class="cat-card-name" data-es="Mariscos y Marisquería" data-en="Mariscos & Seafood">Mariscos y Marisquería</h2>
+        <h2 class="cat-card-name" data-es="Mariscos" data-en="Mariscos">Mariscos</h2>
         <p class="cat-card-desc" data-es="Pescado fresco del Pacífico, ceviche, aguachile y los mejores tacos de mariscos en Playas." data-en="Fresh Pacific fish, ceviche, aguachile, and the best seafood tacos in Playas.">Pescado fresco del Pacífico, ceviche, aguachile y los mejores tacos de mariscos en Playas.</p>
         <span class="cat-card-cta" data-es="Ver mariscos →" data-en="View seafood →">Ver mariscos →</span>
       </div>
@@ -151,6 +164,53 @@
   <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
   <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
+
+
+<!-- Category Picker Modal -->
+<div class="cat-modal-overlay" id="catPickerModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="cat-modal-box">
+    <button class="cat-modal-close" onclick="document.getElementById('catPickerModal').classList.remove('open')">✕</button>
+    <h3 data-es="¿Qué tipo de restaurante?" data-en="What type of restaurant?">¿Qué tipo de restaurante?</h3>
+    <p data-es="Elige la categoría para ir al formulario correcto." data-en="Choose a category to go to the right submission form.">Elige la categoría para ir al formulario correcto.</p>
+    <div class="cat-picker-list">
+      <a href="restaurantes-mariscos.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🦞</span>
+        <span data-es="Mariscos" data-en="Mariscos">Mariscos</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-tacos.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🌮</span>
+        <span data-es="Tacos y Antojitos" data-en="Tacos & Street Food">Tacos y Antojitos</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-cafe.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">☕</span>
+        <span data-es="Cafés y Desayunos" data-en="Cafés & Breakfast">Cafés y Desayunos</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-pizza.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🍕</span>
+        <span data-es="Pizza e Italiana" data-en="Pizza & Italian">Pizza e Italiana</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-fina.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🍷</span>
+        <span data-es="Alta Cocina" data-en="Fine Dining">Alta Cocina</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-sushi.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🍣</span>
+        <span data-es="Sushi y Cocina Asiática" data-en="Sushi & Asian Cuisine">Sushi y Cocina Asiática</span>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="restaurantes-americana.html#submit-listing" class="cat-picker-item">
+        <span class="cat-icon">🍔</span>
+        <span data-es="Americana" data-en="Americana">Americana</span>
+        <span class="cat-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
 
 <script src="lang-persist.js"></script>
 </body>
