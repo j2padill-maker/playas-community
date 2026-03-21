@@ -228,51 +228,54 @@
 </footer>
 
 <script>
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
-  var SHEET_CSV  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
+  const SHEET_CSV  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
 
-  // ── CSV Parser ──────────────────────────────────────────────────────────
+  // CSV Parser
   function parseCSV(text) {
-    var lines = text.replace(/\r/g, '').split('\n');
-    var rawHeaders = []; var cur = ''; var inQ = false;
-    for (var i = 0; i < lines[0].length; i++) {
+    const lines = text.replace(/\r/g, '').split('\n');
+    const rawHeaders = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < lines[0].length; i++) {
       if (lines[0][i] === '"') { inQ = !inQ; }
       else if (lines[0][i] === ',' && !inQ) { rawHeaders.push(cur.trim()); cur = ''; }
       else { cur += lines[0][i]; }
     }
     rawHeaders.push(cur.trim());
-    var headers = rawHeaders.map(function(h) { return h.replace(/"/g,'').trim(); });
-    return lines.slice(1).filter(function(l) { return l.trim(); }).map(function(line) {
-      var values = []; var current = ''; var inQuotes = false;
-      for (var i = 0; i < line.length; i++) {
+    const headers = rawHeaders.map(h => h.replace(/"/g,'').trim());
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+      const values = [];
+      let current = '', inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
         if (line[i] === '"') { inQuotes = !inQuotes; }
         else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
         else { current += line[i]; }
       }
       values.push(current.trim());
-      var obj = {};
-      headers.forEach(function(h, i) { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
+      const obj = {};
+      headers.forEach((h, i) => { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
       return obj;
     });
   }
 
-  // ── Build approved card ─────────────────────────────────────────────────
-  function buildCard(row) {
-    var name = row['Business Name'] || 'Bar';
-    var category = row['Category'] || '';
-    var desc = row['Description'] || '';
-    var address = row['Address'] || '';
-    var phone = row['Phone'] || '';
-    var hours = row['Hours'] || '';
-    var profilePhoto = row['Profile Photo'] || '';
-    var imgHtml = profilePhoto
-      ? '<img src="' + profilePhoto + '" alt="' + name + '" style="width:100%;height:200px;object-fit:cover;display:block;">'
+  // Build listing card
+  function buildListingCard(row) {
+    const name = row['Business Name'] || 'Bar';
+    const category = row['Category'] || '';
+    const desc = row['Description'] || '';
+    const address = row['Address'] || '';
+    const phone = row['Phone'] || '';
+    const hours = row['Hours'] || '';
+    const profileNum = parseInt(row['Profile Photo']) || 1;
+    const profilePhoto = row['Photo_' + profileNum] || '';
+    const imgHtml = profilePhoto && profilePhoto.startsWith('data:image')
+      ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;">'
       : '<div style="height:200px;background:linear-gradient(135deg,#1a2a5a,#2a4a9a);display:flex;align-items:center;justify-content:center;font-size:5rem;">🍺</div>';
-    var html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);">';
+    let html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);">';
     html += imgHtml;
     html += '<div style="padding:1.5rem;">';
     html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
-    html += '<h2 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
+    html += '<h2 style=\"font-family:\'Playfair Display\',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;\">' + name + '</h2>';
     html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
     if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
     if (hours)   html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">🕐 ' + hours + '</p>';
@@ -281,31 +284,33 @@
     return html;
   }
 
-  // ── Load Listings ───────────────────────────────────────────────────────
-  async function loadApproved() {
+  // Load approved listings
+  async function loadApprovedListings() {
     try {
-      var res = await fetch(SHEET_CSV + '&t=' + Date.now());
-      var text = await res.text();
-      var rows = parseCSV(text);
-      var approved = rows.filter(function(r) {
-        var status = (r['Status'] || '').toLowerCase().trim();
-        var source = (r['Source'] || '').toLowerCase();
+      const res = await fetch(SHEET_CSV);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      const approved = rows.filter(r => {
+        const status = (r['Status'] || '').toLowerCase().trim();
+        const source = (r['Source'] || '').toLowerCase();
         return status === 'approved' && source.includes('craft brewery');
       });
       document.getElementById('loading-listings').style.display = 'none';
       if (approved.length > 0) {
         document.getElementById('approved-section').style.display = 'block';
-        document.getElementById('approved-grid').innerHTML = approved.map(buildCard).join('');
+        document.getElementById('approved-grid').innerHTML = approved.map(buildListingCard).join('');
       }
     } catch(err) {
-      document.getElementById('loading-listings').textContent = getLang() === 'en' ? 'Error loading listings.' : 'Error al cargar listados.';
+      console.error('Error loading listings:', err);
+      document.getElementById('loading-listings').style.display = 'none';
     }
   }
-  loadApproved();
 
-  // ── Photo Upload ────────────────────────────────────────────────────────
-  var formPhotos = [null,null,null,null,null];
-  var formProfilePhoto = 1;
+  loadApprovedListings();
+
+  // Form photo upload
+  const formPhotos = [null,null,null,null,null];
+  let formProfilePhoto = 1;
 
   function triggerFormPhoto(i) {
     document.getElementById('formPhotoGrid').children[i].querySelector('input[type=file]').click();
@@ -313,24 +318,24 @@
 
   function handleFormPhoto(input, i) {
     if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = function(e) {
-      var img = new Image();
+      const img = new Image();
       img.onload = function() {
-        var canvas = document.createElement('canvas');
-        var MAX = 1200;
-        var w = img.width; var h = img.height;
+        const canvas = document.createElement('canvas');
+        const MAX = 1200;
+        let w = img.width, h = img.height;
         if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        var data = canvas.toDataURL('image/jpeg', 0.82);
+        const data = canvas.toDataURL('image/jpeg', 0.82);
         formPhotos[i] = data;
-        var slot = document.getElementById('formPhotoGrid').children[i];
-        var imgEl = slot.querySelector('img');
+        const slot = document.getElementById('formPhotoGrid').children[i];
+        let imgEl = slot.querySelector('img');
         if (!imgEl) { imgEl = document.createElement('img'); slot.appendChild(imgEl); }
         imgEl.src = data;
         slot.childNodes[0].textContent = '';
-        var rmBtn = slot.querySelector('.rm-btn');
+        let rmBtn = slot.querySelector('.rm-btn');
         if (!rmBtn) {
           rmBtn = document.createElement('button');
           rmBtn.className = 'rm-btn';
@@ -341,60 +346,55 @@
             imgEl.remove();
             rmBtn.remove();
             slot.childNodes[0].textContent = '📷';
-            updateProfilePicker();
+            updateFormProfilePicker();
           };
           slot.appendChild(rmBtn);
         }
-        updateProfilePicker();
+        updateFormProfilePicker();
       };
       img.src = e.target.result;
     };
     reader.readAsDataURL(input.files[0]);
   }
 
-  function updateProfilePicker() {
-    var filled = formPhotos.filter(function(p) { return p !== null; });
-    var picker = document.getElementById('formProfilePicker');
-    var thumbsEl = document.getElementById('formProfileThumbs');
+  function updateFormProfilePicker() {
+    const filled = formPhotos.filter(function(p) { return p !== null; });
+    const picker = document.getElementById('formProfilePicker');
+    const thumbsEl = document.getElementById('formProfileThumbs');
     if (filled.length === 0) { picker.style.display = 'none'; return; }
     picker.style.display = 'block';
     thumbsEl.innerHTML = '';
-    if (!formPhotos[formProfilePhoto - 1]) {
-      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
-    }
     formPhotos.forEach(function(p, i) {
       if (!p) return;
-      var realIdx = i + 1;
-      var wrap = document.createElement('div');
-      wrap.className = 'profile-thumb-wrap' + (formProfilePhoto === realIdx ? ' selected' : '');
-      wrap.title = 'Photo ' + realIdx;
-      var th = document.createElement('img');
+      const realIdx = i + 1;
+      const th = document.createElement('img');
       th.src = p;
-      th.className = 'profile-thumb';
-      var star = document.createElement('div');
-      star.className = 'profile-star';
-      star.textContent = '★';
-      wrap.appendChild(th);
-      wrap.appendChild(star);
-      wrap.onclick = function() {
+      th.className = 'profile-thumb' + (formProfilePhoto === realIdx ? ' selected' : '');
+      th.title = 'Photo ' + realIdx;
+      th.onclick = function() {
         formProfilePhoto = realIdx;
-        thumbsEl.querySelectorAll('.profile-thumb-wrap').forEach(function(w) { w.classList.remove('selected'); });
-        wrap.classList.add('selected');
+        thumbsEl.querySelectorAll('.profile-thumb').forEach(function(t) { t.classList.remove('selected'); });
+        th.classList.add('selected');
       };
-      thumbsEl.appendChild(wrap);
+      thumbsEl.appendChild(th);
     });
+    if (!formPhotos[formProfilePhoto - 1]) {
+      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
+      const first = thumbsEl.querySelector('.profile-thumb');
+      if (first) first.classList.add('selected');
+    }
   }
 
-  // ── Form Submit ─────────────────────────────────────────────────────────
+  // Form submit — posts to Google Sheet via Apps Script
   async function submitBarForm() {
-    var name = (document.getElementById('barName').value || '').trim();
-    var desc = (document.getElementById('barDesc').value || '').trim();
-    if (!name) { alert(getLang() === 'en' ? 'Please enter the business name.' : 'Por favor ingresa el nombre del negocio.'); return; }
-    if (!desc) { alert(getLang() === 'en' ? 'Please enter a description.' : 'Por favor agrega una descripción.'); return; }
-    var btn = document.getElementById('barSubmitBtn');
+    const name = (document.getElementById('barName').value || '').trim();
+    const desc = (document.getElementById('barDesc').value || '').trim();
+    if (!name) { alert('Please enter the business name.'); return; }
+    if (!desc) { alert('Please enter a description.'); return; }
+    const btn = document.getElementById('barSubmitBtn');
     btn.disabled = true;
-    btn.textContent = '⏳ ' + (getLang() === 'en' ? 'Submitting...' : 'Enviando...');
-    var data = {
+    btn.textContent = '⏳ Enviando...';
+    const data = {
       'Business Name': name,
       'Category':      document.getElementById('barCategory').value,
       'Description':   desc,
@@ -410,17 +410,17 @@
       'Photo Count':   formPhotos.filter(function(p) { return p !== null; }).length,
       'Profile Photo': formProfilePhoto,
     };
+    const params = new URLSearchParams();
     formPhotos.forEach(function(p, i) { if (p) data['Photo_' + (i+1)] = p; });
-    var params = new URLSearchParams();
     params.append('payload', JSON.stringify(data));
     try {
-      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
       document.getElementById('barSuccess').style.display = 'block';
       btn.style.display = 'none';
     } catch(err) {
       btn.disabled = false;
-      btn.textContent = getLang() === 'en' ? 'Submit for Review' : 'Enviar para Revisión';
-      alert(getLang() === 'en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
+      btn.textContent = 'Enviar para Revisión';
+      alert('Algo salió mal. Por favor intenta de nuevo.');
     }
   }
 </script>
