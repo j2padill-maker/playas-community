@@ -59,9 +59,12 @@
   .form-photo-slot .rm-btn { position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:0.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
   .profile-picker { display:none; margin-top:1rem; }
   .profile-picker label { font-size:0.82rem; color:rgba(255,255,255,0.8); display:block; margin-bottom:0.5rem; font-weight:600; }
-  .profile-thumbs { display:flex; gap:0.5rem; flex-wrap:wrap; }
-  .profile-thumb { width:52px; height:52px; border-radius:8px; object-fit:cover; border:3px solid transparent; cursor:pointer; transition:border-color 0.2s; }
-  .profile-thumb.selected { border-color:#fff; box-shadow:0 0 0 2px var(--seafoam); }
+  .profile-thumbs { display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .profile-thumb-wrap { position:relative; cursor:pointer; flex-shrink:0; }
+  .profile-thumb { width:58px; height:58px; border-radius:10px; object-fit:cover; border:3px solid rgba(255,255,255,0.2); display:block; transition:border-color 0.2s,transform 0.2s; }
+  .profile-thumb-wrap.selected .profile-thumb { border-color:var(--seafoam); transform:scale(1.06); }
+  .profile-star { display:none; position:absolute; top:-8px; right:-8px; background:var(--seafoam); color:#fff; font-size:0.7rem; width:20px; height:20px; border-radius:50%; align-items:center; justify-content:center; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.3); }
+  .profile-thumb-wrap.selected .profile-star { display:flex; }
   .info-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; margin-top:3rem; }
   .info-banner h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
   .info-banner p { color:rgba(255,255,255,0.78); font-size:0.9rem; line-height:1.7; max-width:560px; margin:0 auto; }
@@ -356,25 +359,30 @@
     if (filled.length === 0) { picker.style.display = 'none'; return; }
     picker.style.display = 'block';
     thumbsEl.innerHTML = '';
+    if (!formPhotos[formProfilePhoto - 1]) {
+      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
+    }
     formPhotos.forEach(function(p, i) {
       if (!p) return;
       var realIdx = i + 1;
+      var wrap = document.createElement('div');
+      wrap.className = 'profile-thumb-wrap' + (formProfilePhoto === realIdx ? ' selected' : '');
+      wrap.title = 'Photo ' + realIdx;
       var th = document.createElement('img');
       th.src = p;
-      th.className = 'profile-thumb' + (formProfilePhoto === realIdx ? ' selected' : '');
-      th.title = 'Photo ' + realIdx;
-      th.onclick = function() {
+      th.className = 'profile-thumb';
+      var star = document.createElement('div');
+      star.className = 'profile-star';
+      star.textContent = '★';
+      wrap.appendChild(th);
+      wrap.appendChild(star);
+      wrap.onclick = function() {
         formProfilePhoto = realIdx;
-        thumbsEl.querySelectorAll('.profile-thumb').forEach(function(t) { t.classList.remove('selected'); });
-        th.classList.add('selected');
+        thumbsEl.querySelectorAll('.profile-thumb-wrap').forEach(function(w) { w.classList.remove('selected'); });
+        wrap.classList.add('selected');
       };
-      thumbsEl.appendChild(th);
+      thumbsEl.appendChild(wrap);
     });
-    if (!formPhotos[formProfilePhoto - 1]) {
-      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
-      var first = thumbsEl.querySelector('.profile-thumb');
-      if (first) first.classList.add('selected');
-    }
   }
 
   // ── Form Submit ─────────────────────────────────────────────────────────
