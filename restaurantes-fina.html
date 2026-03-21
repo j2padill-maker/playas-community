@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cervecerías Artesanales | Bares — Playas de Tijuana</title>
+<title>Alta Cocina | Restaurantes — Playas de Tijuana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root { --sand:#e8dcc8; --sand-light:#f5efe3; --sand-dark:#c9b99a; --ocean:#2a7fa5; --ocean-deep:#1a5270; --ocean-light:#5aafd4; --seafoam:#4caf88; --seafoam-light:#a8d8c2; --white:#fafaf8; --text:#2c2c2c; --text-light:#6b6b6b; --nav-h:70px; }
@@ -14,7 +14,7 @@
   .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
   .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
   .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
-  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(26,42,90,0.85),rgba(42,74,154,0.75)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(26,26,58,0.88),rgba(58,58,106,0.78)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
   .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
   .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:0.75rem; }
   .page-hero p { color:rgba(255,255,255,0.8); max-width:520px; line-height:1.7; font-size:0.97rem; }
@@ -26,18 +26,11 @@
   .submit-banner p { color:rgba(255,255,255,0.75); font-size:0.875rem; }
   .submit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.75rem 1.8rem; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all 0.2s; flex-shrink:0; }
   .submit-btn:hover { background:var(--sand); transform:translateY(-2px); }
-  .listings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.75rem; }
+  .listings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.75rem; margin-bottom:3rem; }
   .listing-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,0.07); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; }
   .listing-card:nth-child(2){animation-delay:0.1s;} .listing-card:nth-child(3){animation-delay:0.2s;}
   .listing-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.12); }
-  .listing-card-img { height:200px; width:100%; background:linear-gradient(135deg,#1a2a5a,#2a4a9a); display:flex; align-items:center; justify-content:center; font-size:5rem; }
-  .listing-card-body { padding:1.5rem; }
-  .listing-card-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ocean); margin-bottom:0.5rem; }
-  .listing-card-name { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--ocean-deep); margin-bottom:0.6rem; }
-  .listing-card-desc { font-size:0.875rem; color:var(--text-light); line-height:1.7; margin-bottom:1rem; }
-  .listing-card-meta { display:flex; flex-direction:column; gap:0.4rem; }
-  .listing-card-meta span { font-size:0.82rem; color:var(--text-light); }
-  .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:4rem; }
+  .submit-section { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; margin-top:4rem; scroll-margin-top:90px; }
   .submit-section h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.5rem; margin-bottom:0.4rem; }
   .submit-section > p { color:rgba(255,255,255,0.75); font-size:0.875rem; margin-bottom:1.5rem; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
@@ -98,114 +91,91 @@
 
 <nav>
   <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
-  <a href="bares.html" class="nav-back" data-es="← Bares" data-en="← Bars">← Bares</a>
+  <a href="restaurantes.html" class="nav-back" data-es="← Restaurantes" data-en="← Restaurants">← Restaurantes</a>
   <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
 </nav>
 
 <div class="page-hero">
-  <p class="page-hero-tag" data-es="Bares · Playas de Tijuana" data-en="Bars · Playas de Tijuana">Bares · Playas de Tijuana</p>
-  <h1 data-es="Cervecerías Artesanales" data-en="Craft Breweries">Cervecerías Artesanales</h1>
-  <p data-es="Cerveza artesanal de Baja California: IPAs, stouts y lagers artesanales." data-en="Baja California craft beer: IPAs, stouts, and craft lagers.">Cerveza artesanal de Baja California: IPAs, stouts y lagers artesanales.</p>
+  <p class="page-hero-tag" data-es="Restaurantes · Playas de Tijuana" data-en="Restaurants · Playas de Tijuana">Restaurantes · Playas de Tijuana</p>
+  <h1 data-es="Alta Cocina" data-en="Fine Dining">Alta Cocina</h1>
+  <p data-es="Restaurantes de alta cocina con los mejores sabores de Baja California y vista al mar." data-en="Fine dining restaurants featuring the best flavors of Baja California with ocean views.">Restaurantes de alta cocina con los mejores sabores de Baja California y vista al mar.</p>
 </div>
 
 <div class="breadcrumb">
   <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> ›
-  <a href="bares.html" data-es="Bares &amp; Cervecerías" data-en="Bars &amp; Breweries">Bares &amp; Cervecerías</a> ›
-  <span data-es="Cervecerías" data-en="Breweries">Cervecerías</span>
+  <a href="restaurantes.html" data-es="Restaurantes" data-en="Restaurants">Restaurantes</a> ›
+  <span data-es="Alta Cocina" data-en="Fine Dining">Alta Cocina</span>
 </div>
 
 <div class="page-content">
-
   <div class="submit-banner">
     <div>
-      <h3 data-es="¿Tienes una cervecería artesanal en Playas?" data-en="Own a craft brewery in Playas?">¿Tienes una cervecería artesanal en Playas?</h3>
-      <p data-es="Lista tu cervecería gratis y conéctate con los amantes de la cerveza local." data-en="List your brewery for free and connect with local craft beer lovers.">Lista tu cervecería gratis y conéctate con los amantes de la cerveza local.</p>
+      <h3 data-es="¿Tienes un restaurante de alta cocina en Playas?" data-en="Own a fine dining restaurant in Playas?">¿Tienes un restaurante de alta cocina en Playas?</h3>
+      <p data-es="Lista tu restaurante gratis y conéctate con los amantes de la buena mesa." data-en="List your restaurant for free and connect with fine dining enthusiasts.">Lista tu restaurante gratis y conéctate con los amantes de la buena mesa.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Cervecería" data-en="+ Add Your Brewery">+ Agregar tu Cervecería</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Restaurante" data-en="+ Add Your Restaurant">+ Agregar tu Restaurante</button>
   </div>
 
-  <!-- Approved Listings from Google Sheets -->
+  <!-- Approved Listings -->
   <div id="approved-section" style="margin-bottom:2rem;display:none;">
-    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;" data-es="Cervecerías Destacadas" data-en="Featured Breweries">Cervecerías Destacadas</p>
-    <div id="approved-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2rem;"></div>
+    <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ocean);font-weight:700;margin-bottom:1.25rem;" data-es="Restaurantes de Alta Cocina Destacados" data-en="Featured Fine Dining">Restaurantes de Alta Cocina Destacados</p>
+    <div id="approved-grid" class="listings-grid"></div>
   </div>
   <div id="loading-listings" style="text-align:center;padding:1rem;color:var(--text-light);font-size:0.9rem;" data-es="Cargando listados..." data-en="Loading listings...">Cargando listados...</div>
 
-  <!-- Placeholder cards -->
-  <div class="listings-grid">
-    <div class="listing-card">
-      <div class="listing-card-img">🍺</div>
-      <div class="listing-card-body">
-        <p class="listing-card-tag" data-es="Cervecerías Artesanales" data-en="Craft Breweries">Cervecerías Artesanales</p>
-        <h2 class="listing-card-name" data-es="Tu Negocio Aquí" data-en="Your Business Here">Tu Negocio Aquí</h2>
-        <p class="listing-card-desc" data-es="¿Tienes un negocio en esta categoría en Playas? Envía tu info y ayuda a los vecinos a descubrirte." data-en="Have a business in this category in Playas? Submit your info and help neighbors discover you.">¿Tienes un negocio en esta categoría en Playas? Envía tu info y ayuda a los vecinos a descubrirte.</p>
-        <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-      </div>
-    </div>
-    <div class="listing-card">
-      <div class="listing-card-img">🍻</div>
-      <div class="listing-card-body">
-        <p class="listing-card-tag" data-es="Próximamente" data-en="Coming Soon">Próximamente</p>
-        <h2 class="listing-card-name" data-es="Más cervecerías pronto" data-en="More breweries coming soon">Más cervecerías pronto</h2>
-        <p class="listing-card-desc" data-es="Estamos reuniendo los mejores establecimientos de Playas. ¡Sé el primero en aparecer aquí!" data-en="We are gathering the best spots in Playas. Be the first to appear here!">Estamos reuniendo los mejores establecimientos de Playas. ¡Sé el primero en aparecer aquí!</p>
-        <div class="listing-card-meta"><span>📍 Playas de Tijuana</span></div>
-      </div>
-    </div>
-  </div>
-
   <!-- Submission Form -->
   <div class="submit-section" id="submit-listing">
-    <h2 data-es="➕ Agregar una Cervecería" data-en="➕ Add a Craft Brewery">➕ Agregar una Cervecería</h2>
-    <p data-es="Envía tu cervecería para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your brewery for review. We'll add it once approved — free community listing.">Envía tu cervecería para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
+    <h2 data-es="➕ Agregar un Restaurante de Alta Cocina" data-en="➕ Add a Fine Dining Restaurant">➕ Agregar un Restaurante de Alta Cocina</h2>
+    <p data-es="Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your listing for review. We'll add it once approved — free community listing.">Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
     <div class="form-row">
       <div class="form-group">
-        <label data-es="Nombre de la Cervecería" data-en="Brewery Name">Nombre de la Cervecería</label>
-        <input id="barName" type="text" data-placeholder-es="ej. Cervecería del Pacífico" data-placeholder-en="e.g. Pacific Craft Brewery" placeholder="ej. Cervecería del Pacífico">
+        <label data-es="Nombre del Restaurante" data-en="Restaurant Name">Nombre del Restaurante</label>
+        <input id="restName" type="text" placeholder="ej. Restaurante Vista Mar" data-placeholder-es="ej. Restaurante Vista Mar" data-placeholder-en="e.g. Vista Mar Restaurant">
       </div>
       <div class="form-group">
         <label data-es="Categoría" data-en="Category">Categoría</label>
-        <select id="barCategory">
-            <option value="Craft Brewery">Cervecería Artesanal / Craft Brewery</option>
+        <select id="restCategory">
+          <option value="Alta Cocina">Alta Cocina</option>
         </select>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Dirección" data-en="Address">Dirección</label>
-        <input id="barAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address in Playas" placeholder="Dirección en Playas">
+        <input id="restAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address in Playas" placeholder="Dirección en Playas">
       </div>
       <div class="form-group">
         <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
-        <input id="barPhone" type="text" placeholder="664-xxx-xxxx">
+        <input id="restPhone" type="text" placeholder="664-xxx-xxxx">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Horario" data-en="Hours">Horario</label>
-        <input id="barHours" type="text" data-placeholder-es="ej. Jue–Dom 12pm–10pm" data-placeholder-en="e.g. Thu–Sun 12pm–10pm" placeholder="ej. Jue–Dom 12pm–10pm">
+        <input id="restHours" type="text" data-placeholder-es="ej. Mar–Dom 1pm–11pm" data-placeholder-en="e.g. Tue–Sun 1pm–11pm" placeholder="ej. Mar–Dom 1pm–11pm">
       </div>
       <div class="form-group">
         <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes</label>
-        <input id="barSocial" type="text" placeholder="@tubar">
+        <input id="restSocial" type="text" placeholder="@turestaurante">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Sitio Web" data-en="Website">Sitio Web</label>
-        <input id="barWebsite" type="url" placeholder="https://tubar.com">
+        <input id="restWebsite" type="url" placeholder="https://turestaurante.com">
       </div>
       <div class="form-group">
         <label data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
-        <input id="barEmail" type="email" placeholder="hola@tubar.com">
+        <input id="restEmail" type="email" placeholder="hola@turestaurante.com">
       </div>
     </div>
     <div class="form-group">
       <label data-es="Descripción *" data-en="Description *">Descripción *</label>
-      <textarea id="barDesc" data-placeholder-es="Cuéntanos sobre tu cervecería — estilos, ambiente, si tienen tours o catas..." data-placeholder-en="Tell us about your brewery — beer styles, atmosphere, tasting experiences..." placeholder="Cuéntanos sobre tu cervecería — estilos, ambiente, si tienen tours o catas..."></textarea>
+      <textarea id="restDesc" data-placeholder-es="Cuéntanos sobre tu restaurante — menú, chef, ambiente, experiencia gastronómica..." data-placeholder-en="Tell us about your restaurant — menu, chef, atmosphere, dining experience..." placeholder="Cuéntanos sobre tu restaurante — menú, chef, ambiente, experiencia gastronómica..."></textarea>
     </div>
     <div class="form-group">
       <label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto <span style="font-weight:400;opacity:0.75;" data-es="(no se publica)" data-en="(not published)">(no se publica)</span></label>
-      <input id="barContact" type="text" data-placeholder-es="Nombre · email o teléfono" data-placeholder-en="Name · email or phone" placeholder="Nombre · email o teléfono">
+      <input id="restContact" type="text" data-placeholder-es="Nombre · email o teléfono" data-placeholder-en="Name · email or phone" placeholder="Nombre · email o teléfono">
     </div>
     <div class="form-group">
       <label><span data-es="Fotos" data-en="Photos">Fotos</span> <span style="font-weight:400;opacity:0.75;" data-es="(opcional — hasta 5)" data-en="(optional — up to 5)">(opcional — hasta 5)</span></label>
@@ -221,8 +191,8 @@
         <div class="profile-thumbs" id="formProfileThumbs"></div>
       </div>
     </div>
-    <button class="form-submit" id="barSubmitBtn" onclick="submitBarForm()"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
-    <div id="barSuccess" style="display:none;">
+    <button class="form-submit" id="restSubmitBtn" onclick="submitRestForm()"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
+    <div id="restSuccess" style="display:none;">
       <div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;">
         <div style="font-size:3rem;margin-bottom:0.5rem;">✅</div>
         <h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3>
@@ -233,8 +203,8 @@
   </div>
 
   <div class="info-banner">
-    <h2 data-es="🍺 Bebe Local en Playas" data-en="🍺 Drink Local in Playas">🍺 Bebe Local en Playas</h2>
-    <p data-es="Todas las cervecerías listadas aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local." data-en="All breweries listed here are local businesses in Playas de Tijuana. Support your community by choosing to drink local.">Todas las cervecerías listadas aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local.</p>
+    <h2 data-es="🍽️ Come Local en Playas" data-en="🍽️ Eat Local in Playas">🍽️ Come Local en Playas</h2>
+    <p data-es="Todos los restaurantes listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo comer local." data-en="All restaurants listed here are local businesses in Playas de Tijuana. Support your community by choosing to eat local.">Todos los restaurantes listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo comer local.</p>
   </div>
 
 </div>
@@ -280,7 +250,7 @@
   function buildListingCard(row) {
     const idx = listingData.length;
     listingData.push(row);
-    const name = row['Business Name'] || 'Bar';
+    const name = row['Business Name'] || 'Restaurant';
     const category = row['Category'] || '';
     const desc = row['Description'] || '';
     const address = row['Address'] || '';
@@ -290,7 +260,7 @@
     const profilePhoto = row['Photo_' + profileNum] || '';
     const imgHtml = profilePhoto && profilePhoto.startsWith('data:image')
       ? '<img src="' + profilePhoto + '" style="width:100%;height:200px;object-fit:cover;">'
-      : '<div style="height:200px;background:linear-gradient(135deg,#1a2a5a,#2a4a9a);display:flex;align-items:center;justify-content:center;font-size:5rem;">🍺</div>';
+      : '<div style="height:200px;background:linear-gradient(135deg,#1a1a3a,#3a3a6a);display:flex;align-items:center;justify-content:center;font-size:5rem;">🍷</div>';
     let html = '<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.07);transition:transform 0.25s,box-shadow 0.25s;cursor:pointer;" onclick="openModal(' + idx + ')">';
     html += imgHtml;
     html += '<div style="padding:1.5rem;">';
@@ -310,7 +280,7 @@
 
   function openModal(idx) {
     const row = listingData[idx];
-    const name = row['Business Name'] || 'Bar';
+    const name = row['Business Name'] || 'Restaurant';
     const category = row['Category'] || '';
     const desc = row['Description'] || '';
     const address = row['Address'] || '';
@@ -369,7 +339,7 @@
       const approved = rows.filter(r => {
         const status = (r['Status'] || '').toLowerCase().trim();
         const source = (r['Source'] || '').toLowerCase();
-        return status === 'approved' && source.includes('craft brewery');
+        return status === 'approved' && source.includes('fine dining');
       });
       document.getElementById('loading-listings').style.display = 'none';
       if (approved.length > 0) {
@@ -381,7 +351,6 @@
       document.getElementById('loading-listings').style.display = 'none';
     }
   }
-
   loadApprovedListings();
 
   // Form photo upload
@@ -440,7 +409,6 @@
     if (filled.length === 0) { picker.style.display = 'none'; return; }
     picker.style.display = 'block';
     thumbsEl.innerHTML = '';
-    // Auto-correct profile index if that slot is now empty
     if (!formPhotos[formProfilePhoto - 1]) {
       formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
     }
@@ -448,18 +416,15 @@
       if (!p) return;
       const realIdx = i + 1;
       const isSelected = (formProfilePhoto === realIdx);
-      // Wrapper div
       const wrap = document.createElement('div');
       wrap.className = 'profile-thumb-wrap' + (isSelected ? ' selected' : '');
       wrap.title = 'Photo ' + realIdx;
-      // Thumbnail image
       const th = document.createElement('img');
       th.src = p;
       th.className = 'profile-thumb';
-      // Star badge
       const star = document.createElement('div');
       star.className = 'profile-star';
-      star.textContent = '\u2605';
+      star.textContent = '★';
       wrap.appendChild(th);
       wrap.appendChild(star);
       wrap.onclick = function() {
@@ -472,26 +437,26 @@
   }
 
   // Form submit — posts to Google Sheet via Apps Script
-  async function submitBarForm() {
-    const name = (document.getElementById('barName').value || '').trim();
-    const desc = (document.getElementById('barDesc').value || '').trim();
-    if (!name) { alert('Please enter the business name.'); return; }
+  async function submitRestForm() {
+    const name = (document.getElementById('restName').value || '').trim();
+    const desc = (document.getElementById('restDesc').value || '').trim();
+    if (!name) { alert('Please enter the restaurant name.'); return; }
     if (!desc) { alert('Please enter a description.'); return; }
-    const btn = document.getElementById('barSubmitBtn');
+    const btn = document.getElementById('restSubmitBtn');
     btn.disabled = true;
     btn.textContent = '⏳ Enviando...';
     const data = {
       'Business Name': name,
-      'Category':      document.getElementById('barCategory').value,
+      'Category':      document.getElementById('restCategory').value,
       'Description':   desc,
-      'Address':       (document.getElementById('barAddress').value || '').trim(),
-      'Phone':         (document.getElementById('barPhone').value || '').trim(),
-      'Hours':         (document.getElementById('barHours').value || '').trim(),
-      'Social':        (document.getElementById('barSocial').value || '').trim(),
-      'Website':       (document.getElementById('barWebsite').value || '').trim(),
-      'Email':         (document.getElementById('barEmail').value || '').trim(),
-      'Contact Name':  (document.getElementById('barContact').value || '').trim(),
-      'Source':        'Craft Brewery Page',
+      'Address':       (document.getElementById('restAddress').value || '').trim(),
+      'Phone':         (document.getElementById('restPhone').value || '').trim(),
+      'Hours':         (document.getElementById('restHours').value || '').trim(),
+      'Social':        (document.getElementById('restSocial').value || '').trim(),
+      'Website':       (document.getElementById('restWebsite').value || '').trim(),
+      'Email':         (document.getElementById('restEmail').value || '').trim(),
+      'Contact Name':  (document.getElementById('restContact').value || '').trim(),
+      'Source':        'Fine Dining Restaurant Page',
       'Submitted At':  new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'}),
       'Photo Count':   formPhotos.filter(function(p) { return p !== null; }).length,
       'Profile Photo': formProfilePhoto,
@@ -501,7 +466,7 @@
     params.append('payload', JSON.stringify(data));
     try {
       await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
-      document.getElementById('barSuccess').style.display = 'block';
+      document.getElementById('restSuccess').style.display = 'block';
       btn.style.display = 'none';
     } catch(err) {
       btn.disabled = false;
