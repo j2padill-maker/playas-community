@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bares & Cervecerías — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --sand:#e8dcc8; --sand-light:#f5efe3; --sand-dark:#c9b99a; --ocean:#2a7fa5; --ocean-deep:#1a5270; --ocean-light:#5aafd4; --seafoam:#4caf88; --seafoam-light:#a8d8c2; --white:#fafaf8; --text:#2c2c2c; --text-light:#6b6b6b; --nav-h:70px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); }
+  nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); background:rgba(26,82,112,0.97); backdrop-filter:blur(10px); display:flex; align-items:center; padding:0 2rem; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.2); }
+  .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
+  .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
+  .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
+  .page-hero { min-height:420px; background:linear-gradient(135deg,rgba(26,40,82,0.88),rgba(26,82,112,0.82)), url('https://images.unsplash.com/photo-1559526324-593bc073d938?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
+  .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.8rem); color:#fff; margin-bottom:0.75rem; }
+  .page-hero p { color:rgba(255,255,255,0.82); max-width:560px; line-height:1.75; font-size:1rem; }
+  .breadcrumb { background:var(--sand-light); padding:0.75rem 2rem; font-size:0.78rem; color:var(--text-light); }
+  .breadcrumb a { color:var(--ocean); text-decoration:none; }
+  .page-content { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+  .submit-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; margin-bottom:3rem; flex-wrap:wrap; }
+  .submit-banner h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.2rem; margin-bottom:0.3rem; }
+  .submit-banner p { color:rgba(255,255,255,0.75); font-size:0.875rem; }
+  .submit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.75rem 1.8rem; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all 0.2s; flex-shrink:0; text-decoration:none; display:inline-block; }
+  .submit-btn:hover { background:var(--sand); transform:translateY(-2px); }
+  .section-label { font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ocean); font-weight:700; margin-bottom:1.25rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--ocean-deep); margin-bottom:0.5rem; }
+  .section-sub { color:var(--text-light); font-size:0.9rem; margin-bottom:2rem; }
+
+  /* Category cards */
+  .categories-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; margin-bottom:4rem; }
+  .cat-card { background:#fff; border-radius:20px; box-shadow:0 2px 20px rgba(0,0,0,0.07); overflow:hidden; text-decoration:none; color:var(--text); transition:transform 0.25s,box-shadow 0.25s; animation:fadeUp 0.5s ease both; display:flex; flex-direction:column; }
+  .cat-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.13); }
+  .cat-card-img { height:160px; display:flex; align-items:center; justify-content:center; font-size:4rem; }
+  .cat-card-body { padding:1.25rem 1.5rem 1.5rem; flex:1; display:flex; flex-direction:column; }
+  .cat-card-name { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--ocean-deep); margin-bottom:0.4rem; }
+  .cat-card-desc { font-size:0.83rem; color:var(--text-light); line-height:1.65; flex:1; }
+
+  /* Listings */
+  .listings-section { margin-bottom:4rem; }
+  .listings-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; }
+  .listing-card { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.07); overflow:hidden; transition:transform 0.2s,box-shadow 0.2s; animation:fadeUp 0.4s ease both; }
+  .listing-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,0.12); }
+  .listing-photo { width:100%; height:180px; object-fit:cover; background:var(--sand-light); display:flex; align-items:center; justify-content:center; font-size:3rem; color:var(--ocean-light); }
+  .listing-body { padding:1.25rem 1.5rem 1.5rem; }
+  .listing-name { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--ocean-deep); margin-bottom:0.25rem; }
+  .listing-category { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--seafoam); font-weight:700; margin-bottom:0.5rem; }
+  .listing-desc { font-size:0.83rem; color:var(--text-light); line-height:1.6; margin-bottom:0.75rem; }
+  .listing-meta { display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .listing-tag { font-size:0.75rem; background:var(--sand-light); color:var(--text-light); padding:0.2rem 0.6rem; border-radius:20px; }
+  .no-listings { text-align:center; padding:3rem; color:var(--text-light); background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.06); }
+  .no-listings p { font-size:1rem; margin-top:0.5rem; }
+
+  /* Form */
+  .form-section { background:#fff; border-radius:24px; box-shadow:0 4px 32px rgba(0,0,0,0.08); padding:2.5rem; margin-bottom:4rem; scroll-margin-top:90px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+  .form-group.full { grid-column:1/-1; }
+  label { font-size:0.8rem; font-weight:600; color:var(--ocean-deep); letter-spacing:0.04em; text-transform:uppercase; }
+  label span { color:var(--text-light); font-weight:400; text-transform:none; }
+  input, select, textarea { padding:0.7rem 1rem; border:1.5px solid #ddd; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--text); background:#fafaf8; transition:border 0.2s; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--ocean); background:#fff; }
+  textarea { min-height:110px; resize:vertical; }
+  .photo-hint { font-size:0.75rem; color:var(--text-light); margin-top:0.3rem; }
+  .btn-submit { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); color:#fff; border:none; border-radius:50px; padding:0.85rem 2.5rem; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s; margin-top:0.5rem; }
+  .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,82,112,0.3); }
+  .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+  .success-card { display:none; background:linear-gradient(135deg,var(--seafoam),var(--ocean)); border-radius:20px; padding:2rem; text-align:center; color:#fff; margin-top:1.5rem; }
+  .success-card h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:0.5rem; }
+
+  .info-banner { background:linear-gradient(135deg,var(--ocean-deep),var(--ocean)); border-radius:20px; padding:2.5rem; text-align:center; margin-bottom:2rem; }
+  .info-banner h2 { font-family:'Playfair Display',serif; color:#fff; font-size:1.6rem; margin-bottom:0.5rem; }
+  .info-banner p { color:rgba(255,255,255,0.78); font-size:0.9rem; line-height:1.7; max-width:560px; margin:0 auto; }
+  footer { background:var(--ocean-deep); color:rgba(255,255,255,0.65); padding:2.5rem 2rem; text-align:center; }
+  footer .footer-brand { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--sand); margin-bottom:0.4rem; }
+  footer a { color:var(--seafoam-light); text-decoration:none; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:768px){ .form-grid { grid-template-columns:1fr; } .submit-banner { flex-direction:column; text-align:center; } }
+  @media(max-width:600px){ .categories-grid { grid-template-columns:1fr 1fr; } .listings-grid { grid-template-columns:1fr; } }
+  @media(max-width:400px){ .categories-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
+  <a href="index.html" class="nav-back" data-es="← Inicio" data-en="← Home">← Inicio</a>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="margin-left:0.75rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:0.3rem 0.85rem;border-radius:20px;cursor:pointer;font-size:0.82rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
+</nav>
+
+<div class="page-hero">
+  <p class="page-hero-tag" data-es="Playas de Tijuana · Vida Nocturna y Cervecerías" data-en="Playas de Tijuana · Nightlife & Breweries">Playas de Tijuana · Vida Nocturna y Cervecerías</p>
+  <h1 data-es="Bares & Cervecerías" data-en="Bars & Breweries">Bares & Cervecerías</h1>
+  <p data-es="Descubre los mejores bares, cervecerías artesanales, cantinas y lugares para disfrutar una buena copa en Playas de Tijuana." data-en="Discover the best bars, craft breweries, cantinas, and spots to enjoy a great drink in Playas de Tijuana.">Descubre los mejores bares, cervecerías artesanales, cantinas y lugares para disfrutar una buena copa en Playas de Tijuana.</p>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> › <span data-es="Bares & Cervecerías" data-en="Bars & Breweries">Bares & Cervecerías</span>
+</div>
+
+<div class="page-content">
+
+  <!-- Submit Banner -->
+  <div class="submit-banner">
+    <div>
+      <h3 data-es="¿Tienes un bar o cervecería en Playas?" data-en="Own a bar or brewery in Playas?">¿Tienes un bar o cervecería en Playas?</h3>
+      <p data-es="Publica tu negocio gratis y conecta con los vecinos del barrio." data-en="List your business for free and connect with local neighbors.">Publica tu negocio gratis y conecta con los vecinos del barrio.</p>
+    </div>
+    <a href="#submit-bar" class="submit-btn" data-es="+ Agregar tu Bar" data-en="+ Add Your Bar">+ Agregar tu Bar</a>
+  </div>
+
+  <!-- Category Cards -->
+  <p class="section-label" data-es="Explora por categoría" data-en="Explore by category">Explora por categoría</p>
+  <div class="categories-grid">
+    <div class="cat-card" style="cursor:default;">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#1a2a5a,#2a4a9a);">🍺</div>
+      <div class="cat-card-body">
+        <h2 class="cat-card-name" data-es="Cervecerías Artesanales" data-en="Craft Breweries">Cervecerías Artesanales</h2>
+        <p class="cat-card-desc" data-es="Cerveza local de Baja California: IPAs, stouts, lagers artesanales y tours de degustación junto al mar." data-en="Local Baja California beer: IPAs, stouts, craft lagers, and seaside tasting tours.">Cerveza local de Baja California: IPAs, stouts, lagers artesanales y tours de degustación junto al mar.</p>
+      </div>
+    </div>
+    <div class="cat-card" style="cursor:default;">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#3a1a2a,#7a2a4a);">🍹</div>
+      <div class="cat-card-body">
+        <h2 class="cat-card-name" data-es="Bares de Cocteles" data-en="Cocktail Bars">Bares de Cocteles</h2>
+        <p class="cat-card-desc" data-es="Mezcal, tequila, gin y cocteles de autor con ingredientes frescos y vistas al Pacífico." data-en="Mezcal, tequila, gin, and signature cocktails with fresh ingredients and Pacific Ocean views.">Mezcal, tequila, gin y cocteles de autor con ingredientes frescos y vistas al Pacífico.</p>
+      </div>
+    </div>
+
+    <div class="cat-card" style="cursor:default;">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#2a2a1a,#5a4a1a);">🎵</div>
+      <div class="cat-card-body">
+        <h2 class="cat-card-name" data-es="Cantinas & Bares de Barrio" data-en="Cantinas & Local Bars">Cantinas & Bares de Barrio</h2>
+        <p class="cat-card-desc" data-es="Las clásicas cantinas de Playas: ambiente relajado, botanas, música en vivo y precio justo." data-en="Classic Playas cantinas: relaxed vibe, bar snacks, live music, and fair prices.">Las clásicas cantinas de Playas: ambiente relajado, botanas, música en vivo y precio justo.</p>
+      </div>
+    </div>
+    <div class="cat-card" style="cursor:default;">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#1a3a4a,#2a6a8a);">🌊</div>
+      <div class="cat-card-body">
+        <h2 class="cat-card-name" data-es="Bares de Playa & Terrazas" data-en="Beach Bars & Terraces">Bares de Playa & Terrazas</h2>
+        <p class="cat-card-desc" data-es="Terrazas con vista al mar, beach bars y rooftops para ver el atardecer sobre el Pacífico con una bebida en mano." data-en="Sea-view terraces, beach bars, and rooftops to watch the Pacific sunset with a drink in hand.">Terrazas con vista al mar, beach bars y rooftops para ver el atardecer sobre el Pacífico con una bebida en mano.</p>
+      </div>
+    </div>
+    <div class="cat-card" style="cursor:default;">
+      <div class="cat-card-img" style="background:linear-gradient(135deg,#3a1a3a,#6a2a6a);">🎱</div>
+      <div class="cat-card-body">
+        <h2 class="cat-card-name" data-es="Bares Deportivos & Juegos" data-en="Sports Bars & Games">Bares Deportivos & Juegos</h2>
+        <p class="cat-card-desc" data-es="Pantallas para ver la Liga, NFL y fútbol americano con bebidas frías, pool y juegos de mesa." data-en="Screens for Liga, NFL, and American football with cold drinks, pool tables, and bar games.">Pantallas para ver la Liga, NFL y fútbol americano con bebidas frías, pool y juegos de mesa.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approved Listings -->
+  <div class="listings-section">
+    <p class="section-label" data-es="Establecimientos verificados" data-en="Verified listings">Establecimientos verificados</p>
+    <h2 class="section-title" data-es="Bares & Cervecerías en Playas" data-en="Bars & Breweries in Playas">Bares & Cervecerías en Playas</h2>
+    <p class="section-sub" data-es="Negocios aprobados por nuestra comunidad" data-en="Community-approved businesses">Negocios aprobados por nuestra comunidad</p>
+    <div class="listings-grid" id="listings-container">
+      <div class="no-listings" id="no-listings-msg">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">🍺</div>
+        <p data-es="Aún no hay listados aprobados. ¡Sé el primero en agregar tu bar!" data-en="No approved listings yet. Be the first to add your bar!">Aún no hay listados aprobados. ¡Sé el primero en agregar tu bar!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submission Form -->
+  <div class="form-section" id="submit-bar">
+    <p class="section-label" data-es="Agrega tu negocio" data-en="Add your business">Agrega tu negocio</p>
+    <h2 class="section-title" data-es="Publica tu Bar o Cervecería" data-en="List Your Bar or Brewery">Publica tu Bar o Cervecería</h2>
+    <p class="section-sub" data-es="Gratis para negocios locales de Playas de Tijuana. Revisamos cada envío antes de publicarlo." data-en="Free for local Playas de Tijuana businesses. We review each submission before publishing.">Gratis para negocios locales de Playas de Tijuana. Revisamos cada envío antes de publicarlo.</p>
+
+    <form id="bar-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label data-es="Nombre del negocio *" data-en="Business name *">Nombre del negocio *</label>
+          <input type="text" id="f-name" placeholder="Tu Bar / Cervecería" required>
+        </div>
+        <div class="form-group">
+          <label data-es="Categoría *" data-en="Category *">Categoría *</label>
+          <select id="f-category" required>
+            <option value="" disabled selected data-es="Selecciona una categoría" data-en="Select a category">Selecciona una categoría</option>
+            <option value="Craft Brewery" data-es="Cervecería Artesanal" data-en="Craft Brewery">Cervecería Artesanal</option>
+            <option value="Cocktail Bar" data-es="Bar de Cocteles" data-en="Cocktail Bar">Bar de Cocteles</option>
+
+            <option value="Cantina" data-es="Cantina / Bar de Barrio" data-en="Cantina / Local Bar">Cantina / Bar de Barrio</option>
+            <option value="Beach Bar" data-es="Bar de Playa / Terraza" data-en="Beach Bar / Terrace">Bar de Playa / Terraza</option>
+            <option value="Sports Bar" data-es="Bar Deportivo / Juegos" data-en="Sports Bar / Games">Bar Deportivo / Juegos</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label data-es="Descripción *" data-en="Description *">Descripción *</label>
+          <textarea id="f-description" placeholder="Cuéntanos sobre tu bar, ambiente, especialidades..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label data-es="Dirección" data-en="Address">Dirección <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="text" id="f-address" placeholder="Calle y número, Playas de Tijuana">
+        </div>
+        <div class="form-group">
+          <label data-es="Teléfono" data-en="Phone">Teléfono <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="tel" id="f-phone" placeholder="+52 664 000 0000">
+        </div>
+        <div class="form-group">
+          <label data-es="Horario" data-en="Hours">Horario <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="text" id="f-hours" placeholder="Lun-Vie 4pm–2am, Sáb-Dom 12pm–2am">
+        </div>
+        <div class="form-group">
+          <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="text" id="f-social" placeholder="@tubar">
+        </div>
+        <div class="form-group">
+          <label data-es="Sitio web" data-en="Website">Sitio web <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="url" id="f-website" placeholder="https://tubar.com">
+        </div>
+        <div class="form-group">
+          <label data-es="Tu correo electrónico" data-en="Your email">Tu correo electrónico <span data-es="(opcional)" data-en="(optional)">(opcional)</span></label>
+          <input type="email" id="f-email" placeholder="hola@tubar.com">
+        </div>
+        <div class="form-group full">
+          <label data-es="Foto del lugar" data-en="Photo of your place">Foto del lugar <span data-es="(opcional, máx. 1 foto)" data-en="(optional, max 1 photo)">(opcional, máx. 1 foto)</span></label>
+          <input type="file" id="f-photo" accept="image/*">
+          <p class="photo-hint" data-es="Se redimensionará automáticamente. Formatos: JPG, PNG, WEBP." data-en="Will be resized automatically. Formats: JPG, PNG, WEBP.">Se redimensionará automáticamente. Formatos: JPG, PNG, WEBP.</p>
+          <canvas id="photo-canvas" style="display:none;"></canvas>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit" id="submit-btn" data-es="Enviar para revisión →" data-en="Submit for review →">Enviar para revisión →</button>
+    </form>
+
+    <div class="success-card" id="success-card">
+      <div style="font-size:2rem; margin-bottom:0.5rem;">🍺</div>
+      <h3 data-es="¡Envío recibido!" data-en="Submission received!">¡Envío recibido!</h3>
+      <p data-es="Gracias por agregar tu negocio. Lo revisaremos pronto y lo publicaremos si cumple nuestros criterios." data-en="Thanks for adding your business. We'll review it soon and publish it if it meets our criteria.">Gracias por agregar tu negocio. Lo revisaremos pronto y lo publicaremos si cumple nuestros criterios.</p>
+    </div>
+  </div>
+
+  <div class="info-banner">
+    <h2 data-es="🍺 Bebe Local en Playas" data-en="🍺 Drink Local in Playas">🍺 Bebe Local en Playas</h2>
+    <p data-es="Todos los bares y cervecerías listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local." data-en="All bars and breweries listed here are local businesses in Playas de Tijuana. Support your community by choosing to drink local.">Todos los bares y cervecerías listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">🌴 Playas de Tijuana</div>
+  <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
+  <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+
+// ── Load approved listings ──────────────────────────────────────────────────
+async function loadListings() {
+  try {
+    const res = await fetch(CSV_URL + '&t=' + Date.now());
+    const text = await res.text();
+    const rows = parseCSV(text);
+    if (rows.length < 2) return;
+    const headers = rows[0];
+    const records = rows.slice(1).map(function(row) {
+      var obj = {};
+      headers.forEach(function(h, i) { obj[h.trim()] = (row[i] || '').trim(); });
+      return obj;
+    });
+    const approved = records.filter(function(r) {
+      return r['Source'] && r['Source'].includes('Bars') && r['Status'] && r['Status'].toLowerCase() === 'approved';
+    });
+    if (approved.length > 0) {
+      document.getElementById('no-listings-msg').style.display = 'none';
+      approved.forEach(function(r) { renderCard(r); });
+    }
+  } catch(e) { console.log('CSV load error:', e); }
+}
+
+function parseCSV(text) {
+  var rows = []; var row = []; var cell = ''; var inQuotes = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (c === '"') { inQuotes = !inQuotes; }
+    else if (c === ',' && !inQuotes) { row.push(cell); cell = ''; }
+    else if ((c === '\n' || c === '\r') && !inQuotes) {
+      if (c === '\r' && text[i+1] === '\n') i++;
+      row.push(cell); rows.push(row); row = []; cell = '';
+    } else { cell += c; }
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+
+function renderCard(r) {
+  var container = document.getElementById('listings-container');
+  var card = document.createElement('div');
+  card.className = 'listing-card';
+  var profilePhoto = r['Profile Photo'] || '';
+  var imgHtml = profilePhoto
+    ? '<img src="' + profilePhoto + '" alt="' + (r['Business Name'] || '') + '" class="listing-photo" style="width:100%;height:180px;object-fit:cover;">'
+    : '<div class="listing-photo">🍺</div>';
+  var meta = '';
+  if (r['Address']) meta += '<span class="listing-tag">📍 ' + r['Address'] + '</span>';
+  if (r['Phone']) meta += '<span class="listing-tag">📞 ' + r['Phone'] + '</span>';
+  if (r['Hours']) meta += '<span class="listing-tag">🕐 ' + r['Hours'] + '</span>';
+  if (r['Social']) meta += '<span class="listing-tag">📱 ' + r['Social'] + '</span>';
+  card.innerHTML = imgHtml +
+    '<div class="listing-body">' +
+    '<div class="listing-category">' + (r['Category'] || '') + '</div>' +
+    '<div class="listing-name">' + (r['Business Name'] || '') + '</div>' +
+    '<div class="listing-desc">' + (r['Description'] || '') + '</div>' +
+    (meta ? '<div class="listing-meta">' + meta + '</div>' : '') +
+    '</div>';
+  container.appendChild(card);
+}
+
+// ── Photo resize ────────────────────────────────────────────────────────────
+function resizePhoto(file, cb) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var maxW = 1200; var q = 0.82;
+      var w = img.width; var h = img.height;
+      if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+      var canvas = document.getElementById('photo-canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      cb(canvas.toDataURL('image/jpeg', q));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Form submit ─────────────────────────────────────────────────────────────
+document.getElementById('bar-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submit-btn');
+  var nameVal = document.getElementById('f-name').value.trim();
+  var catVal = document.getElementById('f-category').value;
+  var descVal = document.getElementById('f-description').value.trim();
+  if (!nameVal || !catVal || !descVal) { alert('Please fill in the required fields.'); return; }
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando...';
+  var photoFile = document.getElementById('f-photo').files[0];
+  if (photoFile) {
+    resizePhoto(photoFile, function(b64) { submitForm(nameVal, catVal, descVal, b64, btn); });
+  } else {
+    submitForm(nameVal, catVal, descVal, '', btn);
+  }
+});
+
+function submitForm(nameVal, catVal, descVal, photoB64, btn) {
+  var data = {
+    'Business Name': nameVal,
+    'Category': catVal,
+    'Description': descVal,
+    'Address': document.getElementById('f-address').value.trim(),
+    'Phone': document.getElementById('f-phone').value.trim(),
+    'Hours': document.getElementById('f-hours').value.trim(),
+    'Social': document.getElementById('f-social').value.trim(),
+    'Website': document.getElementById('f-website').value.trim(),
+    'Email': document.getElementById('f-email').value.trim(),
+    'Source': 'Bars & Breweries Page',
+    'Status': 'Pending',
+    'Photo Count': photoB64 ? '1' : '0',
+    'Profile Photo': photoB64
+  };
+  var params = new URLSearchParams();
+  params.append('payload', JSON.stringify(data));
+  fetch(APPS_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+    .then(function() {
+      document.getElementById('bar-form').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+    })
+    .catch(function() {
+      document.getElementById('bar-form').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+    });
+}
+
+// ── Language toggle ─────────────────────────────────────────────────────────
+var currentLang = localStorage.getItem('pdt-lang') || 'es';
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('pdt-lang', lang);
+  document.querySelectorAll('[data-es][data-en]').forEach(function(el) {
+    el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-es');
+  });
+  var btn = document.getElementById('lang-toggle-btn');
+  if (btn) btn.textContent = lang === 'en' ? '🌐 Español' : '🌐 English';
+}
+function toggleLanguage() { applyLanguage(currentLang === 'es' ? 'en' : 'es'); }
+applyLanguage(currentLang);
+loadListings();
+</script>
+<script src="lang-persist.js"></script>
+</body>
+</html>
