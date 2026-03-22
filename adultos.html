@@ -179,13 +179,14 @@
     <h2 data-es="➕ Agrega tu Negocio o Clase" data-en="➕ Add Your Business or Class">➕ Agrega tu Negocio o Clase</h2>
     <p data-es="Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your listing for review. We'll add it once approved — free community listing.">Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
     <form id="adultosForm">
+      <!-- Core Info -->
       <div class="form-row">
         <div class="form-group">
-          <label>Business / Class Name</label>
+          <label>Business / Class Name *</label>
           <input id="adultosName" name="Business Name" type="text" placeholder="e.g. Studio Playas">
         </div>
         <div class="form-group">
-          <label>Category</label>
+          <label>Category *</label>
           <select name="Category">
             <option>Fitness & Gym</option>
             <option>Dance Classes</option>
@@ -210,27 +211,64 @@
         </div>
       </div>
       <div class="form-group">
-        <label>Description</label>
-        <textarea id="adultosDesc" name="Description" placeholder="Tell us about your classes, schedule, experience level, pricing..."></textarea>
+        <label>Description *</label>
+        <textarea id="adultosDesc" name="Description" placeholder="Tell us about your classes, schedule, experience level, pricing, what to expect..."></textarea>
       </div>
-      <div class="form-group">
-        <label>Your Name & Contact</label>
-        <input name="Contact Name" type="text" placeholder="Name · email or phone (not published)">
+
+      <!-- Online Presence -->
+      <p style="font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin:1.25rem 0 0.75rem;border-top:1px solid rgba(255,255,255,0.12);padding-top:1rem;">Online Presence <span style="font-weight:400;opacity:0.6;">(optional)</span></p>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input name="Email" type="text" placeholder="contact@email.com"></div>
+        <div class="form-group"><label>Website</label><input name="Website" type="text" placeholder="https://"></div>
       </div>
-      <!-- Photo Upload -->
-      <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
-        <label style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;">Photos <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">(optional · up to 5)</span></label>
-        <div id="svcPhotoDropZone" onclick="document.getElementById('svcPhotoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
-          <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
-          <p id="svcPhotoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
-          <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Any size — auto resized</p>
-          <input type="file" id="svcPhotoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
-        </div>
-        <div id="svcPhotoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;"></div>
-        <p id="svcProfilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">⭐ Tap a photo to set it as your profile picture</p>
-        <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Instagram</label><input name="Instagram" type="text" placeholder="@handle"></div>
+        <div class="form-group"><label>Facebook</label><input name="Facebook" type="text" placeholder="facebook.com/page"></div>
       </div>
-      <button type="submit" class="form-submit" id="adultosSubmitBtn">Submit for Review</button>
+      <div class="form-row">
+        <div class="form-group"><label>WhatsApp Link</label><input name="WhatsApp" type="text" placeholder="https://wa.me/..."></div>
+        <div class="form-group"></div>
+      </div>
+
+      <!-- Hours -->
+      <p style="font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin:1.25rem 0 0.75rem;border-top:1px solid rgba(255,255,255,0.12);padding-top:1rem;">Hours <span style="font-weight:400;opacity:0.6;">(optional)</span></p>
+      <div class="form-row">
+        <div class="form-group"><label>Monday</label><input name="Monday Hours" type="text" placeholder="9am–6pm or Closed"></div>
+        <div class="form-group"><label>Tuesday</label><input name="Tuesday Hours" type="text" placeholder="9am–6pm or Closed"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Wednesday</label><input name="Wednesday Hours" type="text" placeholder="9am–6pm or Closed"></div>
+        <div class="form-group"><label>Thursday</label><input name="Thursday Hours" type="text" placeholder="9am–6pm or Closed"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Friday</label><input name="Friday Hours" type="text" placeholder="9am–6pm or Closed"></div>
+        <div class="form-group"><label>Saturday</label><input name="Saturday Hours" type="text" placeholder="9am–2pm or Closed"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Sunday</label><input name="Sunday Hours" type="text" placeholder="Closed"></div>
+        <div class="form-group"></div>
+      </div>
+
+      <!-- Contact (private) -->
+      <p style="font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin:1.25rem 0 0.75rem;border-top:1px solid rgba(255,255,255,0.12);padding-top:1rem;">Contact Info <span style="font-weight:400;opacity:0.6;">(not published)</span></p>
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input name="Contact Name" type="text" placeholder="Your name"></div>
+        <div class="form-group"><label>Your Email</label><input name="Contact Email" type="text" placeholder="your@email.com"></div>
+      </div>
+
+      <!-- Photos -->
+      <p style="font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin:1.25rem 0 0.75rem;border-top:1px solid rgba(255,255,255,0.12);padding-top:1rem;">Photos <span style="font-weight:400;opacity:0.6;">(optional · up to 5)</span></p>
+      <div id="svcPhotoDropZone" onclick="document.getElementById('svcPhotoInput').click()" style="border:2px dashed rgba(255,255,255,0.3);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;">
+        <div style="font-size:2rem;margin-bottom:0.4rem;">📷</div>
+        <p id="svcPhotoLabel" style="color:rgba(255,255,255,0.85);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;">Click to upload photos</p>
+        <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;">JPG, PNG or WEBP · Any size — auto resized</p>
+        <input type="file" id="svcPhotoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+      </div>
+      <div id="svcPhotoPreview" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;"></div>
+      <p id="svcProfilePickerLabel" style="display:none;color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:0.4rem;">★ = profile photo shown on your card. Tap any photo to change it.</p>
+      <div id="svcPhotoError" style="display:none;background:#fee2e2;color:#991b1b;border-radius:8px;padding:0.5rem 0.75rem;font-size:0.78rem;margin-top:0.4rem;"></div>
+
+      <button type="submit" class="form-submit" id="adultosSubmitBtn" style="margin-top:1.5rem;">Submit for Review</button>
       <div id="adultosSuccess" style="display:none;">
         <div style="background:linear-gradient(135deg,rgba(76,175,136,0.15),rgba(76,175,136,0.05));border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:0.5rem;">
           <div style="font-size:3rem;margin-bottom:0.75rem;">✅</div>
