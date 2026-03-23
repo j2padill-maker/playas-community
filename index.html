@@ -491,6 +491,147 @@
     color: #92400e;
   }
 
+  /* ── MISSION STATEMENT ── */
+  .mission-section {
+    background: var(--white);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .mission-tag {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ocean); font-weight: 700; margin-bottom: 0.75rem;
+  }
+  .mission-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--ocean-deep);
+    margin-bottom: 0.9rem; line-height: 1.35;
+  }
+  .mission-text {
+    max-width: 640px; margin: 0 auto;
+    color: var(--text-light); font-size: 0.97rem; line-height: 1.75;
+  }
+
+  /* ── FEATURED SECTION ── */
+  .featured-section {
+    background: linear-gradient(180deg, #f8f5ef 0%, #fff 100%);
+    padding: 3.5rem 2rem;
+  }
+  .featured-header {
+    text-align: center; margin-bottom: 2.5rem;
+  }
+  .featured-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    color: #fff; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 0.35rem 0.9rem; border-radius: 50px; margin-bottom: 0.9rem;
+  }
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; color: var(--ocean-deep); margin-bottom: 0.5rem;
+  }
+  .featured-sub {
+    color: var(--text-light); font-size: 0.9rem; max-width: 520px; margin: 0 auto;
+  }
+  .featured-category {
+    margin-bottom: 3rem;
+  }
+  .featured-cat-label {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+  .featured-cat-label span {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ocean);
+  }
+  .featured-cat-label::after {
+    content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.08);
+  }
+  .featured-badge {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff; font-size: 0.62rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 50px;
+    vertical-align: middle; margin-left: 0.4rem;
+  }
+  .featured-cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .featured-card {
+    background: #fff; border-radius: 18px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+    overflow: hidden; text-decoration: none; color: var(--text);
+    transition: transform 0.22s, box-shadow 0.22s;
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .featured-card:hover {
+    transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+  }
+  .featured-card-img {
+    width: 100%; height: 160px; object-fit: cover; display: block;
+    background: var(--sand-light);
+  }
+  .featured-card-img-placeholder {
+    width: 100%; height: 160px; background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+  }
+  .featured-card-body { padding: 1rem 1.1rem 1.25rem; }
+  .featured-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700; color: var(--ocean-deep);
+    margin-bottom: 0.25rem;
+  }
+  .featured-card-tag {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--seafoam); margin-bottom: 0.5rem;
+  }
+  .featured-card-desc {
+    font-size: 0.84rem; color: var(--text-light); line-height: 1.55;
+    margin-bottom: 0.75rem;
+  }
+  .featured-card-link {
+    font-size: 0.8rem; font-weight: 700; color: var(--ocean);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;
+  }
+  .featured-card-link:hover { color: var(--seafoam); }
+  .featured-corner-badge {
+    position: absolute; top: 10px; right: 10px;
+  }
+  .featured-advertise {
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    border-radius: 18px; padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;
+    text-align: left;
+  }
+  .featured-advertise h3 {
+    font-family: 'Playfair Display', serif; color: #fff;
+    font-size: 1.15rem; margin-bottom: 0.3rem;
+  }
+  .featured-advertise p { color: rgba(255,255,255,0.72); font-size: 0.875rem; }
+  .featured-advertise-btn {
+    background: var(--sand); color: var(--ocean-deep); border: none;
+    border-radius: 50px; padding: 0.75rem 1.8rem;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; white-space: nowrap;
+    text-decoration: none; flex-shrink: 0; transition: all 0.2s;
+  }
+  .featured-advertise-btn:hover { background: #fff; transform: translateY(-2px); }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer-section {
+    background: var(--ocean-deep); color: rgba(255,255,255,0.5);
+    padding: 2rem; font-size: 0.77rem; line-height: 1.7;
+    border-top: 1px solid rgba(255,255,255,0.08); text-align: center;
+  }
+  .disclaimer-section strong { color: rgba(255,255,255,0.7); }
+  .disclaimer-section p { max-width: 780px; margin: 0 auto 0.6rem; }
+
   /* ── FOOTER ── */
   footer {
     background: var(--ocean-deep);
@@ -946,6 +1087,7 @@
     <a href="services.html" id="services-btn" class="btn-primary">Servicios →</a>
     <a href="ninos.html" id="kids-btn" class="btn-primary">Clases y Actividades para Niños →</a>
     <a href="adultos.html" id="adults-btn" class="btn-primary">Adultos · Clases y Actividades →</a>
+    <a href="realestate.html" id="realestate-btn" class="btn-primary">Bienes Raíces →</a>
   </div>
 </section>
 
@@ -1009,9 +1151,27 @@
 </div>
 
 
-<!-- EVENTS -->
-<section id="events" class="bg-ocean">
-  <div class="section-inner">
+<!-- MISSION STATEMENT -->
+<section class="mission-section">
+  <p class="mission-tag" id="mission-tag">Our Mission</p>
+  <h2 class="mission-title" id="mission-title">Connecting Playas de Tijuana</h2>
+  <p class="mission-text" id="mission-text">At www.miplayasdetijuana.com, we bridge the gap between the vibrant &amp; hardworking entrepreneurs of Playas de Tijuana and the individuals who need their products and services. We invite you to add your business, share your passions, and join a movement rooted in profound community connectivity. By standing together to support local commerce, we don't just find the solutions we need — we empower our neighbors, discover new experiences, and build a beautiful, thriving community for everyone.</p>
+</section>
+
+<!-- FEATURED BUSINESSES SECTION -->
+<section class="featured-section" id="featured">
+  <div class="featured-header">
+    <div class="featured-eyebrow">⭐ Featured Businesses</div>
+    <h2 class="featured-title" id="featured-title">Spotlight on Playas</h2>
+    <p class="featured-sub" id="featured-sub">Discover top-rated local businesses across every category. Featured placements are paid sponsorships that help keep this directory free for the community.</p>
+  </div>
+
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>📅 Events <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+<div class="section-inner">
     <p class="section-tag" id="sec-events-tag">Lo que está pasando</p>
     <h2 class="section-title" id="sec-events-title">Eventos Comunitarios</h2>
     <p class="section-desc" id="sec-events-desc">Mantente conectado con lo que pasa en el vecindario. Envía tu evento — todas las propuestas se revisan antes de publicarse.</p>
@@ -1098,286 +1258,14 @@
       <div class="mod-notice" id="mod-notice">⚠️ Todos los envíos son revisados por moderadores antes de aparecer en el sitio. ¡Gracias por mantener nuestra comunidad segura!</div>
     </div>
   </div>
-</section>
-
-<!-- KIDS -->
-<section id="kids" class="bg-sand">
-  <div class="section-inner">
-    <p class="section-tag" id="sec-kids-tag">Para los más pequeños</p>
-    <h2 class="section-title" id="sec-kids-title">Clases y Actividades para Niños</h2>
-    <p class="section-desc" id="sec-kids-desc">Actividades divertidas y clases enriquecedoras para niños en Playas — desde baile hasta karate y artes creativas.</p>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-img">💃</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-academia_de_danza_playas">Baile</p>
-          <h3 class="card-title">Academia de Danza Playas</h3>
-          <p class="card-text" id="ctext-academia_de_danza_playas">Ballet, folklórico y hip-hop para edades 4–16. Clases lun–sáb. ¡Primera clase gratis!</p>
-          <div class="card-meta"><span>📍</span> Blvd. Sánchez Taboada 1234
-          <button class="merch-btn" onclick="openMerch('Academia de Danza Playas')">🛍️ Shop Academia de Danza Playas Merch</button>
-        
-          
-          <div class="card-video" id="video-academia_de_danza_playas">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Academia de Danza Playas</span>
-              <p class="yt-placeholder-text">Agrega un video de YouTube en el Panel de Administración</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-
-" onclick="toggleReviews('academia_de_danza_playas')">
-              ⭐ Reviews <span id="rev-count-academia_de_danza_playas">— ¡sé el primero!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-academia_de_danza_playas">
-              <div class="review-list" id="rev-list-academia_de_danza_playas"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('academia_de_danza_playas')">✏️ Escribir Reseña</button>
-              <div class="review-form" id="rev-form-academia_de_danza_playas">
-                <div class="star-picker" id="star-picker-academia_de_danza_playas">
-                  <span onclick="setStar('academia_de_danza_playas',1)">★</span>
-                  <span onclick="setStar('academia_de_danza_playas',2)">★</span>
-                  <span onclick="setStar('academia_de_danza_playas',3)">★</span>
-                  <span onclick="setStar('academia_de_danza_playas',4)">★</span>
-                  <span onclick="setStar('academia_de_danza_playas',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-academia_de_danza_playas" placeholder="Tu nombre (opcional)">
-                <textarea class="review-input" id="rev-text-academia_de_danza_playas" placeholder="Comparte tu experiencia..."></textarea>
-                <div class="review-error" id="rev-error-academia_de_danza_playas"></div>
-                <button class="review-submit-btn" onclick="submitReview('academia_de_danza_playas', 'Academia de Danza Playas')">Publicar Reseña</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🥋</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-karate_kids_dojo">Artes Marciales</p>
-          <h3 class="card-title">Karate Kids Dojo</h3>
-          <p class="card-text" id="ctext-karate_kids_dojo">Karate Shotokan tradicional que construye disciplina y confianza. Niveles principiante–avanzado.</p>
-          <div class="card-meta"><span>📍</span> Calle Agua Caliente 56
-          <button class="merch-btn" onclick="openMerch('Karate Kids Dojo')">🛍️ Shop Karate Kids Dojo Merch</button>
-        
-          
-          <div class="card-video" id="video-karate_kids_dojo">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Karate Kids Dojo</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('karate_kids_dojo')">
-              ⭐ Reviews <span id="rev-count-karate_kids_dojo">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-karate_kids_dojo">
-              <div class="review-list" id="rev-list-karate_kids_dojo"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('karate_kids_dojo')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-karate_kids_dojo">
-                <div class="star-picker" id="star-picker-karate_kids_dojo">
-                  <span onclick="setStar('karate_kids_dojo',1)">★</span>
-                  <span onclick="setStar('karate_kids_dojo',2)">★</span>
-                  <span onclick="setStar('karate_kids_dojo',3)">★</span>
-                  <span onclick="setStar('karate_kids_dojo',4)">★</span>
-                  <span onclick="setStar('karate_kids_dojo',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-karate_kids_dojo" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-karate_kids_dojo" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-karate_kids_dojo"></div>
-                <button class="review-submit-btn" onclick="submitReview('karate_kids_dojo', 'Karate Kids Dojo')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🎨</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-taller_de_arte_infantil">Arte y Creatividad</p>
-          <h3 class="card-title">Taller de Arte Infantil</h3>
-          <p class="card-text" id="ctext-taller_de_arte_infantil">Pintura, cerámica y técnicas mixtas para niños 5–12 años. Grupos pequeños, mucha creatividad.</p>
-          <div class="card-meta"><span>📍</span> Paseo del Mar 890
-          <button class="merch-btn" onclick="openMerch('Taller de Arte Infantil')">🛍️ Shop Taller de Arte Infantil Merch</button>
-        
-          
-          <div class="card-video" id="video-taller_de_arte_infantil">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Taller de Arte Infantil</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('taller_de_arte_infantil')">
-              ⭐ Reviews <span id="rev-count-taller_de_arte_infantil">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-taller_de_arte_infantil">
-              <div class="review-list" id="rev-list-taller_de_arte_infantil"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('taller_de_arte_infantil')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-taller_de_arte_infantil">
-                <div class="star-picker" id="star-picker-taller_de_arte_infantil">
-                  <span onclick="setStar('taller_de_arte_infantil',1)">★</span>
-                  <span onclick="setStar('taller_de_arte_infantil',2)">★</span>
-                  <span onclick="setStar('taller_de_arte_infantil',3)">★</span>
-                  <span onclick="setStar('taller_de_arte_infantil',4)">★</span>
-                  <span onclick="setStar('taller_de_arte_infantil',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-taller_de_arte_infantil" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-taller_de_arte_infantil" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-taller_de_arte_infantil"></div>
-                <button class="review-submit-btn" onclick="submitReview('taller_de_arte_infantil', 'Taller de Arte Infantil')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
   </div>
-</section>
 
-<!-- ADULTS -->
-<section id="adults">
-  <div class="section-inner">
-    <p class="section-tag" id="sec-adults-tag">Para adultos</p>
-    <h2 class="section-title" id="sec-adults-title">Clases y Actividades para Adultos</h2>
-    <p class="section-desc" id="sec-adults-desc">Enriquece tu vida — fitness, cultura, aprendizaje y actividades sociales para adultos en Playas.</p>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-img">🧘</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-beach_yoga_collective">Bienestar</p>
-          <h3 class="card-title">Beach Yoga Collective</h3>
-          <p class="card-text" id="ctext-beach_yoga_collective">Sesiones matutinas en la arena. Todos los niveles. Tapetes disponibles. Respira, estírate, relájate.</p>
-          <div class="card-meta"><span>📍</span> Playa Hermosa — north end
-          <button class="merch-btn" onclick="openMerch('Beach Yoga Collective')">🛍️ Shop Beach Yoga Collective Merch</button>
-        
-          
-          <div class="card-video" id="video-beach_yoga_collective">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Beach Yoga Collective</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('beach_yoga_collective')">
-              ⭐ Reviews <span id="rev-count-beach_yoga_collective">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-beach_yoga_collective">
-              <div class="review-list" id="rev-list-beach_yoga_collective"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('beach_yoga_collective')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-beach_yoga_collective">
-                <div class="star-picker" id="star-picker-beach_yoga_collective">
-                  <span onclick="setStar('beach_yoga_collective',1)">★</span>
-                  <span onclick="setStar('beach_yoga_collective',2)">★</span>
-                  <span onclick="setStar('beach_yoga_collective',3)">★</span>
-                  <span onclick="setStar('beach_yoga_collective',4)">★</span>
-                  <span onclick="setStar('beach_yoga_collective',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-beach_yoga_collective" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-beach_yoga_collective" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-beach_yoga_collective"></div>
-                <button class="review-submit-btn" onclick="submitReview('beach_yoga_collective', 'Beach Yoga Collective')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🎸</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-escuela_musica">Música</p>
-          <h3 class="card-title">Escuela de Música Pacífico</h3>
-          <p class="card-text" id="ctext-escuela_musica">Clases de guitarra, bajo, piano y canto. Tardes entre semana y fines de semana.</p>
-          <div class="card-meta"><span>📍</span> Calle Playas 77
-          <button class="merch-btn" onclick="openMerch('Escuela de Música Pacífico')">🛍️ Shop Escuela de Música Pacífico Merch</button>
-        
-          
-          <div class="card-video" id="video-escuela_de_m_sica_pac_fico">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Escuela de Música Pacífico</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('escuela_de_m_sica_pac_fico')">
-              ⭐ Reviews <span id="rev-count-escuela_de_m_sica_pac_fico">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-escuela_de_m_sica_pac_fico">
-              <div class="review-list" id="rev-list-escuela_de_m_sica_pac_fico"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('escuela_de_m_sica_pac_fico')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-escuela_de_m_sica_pac_fico">
-                <div class="star-picker" id="star-picker-escuela_de_m_sica_pac_fico">
-                  <span onclick="setStar('escuela_de_m_sica_pac_fico',1)">★</span>
-                  <span onclick="setStar('escuela_de_m_sica_pac_fico',2)">★</span>
-                  <span onclick="setStar('escuela_de_m_sica_pac_fico',3)">★</span>
-                  <span onclick="setStar('escuela_de_m_sica_pac_fico',4)">★</span>
-                  <span onclick="setStar('escuela_de_m_sica_pac_fico',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-escuela_de_m_sica_pac_fico" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-escuela_de_m_sica_pac_fico" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-escuela_de_m_sica_pac_fico"></div>
-                <button class="review-submit-btn" onclick="submitReview('escuela_de_m_sica_pac_fico', 'Escuela de Música Pacífico')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🏄</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-escuela_surf">Surf</p>
-          <h3 class="card-title">Escuela de Surf Playas</h3>
-          <p class="card-text" id="ctext-escuela_surf">Aprende a surfear o mejora tu técnica. Equipo incluido. Ideal para principiantes.</p>
-          <div class="card-meta"><span>📍</span> Surf spot, Blvd. Costero
-          <button class="merch-btn" onclick="openMerch('Escuela de Surf Playas')">🛍️ Shop Escuela de Surf Playas Merch</button>
-        
-          
-          <div class="card-video" id="video-escuela_de_surf_playas">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Escuela de Surf Playas</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('escuela_de_surf_playas')">
-              ⭐ Reviews <span id="rev-count-escuela_de_surf_playas">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-escuela_de_surf_playas">
-              <div class="review-list" id="rev-list-escuela_de_surf_playas"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('escuela_de_surf_playas')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-escuela_de_surf_playas">
-                <div class="star-picker" id="star-picker-escuela_de_surf_playas">
-                  <span onclick="setStar('escuela_de_surf_playas',1)">★</span>
-                  <span onclick="setStar('escuela_de_surf_playas',2)">★</span>
-                  <span onclick="setStar('escuela_de_surf_playas',3)">★</span>
-                  <span onclick="setStar('escuela_de_surf_playas',4)">★</span>
-                  <span onclick="setStar('escuela_de_surf_playas',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-escuela_de_surf_playas" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-escuela_de_surf_playas" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-escuela_de_surf_playas"></div>
-                <button class="review-submit-btn" onclick="submitReview('escuela_de_surf_playas', 'Escuela de Surf Playas')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🍽️ Restaurants <span class="featured-badge">⭐ Featured</span></span>
     </div>
-  </div>
-</section>
 
-<!-- RESTAURANTS -->
-<section id="restaurants" class="bg-sand">
-  <div class="section-inner">
+<div class="section-inner">
     <p class="section-tag" id="sec-eats-tag">Los mejores sabores</p>
     <h2 class="section-title" id="sec-eats-title">Restaurantes</h2>
     <p class="section-desc" id="sec-eats-desc">Los mejores lugares para comer en Playas — curados por la comunidad, con menús, especialidades y fotos.</p>
@@ -1523,160 +1411,32 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- SERVICES ANCHOR -->
-<section id="services" style="padding:2rem 2rem 0; background:var(--white);">
-  <div style="max-width:1200px; margin:0 auto; border-bottom:2px solid var(--sand); padding-bottom:1.5rem;">
-    <p style="font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ocean); font-weight:600; margin-bottom:0.4rem;">Everything you need</p>
-    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); color:var(--ocean-deep);">Community Services</h2>
-    <p style="color:var(--text-light); font-size:0.97rem; margin-top:0.5rem;">Gyms, mechanics, health providers — trusted local services in one place.</p>
   </div>
-</section>
 
-<!-- GYMS -->
-<section id="gyms">
-  <div class="section-inner">
-    <p class="section-tag" id="sec-gyms-tag">Mantente en forma</p>
-    <h2 class="section-title" id="sec-gyms-title">Gym Rats 💪</h2>
-    <p class="section-desc" id="sec-gyms-desc">Encuentra tu gimnasio ideal en Playas — desde MMA y CrossFit hasta estudios de yoga y levantamiento olímpico.</p>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-img">🥊</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-arena_mma">MMA · Deportes de Combate</p>
-          <h3 class="card-title">Arena Playas MMA</h3>
-          <p class="card-text" id="ctext-arena_mma">Programa completo de MMA: BJJ, Muay Thai, lucha. Octágono profesional, entrenadores de élite.</p>
-          <div class="card-meta"><span>🏊</span> No pool · <span>🧖</span> Sauna: Yes
-          <button class="merch-btn" onclick="openMerch('Arena Playas MMA')">🛍️ Shop Arena Playas MMA Merch</button>
-        
-          
-          <div class="card-video" id="video-arena_playas_mma">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Arena Playas MMA</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('arena_playas_mma')">
-              ⭐ Reviews <span id="rev-count-arena_playas_mma">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-arena_playas_mma">
-              <div class="review-list" id="rev-list-arena_playas_mma"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('arena_playas_mma')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-arena_playas_mma">
-                <div class="star-picker" id="star-picker-arena_playas_mma">
-                  <span onclick="setStar('arena_playas_mma',1)">★</span>
-                  <span onclick="setStar('arena_playas_mma',2)">★</span>
-                  <span onclick="setStar('arena_playas_mma',3)">★</span>
-                  <span onclick="setStar('arena_playas_mma',4)">★</span>
-                  <span onclick="setStar('arena_playas_mma',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-arena_playas_mma" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-arena_playas_mma" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-arena_playas_mma"></div>
-                <button class="review-submit-btn" onclick="submitReview('arena_playas_mma', 'Arena Playas MMA')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Industrial Zona 3, Playas</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🧘</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-studio_sol">Yoga · Pilates</p>
-          <h3 class="card-title">Studio Sol</h3>
-          <p class="card-text" id="ctext-studio_sol">Hot yoga, vinyasa, yin y pilates. Clases en azotea los fines de semana. Vistas al mar.</p>
-          <div class="card-meta"><span>🏊</span> No pool · <span>✨</span> Steam room
-          <button class="merch-btn" onclick="openMerch('Studio Sol')">🛍️ Shop Studio Sol Merch</button>
-        
-          
-          <div class="card-video" id="video-studio_sol">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Studio Sol</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('studio_sol')">
-              ⭐ Reviews <span id="rev-count-studio_sol">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-studio_sol">
-              <div class="review-list" id="rev-list-studio_sol"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('studio_sol')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-studio_sol">
-                <div class="star-picker" id="star-picker-studio_sol">
-                  <span onclick="setStar('studio_sol',1)">★</span>
-                  <span onclick="setStar('studio_sol',2)">★</span>
-                  <span onclick="setStar('studio_sol',3)">★</span>
-                  <span onclick="setStar('studio_sol',4)">★</span>
-                  <span onclick="setStar('studio_sol',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-studio_sol" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-studio_sol" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-studio_sol"></div>
-                <button class="review-submit-btn" onclick="submitReview('studio_sol', 'Studio Sol')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Torre Playas, Piso 4</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">🏋️</div>
-        <div class="card-body">
-          <p class="card-tag" id="ctag-box_pacifico">CrossFit · Fuerza</p>
-          <h3 class="card-title">Box Pacífico CrossFit</h3>
-          <p class="card-text" id="ctext-box_pacifico">CrossFit comunitario. WODs diarios, levantamiento olímpico, horas de gym abierto.</p>
-          <div class="card-meta"><span>🏊</span> Pool: Yes · <span>🧖</span> Sauna: Yes
-          <button class="merch-btn" onclick="openMerch('Box Pacífico CrossFit')">🛍️ Shop Box Pacífico CrossFit Merch</button>
-        
-          
-          <div class="card-video" id="video-box_pac_fico_crossfit">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Box Pacífico CrossFit</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('box_pac_fico_crossfit')">
-              ⭐ Reviews <span id="rev-count-box_pac_fico_crossfit">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-box_pac_fico_crossfit">
-              <div class="review-list" id="rev-list-box_pac_fico_crossfit"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('box_pac_fico_crossfit')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-box_pac_fico_crossfit">
-                <div class="star-picker" id="star-picker-box_pac_fico_crossfit">
-                  <span onclick="setStar('box_pac_fico_crossfit',1)">★</span>
-                  <span onclick="setStar('box_pac_fico_crossfit',2)">★</span>
-                  <span onclick="setStar('box_pac_fico_crossfit',3)">★</span>
-                  <span onclick="setStar('box_pac_fico_crossfit',4)">★</span>
-                  <span onclick="setStar('box_pac_fico_crossfit',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-box_pac_fico_crossfit" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-box_pac_fico_crossfit" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-box_pac_fico_crossfit"></div>
-                <button class="review-submit-btn" onclick="submitReview('box_pac_fico_crossfit', 'Box Pacífico CrossFit')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Calle Reforma 45</div>
-        </div>
-      </div>
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🍺 Bars & Breweries <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+    <div class="section-inner">
+      <p class="section-tag">Coming Soon</p>
+      <h2 class="section-title" id="sec-bars-title">Bares & Cervecerías</h2>
+      <p class="section-desc" id="sec-bars-desc">Local bars, craft breweries, and cantinas — a guide to the best drinks in Playas.</p>
+      <p style="color:var(--text-light);font-size:0.9rem;margin-top:1rem;"><a href="bares.html" style="color:var(--ocean);font-weight:700;">View all bars & breweries →</a></p>
     </div>
   </div>
-</section>
 
-<!-- MECHANICS -->
-<section id="mechanics" class="bg-sand">
-  <div class="section-inner">
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🛠️ Services <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+    <div class="section-inner">
+      <p class="section-tag" id="sec-services-tag">Everything you need</p>
+      <h2 class="section-title">Community Services</h2>
+      <p class="section-desc">Gyms, mechanics, health providers — trusted local services in one place.</p>
+    </div>
+<div class="section-inner">
     <p class="section-tag" id="sec-mechanics-tag">Siempre en movimiento</p>
     <h2 class="section-title" id="sec-mechanics-title">Mecánicos</h2>
     <p class="section-desc" id="sec-mechanics-desc">Talleres de confianza en Playas — sus especialidades, dónde encontrarlos y lo que dicen los clientes.</p>
@@ -1809,11 +1569,7 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- HEALTH -->
-<section id="health">
-  <div class="section-inner">
+<div class="section-inner">
     <p class="section-tag" id="sec-health-tag">Tu bienestar</p>
     <h2 class="section-title" id="sec-health-title">Salud y Bienestar</h2>
     <p class="section-desc" id="sec-health-desc">Dentistas, médicos y veterinarios de confianza — aquí mismo en Playas.</p>
@@ -1959,11 +1715,432 @@
       </div>
     </div>
   </div>
-</section>
+  </div>
 
-<!-- REAL ESTATE -->
-<section id="realestate" class="bg-ocean">
-  <div class="section-inner">
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🧒 Kids Activities <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+<div class="section-inner">
+    <p class="section-tag" id="sec-kids-tag">Para los más pequeños</p>
+    <h2 class="section-title" id="sec-kids-title">Clases y Actividades para Niños</h2>
+    <p class="section-desc" id="sec-kids-desc">Actividades divertidas y clases enriquecedoras para niños en Playas — desde baile hasta karate y artes creativas.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">💃</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-academia_de_danza_playas">Baile</p>
+          <h3 class="card-title">Academia de Danza Playas</h3>
+          <p class="card-text" id="ctext-academia_de_danza_playas">Ballet, folklórico y hip-hop para edades 4–16. Clases lun–sáb. ¡Primera clase gratis!</p>
+          <div class="card-meta"><span>📍</span> Blvd. Sánchez Taboada 1234
+          <button class="merch-btn" onclick="openMerch('Academia de Danza Playas')">🛍️ Shop Academia de Danza Playas Merch</button>
+        
+          
+          <div class="card-video" id="video-academia_de_danza_playas">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Academia de Danza Playas</span>
+              <p class="yt-placeholder-text">Agrega un video de YouTube en el Panel de Administración</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-
+" onclick="toggleReviews('academia_de_danza_playas')">
+              ⭐ Reviews <span id="rev-count-academia_de_danza_playas">— ¡sé el primero!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-academia_de_danza_playas">
+              <div class="review-list" id="rev-list-academia_de_danza_playas"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('academia_de_danza_playas')">✏️ Escribir Reseña</button>
+              <div class="review-form" id="rev-form-academia_de_danza_playas">
+                <div class="star-picker" id="star-picker-academia_de_danza_playas">
+                  <span onclick="setStar('academia_de_danza_playas',1)">★</span>
+                  <span onclick="setStar('academia_de_danza_playas',2)">★</span>
+                  <span onclick="setStar('academia_de_danza_playas',3)">★</span>
+                  <span onclick="setStar('academia_de_danza_playas',4)">★</span>
+                  <span onclick="setStar('academia_de_danza_playas',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-academia_de_danza_playas" placeholder="Tu nombre (opcional)">
+                <textarea class="review-input" id="rev-text-academia_de_danza_playas" placeholder="Comparte tu experiencia..."></textarea>
+                <div class="review-error" id="rev-error-academia_de_danza_playas"></div>
+                <button class="review-submit-btn" onclick="submitReview('academia_de_danza_playas', 'Academia de Danza Playas')">Publicar Reseña</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🥋</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-karate_kids_dojo">Artes Marciales</p>
+          <h3 class="card-title">Karate Kids Dojo</h3>
+          <p class="card-text" id="ctext-karate_kids_dojo">Karate Shotokan tradicional que construye disciplina y confianza. Niveles principiante–avanzado.</p>
+          <div class="card-meta"><span>📍</span> Calle Agua Caliente 56
+          <button class="merch-btn" onclick="openMerch('Karate Kids Dojo')">🛍️ Shop Karate Kids Dojo Merch</button>
+        
+          
+          <div class="card-video" id="video-karate_kids_dojo">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Karate Kids Dojo</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('karate_kids_dojo')">
+              ⭐ Reviews <span id="rev-count-karate_kids_dojo">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-karate_kids_dojo">
+              <div class="review-list" id="rev-list-karate_kids_dojo"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('karate_kids_dojo')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-karate_kids_dojo">
+                <div class="star-picker" id="star-picker-karate_kids_dojo">
+                  <span onclick="setStar('karate_kids_dojo',1)">★</span>
+                  <span onclick="setStar('karate_kids_dojo',2)">★</span>
+                  <span onclick="setStar('karate_kids_dojo',3)">★</span>
+                  <span onclick="setStar('karate_kids_dojo',4)">★</span>
+                  <span onclick="setStar('karate_kids_dojo',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-karate_kids_dojo" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-karate_kids_dojo" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-karate_kids_dojo"></div>
+                <button class="review-submit-btn" onclick="submitReview('karate_kids_dojo', 'Karate Kids Dojo')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🎨</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-taller_de_arte_infantil">Arte y Creatividad</p>
+          <h3 class="card-title">Taller de Arte Infantil</h3>
+          <p class="card-text" id="ctext-taller_de_arte_infantil">Pintura, cerámica y técnicas mixtas para niños 5–12 años. Grupos pequeños, mucha creatividad.</p>
+          <div class="card-meta"><span>📍</span> Paseo del Mar 890
+          <button class="merch-btn" onclick="openMerch('Taller de Arte Infantil')">🛍️ Shop Taller de Arte Infantil Merch</button>
+        
+          
+          <div class="card-video" id="video-taller_de_arte_infantil">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Taller de Arte Infantil</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('taller_de_arte_infantil')">
+              ⭐ Reviews <span id="rev-count-taller_de_arte_infantil">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-taller_de_arte_infantil">
+              <div class="review-list" id="rev-list-taller_de_arte_infantil"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('taller_de_arte_infantil')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-taller_de_arte_infantil">
+                <div class="star-picker" id="star-picker-taller_de_arte_infantil">
+                  <span onclick="setStar('taller_de_arte_infantil',1)">★</span>
+                  <span onclick="setStar('taller_de_arte_infantil',2)">★</span>
+                  <span onclick="setStar('taller_de_arte_infantil',3)">★</span>
+                  <span onclick="setStar('taller_de_arte_infantil',4)">★</span>
+                  <span onclick="setStar('taller_de_arte_infantil',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-taller_de_arte_infantil" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-taller_de_arte_infantil" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-taller_de_arte_infantil"></div>
+                <button class="review-submit-btn" onclick="submitReview('taller_de_arte_infantil', 'Taller de Arte Infantil')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🧘 Adults Activities <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+<div class="section-inner">
+    <p class="section-tag" id="sec-adults-tag">Para adultos</p>
+    <h2 class="section-title" id="sec-adults-title">Clases y Actividades para Adultos</h2>
+    <p class="section-desc" id="sec-adults-desc">Enriquece tu vida — fitness, cultura, aprendizaje y actividades sociales para adultos en Playas.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">🧘</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-beach_yoga_collective">Bienestar</p>
+          <h3 class="card-title">Beach Yoga Collective</h3>
+          <p class="card-text" id="ctext-beach_yoga_collective">Sesiones matutinas en la arena. Todos los niveles. Tapetes disponibles. Respira, estírate, relájate.</p>
+          <div class="card-meta"><span>📍</span> Playa Hermosa — north end
+          <button class="merch-btn" onclick="openMerch('Beach Yoga Collective')">🛍️ Shop Beach Yoga Collective Merch</button>
+        
+          
+          <div class="card-video" id="video-beach_yoga_collective">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Beach Yoga Collective</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('beach_yoga_collective')">
+              ⭐ Reviews <span id="rev-count-beach_yoga_collective">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-beach_yoga_collective">
+              <div class="review-list" id="rev-list-beach_yoga_collective"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('beach_yoga_collective')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-beach_yoga_collective">
+                <div class="star-picker" id="star-picker-beach_yoga_collective">
+                  <span onclick="setStar('beach_yoga_collective',1)">★</span>
+                  <span onclick="setStar('beach_yoga_collective',2)">★</span>
+                  <span onclick="setStar('beach_yoga_collective',3)">★</span>
+                  <span onclick="setStar('beach_yoga_collective',4)">★</span>
+                  <span onclick="setStar('beach_yoga_collective',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-beach_yoga_collective" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-beach_yoga_collective" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-beach_yoga_collective"></div>
+                <button class="review-submit-btn" onclick="submitReview('beach_yoga_collective', 'Beach Yoga Collective')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🎸</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-escuela_musica">Música</p>
+          <h3 class="card-title">Escuela de Música Pacífico</h3>
+          <p class="card-text" id="ctext-escuela_musica">Clases de guitarra, bajo, piano y canto. Tardes entre semana y fines de semana.</p>
+          <div class="card-meta"><span>📍</span> Calle Playas 77
+          <button class="merch-btn" onclick="openMerch('Escuela de Música Pacífico')">🛍️ Shop Escuela de Música Pacífico Merch</button>
+        
+          
+          <div class="card-video" id="video-escuela_de_m_sica_pac_fico">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Escuela de Música Pacífico</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('escuela_de_m_sica_pac_fico')">
+              ⭐ Reviews <span id="rev-count-escuela_de_m_sica_pac_fico">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-escuela_de_m_sica_pac_fico">
+              <div class="review-list" id="rev-list-escuela_de_m_sica_pac_fico"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('escuela_de_m_sica_pac_fico')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-escuela_de_m_sica_pac_fico">
+                <div class="star-picker" id="star-picker-escuela_de_m_sica_pac_fico">
+                  <span onclick="setStar('escuela_de_m_sica_pac_fico',1)">★</span>
+                  <span onclick="setStar('escuela_de_m_sica_pac_fico',2)">★</span>
+                  <span onclick="setStar('escuela_de_m_sica_pac_fico',3)">★</span>
+                  <span onclick="setStar('escuela_de_m_sica_pac_fico',4)">★</span>
+                  <span onclick="setStar('escuela_de_m_sica_pac_fico',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-escuela_de_m_sica_pac_fico" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-escuela_de_m_sica_pac_fico" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-escuela_de_m_sica_pac_fico"></div>
+                <button class="review-submit-btn" onclick="submitReview('escuela_de_m_sica_pac_fico', 'Escuela de Música Pacífico')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🏄</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-escuela_surf">Surf</p>
+          <h3 class="card-title">Escuela de Surf Playas</h3>
+          <p class="card-text" id="ctext-escuela_surf">Aprende a surfear o mejora tu técnica. Equipo incluido. Ideal para principiantes.</p>
+          <div class="card-meta"><span>📍</span> Surf spot, Blvd. Costero
+          <button class="merch-btn" onclick="openMerch('Escuela de Surf Playas')">🛍️ Shop Escuela de Surf Playas Merch</button>
+        
+          
+          <div class="card-video" id="video-escuela_de_surf_playas">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Escuela de Surf Playas</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('escuela_de_surf_playas')">
+              ⭐ Reviews <span id="rev-count-escuela_de_surf_playas">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-escuela_de_surf_playas">
+              <div class="review-list" id="rev-list-escuela_de_surf_playas"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('escuela_de_surf_playas')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-escuela_de_surf_playas">
+                <div class="star-picker" id="star-picker-escuela_de_surf_playas">
+                  <span onclick="setStar('escuela_de_surf_playas',1)">★</span>
+                  <span onclick="setStar('escuela_de_surf_playas',2)">★</span>
+                  <span onclick="setStar('escuela_de_surf_playas',3)">★</span>
+                  <span onclick="setStar('escuela_de_surf_playas',4)">★</span>
+                  <span onclick="setStar('escuela_de_surf_playas',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-escuela_de_surf_playas" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-escuela_de_surf_playas" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-escuela_de_surf_playas"></div>
+                <button class="review-submit-btn" onclick="submitReview('escuela_de_surf_playas', 'Escuela de Surf Playas')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="section-inner">
+    <p class="section-tag" id="sec-gyms-tag">Mantente en forma</p>
+    <h2 class="section-title" id="sec-gyms-title">Gym Rats 💪</h2>
+    <p class="section-desc" id="sec-gyms-desc">Encuentra tu gimnasio ideal en Playas — desde MMA y CrossFit hasta estudios de yoga y levantamiento olímpico.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">🥊</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-arena_mma">MMA · Deportes de Combate</p>
+          <h3 class="card-title">Arena Playas MMA</h3>
+          <p class="card-text" id="ctext-arena_mma">Programa completo de MMA: BJJ, Muay Thai, lucha. Octágono profesional, entrenadores de élite.</p>
+          <div class="card-meta"><span>🏊</span> No pool · <span>🧖</span> Sauna: Yes
+          <button class="merch-btn" onclick="openMerch('Arena Playas MMA')">🛍️ Shop Arena Playas MMA Merch</button>
+        
+          
+          <div class="card-video" id="video-arena_playas_mma">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Arena Playas MMA</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('arena_playas_mma')">
+              ⭐ Reviews <span id="rev-count-arena_playas_mma">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-arena_playas_mma">
+              <div class="review-list" id="rev-list-arena_playas_mma"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('arena_playas_mma')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-arena_playas_mma">
+                <div class="star-picker" id="star-picker-arena_playas_mma">
+                  <span onclick="setStar('arena_playas_mma',1)">★</span>
+                  <span onclick="setStar('arena_playas_mma',2)">★</span>
+                  <span onclick="setStar('arena_playas_mma',3)">★</span>
+                  <span onclick="setStar('arena_playas_mma',4)">★</span>
+                  <span onclick="setStar('arena_playas_mma',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-arena_playas_mma" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-arena_playas_mma" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-arena_playas_mma"></div>
+                <button class="review-submit-btn" onclick="submitReview('arena_playas_mma', 'Arena Playas MMA')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Industrial Zona 3, Playas</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🧘</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-studio_sol">Yoga · Pilates</p>
+          <h3 class="card-title">Studio Sol</h3>
+          <p class="card-text" id="ctext-studio_sol">Hot yoga, vinyasa, yin y pilates. Clases en azotea los fines de semana. Vistas al mar.</p>
+          <div class="card-meta"><span>🏊</span> No pool · <span>✨</span> Steam room
+          <button class="merch-btn" onclick="openMerch('Studio Sol')">🛍️ Shop Studio Sol Merch</button>
+        
+          
+          <div class="card-video" id="video-studio_sol">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Studio Sol</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('studio_sol')">
+              ⭐ Reviews <span id="rev-count-studio_sol">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-studio_sol">
+              <div class="review-list" id="rev-list-studio_sol"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('studio_sol')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-studio_sol">
+                <div class="star-picker" id="star-picker-studio_sol">
+                  <span onclick="setStar('studio_sol',1)">★</span>
+                  <span onclick="setStar('studio_sol',2)">★</span>
+                  <span onclick="setStar('studio_sol',3)">★</span>
+                  <span onclick="setStar('studio_sol',4)">★</span>
+                  <span onclick="setStar('studio_sol',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-studio_sol" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-studio_sol" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-studio_sol"></div>
+                <button class="review-submit-btn" onclick="submitReview('studio_sol', 'Studio Sol')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Torre Playas, Piso 4</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">🏋️</div>
+        <div class="card-body">
+          <p class="card-tag" id="ctag-box_pacifico">CrossFit · Fuerza</p>
+          <h3 class="card-title">Box Pacífico CrossFit</h3>
+          <p class="card-text" id="ctext-box_pacifico">CrossFit comunitario. WODs diarios, levantamiento olímpico, horas de gym abierto.</p>
+          <div class="card-meta"><span>🏊</span> Pool: Yes · <span>🧖</span> Sauna: Yes
+          <button class="merch-btn" onclick="openMerch('Box Pacífico CrossFit')">🛍️ Shop Box Pacífico CrossFit Merch</button>
+        
+          
+          <div class="card-video" id="video-box_pac_fico_crossfit">
+            <div class="card-video-placeholder">
+              <div class="play-icon">▶️</div>
+              <span>Box Pacífico CrossFit</span>
+              <p>Add a YouTube video via the Admin Panel</p>
+            </div>
+          </div>
+          <div class="review-section">
+            <button class="review-toggle" onclick="toggleReviews('box_pac_fico_crossfit')">
+              ⭐ Reviews <span id="rev-count-box_pac_fico_crossfit">— be the first!</span>
+            </button>
+            <div class="review-panel" id="rev-panel-box_pac_fico_crossfit">
+              <div class="review-list" id="rev-list-box_pac_fico_crossfit"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('box_pac_fico_crossfit')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-box_pac_fico_crossfit">
+                <div class="star-picker" id="star-picker-box_pac_fico_crossfit">
+                  <span onclick="setStar('box_pac_fico_crossfit',1)">★</span>
+                  <span onclick="setStar('box_pac_fico_crossfit',2)">★</span>
+                  <span onclick="setStar('box_pac_fico_crossfit',3)">★</span>
+                  <span onclick="setStar('box_pac_fico_crossfit',4)">★</span>
+                  <span onclick="setStar('box_pac_fico_crossfit',5)">★</span>
+                </div>
+                <input class="review-name-input" id="rev-name-box_pac_fico_crossfit" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-box_pac_fico_crossfit" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-box_pac_fico_crossfit"></div>
+                <button class="review-submit-btn" onclick="submitReview('box_pac_fico_crossfit', 'Box Pacífico CrossFit')">Post Review</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="card-meta" style="margin-top:0.4rem"><span>📍</span> Calle Reforma 45</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-category">
+    <div class="featured-cat-label">
+      <span>🏡 Real Estate <span class="featured-badge">⭐ Featured</span></span>
+    </div>
+
+<div class="section-inner">
     <p class="section-tag" id="sec-re-tag">Encuentra tu lugar</p>
     <h2 class="section-title" id="sec-re-title">Bienes Raíces</h2>
     <p class="section-desc" id="sec-re-desc">Renta o compra en Playas de Tijuana. Explora los anuncios de la comunidad o publica el tuyo.</p>
@@ -2034,9 +2211,28 @@
       <div class="mod-notice" id="mod-notice-listing">⚠️ Todos los anuncios se revisan antes de publicarse. No cobramos — es un servicio comunitario gratuito.</div>
     </div>
   </div>
+  </div>
+
+  <!-- ADVERTISE CTA -->
+  <div class="featured-advertise">
+    <div>
+      <h3 id="feat-cta-title">Want to be featured here?</h3>
+      <p id="feat-cta-sub">Secure a featured spot in your category and put your business in front of the entire Playas community. Affordable monthly placements — free community listings always available.</p>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#80eab2f0e1e4e9ececc0e7ede1e9ecaee3efedbff3f5e2eae5e3f4bdc6e5e1f4f5f2e5e4a5b2b0cce9f3f4e9eee7a5b2b0c9eef1f5e9f2f9" class="featured-advertise-btn" id="feat-cta-btn">Get Featured →</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
+<!-- DISCLAIMER -->
+<div class="disclaimer-section">
+  <p><strong>Disclaimer & Limitation of Liability</strong></p>
+  <p>The listings, information, and content on this website are provided by community members and third parties for general informational purposes only. Playas de Tijuana Community Hub does not verify, endorse, or guarantee the accuracy, quality, safety, legality, or availability of any business, service, event, or listing featured on this site.</p>
+  <p>We are not responsible for any transactions, agreements, or interactions between users and listed businesses. Your use of any information or services found through this site is at your own risk. Featured placements are paid sponsorships and do not constitute an endorsement or recommendation by this site.</p>
+  <p>By using this site, you agree that Playas de Tijuana Community Hub, its owners, and contributors shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use of, or inability to use, information or services obtained through this website.</p>
+  <p style="margin-top:0.75rem; font-size:0.72rem; opacity:0.6;">For questions or to report an inaccurate listing, contact us at <a href="/cdn-cgi/l/email-protection#c2a8f0b2a3a6abaeae82a5afa3abaeeca1adaf" style="color:rgba(255,255,255,0.5);"><span class="__cf_email__" data-cfemail="f19bc3819095989d9db1969c90989ddf929e9c">[email&#160;protected]</span></a></p>
+</div>
+
 <footer>
   <div class="footer-brand">🌊 Playas de Tijuana</div>
   <p id="footer-tagline">Tu centro comunitario — hecho con amor para Playas.</p>
@@ -2127,7 +2323,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Smooth scroll helper
   function goToSection(id) {
     const el = document.getElementById(id);
@@ -2813,6 +3009,11 @@ const translations = {
     drop_surf:          '🏄 Escuela de Surf',
     drop_submit_adults: '➕ Enviar Actividad',
 
+    // MISSION STATEMENT
+    mission_tag:   'Nuestra Misión',
+    mission_title: 'Conectando Playas de Tijuana',
+    mission_text:  'En www.miplayasdetijuana.com, tendemos el puente entre los vibrantes y trabajadores emprendedores de Playas de Tijuana y las personas que necesitan sus productos y servicios. Te invitamos a agregar tu negocio, compartir tus pasiones y unirte a un movimiento arraigado en una profunda conectividad comunitaria. Al apoyar juntos el comercio local, no solo encontramos las soluciones que necesitamos — empoderamos a nuestros vecinos, descubrimos nuevas experiencias y construimos una comunidad bella y próspera para todos.',
+
     // EVENTS SECTION
     sec_events_tag:   'Lo que está pasando',
     sec_events_title: 'Eventos Comunitarios',
@@ -3005,6 +3206,10 @@ const translations = {
     drop_surf:          '🏄 Surf School',
     drop_submit_adults: '➕ Submit an Activity',
 
+    mission_tag:   'Our Mission',
+    mission_title: 'Connecting Playas de Tijuana',
+    mission_text:  'At www.miplayasdetijuana.com, we bridge the gap between the vibrant & hardworking entrepreneurs of Playas de Tijuana and the individuals who need their products and services. We invite you to add your business, share your passions, and join a movement rooted in profound community connectivity. By standing together to support local commerce, we don\'t just find the solutions we need — we empower our neighbors, discover new experiences, and build a beautiful, thriving community for everyone.',
+
     sec_events_tag:   "What's happening",
     sec_events_title: 'Community Events',
     sec_events_desc:  'Stay connected with local happenings. Submit your event below — all submissions are reviewed before publishing.',
@@ -3183,6 +3388,9 @@ const idMap = {
   drop_music:         'drop-music',
   drop_surf:          'drop-surf',
   drop_submit_adults: 'drop-submit-adults',
+  mission_tag:    'mission-tag',
+  mission_title:  'mission-title',
+  mission_text:   'mission-text',
   sec_events_tag:   'sec-events-tag',
   sec_events_title: 'sec-events-title',
   sec_events_desc:  'sec-events-desc',
@@ -3342,21 +3550,4 @@ function applyLanguage(lang) {
     el.textContent = t.yt_placeholder;
   });
 
-  // Save preference & update html lang
-  localStorage.setItem('preferredLang', lang);
-  document.documentElement.lang = lang;
-}
-
-function toggleLanguage() {
-  const current = localStorage.getItem('preferredLang') || 'es';
-  applyLanguage(current === 'es' ? 'en' : 'es');
-}
-
-// Auto-run immediately since script is at bottom of body
-// Only switch to English if user has explicitly chosen it before
-const savedLang = localStorage.getItem('preferredLang');
-applyLanguage(savedLang === 'en' ? 'en' : 'es');
-
-</script>
-</body>
-</html>
+  // Save preference & upda
