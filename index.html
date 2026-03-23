@@ -84,8 +84,8 @@
   #home {
     min-height: 100vh;
     background:
-      linear-gradient(180deg, rgba(10,20,40,0.60) 0%, rgba(20,40,70,0.40) 50%, transparent 100%),
-      url('https://images.unsplash.com/photo-1568429779373-8f9b1f6f7ab6?w=1600&q=80') center/cover no-repeat;
+      linear-gradient(180deg, rgba(10,20,40,0.55) 0%, rgba(20,40,70,0.35) 50%, transparent 100%),
+      url('PXL_20250201_014607402.PORTRAIT.ORIGINAL.jpg') center/cover no-repeat;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center;
@@ -497,6 +497,7 @@
     padding: 3rem 2rem 2.5rem;
     text-align: center;
     border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: relative;
   }
   .mission-tag {
     font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -513,9 +514,45 @@
   }
 
   /* ── FEATURED SECTION ── */
+  /* ── PAPEL PICADO BACKGROUND ZONE ── applies from mission → bottom ── */
+  .mission-section,
+  .featured-section,
+  .disclaimer-section,
+  footer {
+    background-image:
+      url('https://images.unsplash.com/photo-1568429779373-8f9b1f6f7ab6?w=1600&q=75');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+  }
+  .mission-section {
+    background-color: transparent;
+    background-blend-mode: normal;
+    position: relative;
+  }
+  .mission-section::before,
+  .featured-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,252,245,0.88);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .mission-section > *,
+  .featured-section > * { position: relative; z-index: 1; }
+  .disclaimer-section {
+    background-color: rgba(10,25,50,0.93);
+    background-blend-mode: multiply;
+  }
+  footer {
+    background-color: rgba(10,25,50,0.96);
+    background-blend-mode: multiply;
+  }
+
   .featured-section {
     background: linear-gradient(180deg, #f8f5ef 0%, #fff 100%);
     padding: 3.5rem 2rem;
+    position: relative;
   }
   .featured-header {
     text-align: center; margin-bottom: 2.5rem;
