@@ -84,8 +84,8 @@
   #home {
     min-height: 100vh;
     background:
-      linear-gradient(180deg, rgba(10,20,40,0.55) 0%, rgba(20,40,70,0.35) 50%, transparent 100%),
-     url('PXL_20250201_014607402.PORTRAIT.ORIGINAL.jpg') center/cover no-repeat;
+      linear-gradient(180deg, rgba(10,20,40,0.60) 0%, rgba(20,40,70,0.40) 50%, transparent 100%),
+      url('https://images.unsplash.com/photo-1568429779373-8f9b1f6f7ab6?w=1600&q=80') center/cover no-repeat;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center;
@@ -1218,21 +1218,21 @@
       <div class="form-row">
         <div class="form-group">
           <label id="label-event-name">Nombre del Evento</label>
-          <input id="ph-event-name" type="text" placeholder="ej. Yoga en la Playa">
+          <input id="event-name" type="text" placeholder="ej. Yoga en la Playa">
         </div>
         <div class="form-group">
           <label id="label-date">Fecha</label>
-          <input type="date">
+          <input id="event-date" type="date">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label id="label-location">Lugar</label>
-          <input id="ph-location" type="text" placeholder="¿Dónde es?">
+          <input id="event-location" type="text" placeholder="¿Dónde es?">
         </div>
         <div class="form-group">
           <label id="label-category">Categoría</label>
-          <select>
+          <select id="event-category">
             <option id="opt-community">Comunidad</option>
             <option id="opt-sports">Deportes y Fitness</option>
             <option id="opt-food">Comida y Bebidas</option>
@@ -1244,7 +1244,7 @@
       </div>
       <div class="form-group" style="margin-bottom:1rem">
         <label id="label-desc">Descripción</label>
-        <textarea id="ph-desc" placeholder="Cuéntanos sobre el evento..."></textarea>
+        <textarea id="event-desc" placeholder="Cuéntanos sobre el evento..."></textarea>
       </div>
       <div class="upload-area" onclick="alert('Image upload coming soon! 📸')">
         <div class="upload-icon">📷</div>
@@ -1252,9 +1252,13 @@
       </div>
       <div class="form-group" style="margin-bottom:1rem">
         <label id="label-contact">Tu Nombre y Contacto</label>
-        <input id="ph-contact" type="text" placeholder="Nombre · correo o teléfono (no se publica)">
+        <input id="event-contact" type="text" placeholder="Nombre · correo o teléfono (no se publica)">
       </div>
       <button class="form-submit" id="btn-submit-event" onclick="submitEvent()">Enviar para Revisión</button>
+      <div id="event-success" style="display:none; background:rgba(76,175,136,0.15); border:2px solid rgba(76,175,136,0.5); border-radius:14px; padding:1.5rem; text-align:center; margin-top:1rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">✅</div>
+        <p style="color:#a8d8c2; font-weight:700; font-size:1rem;" id="event-success-msg">¡Evento enviado! Lo revisaremos y publicaremos pronto.</p>
+      </div>
       <div class="mod-notice" id="mod-notice">⚠️ Todos los envíos son revisados por moderadores antes de aparecer en el sitio. ¡Gracias por mantener nuestra comunidad segura!</div>
     </div>
   </div>
@@ -2364,8 +2368,50 @@
   }
 
   // Form submissions
-  function submitEvent() {
-    alert('Thank you! Your event has been submitted for review. We\'ll post it once approved. 🌊');
+  async function submitEvent() {
+    const name    = (document.getElementById('event-name')     || {}).value?.trim();
+    const date    = (document.getElementById('event-date')     || {}).value?.trim();
+    const location= (document.getElementById('event-location') || {}).value?.trim();
+    const category= (document.getElementById('event-category') || {}).value?.trim();
+    const desc    = (document.getElementById('event-desc')     || {}).value?.trim();
+    const contact = (document.getElementById('event-contact')  || {}).value?.trim();
+
+    if (!name)  { alert('Please enter the event name.'); return; }
+    if (!desc || desc.length < 10) { alert('Please add a short description.'); return; }
+
+    const btn = document.getElementById('btn-submit-event');
+    btn.disabled = true;
+    btn.textContent = '⏳ Sending...';
+
+    const data = {
+      'Business Name': name,
+      'Category':      category,
+      'Description':   desc,
+      'Address':       location,
+      'Date':          date,
+      'Contact Name':  contact,
+      'Source':        'Events Page',
+      'Submitted At':  new Date().toLocaleString('en-US', {timeZone:'America/Tijuana'})
+    };
+
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+      const params = new URLSearchParams();
+      params.append('payload', JSON.stringify(data));
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+
+      // Hide form fields, show success
+      btn.style.display = 'none';
+      document.getElementById('event-success').style.display = 'block';
+      ['event-name','event-date','event-location','event-category','event-desc','event-contact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.disabled = true;
+      });
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Enviar para Revisión';
+      alert('Something went wrong. Please try again.');
+    }
   }
   function submitListing() {
     alert('Thank you! Your listing has been submitted for review. We\'ll post it once approved. 🏠');
