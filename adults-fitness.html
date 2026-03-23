@@ -273,6 +273,16 @@
   // ── Listing Cards ─────────────────────────────────────────
   const listingData = [];
 
+  // Convert **bold** and *italic* markdown to HTML, and newlines to br
+  function renderMarkdown(text) {
+    if (!text) return '';
+    return text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/\n/g,'<br>');
+  }
+
   function buildListingCard(row) {
     const idx = listingData.length;
     listingData.push(row);
@@ -291,7 +301,7 @@
     html += '<div style="padding:1.5rem;">';
     html += '<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:0.5rem;">' + category + '</p>';
     html += '<h2 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;color:var(--ocean-deep);margin-bottom:0.6rem;">' + name + '</h2>';
-    html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + desc + '</p>';
+    html += '<p style="font-size:0.875rem;color:var(--text-light);line-height:1.7;margin-bottom:1rem;">' + renderMarkdown(desc) + '</p>';
     if (address) html += '<p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.3rem;">📍 ' + address + '</p>';
     if (phone) html += '<p style="font-size:0.82rem;color:var(--text-light);">📞 ' + phone + '</p>';
     html += '<p style="font-size:0.82rem;color:var(--ocean);font-weight:600;margin-top:0.5rem;">View photos & details →</p>';
@@ -325,7 +335,7 @@
     }
     document.getElementById('modalCategory').textContent = category;
     document.getElementById('modalName').textContent = name;
-    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('modalDesc').innerHTML = renderMarkdown(desc);
     let meta = '';
     if (address) meta += '<span>📍 ' + address + '</span>';
     document.getElementById('modalMeta').innerHTML = meta;
