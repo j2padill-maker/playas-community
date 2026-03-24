@@ -338,34 +338,37 @@
     <h2 class="section-title" id="sec-re-title">Propiedades Disponibles</h2>
     <p class="section-desc" id="sec-re-desc">Anuncios revisados por la comunidad. Todos los listados son enviados por vecinos y propietarios locales.</p>
 
-    <!-- TABS -->
-    <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('rent')" id="tab-rent">🏠 En Renta</button>
-      <button class="tab-btn" onclick="switchTab('sale')" id="tab-sale">🔑 En Venta</button>
-    </div>
+    <!-- LISTING TYPE CARDS -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2rem;">
 
-    <!-- RENTALS PANEL -->
-    <div class="tab-panel active" id="panel-rent">
-      <div class="listing-grid" id="rent-grid">
-        <!-- Approved rental listings load here from Google Sheets -->
-        <!-- Placeholder shown until listings exist -->
-        <div class="placeholder-card" id="rent-placeholder">
-          <div class="ph-icon">🏠</div>
-          <strong id="ph-rent-title">Sé el primero en publicar una renta</strong>
-          <p id="ph-rent-desc">Aún no hay propiedades en renta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.</p>
-        </div>
-      </div>
-    </div>
+      <a href="rentals.html" id="card-rent" style="
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        gap:0.75rem; padding:2.25rem 1.5rem; background:#fff; border-radius:20px;
+        box-shadow:0 2px 18px rgba(0,0,0,0.08); text-decoration:none;
+        border:2px solid transparent; transition:all 0.25s; text-align:center;
+      " onmouseover="this.style.borderColor='#2a7fa5';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(42,127,165,0.18)'"
+         onmouseout="this.style.borderColor='transparent';this.style.transform='';this.style.boxShadow='0 2px 18px rgba(0,0,0,0.08)'">
+        <span style="font-size:2.5rem;">🏠</span>
+        <span style="display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:12px;" id="badge-rent">En Renta</span>
+        <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#1a5270;line-height:1.25;" id="card-rent-title">Ver Propiedades en Renta</p>
+        <p style="font-size:0.82rem;color:#6b6b6b;" id="card-rent-sub">Departamentos, casas y cuartos disponibles</p>
+        <span style="background:#2a7fa5;color:#fff;padding:0.5rem 1.25rem;border-radius:50px;font-size:0.82rem;font-weight:600;margin-top:0.25rem;" id="card-rent-btn">Ver listados →</span>
+      </a>
 
-    <!-- FOR SALE PANEL -->
-    <div class="tab-panel" id="panel-sale">
-      <div class="listing-grid" id="sale-grid">
-        <div class="placeholder-card" id="sale-placeholder">
-          <div class="ph-icon">🔑</div>
-          <strong id="ph-sale-title">Sé el primero en publicar una venta</strong>
-          <p id="ph-sale-desc">Aún no hay propiedades en venta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.</p>
-        </div>
-      </div>
+      <a href="ventas.html" id="card-sale" style="
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        gap:0.75rem; padding:2.25rem 1.5rem; background:#fff; border-radius:20px;
+        box-shadow:0 2px 18px rgba(0,0,0,0.08); text-decoration:none;
+        border:2px solid transparent; transition:all 0.25s; text-align:center;
+      " onmouseover="this.style.borderColor='#4caf88';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(76,175,136,0.18)'"
+         onmouseout="this.style.borderColor='transparent';this.style.transform='';this.style.boxShadow='0 2px 18px rgba(0,0,0,0.08)'">
+        <span style="font-size:2.5rem;">🔑</span>
+        <span style="display:inline-block;background:#dcfce7;color:#166534;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:12px;" id="badge-sale">En Venta</span>
+        <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#1a5270;line-height:1.25;" id="card-sale-title">Ver Propiedades en Venta</p>
+        <p style="font-size:0.82rem;color:#6b6b6b;" id="card-sale-sub">Casas, terrenos y condominios en venta</p>
+        <span style="background:#4caf88;color:#fff;padding:0.5rem 1.25rem;border-radius:50px;font-size:0.82rem;font-weight:600;margin-top:0.25rem;" id="card-sale-btn">Ver listados →</span>
+      </a>
+
     </div>
 
   </div>
@@ -462,6 +465,13 @@ const T = {
     sec_re_tag:      'Encuentra tu lugar',
     sec_re_title:    'Propiedades Disponibles',
     sec_re_desc:     'Anuncios revisados por la comunidad. Todos los listados son enviados por vecinos y propietarios locales.',
+    badge_rent:      'En Renta', badge_sale: 'En Venta',
+    card_rent_title: 'Ver Propiedades en Renta',
+    card_rent_sub:   'Departamentos, casas y cuartos disponibles',
+    card_rent_btn:   'Ver listados →',
+    card_sale_title: 'Ver Propiedades en Venta',
+    card_sale_sub:   'Casas, terrenos y condominios en venta',
+    card_sale_btn:   'Ver listados →',
     tab_rent:        '🏠 En Renta',
     tab_sale:        '🔑 En Venta',
     ph_rent_title:   'Sé el primero en publicar una renta',
@@ -495,6 +505,13 @@ const T = {
     sec_re_tag:      'Find your place',
     sec_re_title:    'Available Properties',
     sec_re_desc:     'Community-reviewed listings. All properties are submitted by neighbors and local owners.',
+    badge_rent:      'For Rent', badge_sale: 'For Sale',
+    card_rent_title: 'View Rental Properties',
+    card_rent_sub:   'Apartments, houses and rooms available',
+    card_rent_btn:   'See listings →',
+    card_sale_title: 'View Properties For Sale',
+    card_sale_sub:   'Houses, lots and condos for sale',
+    card_sale_btn:   'See listings →',
     tab_rent:        '🏠 For Rent',
     tab_sale:        '🔑 For Sale',
     ph_rent_title:   'Be the first to post a rental',
@@ -527,6 +544,9 @@ const ID_MAP = {
   nav_services: 'nav-link-services', nav_realestate: 'nav-link-realestate', nav_addbiz: 'nav-link-addbiz',
   hero_badge: 'hero-badge', hero_sub: 'hero-sub',
   sec_re_tag: 'sec-re-tag', sec_re_title: 'sec-re-title', sec_re_desc: 'sec-re-desc',
+  badge_rent: 'badge-rent', badge_sale: 'badge-sale',
+  card_rent_title: 'card-rent-title', card_rent_sub: 'card-rent-sub', card_rent_btn: 'card-rent-btn',
+  card_sale_title: 'card-sale-title', card_sale_sub: 'card-sale-sub', card_sale_btn: 'card-sale-btn',
   tab_rent: 'tab-rent', tab_sale: 'tab-sale',
   ph_rent_title: 'ph-rent-title', ph_rent_desc: 'ph-rent-desc',
   ph_sale_title: 'ph-sale-title', ph_sale_desc: 'ph-sale-desc',
@@ -564,14 +584,6 @@ function toggleLanguage() {
 // ── NAV ──
 function toggleNav() {
   document.getElementById('navLinks').classList.toggle('open');
-}
-
-// ── TAB SWITCHER ──
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  document.getElementById('panel-' + tab).classList.add('active');
 }
 
 // ── PHOTO UPLOAD (Base64, max 5, resize to 1200px) ──
@@ -676,106 +688,9 @@ function submitListing() {
 }
 
 // ── LOAD APPROVED LISTINGS FROM SHEET ──
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
-  return lines.slice(1).map(line => {
-    const vals = line.match(/(".*?"|[^,]+|(?<=,)(?=,)|(?<=,)$|^(?=,))/g) || [];
-    const row = {};
-    headers.forEach((h, i) => {
-      row[h] = (vals[i] || '').replace(/^"|"$/g, '').trim();
-    });
-    return row;
-  });
-}
-
-function buildListingCard(r, lang) {
-  const t = T[lang];
-  const type = (r['Listing Type'] || '').toLowerCase();
-  const isRent = type.includes('rent') || type.includes('renta');
-  const badgeClass = isRent ? 'badge-rent' : 'badge-sale';
-  const badgeText  = isRent ? t.badge_rent : t.badge_sale;
-
-  const price    = r['Price']     ? '<div class="listing-price">$' + r['Price'] + '</div>' : '';
-  const beds     = r['Bedrooms']  ? '<span>🛏 ' + r['Bedrooms'] + '</span>' : '';
-  const baths    = r['Bathrooms'] ? '<span>🚿 ' + r['Bathrooms'] + '</span>' : '';
-  const addr     = r['Address']   ? '<span>📍 ' + r['Address'] + '</span>' : '';
-
-  let photoHTML = '<div class="listing-photo">🏠</div>';
-  const profilePhoto = r['Profile Photo'] || r['Photo 1'] || '';
-  if (profilePhoto) {
-    photoHTML = '<div class="listing-photo"><img src="' + profilePhoto + '" alt="Property photo" loading="lazy"></div>';
-  }
-
-  return '<div class="listing-card">' +
-    photoHTML +
-    '<div class="listing-body">' +
-      '<span class="listing-badge ' + badgeClass + '">' + badgeText + '</span>' +
-      price +
-      '<h3 class="listing-title">' + (r['Business Name'] || r['Address'] || '') + '</h3>' +
-      '<p class="listing-desc">' + (r['Description'] || '') + '</p>' +
-      '<div class="listing-meta">' + beds + baths + addr + '</div>' +
-    '</div>' +
-  '</div>';
-}
-
-function renderListings() {
-  if (!window._allListings) return;
-  const lang = currentLang;
-  const approved = window._allListings.filter(r =>
-    r['Category'] === 'Real Estate' &&
-    (r['Status'] || '').toLowerCase() === 'approved'
-  );
-
-  const rentals = approved.filter(r => {
-    const t = (r['Listing Type'] || '').toLowerCase();
-    return t.includes('rent') || t.includes('renta');
-  });
-  const sales = approved.filter(r => {
-    const t = (r['Listing Type'] || '').toLowerCase();
-    return t.includes('sale') || t.includes('venta');
-  });
-
-  const rentGrid = document.getElementById('rent-grid');
-  const saleGrid = document.getElementById('sale-grid');
-
-  if (rentals.length > 0) {
-    rentGrid.innerHTML = rentals.map(r => buildListingCard(r, lang)).join('');
-  } else {
-    rentGrid.innerHTML = '<div class="placeholder-card" id="rent-placeholder">' +
-      '<div class="ph-icon">🏠</div>' +
-      '<strong id="ph-rent-title">' + T[lang].ph_rent_title + '</strong>' +
-      '<p id="ph-rent-desc">' + T[lang].ph_rent_desc + '</p>' +
-      '</div>';
-  }
-
-  if (sales.length > 0) {
-    saleGrid.innerHTML = sales.map(r => buildListingCard(r, lang)).join('');
-  } else {
-    saleGrid.innerHTML = '<div class="placeholder-card" id="sale-placeholder">' +
-      '<div class="ph-icon">🔑</div>' +
-      '<strong id="ph-sale-title">' + T[lang].ph_sale_title + '</strong>' +
-      '<p id="ph-sale-desc">' + T[lang].ph_sale_desc + '</p>' +
-      '</div>';
-  }
-}
-
-function loadListings() {
-  fetch(SHEET_CSV_URL + '&t=' + Date.now())
-    .then(r => r.text())
-    .then(text => {
-      window._allListings = parseCSV(text);
-      renderListings();
-    })
-    .catch(() => {
-      // Silent fail — placeholders remain
-    });
-}
-
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', function() {
   applyLanguage(currentLang);
-  loadListings();
 });
 </script>
 </body>
