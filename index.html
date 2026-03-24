@@ -514,8 +514,7 @@
   }
 
   /* ── FEATURED SECTION ── */
-  /* ── PAPEL PICADO BACKGROUND ZONE ── applies from mission → bottom ── */
-  .mission-section,
+  /* ── PAPEL PICADO BACKGROUND ZONE ── applies from featured → bottom ── */
   .featured-section,
   .disclaimer-section,
   footer {
@@ -525,7 +524,6 @@
     background-size: cover;
     background-position: center center;
   }
-  .mission-section::before,
   .featured-section::before {
     content: '';
     position: absolute; inset: 0;
@@ -533,7 +531,6 @@
     pointer-events: none;
     z-index: 0;
   }
-  .mission-section > *,
   .featured-section > * { position: relative; z-index: 1; }
   .disclaimer-section {
     background-color: rgba(10,25,50,0.93);
