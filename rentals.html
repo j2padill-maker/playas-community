@@ -527,7 +527,7 @@ function applyFilters() {
 
   filtered = allListings.filter(r => {
     if (!q) return true;
-    const haystack = [r['Business Name'], r['Address'], r['Description'], r['Price']].join(' ').toLowerCase();
+    const haystack = [r['Title'], r['Address'], r['Description'], r['Price'], r['Neighborhood']].join(' ').toLowerCase();
     return haystack.includes(q);
   });
 
@@ -599,7 +599,7 @@ function renderGrid() {
     const addr   = r['Address'] ? '<div class="card-addr">📍 ' + (r['Neighborhood'] ? r['Neighborhood'] + ' · ' : '') + r['Address'] + '</div>' : '';
     const beds   = r['Bedrooms']  ? '<span>🛏 ' + r['Bedrooms']  + '</span>' : '';
     const baths  = r['Bathrooms'] ? '<span>🚿 ' + r['Bathrooms'] + '</span>' : '';
-    const sqm    = r['Square Meters'] ? '<span>📐 ' + r['Square Meters'] + '</span>' : '';
+    const sqm    = r['Sq Meters'] ? '<span>📐 ' + r['Sq Meters'] + ' m²</span>' : '';
     const furn   = r['Furnished'] && r['Furnished'] !== '' ? '<span>🪑 ' + r['Furnished'] + '</span>' : '';
     const pets   = r['Pets Allowed'] === 'Yes' ? '<span>🐾 Pets OK</span>' : '';
     const park   = r['Parking'] === 'Yes' ? '<span>🚗 Parking</span>' : '';
@@ -623,26 +623,36 @@ function openModal(idx) {
 
   document.getElementById('m-badge').textContent = t.badge;
   document.getElementById('m-price').textContent = r['Price'] ? '$' + r['Price'] : '';
-  document.getElementById('m-title').textContent = r['Business Name'] || r['Address'] || '';
+  document.getElementById('m-title').textContent = r['Title'] || r['Address'] || '';
   document.getElementById('m-addr').innerHTML = r['Address'] ? '📍 ' + r['Address'] : '';
-  document.getElementById('m-desc').textContent = r['Description'] || '';
+  document.getElementById('m-desc').textContent = r['Description'] || r['description'] || '';
   document.getElementById('t-desc-label').textContent = t.desc_label;
 
   // stats
   const stats = [];
-  if (r['Bedrooms'])  stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.beds + '</span><span class="modal-stat-value">🛏 ' + r['Bedrooms'] + '</span></div>');
-  if (r['Bathrooms']) stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.baths + '</span><span class="modal-stat-value">🚿 ' + r['Bathrooms'] + '</span></div>');
-  if (r['Price'])     stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.price_lbl + '</span><span class="modal-stat-value">$' + r['Price'] + '</span></div>');
+  if (r['Bedrooms'])   stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.beds  + '</span><span class="modal-stat-value">🛏 ' + r['Bedrooms']  + '</span></div>');
+  if (r['Bathrooms'])  stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.baths + '</span><span class="modal-stat-value">🚿 ' + r['Bathrooms'] + '</span></div>');
+  if (r['Sq Meters'])  stats.push('<div class="modal-stat"><span class="modal-stat-label">m²</span><span class="modal-stat-value">📐 ' + r['Sq Meters'] + '</span></div>');
+  if (r['Price'])      stats.push('<div class="modal-stat"><span class="modal-stat-label">' + t.price_lbl + '</span><span class="modal-stat-value">$' + r['Price'] + '</span></div>');
+  if (r['Furnished'] && r['Furnished'] !== '')   stats.push('<div class="modal-stat"><span class="modal-stat-label">Amueblado</span><span class="modal-stat-value">🪑 ' + r['Furnished'] + '</span></div>');
+  if (r['Pets Allowed'] === 'Yes') stats.push('<div class="modal-stat"><span class="modal-stat-label">Mascotas</span><span class="modal-stat-value">🐾 Sí</span></div>');
+  if (r['Parking'] === 'Yes')      stats.push('<div class="modal-stat"><span class="modal-stat-label">Estacionamiento</span><span class="modal-stat-value">🚗 Incluido</span></div>');
   document.getElementById('m-stats').innerHTML = stats.join('');
   if (!stats.length) document.getElementById('m-stats').style.display = 'none';
   else document.getElementById('m-stats').style.display = '';
 
   // contact
-  const contact = r['Contact'] || '';
-  document.getElementById('m-contact-box').innerHTML =
-    '<div><p class="modal-desc-label" style="color:rgba(255,255,255,0.6)">' + t.contact_label + '</p>' +
-    '<strong>' + (contact || '—') + '</strong>' +
-    '<p class="contact-note">' + t.contact_note + '</p></div>';
+  const contactName  = r['Contact Name']  || '';
+  const contactPhone = r['Contact Phone'] || '';
+  const contactEmail = r['Contact Email'] || '';
+  let contactHtml = '<div>';
+  contactHtml += '<p class="modal-desc-label" style="color:rgba(255,255,255,0.6)">' + t.contact_label + '</p>';
+  if (contactName)  contactHtml += '<strong>' + contactName + '</strong>';
+  if (contactPhone) contactHtml += '<p style="color:#a8d8c2;margin-top:0.25rem;font-size:0.9rem">📞 ' + contactPhone + '</p>';
+  if (contactEmail) contactHtml += '<p style="color:#a8d8c2;font-size:0.85rem">✉️ ' + contactEmail + '</p>';
+  if (!contactName && !contactPhone && !contactEmail) contactHtml += '<strong>—</strong>';
+  contactHtml += '<p class="contact-note">' + t.contact_note + '</p></div>';
+  document.getElementById('m-contact-box').innerHTML = contactHtml;
 
   // photos
   carouselPhotos = getPhotos(r);
