@@ -380,44 +380,103 @@
     <h2 id="form-title">Publicar un Anuncio</h2>
     <p class="form-intro" id="form-intro">Renta o venta — publica tu propiedad gratis. Se revisa antes de publicarse. Este es un servicio comunitario gratuito.</p>
 
+    <!-- Row 1: Type + Price -->
     <div class="form-row">
       <div class="form-group">
-        <label id="label-listing-type">Tipo de Anuncio</label>
+        <label id="label-listing-type">Tipo de Anuncio *</label>
         <select id="listing-type">
           <option value="For Rent" id="opt-for-rent">En Renta</option>
           <option value="For Sale" id="opt-for-sale">En Venta</option>
         </select>
       </div>
       <div class="form-group">
-        <label id="label-price">Precio (USD)</label>
-        <input type="text" id="listing-price" placeholder="ej. 800/mes o 150,000" id="ph-price">
+        <label id="label-price">Precio (USD) *</label>
+        <input type="text" id="listing-price" placeholder="ej. 850/mes ó 195,000">
       </div>
     </div>
 
+    <!-- Row 2: Beds + Baths + SqM -->
     <div class="form-row">
       <div class="form-group">
         <label id="label-bedrooms">Recámaras</label>
-        <input type="number" id="listing-bedrooms" placeholder="# de recámaras" min="0">
+        <input type="number" id="listing-bedrooms" placeholder="0" min="0">
       </div>
       <div class="form-group">
         <label id="label-bathrooms">Baños</label>
-        <input type="number" id="listing-bathrooms" placeholder="# de baños" min="0" step="0.5">
+        <input type="number" id="listing-bathrooms" placeholder="0" min="0" step="0.5">
+      </div>
+      <div class="form-group">
+        <label id="label-sqm">M² / Tamaño</label>
+        <input type="text" id="listing-sqm" placeholder="ej. 85 m²">
       </div>
     </div>
 
-    <div class="form-group">
-      <label id="label-address">Dirección / Colonia *</label>
-      <input type="text" id="listing-address" placeholder="Dirección o zona general">
+    <!-- Row 3: Address + Neighborhood -->
+    <div class="form-row">
+      <div class="form-group">
+        <label id="label-address">Dirección *</label>
+        <input type="text" id="listing-address" placeholder="Calle y número">
+      </div>
+      <div class="form-group">
+        <label id="label-neighborhood">Colonia / Zona</label>
+        <input type="text" id="listing-neighborhood" placeholder="ej. Playas Norte, Costa Hermosa">
+      </div>
     </div>
 
+    <!-- Row 4: Furnished + Pets + Parking -->
+    <div class="form-row">
+      <div class="form-group">
+        <label id="label-furnished">Amueblado</label>
+        <select id="listing-furnished">
+          <option value="" id="opt-furnished-na">— No especificado —</option>
+          <option value="Yes" id="opt-furnished-yes">Sí</option>
+          <option value="Partial" id="opt-furnished-partial">Parcialmente</option>
+          <option value="No" id="opt-furnished-no">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label id="label-pets">Mascotas</label>
+        <select id="listing-pets">
+          <option value="" id="opt-pets-na">— No especificado —</option>
+          <option value="Yes" id="opt-pets-yes">Se aceptan</option>
+          <option value="No" id="opt-pets-no">No se aceptan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label id="label-parking">Estacionamiento</label>
+        <select id="listing-parking">
+          <option value="" id="opt-parking-na">— No especificado —</option>
+          <option value="Yes" id="opt-parking-yes">Incluido</option>
+          <option value="No" id="opt-parking-no">No incluido</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Title / description -->
     <div class="form-group">
-      <label id="label-contact-name">Tu Nombre y Contacto *</label>
-      <input type="text" id="listing-contact" placeholder="Nombre · correo o teléfono (no se publica)">
+      <label id="label-title">Título del Anuncio *</label>
+      <input type="text" id="listing-title" placeholder="ej. Depto amueblado 2 rec cerca de la playa">
     </div>
 
     <div class="form-group">
       <label id="label-prop-desc">Descripción *</label>
-      <textarea id="listing-desc" placeholder="Describe la propiedad, características, contacto..."></textarea>
+      <textarea id="listing-desc" placeholder="Describe la propiedad: características, servicios incluidos, condiciones..."></textarea>
+    </div>
+
+    <!-- Contact info -->
+    <div class="form-row">
+      <div class="form-group">
+        <label id="label-contact-name">Tu Nombre *</label>
+        <input type="text" id="listing-contact-name" placeholder="Nombre del propietario o agente">
+      </div>
+      <div class="form-group">
+        <label id="label-contact-email">Correo Electrónico *</label>
+        <input type="email" id="listing-contact-email" placeholder="Para recibir notificaciones">
+      </div>
+    </div>
+    <div class="form-group">
+      <label id="label-contact-phone">Teléfono / WhatsApp <span style="font-weight:400;color:var(--text-light)">(opcional)</span></label>
+      <input type="tel" id="listing-contact-phone" placeholder="ej. +52 664 123 4567">
     </div>
 
     <!-- Photo Upload -->
@@ -432,10 +491,10 @@
 
     <div class="success-box" id="listing-success">
       <div class="s-icon">✅</div>
-      <p id="listing-success-msg">¡Anuncio enviado! Lo revisaremos y publicaremos pronto.</p>
+      <p id="listing-success-msg">¡Anuncio enviado! Lo revisaremos y publicaremos pronto. Recibirás un correo cuando esté publicado.</p>
     </div>
 
-    <div class="mod-notice" id="mod-notice-listing">⚠️ Todos los anuncios se revisan antes de publicarse. No cobramos — es un servicio comunitario gratuito.</div>
+    <div class="mod-notice" id="mod-notice-listing">⚠️ Todos los anuncios se revisan antes de publicarse. No cobramos — es un servicio comunitario gratuito. Los anuncios expiran después de 7 meses.</div>
   </div>
 </section>
 
@@ -628,12 +687,23 @@ function updatePhotoPreview() {
 
 // ── FORM SUBMIT ──
 function submitListing() {
-  const address = document.getElementById('listing-address').value.trim();
-  const contact = document.getElementById('listing-contact').value.trim();
-  const desc    = document.getElementById('listing-desc').value.trim();
+  const listingType    = document.getElementById('listing-type').value;
+  const price          = document.getElementById('listing-price').value.trim();
+  const title          = document.getElementById('listing-title').value.trim();
+  const address        = document.getElementById('listing-address').value.trim();
+  const desc           = document.getElementById('listing-desc').value.trim();
+  const contactName    = document.getElementById('listing-contact-name').value.trim();
+  const contactEmail   = document.getElementById('listing-contact-email').value.trim();
+  const contactPhone   = document.getElementById('listing-contact-phone').value.trim();
 
-  if (!address || !contact || !desc) {
+  // Required fields
+  if (!title || !address || !desc || !contactName || !contactEmail || !price) {
     alert(T[currentLang].err_required);
+    return;
+  }
+  // Basic email validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) {
+    alert(T[currentLang].err_email || 'Please enter a valid email address.');
     return;
   }
 
@@ -642,17 +712,24 @@ function submitListing() {
   btn.textContent = '⏳ Enviando...';
 
   const data = {
-    'Business Name':  document.getElementById('listing-address').value.trim(),
-    'Category':       'Real Estate',
-    'Listing Type':   document.getElementById('listing-type').value,
-    'Price':          document.getElementById('listing-price').value.trim(),
+    'Source':         'Real Estate Page',
+    'Listing Type':   listingType,
+    'Title':          title,
+    'Price':          price,
     'Bedrooms':       document.getElementById('listing-bedrooms').value.trim(),
     'Bathrooms':      document.getElementById('listing-bathrooms').value.trim(),
+    'Sq Meters':      document.getElementById('listing-sqm').value.trim(),
     'Address':        address,
+    'Neighborhood':   document.getElementById('listing-neighborhood').value.trim(),
+    'Furnished':      document.getElementById('listing-furnished').value,
+    'Pets Allowed':   document.getElementById('listing-pets').value,
+    'Parking':        document.getElementById('listing-parking').value,
     'Description':    desc,
-    'Contact':        contact,
-    'Source':         'Real Estate Page',
+    'Contact Name':   contactName,
+    'Contact Email':  contactEmail,
+    'Contact Phone':  contactPhone,
     'Photo Count':    photoDataArray.length,
+    'Profile Photo':  photoDataArray[0] || '',
     'Photo 1':        photoDataArray[0] || '',
     'Photo 2':        photoDataArray[1] || '',
     'Photo 3':        photoDataArray[2] || '',
@@ -671,12 +748,17 @@ function submitListing() {
   .then(() => {
     document.getElementById('listing-success').style.display = 'block';
     btn.style.display = 'none';
-    document.getElementById('listing-address').value = '';
-    document.getElementById('listing-contact').value = '';
-    document.getElementById('listing-desc').value = '';
-    document.getElementById('listing-price').value = '';
-    document.getElementById('listing-bedrooms').value = '';
-    document.getElementById('listing-bathrooms').value = '';
+    // Clear form
+    ['listing-title','listing-price','listing-bedrooms','listing-bathrooms',
+     'listing-sqm','listing-address','listing-neighborhood','listing-desc',
+     'listing-contact-name','listing-contact-email','listing-contact-phone'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    ['listing-furnished','listing-pets','listing-parking'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.selectedIndex = 0;
+    });
     photoDataArray.length = 0;
     updatePhotoPreview();
   })

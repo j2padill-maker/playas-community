@@ -300,6 +300,21 @@
   @media (max-width: 420px) {
     .grid { grid-template-columns: 1fr 1fr; }
   }
+
+  .card-perks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .card-perks span {
+    font-size: 0.72rem;
+    background: var(--sand-light, #f5efe3);
+    color: var(--ocean-deep, #1a5270);
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
 </style>
 </head>
 <body>
@@ -383,7 +398,7 @@
 </div>
 
 <script>
-const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=1898785681&single=true&output=csv';
 
 // ── LANGUAGE ──
 let lang = localStorage.getItem('preferred-lang') || 'es';
@@ -489,11 +504,10 @@ function loadData() {
     .then(text => {
       const all = parseCSV(text);
       allListings = all.filter(r => {
-        const cat = (r['Category'] || '').toLowerCase();
         const status = (r['Status'] || '').toLowerCase();
-        const type = (r['Listing Type'] || r['listing type'] || '').toLowerCase();
-        return cat.includes('real estate') && status === 'approved'
-          && (type.includes('rent') || type.includes('renta'));
+        const type   = (r['Listing Type'] || '').toLowerCase();
+        return status === 'approved'
+          && (type.includes('rent') || type.includes('renta') || type === 'for rent');
       });
       applyFilters();
     })
@@ -579,16 +593,21 @@ function renderGrid() {
 
   grid.innerHTML = filtered.map((r, idx) => {
     const photos = getPhotos(r);
-    const thumb = photos.length ? '<img src="' + photos[0] + '" alt="Propiedad" loading="lazy">' : '🏠';
-    const price = r['Price'] ? '<div class="card-price">$' + r['Price'] + '</div>' : '';
-    const title = r['Business Name'] || r['Address'] || 'Propiedad ' + (idx + 1);
-    const addr = r['Address'] ? '<div class="card-addr">📍 ' + r['Address'] + '</div>' : '';
-    const beds = r['Bedrooms'] ? '<span>🛏 ' + r['Bedrooms'] + '</span>' : '';
-    const baths = r['Bathrooms'] ? '<span>🚿 ' + r['Bathrooms'] + '</span>' : '';
-    const meta = (beds || baths) ? '<div class="card-meta">' + beds + baths + '</div>' : '';
+    const thumb  = photos.length ? '<img src="' + photos[0] + '" alt="Propiedad" loading="lazy">' : '<div style="font-size:3rem;text-align:center;padding:2rem">🏠</div>';
+    const price  = r['Price'] ? '<div class="card-price">$' + r['Price'] + '</div>' : '';
+    const title  = r['Title'] || r['Business Name'] || r['Address'] || 'Propiedad ' + (idx + 1);
+    const addr   = r['Address'] ? '<div class="card-addr">📍 ' + (r['Neighborhood'] ? r['Neighborhood'] + ' · ' : '') + r['Address'] + '</div>' : '';
+    const beds   = r['Bedrooms']  ? '<span>🛏 ' + r['Bedrooms']  + '</span>' : '';
+    const baths  = r['Bathrooms'] ? '<span>🚿 ' + r['Bathrooms'] + '</span>' : '';
+    const sqm    = r['Square Meters'] ? '<span>📐 ' + r['Square Meters'] + '</span>' : '';
+    const furn   = r['Furnished'] && r['Furnished'] !== '' ? '<span>🪑 ' + r['Furnished'] + '</span>' : '';
+    const pets   = r['Pets Allowed'] === 'Yes' ? '<span>🐾 Pets OK</span>' : '';
+    const park   = r['Parking'] === 'Yes' ? '<span>🚗 Parking</span>' : '';
+    const meta   = (beds || baths || sqm) ? '<div class="card-meta">' + beds + baths + sqm + '</div>' : '';
+    const perks  = (furn || pets || park) ? '<div class="card-perks">' + furn + pets + park + '</div>' : '';
     return '<div class="card" onclick="openModal(' + idx + ')" role="button" tabindex="0" aria-label="' + title + '">' +
       '<div class="card-thumb"><span class="card-badge">' + t.badge + '</span>' + thumb + '</div>' +
-      '<div class="card-body">' + price + '<div class="card-title">' + title + '</div>' + addr + meta + '</div>' +
+      '<div class="card-body">' + price + '<div class="card-title">' + title + '</div>' + addr + meta + perks + '</div>' +
       '</div>';
   }).join('');
 }

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="google" content="notranslate">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renew Your Listing — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #e8dcc8;
+    --sand-light: #f5efe3;
+    --ocean: #2a7fa5;
+    --ocean-deep: #1a5270;
+    --seafoam: #4caf88;
+    --white: #fafaf8;
+    --text: #2c2c2c;
+    --text-light: #6b6b6b;
+    --nav-h: 70px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(26,82,112,0.96);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center;
+    padding: 0 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--sand); font-size: 1.3rem; font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--nav-h) + 3rem) 1.5rem 4rem;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    padding: 3rem 2.5rem;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-icon { font-size: 3.5rem; margin-bottom: 1.25rem; }
+
+  .card h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--ocean-deep);
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .card p {
+    color: var(--text-light);
+    font-size: 0.97rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  /* Listing summary box */
+  .listing-summary {
+    background: var(--sand-light);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    margin: 1.5rem 0;
+    display: none;
+  }
+  .listing-summary.show { display: block; }
+  .listing-summary h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--ocean-deep);
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .listing-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--text);
+  }
+  .listing-detail:last-child { border-bottom: none; }
+  .listing-detail span:first-child { color: var(--text-light); }
+
+  /* Expiry highlight */
+  .expiry-badge {
+    display: inline-block;
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+    border-radius: 20px;
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .expiry-badge.expired {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+  }
+
+  /* Buttons */
+  .btn-renew {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--seafoam);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 0.75rem;
+  }
+  .btn-renew:hover { background: #3a9a74; transform: translateY(-2px); }
+  .btn-renew:disabled { background: #aaa; cursor: not-allowed; transform: none; }
+
+  .btn-secondary {
+    display: inline-block;
+    color: var(--ocean);
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: var(--sand-light); }
+
+  /* State panels */
+  .state { display: none; }
+  .state.active { display: block; }
+
+  /* Success */
+  .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .new-expiry {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--seafoam);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  /* Error */
+  .error-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+  /* Loading spinner */
+  .spinner {
+    width: 40px; height: 40px;
+    border: 4px solid var(--sand);
+    border-top-color: var(--ocean);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 1rem auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--sand);
+  }
+  footer a { color: var(--ocean); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">🌴 Playas de Tijuana</a>
+</nav>
+
+<main>
+  <div class="card">
+
+    <!-- LOADING STATE -->
+    <div class="state active" id="state-loading">
+      <div class="card-icon">🔍</div>
+      <h1>Verificando tu anuncio...</h1>
+      <div class="spinner"></div>
+      <p>Un momento, por favor.</p>
+    </div>
+
+    <!-- CONFIRM RENEW STATE -->
+    <div class="state" id="state-confirm">
+      <div class="card-icon">🏠</div>
+      <h1 id="confirm-title">¿Deseas renovar tu anuncio?</h1>
+
+      <div class="listing-summary show" id="listing-summary">
+        <h3 id="summary-title">Tu propiedad</h3>
+        <div class="listing-detail"><span>Tipo</span><span id="s-type">—</span></div>
+        <div class="listing-detail"><span>Precio</span><span id="s-price">—</span></div>
+        <div class="listing-detail"><span>Dirección</span><span id="s-address">—</span></div>
+        <div class="listing-detail"><span>Recámaras</span><span id="s-beds">—</span></div>
+        <div class="listing-detail"><span>Baños</span><span id="s-baths">—</span></div>
+      </div>
+
+      <div class="expiry-badge" id="expiry-badge">⏰ Expira: <span id="expiry-date">—</span></div>
+
+      <p>Al renovar, tu anuncio se extenderá por <strong>7 meses adicionales</strong> sin costo alguno.</p>
+      <p style="font-size:0.85rem;margin-bottom:1.5rem;">Si tu propiedad ya no está disponible, simplemente cierra esta página — el anuncio expirará automáticamente.</p>
+
+      <button class="btn-renew" id="btn-renew" onclick="doRenew()">
+        ✅ Sí, renovar mi anuncio
+      </button>
+      <a class="btn-secondary" href="realestate.html">Publicar un nuevo anuncio</a>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="state" id="state-success">
+      <div class="success-icon">🎉</div>
+      <h1>¡Anuncio renovado!</h1>
+      <p class="new-expiry" id="new-expiry-text"></p>
+      <p>Tu propiedad seguirá apareciendo en Playas de Tijuana por 7 meses más. Te enviaremos otro recordatorio antes de que expire.</p>
+      <br>
+      <a class="btn-renew" href="realestate.html" style="display:inline-block;width:auto;padding:0.85rem 2rem;text-decoration:none;">Ver anuncios →</a>
+    </div>
+
+    <!-- ERROR: INVALID TOKEN -->
+    <div class="state" id="state-invalid">
+      <div class="error-icon">🔗</div>
+      <h1>Enlace no válido</h1>
+      <p>Este enlace de renovación no es válido o ya expiró. Es posible que tu anuncio haya sido eliminado o que el enlace sea incorrecto.</p>
+      <br>
+      <a class="btn-renew" href="realestate.html" style="display:inline-block;width:auto;padding:0.85rem 2rem;text-decoration:none;">Publicar un nuevo anuncio</a>
+    </div>
+
+    <!-- ERROR: GENERAL -->
+    <div class="state" id="state-error">
+      <div class="error-icon">⚠️</div>
+      <h1>Algo salió mal</h1>
+      <p id="error-msg">No pudimos procesar tu solicitud. Por favor intenta de nuevo o contáctanos.</p>
+      <br>
+      <button class="btn-renew" onclick="location.reload()">Intentar de nuevo</button>
+      <a class="btn-secondary" href="index.html">Ir al inicio</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>🌴 <strong>Playas de Tijuana Community Hub</strong> · <a href="index.html">Inicio</a> · <a href="realestate.html">Bienes Raíces</a></p>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+
+function showState(id) {
+  document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function formatDate(str) {
+  if (!str) return '—';
+  const d = new Date(str);
+  if (isNaN(d)) return str;
+  return d.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function addMonths(dateStr, months) {
+  const d = new Date(dateStr || Date.now());
+  d.setMonth(d.getMonth() + months);
+  return d.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// Get token from URL
+const params  = new URLSearchParams(window.location.search);
+const reToken = params.get('re_token');
+
+if (!reToken) {
+  showState('state-invalid');
+} else {
+  // Look up the listing via doGet
+  fetch(APPS_SCRIPT_URL + '?re_token=' + encodeURIComponent(reToken))
+    .then(r => r.json())
+    .then(res => {
+      if (!res.valid) {
+        showState('state-invalid');
+        return;
+      }
+
+      // Populate summary
+      document.getElementById('summary-title').textContent = res.title || res.address || 'Tu propiedad';
+      document.getElementById('s-type').textContent    = res.listing_type || '—';
+      document.getElementById('s-price').textContent   = res.price ? '$' + res.price : '—';
+      document.getElementById('s-address').textContent = res.address || '—';
+      document.getElementById('s-beds').textContent    = res.bedrooms  || '—';
+      document.getElementById('s-baths').textContent   = res.bathrooms || '—';
+
+      // Expiry badge
+      const expBadge = document.getElementById('expiry-badge');
+      const expDate  = document.getElementById('expiry-date');
+      expDate.textContent = formatDate(res.expiry_date);
+      if (res.re_status === 'expired') {
+        expBadge.classList.add('expired');
+        expBadge.textContent = '❌ Este anuncio ya expiró';
+        document.getElementById('confirm-title').textContent = '¿Deseas volver a publicar tu anuncio?';
+      }
+
+      showState('state-confirm');
+    })
+    .catch(() => {
+      document.getElementById('error-msg').textContent =
+        'No pudimos conectar con el servidor. Revisa tu conexión e intenta de nuevo.';
+      showState('state-error');
+    });
+}
+
+function doRenew() {
+  const btn = document.getElementById('btn-renew');
+  btn.disabled = true;
+  btn.textContent = '⏳ Renovando...';
+
+  const payload = {
+    'Source':   'Real Estate Page',
+    'Action':   'Renew',
+    'RE Token': reToken,
+  };
+
+  const p = new URLSearchParams();
+  p.append('payload', JSON.stringify(payload));
+
+  fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: p })
+    .then(() => {
+      document.getElementById('new-expiry-text').textContent =
+        'Nuevo vencimiento: ' + addMonths(new Date().toISOString(), 7);
+      showState('state-success');
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = '✅ Sí, renovar mi anuncio';
+      showState('state-error');
+    });
+}
+</script>
+</body>
+</html>
