@@ -544,10 +544,33 @@
     background-blend-mode: multiply;
   }
 
-  /* contribute-box: dark card so form is readable over light flag background */
+  /* contribute-box: papel picado background with light overlay, matching the scroll section */
   .contribute-box {
-    background: rgba(15, 35, 65, 0.92) !important;
-    border: 1.5px solid rgba(255,255,255,0.2) !important;
+    background: rgba(255,252,245,0.90) !important;
+    border: 1.5px solid rgba(200,180,150,0.5) !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .contribute-box h3,
+  .contribute-box p,
+  .contribute-box label {
+    color: var(--ocean-deep) !important;
+  }
+  .contribute-box input,
+  .contribute-box select,
+  .contribute-box textarea {
+    background: rgba(255,255,255,0.85) !important;
+    border-color: var(--sand-dark) !important;
+    color: var(--text) !important;
+  }
+  .contribute-box input::placeholder,
+  .contribute-box textarea::placeholder {
+    color: var(--text-light) !important;
+  }
+  .contribute-box .mod-notice {
+    background: rgba(26,82,112,0.08);
+    border-left-color: var(--ocean);
+    color: var(--text-light);
   }
 
   .featured-section {
