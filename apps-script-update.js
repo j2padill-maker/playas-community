@@ -182,12 +182,12 @@ function handleRealEstate(data) {
   if (data['Action'] === 'Renew' && data['RE Token']) {
     const allRows = sheet.getDataRange().getValues();
     for (let i = 1; i < allRows.length; i++) {
-      if (allRows[i][28] === data['RE Token']) {  // col AC (index 28) = token
+      if (allRows[i][27] === data['RE Token']) {  // col AB (index 27) = token
         const r          = i + 1;
         const newExpiry  = new Date(now.getTime() + 210 * 24 * 60 * 60 * 1000);
-        sheet.getRange(r, 18).setValue(Utilities.formatDate(now,      'America/Tijuana', 'yyyy-MM-dd')); // R col18 Submitted Date
-        sheet.getRange(r, 19).setValue(Utilities.formatDate(newExpiry,'America/Tijuana', 'yyyy-MM-dd')); // S col19 Expiry Date
-        sheet.getRange(r, 28).setValue('Approved'); // AB Status
+        sheet.getRange(r, 17).setValue(Utilities.formatDate(now,      'America/Tijuana', 'yyyy-MM-dd')); // Q col17 Submitted Date
+        sheet.getRange(r, 18).setValue(Utilities.formatDate(newExpiry,'America/Tijuana', 'yyyy-MM-dd')); // R col18 Expiry Date
+        sheet.getRange(r, 27).setValue('Approved'); // AA col27 Status
         MailApp.sendEmail({
           to: NOTIFY_EMAIL,
           subject: '🔄 Listing renewed: ' + (allRows[i][2] || 'Real Estate'),
@@ -219,35 +219,34 @@ function handleRealEstate(data) {
   // U=Photo Count, V=Profile Photo, W=Photo 1, X=Photo 2, Y=Photo 3, Z=Photo 4, AA=Photo 5,
   // AB=Status
   const row = [
-    new Date().toLocaleString('en-US', {timeZone: 'America/Tijuana'}), // A  col1  Submitted At
-    data['Listing Type']   || '',   // B  col2  Listing Type
-    data['Title']          || '',   // C  col3  Title
-    data['Price']          || '',   // D  col4  Price
-    data['Bedrooms']       || '',   // E  col5  Bedrooms
-    data['Bathrooms']      || '',   // F  col6  Bathrooms
-    data['Sq Meters']      || '',   // G  col7  Square Meters
-    data['Address']        || '',   // H  col8  Address
-    data['Neighborhood']   || '',   // I  col9  Neighborhood
-    data['Furnished']      || '',   // J  col10 Furnished
-    data['Pets Allowed']   || '',   // K  col11 Pets Allowed
-    data['Parking']        || '',   // L  col12 Parking
-    data['Contact Name']   || '',   // M  col13 Contact Name
-    data['Contact Phone']  || '',   // N  col14 Contact Phone
-    data['Contact Email']  || '',   // O  col15 Contact Email
-    'Real Estate Page',             // P  col16 Source
-    '',                             // Q  col17 (existing 'Status' header — script leaves blank, use AB instead)
-    submittedDate,                  // R  col18 Submitted Date
-    expiryDate,                     // S  col19 Expiry Date
-    '',                             // T  col20 Days Remaining (put formula =S2-TODAY() in T2, drag down)
-    data['Photo Count']    || 0,    // U  col21 Photo Count
-    data['Profile Photo']  || '',   // V  col22 Profile Photo
-    data['Photo 1']        || '',   // W  col23 Photo 1
-    data['Photo 2']        || '',   // X  col24 Photo 2
-    data['Photo 3']        || '',   // Y  col25 Photo 3
-    data['Photo 4']        || '',   // Z  col26 Photo 4
-    data['Photo 5']        || '',   // AA col27 Photo 5
-    'Pending',                      // AB col28 Status (your dropdown)
-    token,                          // AC col29 Token (add "Token" header in AC1)
+    new Date().toLocaleString('en-US', {timeZone: 'America/Tijuana'}), // A  col1  idx0  Submitted At
+    data['Listing Type']   || '',   // B  col2  idx1  Listing Type
+    data['Title']          || '',   // C  col3  idx2  Title
+    data['Price']          || '',   // D  col4  idx3  Price
+    data['Bedrooms']       || '',   // E  col5  idx4  Bedrooms
+    data['Bathrooms']      || '',   // F  col6  idx5  Bathrooms
+    data['Sq Meters']      || '',   // G  col7  idx6  Square Meters
+    data['Address']        || '',   // H  col8  idx7  Address
+    data['Neighborhood']   || '',   // I  col9  idx8  Neighborhood
+    data['Furnished']      || '',   // J  col10 idx9  Furnished
+    data['Pets Allowed']   || '',   // K  col11 idx10 Pets Allowed
+    data['Parking']        || '',   // L  col12 idx11 Parking
+    data['Contact Name']   || '',   // M  col13 idx12 Contact Name
+    data['Contact Phone']  || '',   // N  col14 idx13 Contact Phone
+    data['Contact Email']  || '',   // O  col15 idx14 Contact Email
+    'Real Estate Page',             // P  col16 idx15 Source
+    submittedDate,                  // Q  col17 idx16 Submitted Date
+    expiryDate,                     // R  col18 idx17 Expiry Date
+    '',                             // S  col19 idx18 Days Remaining (formula =R2-TODAY() in S2)
+    data['Photo Count']    || 0,    // T  col20 idx19 Photo Count
+    data['Profile Photo']  || '',   // U  col21 idx20 Profile Photo
+    data['Photo 1']        || '',   // V  col22 idx21 Photo 1
+    data['Photo 2']        || '',   // W  col23 idx22 Photo 2
+    data['Photo 3']        || '',   // X  col24 idx23 Photo 3
+    data['Photo 4']        || '',   // Y  col25 idx24 Photo 4
+    data['Photo 5']        || '',   // Z  col26 idx25 Photo 5
+    'Pending',                      // AA col27 idx26 Status (dropdown: Pending/Approved/Denied/Expired)
+    token,                          // AB col28 idx27 Token
   ];
   sheet.appendRow(row);
 
@@ -306,25 +305,25 @@ function doGet(e) {
       const sheet = getRealEstateSheet();
       const data  = sheet.getDataRange().getValues();
       for (let i = 1; i < data.length; i++) {
-        if (data[i][28] === reToken) {  // col AC = token (index 28)
-          const status = String(data[i][27]).toLowerCase(); // col AB (index 27)
+        if (data[i][27] === reToken) {  // col AB (index 27) = token
+          const status = String(data[i][26]).toLowerCase(); // col AA (index 26) = Status
           return respond({
             status:      'ok',
             valid:       true,
             re_status:   status,
-            listing_type:data[i][1],
-            title:       data[i][2],
-            price:       data[i][3],
-            bedrooms:    data[i][4],
-            bathrooms:   data[i][5],
-            sq_meters:   data[i][6],
-            address:     data[i][7],
-            neighborhood:data[i][8],
-            furnished:   data[i][9],
-            pets:        data[i][10],
-            parking:     data[i][11],
-            contact_name:data[i][12],
-            expiry_date: data[i][18],  // S Expiry Date (index 18)
+            listing_type:data[i][1],   // B
+            title:       data[i][2],   // C
+            price:       data[i][3],   // D
+            bedrooms:    data[i][4],   // E
+            bathrooms:   data[i][5],   // F
+            sq_meters:   data[i][6],   // G
+            address:     data[i][7],   // H
+            neighborhood:data[i][8],   // I
+            furnished:   data[i][9],   // J
+            pets:        data[i][10],  // K
+            parking:     data[i][11],  // L
+            contact_name:data[i][12],  // M
+            expiry_date: data[i][17],  // R col18 idx17 Expiry Date
           });
         }
       }
@@ -382,7 +381,7 @@ function onEdit(e) {
   const sheetName = sheet.getName();
 
   // ── Real Estate tab: Status = col AB = 28 ───────────────────
-  if (sheetName === 'Real Estate' && col === 28) {
+  if (sheetName === 'Real Estate' && col === 27) {  // AA col27 = Status
     if (String(newVal).toLowerCase() !== 'approved') return;
 
     const rowData      = sheet.getRange(row, 1, 1, 28).getValues()[0];
@@ -391,8 +390,8 @@ function onEdit(e) {
     const contactName  = rowData[12];  // M Contact Name
     const contactEmail = rowData[14];  // O Contact Email (index 14) ✓
     const listingType  = rowData[1];   // B Listing Type
-    const token        = rowData[28];  // AC Token (index 28)
-    const expiryDate   = rowData[18];  // S Expiry Date (index 18)
+    const token        = rowData[27];  // AB col28 idx27 Token
+    const expiryDate   = rowData[17];  // R col18 idx17 Expiry Date
 
     if (!contactEmail || !token) return;
 
@@ -484,14 +483,14 @@ function checkExpiringListings() {
   today.setHours(0, 0, 0, 0);
 
   for (let i = 1; i < data.length; i++) {
-    const status      = String(data[i][27]).toLowerCase(); // AB col 28, index 27
-    const expiryStr   = data[i][18];                       // S col 19, index 18
+    const status      = String(data[i][26]).toLowerCase(); // AA col27 idx26 Status
+    const expiryStr   = data[i][17];                       // R col18 idx17 Expiry Date
     const contactEmail= data[i][14];                       // O col 15, index 14
     const contactName = data[i][12];                       // M col 13, index 12
     const title       = data[i][2];                        // C col 3, index 2
     const address     = data[i][7];                        // H col 8, index 7
     const listingType = data[i][1];                        // B col 2, index 1
-    const token       = data[i][28];                       // AC col 29, index 28
+    const token       = data[i][27];                       // AB col28 idx27 Token
 
     if (!expiryStr || status === 'expired' || status === 'denied' || status === 'pending') continue;
 
@@ -501,7 +500,7 @@ function checkExpiringListings() {
 
     // ── Auto-expire at 0 days ─────────────────────────────────
     if (daysLeft <= 0 && status === 'approved') {
-      sheet.getRange(i + 1, 28).setValue('Expired'); // AB col28
+      sheet.getRange(i + 1, 27).setValue('Expired'); // AA col27 Status
       if (contactEmail) {
         MailApp.sendEmail({
           to: contactEmail,
