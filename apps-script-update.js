@@ -33,9 +33,12 @@ function getMainSheet() {
 }
 
 function getRealEstateSheet() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
-  const re = ss.getSheetByName('Real Estate');
-  if (!re) throw new Error('Real Estate tab not found. Please create it.');
+  const ss     = SpreadsheetApp.openById(SHEET_ID);
+  const re     = ss.getSheetByName('Real Estate');
+  if (!re) {
+    const names = ss.getSheets().map(s => s.getName()).join(', ');
+    throw new Error('Real Estate tab not found. Available tabs: ' + names);
+  }
   return re;
 }
 
@@ -565,4 +568,25 @@ function ok() {
   return ContentService
     .createTextOutput(JSON.stringify({ status: 'ok' }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// testRouting — run this manually in Apps Script to verify setup
+// Click Run → testRouting and check the Execution Log
+// ═══════════════════════════════════════════════════════════════════
+function testRouting() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sheets = ss.getSheets().map(s => s.getName());
+  Logger.log('Available sheets: ' + sheets.join(', '));
+
+  const re = ss.getSheetByName('Real Estate');
+  if (re) {
+    Logger.log('✅ Real Estate tab found. Last column: ' + re.getLastColumn());
+    Logger.log('Headers: ' + re.getRange(1, 1, 1, re.getLastColumn()).getValues()[0].join(' | '));
+  } else {
+    Logger.log('❌ Real Estate tab NOT found. Check the tab name exactly.');
+  }
+
+  Logger.log('SHEET_ID: ' + SHEET_ID);
+  Logger.log('NOTIFY_EMAIL: ' + NOTIFY_EMAIL);
 }
