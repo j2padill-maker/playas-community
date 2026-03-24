@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="google" content="notranslate">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienes Raíces — Playas de Tijuana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #e8dcc8;
+    --sand-light: #f5efe3;
+    --sand-dark: #c9b99a;
+    --ocean: #2a7fa5;
+    --ocean-deep: #1a5270;
+    --ocean-light: #5aafd4;
+    --seafoam: #4caf88;
+    --seafoam-light: #a8d8c2;
+    --white: #fafaf8;
+    --text: #2c2c2c;
+    --text-light: #6b6b6b;
+    --nav-h: 70px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(26,82,112,0.96);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center;
+    padding: 0 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--sand); font-size: 1.3rem; font-weight: 700;
+    flex: 1; text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 0.3rem; flex-wrap: wrap; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.35rem 0.65rem; border-radius: 20px;
+    transition: all 0.2s; letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    background: rgba(255,255,255,0.15); color: var(--sand);
+  }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--sand); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── HERO ── */
+  .page-hero {
+    min-height: 42vh;
+    background:
+      linear-gradient(180deg, rgba(10,20,40,0.6) 0%, rgba(20,40,70,0.4) 60%, transparent 100%),
+      url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80') center/cover no-repeat;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: calc(var(--nav-h) + 3rem) 2rem 4rem;
+    position: relative;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(transparent, var(--white));
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    color: var(--sand-light); font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.5rem 1.2rem; border-radius: 30px;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    color: #fff; line-height: 1.15;
+    margin-bottom: 0.75rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title span { color: var(--sand); }
+  .hero-sub {
+    color: rgba(255,255,255,0.85);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    max-width: 520px; line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── LAYOUT ── */
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  section { padding: 4rem 2rem; }
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ocean);
+    font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: var(--ocean-deep); margin-bottom: 0.6rem; line-height: 1.2;
+  }
+  .section-desc {
+    color: var(--text-light); max-width: 560px;
+    line-height: 1.75; margin-bottom: 2rem; font-size: 0.95rem;
+  }
+
+  /* ── TAB SWITCHER ── */
+  .tab-bar {
+    display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 0.55rem 1.25rem; border-radius: 50px;
+    border: 2px solid var(--sand-dark);
+    background: transparent; color: var(--text-light);
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tab-btn.active {
+    background: var(--ocean); border-color: var(--ocean);
+    color: #fff; box-shadow: 0 4px 16px rgba(42,127,165,0.35);
+  }
+  .tab-btn:hover:not(.active) { border-color: var(--ocean); color: var(--ocean); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── LISTING GRID ── */
+  .listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .listing-card {
+    background: #fff; border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+  }
+  .listing-photo {
+    width: 100%; height: 200px; object-fit: cover;
+    background: linear-gradient(135deg, var(--sand-light), var(--sand));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; color: var(--sand-dark);
+  }
+  .listing-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .listing-body { padding: 1.2rem 1.4rem 1.5rem; }
+  .listing-badge {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.25rem 0.75rem;
+    border-radius: 20px; margin-bottom: 0.6rem;
+  }
+  .badge-rent { background: #dbeafe; color: #1d4ed8; }
+  .badge-sale { background: #dcfce7; color: #166534; }
+  .listing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--ocean-deep);
+    margin-bottom: 0.4rem;
+  }
+  .listing-desc {
+    font-size: 0.865rem; color: var(--text-light);
+    line-height: 1.65; margin-bottom: 0.9rem;
+  }
+  .listing-meta {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
+    font-size: 0.8rem; color: var(--text-light);
+    border-top: 1px solid var(--sand); padding-top: 0.8rem;
+  }
+  .listing-meta span { display: flex; align-items: center; gap: 0.3rem; }
+  .listing-price {
+    font-size: 1.15rem; font-weight: 700; color: var(--ocean);
+    margin-bottom: 0.6rem;
+  }
+
+  /* placeholder card */
+  .placeholder-card {
+    background: var(--sand-light); border: 2px dashed var(--sand-dark);
+    border-radius: 18px; padding: 2.5rem;
+    text-align: center; color: var(--text-light);
+    font-size: 0.9rem; line-height: 1.7;
+  }
+  .placeholder-card .ph-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+  /* ── SUBMIT FORM ── */
+  .form-section {
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    padding: 4rem 2rem;
+  }
+  .form-box {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    border-radius: 22px; padding: 2.5rem;
+    backdrop-filter: blur(8px);
+    max-width: 760px; margin: 0 auto;
+  }
+  .form-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: #fff; font-size: 1.6rem; margin-bottom: 0.4rem;
+  }
+  .form-box .form-intro { color: rgba(255,255,255,0.75); font-size: 0.92rem; margin-bottom: 1.75rem; line-height: 1.6; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 0.03em; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 10px; padding: 0.65rem 0.9rem;
+    color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.45); }
+  .form-group select option { background: var(--ocean-deep); color: #fff; }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { outline: none; border-color: rgba(255,255,255,0.6); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-group input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+
+  /* photo upload */
+  .upload-area {
+    border: 2px dashed rgba(255,255,255,0.35);
+    border-radius: 12px; padding: 1.5rem;
+    text-align: center; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 1rem; position: relative;
+  }
+  .upload-area:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-area .upload-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+  .upload-area p { color: rgba(255,255,255,0.65); font-size: 0.82rem; }
+  #photo-preview { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+  #photo-preview img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); }
+
+  .form-submit {
+    width: 100%; padding: 0.9rem;
+    background: var(--seafoam); border: none; border-radius: 50px;
+    color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: all 0.25s; margin-top: 0.5rem;
+    box-shadow: 0 4px 20px rgba(76,175,136,0.4);
+  }
+  .form-submit:hover { background: #3d9b75; transform: translateY(-2px); }
+  .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .success-box {
+    display: none; text-align: center;
+    background: rgba(76,175,136,0.18);
+    border: 2px solid rgba(76,175,136,0.5);
+    border-radius: 16px; padding: 2rem; margin-top: 1rem;
+  }
+  .success-box .s-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .success-box p { color: #a8d8c2; font-weight: 600; font-size: 1rem; }
+
+  .mod-notice {
+    background: rgba(255,255,255,0.08);
+    border-left: 3px solid rgba(255,255,255,0.3);
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem; font-size: 0.8rem;
+    color: rgba(255,255,255,0.65); margin-top: 1rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(10,25,50,0.96);
+    color: rgba(255,255,255,0.6);
+    text-align: center; padding: 2rem;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--seafoam-light); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--ocean-deep); padding: 1rem; gap: 0.5rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .form-row { grid-template-columns: 1fr; }
+    .listing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">🌴 Playas de Tijuana</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="eventos.html" id="nav-link-events">Eventos</a></li>
+    <li><a href="ninos.html" id="nav-link-kids">Niños</a></li>
+    <li><a href="adultos.html" id="nav-link-adults">Adultos</a></li>
+    <li><a href="restaurantes.html" id="nav-link-eats">Restaurantes</a></li>
+    <li><a href="bares.html" id="nav-link-bars">Bares &amp; Cervecerías</a></li>
+    <li><a href="services.html" id="nav-link-services">Servicios</a></li>
+    <li><a href="realestate.html" id="nav-link-realestate" class="active">Bienes Raíces</a></li>
+    <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25);color:#a8d8c2;">➕ Tu Negocio</a></li>
+  </ul>
+  <button id="lang-toggle-btn" onclick="toggleLanguage()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);color:#fff;padding:0.3rem 0.8rem;border-radius:20px;cursor:pointer;font-size:0.82rem;margin-left:0.75rem;white-space:nowrap;font-family:'DM Sans',sans-serif;">🌐 English</button>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-badge" id="hero-badge">Playas de Tijuana · Real Estate</div>
+  <h1 class="hero-title" id="hero-title">Bienes <span>Raíces</span></h1>
+  <p class="hero-sub" id="hero-sub">Renta o compra en Playas de Tijuana. Explora anuncios de la comunidad o publica el tuyo gratis.</p>
+</div>
+
+<!-- LISTINGS SECTION -->
+<section id="listings" style="padding-top:3rem;">
+  <div class="section-inner">
+    <p class="section-tag" id="sec-re-tag">Encuentra tu lugar</p>
+    <h2 class="section-title" id="sec-re-title">Propiedades Disponibles</h2>
+    <p class="section-desc" id="sec-re-desc">Anuncios revisados por la comunidad. Todos los listados son enviados por vecinos y propietarios locales.</p>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('rent')" id="tab-rent">🏠 En Renta</button>
+      <button class="tab-btn" onclick="switchTab('sale')" id="tab-sale">🔑 En Venta</button>
+    </div>
+
+    <!-- RENTALS PANEL -->
+    <div class="tab-panel active" id="panel-rent">
+      <div class="listing-grid" id="rent-grid">
+        <!-- Approved rental listings load here from Google Sheets -->
+        <!-- Placeholder shown until listings exist -->
+        <div class="placeholder-card" id="rent-placeholder">
+          <div class="ph-icon">🏠</div>
+          <strong id="ph-rent-title">Sé el primero en publicar una renta</strong>
+          <p id="ph-rent-desc">Aún no hay propiedades en renta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOR SALE PANEL -->
+    <div class="tab-panel" id="panel-sale">
+      <div class="listing-grid" id="sale-grid">
+        <div class="placeholder-card" id="sale-placeholder">
+          <div class="ph-icon">🔑</div>
+          <strong id="ph-sale-title">Sé el primero en publicar una venta</strong>
+          <p id="ph-sale-desc">Aún no hay propiedades en venta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SUBMIT LISTING FORM -->
+<section class="form-section" id="submit-listing">
+  <div class="form-box">
+    <h2 id="form-title">Publicar un Anuncio</h2>
+    <p class="form-intro" id="form-intro">Renta o venta — publica tu propiedad gratis. Se revisa antes de publicarse. Este es un servicio comunitario gratuito.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label id="label-listing-type">Tipo de Anuncio</label>
+        <select id="listing-type">
+          <option value="For Rent" id="opt-for-rent">En Renta</option>
+          <option value="For Sale" id="opt-for-sale">En Venta</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label id="label-price">Precio (USD)</label>
+        <input type="text" id="listing-price" placeholder="ej. 800/mes o 150,000" id="ph-price">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label id="label-bedrooms">Recámaras</label>
+        <input type="number" id="listing-bedrooms" placeholder="# de recámaras" min="0">
+      </div>
+      <div class="form-group">
+        <label id="label-bathrooms">Baños</label>
+        <input type="number" id="listing-bathrooms" placeholder="# de baños" min="0" step="0.5">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label id="label-address">Dirección / Colonia *</label>
+      <input type="text" id="listing-address" placeholder="Dirección o zona general">
+    </div>
+
+    <div class="form-group">
+      <label id="label-contact-name">Tu Nombre y Contacto *</label>
+      <input type="text" id="listing-contact" placeholder="Nombre · correo o teléfono (no se publica)">
+    </div>
+
+    <div class="form-group">
+      <label id="label-prop-desc">Descripción *</label>
+      <textarea id="listing-desc" placeholder="Describe la propiedad, características, contacto..."></textarea>
+    </div>
+
+    <!-- Photo Upload -->
+    <div class="upload-area" id="upload-area">
+      <input type="file" id="photo-input" accept="image/jpeg,image/png" multiple>
+      <div class="upload-icon">📷</div>
+      <p id="upload-p-listing">Haz clic para subir fotos de la propiedad (JPG, PNG — hasta 5 imágenes)</p>
+    </div>
+    <div id="photo-preview"></div>
+
+    <button class="form-submit" id="btn-submit-listing" onclick="submitListing()">Enviar Anuncio para Revisión</button>
+
+    <div class="success-box" id="listing-success">
+      <div class="s-icon">✅</div>
+      <p id="listing-success-msg">¡Anuncio enviado! Lo revisaremos y publicaremos pronto.</p>
+    </div>
+
+    <div class="mod-notice" id="mod-notice-listing">⚠️ Todos los anuncios se revisan antes de publicarse. No cobramos — es un servicio comunitario gratuito.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🌴 <strong>Playas de Tijuana Community Hub</strong> · <a href="index.html">Inicio</a> · <a href="add-business.html">Agrega tu Negocio</a></p>
+  <p style="margin-top:0.5rem;" id="footer-tagline">Tu centro comunitario — hecho con amor para Playas.</p>
+</footer>
+
+<script>
+// ── CONFIG ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
+const SHEET_CSV_URL   = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
+
+// ── LANGUAGE ──
+let currentLang = localStorage.getItem('preferred-lang') || 'es';
+
+const T = {
+  es: {
+    lang_btn:        '🌐 English',
+    nav_events:      'Eventos', nav_kids: 'Niños', nav_adults: 'Adultos',
+    nav_eats:        'Restaurantes', nav_bars: 'Bares & Cervecerías',
+    nav_services:    'Servicios', nav_realestate: 'Bienes Raíces', nav_addbiz: '➕ Tu Negocio',
+    hero_badge:      'Playas de Tijuana · Bienes Raíces',
+    hero_title:      null, // handled by HTML span
+    hero_sub:        'Renta o compra en Playas de Tijuana. Explora anuncios de la comunidad o publica el tuyo gratis.',
+    sec_re_tag:      'Encuentra tu lugar',
+    sec_re_title:    'Propiedades Disponibles',
+    sec_re_desc:     'Anuncios revisados por la comunidad. Todos los listados son enviados por vecinos y propietarios locales.',
+    tab_rent:        '🏠 En Renta',
+    tab_sale:        '🔑 En Venta',
+    ph_rent_title:   'Sé el primero en publicar una renta',
+    ph_rent_desc:    'Aún no hay propiedades en renta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.',
+    ph_sale_title:   'Sé el primero en publicar una venta',
+    ph_sale_desc:    'Aún no hay propiedades en venta. Usa el formulario de abajo para publicar la tuya — es gratis y se revisa antes de aparecer aquí.',
+    form_title:      'Publicar un Anuncio',
+    form_intro:      'Renta o venta — publica tu propiedad gratis. Se revisa antes de publicarse.',
+    label_listing_type: 'Tipo de Anuncio',
+    opt_for_rent:    'En Renta', opt_for_sale: 'En Venta',
+    label_price:     'Precio (USD)',
+    label_bedrooms:  'Recámaras', label_bathrooms: 'Baños',
+    label_address:   'Dirección / Colonia *',
+    label_contact_name: 'Tu Nombre y Contacto *',
+    label_prop_desc: 'Descripción *',
+    upload_p_listing:'Haz clic para subir fotos de la propiedad (JPG, PNG — hasta 5 imágenes)',
+    btn_submit_listing: 'Enviar Anuncio para Revisión',
+    listing_success_msg: '¡Anuncio enviado! Lo revisaremos y publicaremos pronto.',
+    mod_notice_listing: '⚠️ Todos los anuncios se revisan antes de publicarse. No cobramos — es un servicio comunitario gratuito.',
+    footer_tagline:  'Tu centro comunitario — hecho con amor para Playas.',
+    badge_rent:      'En Renta', badge_sale: 'En Venta',
+    err_required:    'Por favor completa los campos requeridos.',
+  },
+  en: {
+    lang_btn:        '🌐 Español',
+    nav_events:      'Events', nav_kids: 'Kids', nav_adults: 'Adults',
+    nav_eats:        'Restaurants', nav_bars: 'Bars & Breweries',
+    nav_services:    'Services', nav_realestate: 'Real Estate', nav_addbiz: '➕ Add Your Business',
+    hero_badge:      'Playas de Tijuana · Real Estate',
+    hero_sub:        'Rent or buy in Playas de Tijuana. Browse community listings or post your own for free.',
+    sec_re_tag:      'Find your place',
+    sec_re_title:    'Available Properties',
+    sec_re_desc:     'Community-reviewed listings. All properties are submitted by neighbors and local owners.',
+    tab_rent:        '🏠 For Rent',
+    tab_sale:        '🔑 For Sale',
+    ph_rent_title:   'Be the first to post a rental',
+    ph_rent_desc:    'No rental listings yet. Use the form below to post yours — it\'s free and reviewed before publishing.',
+    ph_sale_title:   'Be the first to post a property for sale',
+    ph_sale_desc:    'No listings for sale yet. Use the form below to post yours — it\'s free and reviewed before publishing.',
+    form_title:      'Submit a Listing',
+    form_intro:      'Rent or sale — post your property for free. Reviewed before publishing.',
+    label_listing_type: 'Listing Type',
+    opt_for_rent:    'For Rent', opt_for_sale: 'For Sale',
+    label_price:     'Price (USD)',
+    label_bedrooms:  'Bedrooms', label_bathrooms: 'Bathrooms',
+    label_address:   'Address / Neighborhood *',
+    label_contact_name: 'Your Name & Contact *',
+    label_prop_desc: 'Description *',
+    upload_p_listing:'Click to upload property photos (JPG, PNG — up to 5 images)',
+    btn_submit_listing: 'Submit Listing for Review',
+    listing_success_msg: 'Listing submitted! We\'ll review and publish it soon.',
+    mod_notice_listing: '⚠️ All listings are reviewed before publishing. We do not charge — this is a free community service.',
+    footer_tagline:  'Your neighborhood community hub — built with love for Playas.',
+    badge_rent:      'For Rent', badge_sale: 'For Sale',
+    err_required:    'Please fill in all required fields.',
+  }
+};
+
+const ID_MAP = {
+  lang_btn: 'lang-toggle-btn',
+  nav_events: 'nav-link-events', nav_kids: 'nav-link-kids', nav_adults: 'nav-link-adults',
+  nav_eats: 'nav-link-eats', nav_bars: 'nav-link-bars',
+  nav_services: 'nav-link-services', nav_realestate: 'nav-link-realestate', nav_addbiz: 'nav-link-addbiz',
+  hero_badge: 'hero-badge', hero_sub: 'hero-sub',
+  sec_re_tag: 'sec-re-tag', sec_re_title: 'sec-re-title', sec_re_desc: 'sec-re-desc',
+  tab_rent: 'tab-rent', tab_sale: 'tab-sale',
+  ph_rent_title: 'ph-rent-title', ph_rent_desc: 'ph-rent-desc',
+  ph_sale_title: 'ph-sale-title', ph_sale_desc: 'ph-sale-desc',
+  form_title: 'form-title', form_intro: 'form-intro',
+  label_listing_type: 'label-listing-type',
+  opt_for_rent: 'opt-for-rent', opt_for_sale: 'opt-for-sale',
+  label_price: 'label-price',
+  label_bedrooms: 'label-bedrooms', label_bathrooms: 'label-bathrooms',
+  label_address: 'label-address', label_contact_name: 'label-contact-name',
+  label_prop_desc: 'label-prop-desc',
+  upload_p_listing: 'upload-p-listing',
+  btn_submit_listing: 'btn-submit-listing',
+  listing_success_msg: 'listing-success-msg',
+  mod_notice_listing: 'mod-notice-listing',
+  footer_tagline: 'footer-tagline',
+};
+
+function applyLanguage(lang) {
+  const t = T[lang];
+  if (!t) return;
+  for (const [key, elId] of Object.entries(ID_MAP)) {
+    const el = document.getElementById(elId);
+    if (el && t[key] !== undefined) el.textContent = t[key];
+  }
+  // Re-render cards with correct badge labels
+  renderListings();
+  localStorage.setItem('preferred-lang', lang);
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  applyLanguage(currentLang);
+}
+
+// ── NAV ──
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ── TAB SWITCHER ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ── PHOTO UPLOAD (Base64, max 5, resize to 1200px) ──
+const photoDataArray = [];
+
+document.getElementById('photo-input').addEventListener('change', function(e) {
+  const files = Array.from(e.target.files);
+  const remaining = 5 - photoDataArray.length;
+  const toProcess = files.slice(0, remaining);
+  toProcess.forEach(file => resizeAndStore(file));
+});
+
+function resizeAndStore(file) {
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX_W = 1200;
+      let w = img.width, h = img.height;
+      if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const b64 = canvas.toDataURL('image/jpeg', 0.82);
+      photoDataArray.push(b64);
+      updatePhotoPreview();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function updatePhotoPreview() {
+  const preview = document.getElementById('photo-preview');
+  preview.innerHTML = '';
+  photoDataArray.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    preview.appendChild(img);
+  });
+}
+
+// ── FORM SUBMIT ──
+function submitListing() {
+  const address = document.getElementById('listing-address').value.trim();
+  const contact = document.getElementById('listing-contact').value.trim();
+  const desc    = document.getElementById('listing-desc').value.trim();
+
+  if (!address || !contact || !desc) {
+    alert(T[currentLang].err_required);
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit-listing');
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando...';
+
+  const data = {
+    'Business Name':  document.getElementById('listing-address').value.trim(),
+    'Category':       'Real Estate',
+    'Listing Type':   document.getElementById('listing-type').value,
+    'Price':          document.getElementById('listing-price').value.trim(),
+    'Bedrooms':       document.getElementById('listing-bedrooms').value.trim(),
+    'Bathrooms':      document.getElementById('listing-bathrooms').value.trim(),
+    'Address':        address,
+    'Description':    desc,
+    'Contact':        contact,
+    'Source':         'Real Estate Page',
+    'Photo Count':    photoDataArray.length,
+    'Photo 1':        photoDataArray[0] || '',
+    'Photo 2':        photoDataArray[1] || '',
+    'Photo 3':        photoDataArray[2] || '',
+    'Photo 4':        photoDataArray[3] || '',
+    'Photo 5':        photoDataArray[4] || '',
+  };
+
+  const params = new URLSearchParams();
+  params.append('payload', JSON.stringify(data));
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: params,
+  })
+  .then(() => {
+    document.getElementById('listing-success').style.display = 'block';
+    btn.style.display = 'none';
+    document.getElementById('listing-address').value = '';
+    document.getElementById('listing-contact').value = '';
+    document.getElementById('listing-desc').value = '';
+    document.getElementById('listing-price').value = '';
+    document.getElementById('listing-bedrooms').value = '';
+    document.getElementById('listing-bathrooms').value = '';
+    photoDataArray.length = 0;
+    updatePhotoPreview();
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = T[currentLang].btn_submit_listing;
+    alert('Error al enviar. Por favor intenta de nuevo.');
+  });
+}
+
+// ── LOAD APPROVED LISTINGS FROM SHEET ──
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+  return lines.slice(1).map(line => {
+    const vals = line.match(/(".*?"|[^,]+|(?<=,)(?=,)|(?<=,)$|^(?=,))/g) || [];
+    const row = {};
+    headers.forEach((h, i) => {
+      row[h] = (vals[i] || '').replace(/^"|"$/g, '').trim();
+    });
+    return row;
+  });
+}
+
+function buildListingCard(r, lang) {
+  const t = T[lang];
+  const type = (r['Listing Type'] || '').toLowerCase();
+  const isRent = type.includes('rent') || type.includes('renta');
+  const badgeClass = isRent ? 'badge-rent' : 'badge-sale';
+  const badgeText  = isRent ? t.badge_rent : t.badge_sale;
+
+  const price    = r['Price']     ? '<div class="listing-price">$' + r['Price'] + '</div>' : '';
+  const beds     = r['Bedrooms']  ? '<span>🛏 ' + r['Bedrooms'] + '</span>' : '';
+  const baths    = r['Bathrooms'] ? '<span>🚿 ' + r['Bathrooms'] + '</span>' : '';
+  const addr     = r['Address']   ? '<span>📍 ' + r['Address'] + '</span>' : '';
+
+  let photoHTML = '<div class="listing-photo">🏠</div>';
+  const profilePhoto = r['Profile Photo'] || r['Photo 1'] || '';
+  if (profilePhoto) {
+    photoHTML = '<div class="listing-photo"><img src="' + profilePhoto + '" alt="Property photo" loading="lazy"></div>';
+  }
+
+  return '<div class="listing-card">' +
+    photoHTML +
+    '<div class="listing-body">' +
+      '<span class="listing-badge ' + badgeClass + '">' + badgeText + '</span>' +
+      price +
+      '<h3 class="listing-title">' + (r['Business Name'] || r['Address'] || '') + '</h3>' +
+      '<p class="listing-desc">' + (r['Description'] || '') + '</p>' +
+      '<div class="listing-meta">' + beds + baths + addr + '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderListings() {
+  if (!window._allListings) return;
+  const lang = currentLang;
+  const approved = window._allListings.filter(r =>
+    r['Category'] === 'Real Estate' &&
+    (r['Status'] || '').toLowerCase() === 'approved'
+  );
+
+  const rentals = approved.filter(r => {
+    const t = (r['Listing Type'] || '').toLowerCase();
+    return t.includes('rent') || t.includes('renta');
+  });
+  const sales = approved.filter(r => {
+    const t = (r['Listing Type'] || '').toLowerCase();
+    return t.includes('sale') || t.includes('venta');
+  });
+
+  const rentGrid = document.getElementById('rent-grid');
+  const saleGrid = document.getElementById('sale-grid');
+
+  if (rentals.length > 0) {
+    rentGrid.innerHTML = rentals.map(r => buildListingCard(r, lang)).join('');
+  } else {
+    rentGrid.innerHTML = '<div class="placeholder-card" id="rent-placeholder">' +
+      '<div class="ph-icon">🏠</div>' +
+      '<strong id="ph-rent-title">' + T[lang].ph_rent_title + '</strong>' +
+      '<p id="ph-rent-desc">' + T[lang].ph_rent_desc + '</p>' +
+      '</div>';
+  }
+
+  if (sales.length > 0) {
+    saleGrid.innerHTML = sales.map(r => buildListingCard(r, lang)).join('');
+  } else {
+    saleGrid.innerHTML = '<div class="placeholder-card" id="sale-placeholder">' +
+      '<div class="ph-icon">🔑</div>' +
+      '<strong id="ph-sale-title">' + T[lang].ph_sale_title + '</strong>' +
+      '<p id="ph-sale-desc">' + T[lang].ph_sale_desc + '</p>' +
+      '</div>';
+  }
+}
+
+function loadListings() {
+  fetch(SHEET_CSV_URL + '&t=' + Date.now())
+    .then(r => r.text())
+    .then(text => {
+      window._allListings = parseCSV(text);
+      renderListings();
+    })
+    .catch(() => {
+      // Silent fail — placeholders remain
+    });
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  applyLanguage(currentLang);
+  loadListings();
+});
+</script>
+</body>
+</html>
