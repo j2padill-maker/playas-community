@@ -710,6 +710,30 @@
       alert(getLang()==='en' ? 'Something went wrong. Please try again.' : 'Algo salió mal. Por favor intenta de nuevo.');
     }
   }
+
+  // ── Language helpers ──────────────────────────────────────
+  function getLang() {
+    return localStorage.getItem("lang") || "es";
+  }
+  function applyLanguage(lang) {
+    document.querySelectorAll("[data-es]").forEach(function(el) {
+      el.textContent = lang === "en" ? el.getAttribute("data-en") : el.getAttribute("data-es");
+    });
+    document.querySelectorAll("[data-placeholder-es]").forEach(function(el) {
+      el.placeholder = lang === "en" ? el.getAttribute("data-placeholder-en") : el.getAttribute("data-placeholder-es");
+    });
+    var btn = document.getElementById("lang-toggle-btn");
+    if (btn) btn.textContent = lang === "en" ? "🌐 Español" : "🌐 English";
+  }
+  function toggleLanguage() {
+    var lang = getLang() === "en" ? "es" : "en";
+    localStorage.setItem("lang", lang);
+    applyLanguage(lang);
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    applyLanguage(getLang());
+  });
+  // ─────────────────────────────────────────────────────────
 </script>
 <!-- Photo Gallery Modal -->
 <div class="modal-overlay" id="listingModal" onclick="closeModal(event)">
