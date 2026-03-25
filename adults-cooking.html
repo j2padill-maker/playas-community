@@ -129,16 +129,16 @@
   .owner-banner strong { font-size:1rem; }
   .owner-edit-btn { background:#fff; color:var(--ocean-deep); border:none; border-radius:50px; padding:0.55rem 1.4rem; font-size:0.85rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; }
 
-  .form-photo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin-top:0.5rem; }
-  .form-photo-slot { aspect-ratio:1; border:2px dashed rgba(255,255,255,0.35); border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; position:relative; background:rgba(255,255,255,0.08); font-size:1.2rem; transition:border-color 0.2s; }
-  .form-photo-slot:hover { border-color:rgba(255,255,255,0.7); }
-  .form-photo-slot img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
-  .form-photo-slot .rm-btn { position:absolute; top:3px; right:3px; background:rgba(0,0,0,0.55); color:#fff; border:none; border-radius:50%; width:20px; height:20px; font-size:0.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
-  .profile-picker { margin-top:0.75rem; }
-  .profile-picker label { font-size:0.78rem; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:0.4rem; }
-  .profile-thumbs { display:flex; gap:0.5rem; flex-wrap:wrap; }
-  .profile-thumb { width:52px; height:52px; border-radius:8px; object-fit:cover; cursor:pointer; border:3px solid transparent; transition:border-color 0.2s; }
-  .profile-thumb.selected { border-color:var(--seafoam-light); }
+  .form-photo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;margin-top:0.5rem;}
+  .form-photo-slot{aspect-ratio:1;border:2px dashed rgba(255,255,255,0.35);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;background:rgba(255,255,255,0.08);font-size:1.2rem;transition:border-color 0.2s;}
+  .form-photo-slot:hover{border-color:rgba(255,255,255,0.7);}
+  .form-photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;}
+  .form-photo-slot .rm-btn{position:absolute;top:3px;right:3px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
+  .profile-picker{margin-top:0.75rem;}
+  .profile-picker label{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.4rem;}
+  .profile-thumbs{display:flex;gap:0.5rem;flex-wrap:wrap;}
+  .profile-thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;cursor:pointer;border:3px solid transparent;transition:border-color 0.2s;}
+  .profile-thumb.selected{border-color:var(--seafoam-light);}
 </style>
 </head>
 <body>
@@ -220,19 +220,26 @@
   </div>
   <div class="submit-section" id="submit-listing">
     <h2 data-es="➕ Agregar una Clase de Cocina" data-en="➕ Add a Cooking Class">➕ Agregar una Clase de Cocina</h2>
-    <p data-es="Envía tu clase de cocina para revisión. La agregaremos una vez aprobada." data-en="Submit your cooking class or chef service for review. We'll add it once approved.">Envía tu clase de cocina para revisión. La agregaremos una vez aprobada.</p>
+    <p data-es="Envía tu clase para revisión. La agregaremos una vez aprobada." data-en="Submit your class for review. We'll add it once approved.">Envía tu clase para revisión. La agregaremos una vez aprobada.</p>
     <div class="form-row">
-      <div class="form-group"><label data-es="Nombre de la Clase / Chef" data-en="Class / Chef Name">Nombre de la Clase / Chef</label><input id="cookingName" type="text" placeholder="e.g. Cocina con María"></div>
-      <div class="form-group"><label data-es="Tipo de Cocina" data-en="Cuisine Type">Tipo de Cocina</label>
-        <select id="cookingCategory"><option>Mexican / Baja</option><option>Seafood</option><option>Vegan / Plant-based</option><option>Baking & Pastry</option><option>International</option><option>Multiple</option></select>
+      <div class="form-group"><label data-es="Nombre" data-en="Name">Nombre</label><input id="cookingName" type="text" placeholder="e.g. Cocina Playas"></div>
+      <div class="form-group"><label data-es="Tipo de Clase" data-en="Class Type">Tipo de Clase</label>
+        <select id="cookingCategory">
+        <option>Mexican Cuisine</option>
+        <option>International</option>
+        <option>Baking & Pastry</option>
+        <option>Wine & Spirits</option>
+        <option>Kids Cooking</option>
+        <option>Multiple</option>
+        </select>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group"><label data-es="Dirección" data-en="Address">Dirección</label><input id="cookingAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address" placeholder="Dirección en Playas"></div>
       <div class="form-group"><label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label><input id="cookingPhone" type="text" placeholder="664-xxx-xxxx"></div>
     </div>
-    <div class="form-group"><label>Description</label><textarea id="cookingDesc" data-placeholder-es="Cuéntanos sobre tu negocio, servicios y especialidades..." data-placeholder-en="Tell us about your classes, menu style, schedule, pricing..." placeholder="Cuéntanos sobre tu negocio, servicios y especialidades..."></textarea></div>
-    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto</label><input id="cookingContact" type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
+    <div class="form-group"><label data-es="Descripción" data-en="Description">Descripción</label><textarea id="cookingDesc" data-placeholder-es="Cuéntanos sobre tu negocio, servicios y especialidades..." data-placeholder-en="Tell us about the classes, cuisine style, schedule, pricing..." placeholder="Cuéntanos sobre tu negocio, servicios y especialidades..."></textarea></div>
+    <div class="form-group"><label data-es="Tu Nombre y Contacto" data-en="Your Name &amp; Contact">Tu Nombre y Contacto</label><input id="cookingContact" type="text" data-placeholder-es="Nombre · email o teléfono (no se publica)" data-placeholder-en="Name · email or phone (not published)" placeholder="Nombre · email o teléfono (no se publica)"></div>
     <div class="form-group">
       <label><span data-es="Fotos" data-en="Photos">Fotos</span> <span style="font-weight:400;opacity:0.75;" data-es="(opcional — hasta 5)" data-en="(optional — up to 5)">(opcional — hasta 5)</span></label>
       <div class="form-photo-grid" id="formPhotoGrid">
@@ -248,16 +255,19 @@
       </div>
     </div>
     <button class="form-submit" id="cookingSubmitBtn" onclick="submitCookingForm()"><span data-es="Enviar para Revisión" data-en="Submit for Review">Enviar para Revisión</span></button>
-    <div id="cookingSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;" data-es="Tu listado ha sido enviado para revisión." data-en="Your listing has been submitted for review.">Tu listado ha sido enviado para revisión.</p></div></div><div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
+    <div id="cookingSuccess" style="display:none;"><div style="background:rgba(76,175,136,0.15);border:2px solid rgba(76,175,136,0.5);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;"><div style="font-size:3rem;margin-bottom:0.5rem;">✅</div><h3 style="font-family:'Playfair Display',serif;color:#a8d8c2;margin-bottom:0.5rem;" data-es="¡Solicitud Recibida!" data-en="Submission Received!">¡Solicitud Recibida!</h3><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;" data-es="Tu listado ha sido enviado para revisión." data-en="Your listing has been submitted for review.">Tu listado ha sido enviado para revisión.</p></div></div>
+    <div class="mod-notice" data-es="⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito." data-en="⚠️ All submissions are reviewed before publishing. Free community listing.">⚠️ Todas las solicitudes son revisadas antes de publicarse. Listado comunitario gratuito.</div>
   </div>
+
 </div>
+
 <footer>
   <div class="footer-brand">🌴 Playas de Tijuana</div>
   <p data-es="Tu centro comunitario del vecindario" data-en="Your neighborhood community hub">Tu centro comunitario del vecindario</p>
   <p style="margin-top:0.5rem"><a href="index.html" data-es="← Volver al sitio principal" data-en="← Back to main site">← Volver al sitio principal</a></p>
 </footer>
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6uPIdPWN-x2odj2Nz9B8ImlWOyh_sDYN1bLdxNgNcqAi4iO6rmW0UiGiasOY8_H85/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxC7k_ADZq75uNxQ66qxpfogJhbiqoQfLVBN_v8CW62wNHrW324BiOXfTkTnv1Q5M4I/exec';
   const SHEET_CSV  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzvv44z4h6l_BpcXXwz8daMP-4NlPnBkqegKiIwPZUtuCdYQXlx7tP7wE1NxF6aqA5N7b_qXKH18vh/pub?gid=0&single=true&output=csv';
 
   // ── Reviews ──────────────────────────────────────────────
@@ -573,11 +583,12 @@
   }
 
   // ── Cooking Classes Form Submit ──────────────────────────────
+
   async function submitCookingForm() {
     const name = (document.getElementById('cookingName').value || '').trim();
     const desc = (document.getElementById('cookingDesc').value || '').trim();
     if (!name) { alert(getLang()==='en' ? 'Please enter the name.' : 'Por favor ingresa el nombre.'); return; }
-    if (!desc) { alert('Please enter a description.'); return; }
+    if (!desc) { alert(getLang()==='en' ? 'Please enter a description.' : 'Por favor ingresa una descripción.'); return; }
     const btn = document.getElementById('cookingSubmitBtn');
     btn.disabled = true; btn.textContent = '⏳ ' + (getLang()==='en' ? 'Submitting...' : 'Enviando...');
     const data = {
@@ -588,14 +599,14 @@
       'Phone':         (document.getElementById('cookingPhone').value || '').trim(),
       'Contact Name':  (document.getElementById('cookingContact').value || '').trim(),
       'Source':        'Cooking Class Page',
-      'Photo Count':   formPhotos.filter(function(p) { return p !== null; }).length,
+      'Photo Count':   formPhotos.filter(function(p){ return p!==null; }).length,
       'Profile Photo': formProfilePhoto,
     };
-    formPhotos.forEach(function(p, i) { if (p) data['Photo_' + (i+1)] = p; });
+    formPhotos.forEach(function(p,i){ if(p) data['Photo_'+(i+1)]=p; });
     const params = new URLSearchParams();
     params.append('payload', JSON.stringify(data));
     try {
-      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params });
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:params });
       document.getElementById('cookingSuccess').style.display = 'block';
       btn.style.display = 'none';
     } catch(err) {
@@ -611,22 +622,19 @@
     document.querySelectorAll('#formPhotoGrid .form-photo-slot input')[i].click();
   }
   function handleFormPhoto(input, i) {
-    const file = input.files[0];
-    if (!file) return;
+    const file = input.files[0]; if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
       const img = new Image();
       img.onload = function() {
         const canvas = document.createElement('canvas');
-        const maxW = 1200;
-        const scale = img.width > maxW ? maxW / img.width : 1;
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        const data = canvas.toDataURL('image/jpeg', 0.82).split(',')[1];
+        const maxW = 1200; const scale = img.width > maxW ? maxW/img.width : 1;
+        canvas.width = img.width*scale; canvas.height = img.height*scale;
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        const data = canvas.toDataURL('image/jpeg',0.82).split(',')[1];
         formPhotos[i] = data;
         const slot = document.querySelectorAll('#formPhotoGrid .form-photo-slot')[i];
-        slot.innerHTML = '<img src="data:image/jpeg;base64,' + data + '"><button class="rm-btn" onclick="removeFormPhoto(event,' + i + ')">✕</button>';
+        slot.innerHTML = '<img src="data:image/jpeg;base64,'+data+'"><button class="rm-btn" onclick="removeFormPhoto(event,'+i+')">✕</button>';
         updateProfilePicker();
       };
       img.src = e.target.result;
@@ -634,33 +642,49 @@
     reader.readAsDataURL(file);
   }
   function removeFormPhoto(e, i) {
-    e.stopPropagation();
-    formPhotos[i] = null;
+    e.stopPropagation(); formPhotos[i] = null;
     const slot = document.querySelectorAll('#formPhotoGrid .form-photo-slot')[i];
-    slot.innerHTML = '📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,' + i + ')">';
-    slot.onclick = function() { triggerFormPhoto(i); };
+    slot.innerHTML = '📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,'+i+')">';
+    slot.onclick = function(){ triggerFormPhoto(i); };
     updateProfilePicker();
   }
   function updateProfilePicker() {
-    const filled = formPhotos.filter(function(p) { return p !== null; });
+    const filled = formPhotos.filter(function(p){return p!==null;});
     const picker = document.getElementById('formProfilePicker');
     const thumbs = document.getElementById('formProfileThumbs');
-    if (!picker || !thumbs) return;
-    picker.style.display = filled.length > 0 ? 'block' : 'none';
+    if (!picker||!thumbs) return;
+    picker.style.display = filled.length>0 ? 'block' : 'none';
     thumbs.innerHTML = '';
-    formPhotos.forEach(function(p, i) {
+    formPhotos.forEach(function(p,i){
       if (!p) return;
-      const realIdx = i + 1;
+      const realIdx = i+1;
       const th = document.createElement('img');
-      th.src = 'data:image/jpeg;base64,' + p;
-      th.className = 'profile-thumb' + (formProfilePhoto === realIdx ? ' selected' : '');
-      th.onclick = function() { formProfilePhoto = realIdx; updateProfilePicker(); };
+      th.src = 'data:image/jpeg;base64,'+p;
+      th.className = 'profile-thumb'+(formProfilePhoto===realIdx?' selected':'');
+      th.onclick = function(){ formProfilePhoto=realIdx; updateProfilePicker(); };
       thumbs.appendChild(th);
     });
-    if (!formPhotos[formProfilePhoto - 1]) {
-      formProfilePhoto = formPhotos.findIndex(function(p) { return p !== null; }) + 1;
+    if (!formPhotos[formProfilePhoto-1]) {
+      formProfilePhoto = formPhotos.findIndex(function(p){return p!==null;})+1;
     }
   }
+  // ── Language helpers ──────────────────────────────────────
+  function getLang(){ return localStorage.getItem('lang')||'es'; }
+  function applyLanguage(lang){
+    document.querySelectorAll('[data-es]').forEach(function(el){
+      el.textContent = lang==='en' ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+    document.querySelectorAll('[data-placeholder-es]').forEach(function(el){
+      el.placeholder = lang==='en' ? el.getAttribute('data-placeholder-en') : el.getAttribute('data-placeholder-es');
+    });
+    var btn=document.getElementById('lang-toggle-btn');
+    if(btn) btn.textContent = lang==='en' ? '🌐 Español' : '🌐 English';
+  }
+  function toggleLanguage(){
+    var lang = getLang()==='en' ? 'es' : 'en';
+    localStorage.setItem('lang',lang); applyLanguage(lang);
+  }
+  document.addEventListener('DOMContentLoaded',function(){ applyLanguage(getLang()); });
 </script>
 <!-- Photo Gallery Modal -->
 <div class="modal-overlay" id="listingModal" onclick="closeModal(event)">
