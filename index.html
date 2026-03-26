@@ -2416,6 +2416,218 @@
   </div>
 </div>
 
+<!-- ============================================================
+     SITE CONTENT CONFIG — EDIT THIS SECTION TO UPDATE CARDS
+     Change text, addresses, specialties, and images here.
+     For images: upload your photo to the /images/ folder in
+     GitHub, then set image to "images/your-photo.jpg"
+     Or paste any web URL: "https://example.com/photo.jpg"
+     Set image to "" (empty) to show the emoji icon instead.
+     ============================================================ -->
+<script>
+const SITE_CONFIG = {
+
+  // ── RESTAURANTS ──────────────────────────────────────────────
+
+  // NOTE: Each key must match the "ctext-KEY" id in the HTML.
+  // Example: key "mariscos_ensenada" matches id="ctext-mariscos_ensenada"
+
+  // ── RESTAURANTS ──────────────────────────────────────────────
+
+  mariscos_ensenada: {
+    tag:       "Mariscos · Seafood",
+    text:      "Famosos por sus tostadas de ceviche y tacos de pescado. Vistas al mar, ambiente casual.",
+    address:   "Blvd. Costero 234",
+    image:     "",   // e.g. "images/mariscos-ensenada.jpg"
+  },
+
+  mariscos_vallarta: {
+    tag:       "Mariscos · Seafood",
+    text:      "Próximamente — mariscos frescos en el corazón de Playas. Menú y detalles en breve.",
+    address:   "Dirección: Próximamente",
+    image:     "",
+  },
+
+  tacos_el_poblano: {
+    tag:       "Tacos · Mexicano",
+    text:      "Asada, adobada, birria, tripas, lengua y cabeza. Tortillas hechas a mano y aguas frescas.",
+    address:   "Calle 5 de Mayo 18",
+    image:     "",   // leave empty to keep the existing photo
+  },
+
+  cafe_ilustre: {
+    tag:       "Café · Brunch",
+    text:      "Café de especialidad, tostadas con aguacate y chilaquiles con brisa marina. Perfectas mañanas de domingo.",
+    address:   "Paseo del Mar 12",
+    image:     "",
+  },
+
+  // ── MECHANICS ────────────────────────────────────────────────
+
+  el_tubo: {
+    tag:     "General · Eléctrico",
+    text:    "20 años en Playas. Especialista en sistemas eléctricos, diagnóstico y vehículos japoneses/coreanos.",
+    address: "Blvd. Agua Caliente 551",
+    image:   "",
+  },
+
+  llantera: {
+    tag:     "Llantas · Suspensión",
+    text:    "Llantas, alineación, suspensión. Servicio rápido, precios competitivos. Abierto domingos.",
+    address: "Calle Reforma 22",
+    image:   "",
+  },
+
+  carroceria: {
+    tag:     "Hojalatería · Pintura",
+    text:    "Hojalatería experta y pintura personalizada. Se trabaja con seguros. Presupuesto sin costo.",
+    address: "Zona Industrial Playas",
+    image:   "",
+  },
+
+  // ── HEALTH & WELLNESS ────────────────────────────────────────
+
+  dental_playas: {
+    tag:     "General · Cosmético",
+    text:    "Clínica dental completa. Se habla inglés. Implantes, blanqueamiento, ortodoncia. Precios accesibles.",
+    address: "Blvd. Costero 88 · 🕐 Mon–Sat",
+    image:   "",
+  },
+
+  clinica_familiar: {
+    tag:     "General · Medicina Familiar",
+    text:    "Medicina preventiva, pediatría, laboratorio y urgencias. Sin cita previa.",
+    address: "Calle Emiliano Zapata 10",
+    image:   "",
+  },
+
+  vet_playas: {
+    tag:     "Mascotas · Animales",
+    text:    "Vacunas, cirugía, estética y urgencias para perros, gatos y animales pequeños.",
+    address: "Paseo del Mar 200",
+    image:   "",
+  },
+
+  // ── KIDS ACTIVITIES ──────────────────────────────────────────
+
+  academia_de_danza_playas: {
+    tag:     "Baile",
+    text:    "Ballet, folklórico y hip-hop para edades 4–16. Clases lun–sáb. ¡Primera clase gratis!",
+    address: "Blvd. Sánchez Taboada 1234",
+    image:   "",
+  },
+
+  karate_kids_dojo: {
+    tag:     "Artes Marciales",
+    text:    "Karate Shotokan tradicional que construye disciplina y confianza. Niveles principiante–avanzado.",
+    address: "Calle Agua Caliente 56",
+    image:   "",
+  },
+
+  taller_de_arte_infantil: {
+    tag:     "Arte y Creatividad",
+    text:    "Pintura, cerámica y técnicas mixtas para niños 5–12 años. Grupos pequeños, mucha creatividad.",
+    address: "Paseo del Mar 890",
+    image:   "",
+  },
+
+  // ── ADULTS / FITNESS ─────────────────────────────────────────
+
+  beach_yoga_collective: {
+    tag:     "Bienestar",
+    text:    "Sesiones matutinas en la arena. Todos los niveles. Tapetes disponibles. Respira, estírate, relájate.",
+    address: "Playa Hermosa — north end",
+    image:   "",
+  },
+
+  escuela_musica: {
+    tag:     "Música",
+    text:    "Clases de guitarra, bajo, piano y canto. Tardes entre semana y fines de semana.",
+    address: "Calle Playas 77",
+    image:   "",
+  },
+
+  escuela_surf: {
+    tag:     "Surf",
+    text:    "Aprende a surfear o mejora tu técnica. Equipo incluido. Ideal para principiantes.",
+    address: "Surf spot, Blvd. Costero",
+    image:   "",
+  },
+
+  arena_mma: {
+    tag:     "MMA · Deportes de Combate",
+    text:    "Programa completo de MMA: BJJ, Muay Thai, lucha. Octágono profesional, entrenadores de élite.",
+    address: "Industrial Zona 3, Playas",
+    image:   "",
+  },
+
+  studio_sol: {
+    tag:     "Yoga · Pilates",
+    text:    "Hot yoga, vinyasa, yin y pilates. Clases en azotea los fines de semana. Vistas al mar.",
+    address: "Torre Playas, Piso 4",
+    image:   "",
+  },
+
+  box_pacifico: {
+    tag:     "CrossFit · Fuerza",
+    text:    "CrossFit comunitario. WODs diarios, levantamiento olímpico, horas de gym abierto.",
+    address: "Calle Reforma 45",
+    image:   "",
+  },
+
+};
+
+// ── DO NOT EDIT BELOW THIS LINE ──────────────────────────────
+// This function applies the config to each card on the page.
+// It finds each card by its description text element (ctext-KEY),
+// then updates the text and optionally swaps in a photo.
+function applyConfig() {
+  Object.entries(SITE_CONFIG).forEach(([key, c]) => {
+
+    // Find the description paragraph for this card
+    const textEl = document.getElementById('ctext-' + key);
+    if (!textEl) return;
+
+    // Update description text
+    if (c.text) textEl.textContent = c.text;
+
+    // Walk up to the card container
+    const card = textEl.closest('.card');
+    if (!card) return;
+
+    // Update tag (first <p class="card-tag"> inside this card)
+    if (c.tag) {
+      const tagEl = card.querySelector('.card-tag');
+      if (tagEl) tagEl.textContent = c.tag;
+    }
+
+    // Update address (first card-meta with 📍 inside this card)
+    if (c.address) {
+      const metas = card.querySelectorAll('.card-meta');
+      metas.forEach(m => {
+        if (m.textContent.includes('📍')) {
+          m.innerHTML = '<span>📍</span> ' + c.address;
+        }
+      });
+    }
+
+    // Swap emoji → image if an image path is provided
+    if (c.image) {
+      const imgDiv = card.querySelector('.card-img');
+      if (imgDiv && imgDiv.tagName !== 'IMG') {
+        const img = document.createElement('img');
+        img.src = c.image;
+        img.alt = card.querySelector('.card-title')?.textContent || '';
+        img.style.cssText = 'object-fit:cover; height:200px; width:100%; display:block;';
+        imgDiv.replaceWith(img);
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', applyConfig);
+</script>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Smooth scroll helper
   function goToSection(id) {
