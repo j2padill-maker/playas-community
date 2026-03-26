@@ -1354,56 +1354,55 @@
            ║  AD SLOT 1 — Paid Featured Restaurant                       ║
            ╠══════════════════════════════════════════════════════════════╣
            ║  TO UPDATE THIS AD:                                          ║
-           ║  1. PHOTO    → change the src filename on the img tag below  ║
+           ║  1. PHOTO    → change card-restaurant-2.jpg to your file     ║
            ║               (upload new photo to your GitHub repo first)   ║
            ║  2. CATEGORY → change the text in card-tag p tag             ║
-           ║  3. NAME     → change the text in the h3 tag                 ║
+           ║  3. NAME     → change text in h3 AND in merch/review buttons ║
            ║  4. AD COPY  → change the text in the card-text p tag        ║
            ║  5. SPECIALTY→ change text after the ⭐ emoji                ║
            ║  6. ADDRESS  → change text after the 📍 emoji                ║
-           ║  7. MERCH    → change restaurant name in openMerch()         ║
-           ║  Also update the TRANSLATIONS section near bottom of file:   ║
-           ║    Search: ctext_mariscos_ensenada  (Spanish + English)      ║
+           ║  NOTE: Sweet Martha has no translation entry yet —           ║
+           ║        text shows same in both Spanish and English           ║
            ╚══════════════════════════════════════════════════════════════╝ -->
       <div class="card">
-        <div class="card-img">🦞</div><!-- ← swap emoji OR use: <img src="your-photo.jpg" class="card-img" style="object-fit:cover;height:200px;width:100%;" alt="Restaurant Name"> -->
+        <img src="card-restaurant-2.jpg" class="card-img" style="object-fit:cover;height:200px;width:100%;display:block;" alt="Sweet Martha"><!-- ← PHOTO FILE -->
         <div class="card-body">
-          <p class="card-tag" id="ctag-mariscos">Mariscos · Seafood</p><!-- ← CATEGORY -->
-          <h3 class="card-title">Mariscos Ensenada</h3><!-- ← RESTAURANT NAME -->
-          <p class="card-text" id="ctext-mariscos_ensenada">Famosos por sus tostadas de ceviche y tacos de pescado. Vistas al mar, ambiente casual.</p><!-- ← AD COPY -->
-          <div class="card-meta"><span>⭐</span> Specialty: Ceviche Tostadas<!-- ← SPECIALTY -->
-          <button class="merch-btn" onclick="openMerch('Mariscos Ensenada')">🛍️ Shop Mariscos Ensenada Merch</button><!-- ← update name in quotes -->
-          <div class="card-video" id="video-mariscos_ensenada">
+          <p class="card-tag" id="ctag-sweet_martha">Postres · Bakery & Italian Cuisine</p><!-- ← CATEGORY -->
+          <h3 class="card-title">Sweet Martha</h3><!-- ← RESTAURANT NAME -->
+          <p class="card-text" id="ctext-sweet_martha">Postres, panadería y cocina italiana en el corazón de Playas. El único lugar donde encontrarás capirotada los 365 días del año.</p><!-- ← AD COPY -->
+          <div class="card-meta"><span>⭐</span> Specialty: Capirotada de leche y piloncillo<!-- ← SPECIALTY -->
+          <button class="merch-btn" onclick="openMerch('Sweet Martha')">🛍️ Shop Sweet Martha Merch</button><!-- ← update name in quotes -->
+          <div class="card-video" id="video-sweet_martha">
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
-              <span>Mariscos Ensenada</span>
+              <span>Sweet Martha</span>
               <p>Add a YouTube video via the Admin Panel</p>
             </div>
           </div>
           <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('el_manglar')">
-              ⭐ Reviews <span id="rev-count-el_manglar">— be the first!</span>
+            <button class="review-toggle" onclick="toggleReviews('sweet_martha')">
+              ⭐ Reviews <span id="rev-count-sweet_martha">— be the first!</span>
             </button>
-            <div class="review-panel" id="rev-panel-el_manglar">
-              <div class="review-list" id="rev-list-el_manglar"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('el_manglar')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-el_manglar">
-                <div class="star-picker" id="star-picker-el_manglar">
-                  <span onclick="setStar('el_manglar',1)">★</span>
-                  <span onclick="setStar('el_manglar',2)">★</span>
-                  <span onclick="setStar('el_manglar',3)">★</span>
-                  <span onclick="setStar('el_manglar',4)">★</span>
-                  <span onclick="setStar('el_manglar',5)">★</span>
+            <div class="review-panel" id="rev-panel-sweet_martha">
+              <div class="review-list" id="rev-list-sweet_martha"></div>
+              <button class="write-review-btn" onclick="toggleReviewForm('sweet_martha')">✏️ Write a Review</button>
+              <div class="review-form" id="rev-form-sweet_martha">
+                <div class="star-picker" id="star-picker-sweet_martha">
+                  <span onclick="setStar('sweet_martha',1)">★</span>
+                  <span onclick="setStar('sweet_martha',2)">★</span>
+                  <span onclick="setStar('sweet_martha',3)">★</span>
+                  <span onclick="setStar('sweet_martha',4)">★</span>
+                  <span onclick="setStar('sweet_martha',5)">★</span>
                 </div>
-                <input class="review-name-input" id="rev-name-el_manglar" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-el_manglar" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-el_manglar"></div>
-                <button class="review-submit-btn" onclick="submitReview('el_manglar', 'Mariscos Ensenada')">Post Review</button>
+                <input class="review-name-input" id="rev-name-sweet_martha" placeholder="Your name (optional)">
+                <textarea class="review-input" id="rev-text-sweet_martha" placeholder="Share your experience..."></textarea>
+                <div class="review-error" id="rev-error-sweet_martha"></div>
+                <button class="review-submit-btn" onclick="submitReview('sweet_martha', 'Sweet Martha')">Post Review</button>
               </div>
             </div>
           </div>
         </div>
-          <div class="card-meta mt-sm"><span>📍</span> Blvd. Costero 234</div><!-- ← ADDRESS -->
+          <div class="card-meta mt-sm"><span>📍</span> Parque Azteca Sur #689, local 3, Jardines, Playas de Tijuana</div><!-- ← ADDRESS -->
         </div>
       </div>
       <!-- END AD SLOT 1 ─────────────────────────────────────────────── -->
@@ -1543,63 +1542,6 @@
         </div>
       </div>
       <!-- END AD SLOT 4 ─────────────────────────────────────────────── -->
-
-      <!-- ╔══════════════════════════════════════════════════════════════╗
-           ║  AD SLOT 5 — Paid Featured Restaurant                       ║
-           ╠══════════════════════════════════════════════════════════════╣
-           ║  TO UPDATE THIS AD:                                          ║
-           ║  1. PHOTO    → change card-restaurant-2.jpg to your file     ║
-           ║               (upload new photo to your GitHub repo first)   ║
-           ║  2. CATEGORY → change the text in card-tag p tag             ║
-           ║  3. NAME     → change text in h3 AND in merch/review buttons ║
-           ║  4. AD COPY  → change the text in the card-text p tag        ║
-           ║  5. SPECIALTY→ change text after the ⭐ emoji                ║
-           ║  6. ADDRESS  → change text after the 📍 emoji                ║
-           ║  NOTE: Sweet Martha has no translation entry yet —           ║
-           ║        text shows same in both Spanish and English           ║
-           ╚══════════════════════════════════════════════════════════════╝ -->
-      <div class="card">
-        <img src="card-restaurant-2.jpg" class="card-img" style="object-fit:cover;height:200px;width:100%;display:block;" alt="Sweet Martha"><!-- ← PHOTO FILE -->
-        <div class="card-body">
-          <p class="card-tag" id="ctag-sweet_martha">Postres · Bakery & Italian Cuisine</p><!-- ← CATEGORY -->
-          <h3 class="card-title">Sweet Martha</h3><!-- ← RESTAURANT NAME -->
-          <p class="card-text" id="ctext-sweet_martha">Postres, panadería y cocina italiana en el corazón de Playas. El único lugar donde encontrarás capirotada los 365 días del año.</p><!-- ← AD COPY -->
-          <div class="card-meta"><span>⭐</span> Specialty: Capirotada de leche y piloncillo<!-- ← SPECIALTY -->
-          <button class="merch-btn" onclick="openMerch('Sweet Martha')">🛍️ Shop Sweet Martha Merch</button><!-- ← update name in quotes -->
-          <div class="card-video" id="video-sweet_martha">
-            <div class="card-video-placeholder">
-              <div class="play-icon">▶️</div>
-              <span>Sweet Martha</span>
-              <p>Add a YouTube video via the Admin Panel</p>
-            </div>
-          </div>
-          <div class="review-section">
-            <button class="review-toggle" onclick="toggleReviews('sweet_martha')">
-              ⭐ Reviews <span id="rev-count-sweet_martha">— be the first!</span>
-            </button>
-            <div class="review-panel" id="rev-panel-sweet_martha">
-              <div class="review-list" id="rev-list-sweet_martha"></div>
-              <button class="write-review-btn" onclick="toggleReviewForm('sweet_martha')">✏️ Write a Review</button>
-              <div class="review-form" id="rev-form-sweet_martha">
-                <div class="star-picker" id="star-picker-sweet_martha">
-                  <span onclick="setStar('sweet_martha',1)">★</span>
-                  <span onclick="setStar('sweet_martha',2)">★</span>
-                  <span onclick="setStar('sweet_martha',3)">★</span>
-                  <span onclick="setStar('sweet_martha',4)">★</span>
-                  <span onclick="setStar('sweet_martha',5)">★</span>
-                </div>
-                <input class="review-name-input" id="rev-name-sweet_martha" placeholder="Your name (optional)">
-                <textarea class="review-input" id="rev-text-sweet_martha" placeholder="Share your experience..."></textarea>
-                <div class="review-error" id="rev-error-sweet_martha"></div>
-                <button class="review-submit-btn" onclick="submitReview('sweet_martha', 'Sweet Martha')">Post Review</button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="card-meta mt-sm"><span>📍</span> Parque Azteca Sur #689, local 3, Jardines, Playas de Tijuana</div><!-- ← ADDRESS -->
-        </div>
-      </div>
-      <!-- END AD SLOT 5 ─────────────────────────────────────────────── -->
 
     </div>
   </div>
@@ -3530,10 +3472,10 @@ const translations = {
     // ── AD SLOTS: SPANISH TRANSLATIONS ─────────────────────────────────
     // Update these when you change a restaurant ad above.
     // Each line = one card's category tag or description text in Spanish.
-    ctag_mariscos: 'Mariscos · Seafood',          // AD SLOT 1 category tag
+    ctag_mariscos: 'Mariscos · Seafood',          // AD SLOT 2 category tag (Mariscos Vallarta)
     ctag_tacos: 'Tacos · Mexicano',               // AD SLOT 3 category tag
     ctag_cafe: 'Café · Brunch',                   // AD SLOT 4 category tag
-    ctext_mariscos_ensenada: 'Famosos por sus tostadas de ceviche y tacos de pescado. Vistas al mar, ambiente casual.',  // AD SLOT 1 description
+    // AD SLOT 1 (Sweet Martha) — no translation entry needed, shows same in ES and EN
     ctext_mariscos_vallarta: 'Próximamente — mariscos frescos en el corazón de Playas. Menú y detalles en breve.',       // AD SLOT 2 description
     spec_coming_soon: 'Especialidad: Próximamente',  // AD SLOT 2 specialty placeholder
     addr_coming_soon: 'Dirección: Próximamente',     // AD SLOT 2 address placeholder
@@ -3726,10 +3668,10 @@ const translations = {
     // ── AD SLOTS: ENGLISH TRANSLATIONS ─────────────────────────────────
     // Update these when you change a restaurant ad above.
     // Each line = one card's category tag or description text in English.
-    ctag_mariscos: 'Mariscos · Seafood',          // AD SLOT 1 category tag
+    ctag_mariscos: 'Mariscos · Seafood',          // AD SLOT 2 category tag (Mariscos Vallarta)
     ctag_tacos: 'Tacos · Mexican',                // AD SLOT 3 category tag
     ctag_cafe: 'Café · Brunch',                   // AD SLOT 4 category tag
-    ctext_mariscos_ensenada: 'Famous for their ceviche tostadas and fish tacos. Ocean views, casual vibe.',              // AD SLOT 1 description
+    // AD SLOT 1 (Sweet Martha) — no translation entry needed, shows same in ES and EN
     ctext_mariscos_vallarta: 'Coming soon — fresh seafood in the heart of Playas. Menu and details being added shortly.',// AD SLOT 2 description
     spec_coming_soon: 'Specialty: Coming soon',   // AD SLOT 2 specialty placeholder
     addr_coming_soon: 'Address: Coming soon',     // AD SLOT 2 address placeholder
