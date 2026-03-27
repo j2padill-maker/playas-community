@@ -1140,11 +1140,11 @@
     z-index: 999;
     background: var(--ocean-deep);
     color: #fff;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 0.7rem 1.5rem;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.88rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.25);
@@ -1152,34 +1152,33 @@
     flex-wrap: wrap;
     text-align: center;
   }
+  #translate-hint.visible { display: flex; }
   @keyframes slideDown {
     from { transform: translateY(-100%); opacity: 0; }
     to   { transform: translateY(0);     opacity: 1; }
   }
-  .hint-icon {
-    font-size: 1.1rem;
+  #translate-now-btn {
+    background: var(--sand);
+    color: var(--ocean-deep);
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
     flex-shrink: 0;
   }
-  .hint-text { line-height: 1.5; }
-  .hint-text strong { color: var(--sand); }
-  .hint-step {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: rgba(255,255,255,0.15);
-    border-radius: 20px;
-    padding: 0.2rem 0.65rem;
-    font-size: 0.82rem;
-    white-space: nowrap;
-  }
+  #translate-now-btn:hover { background: #fff; }
   #translate-hint-close {
     background: none;
     border: none;
     color: rgba(255,255,255,0.6);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 0 0.25rem;
-    margin-left: 0.25rem;
+    padding: 0;
     line-height: 1;
     font-family: 'DM Sans', sans-serif;
     flex-shrink: 0;
@@ -1206,10 +1205,10 @@
   </div>
 </nav>
 
-<!-- TRANSLATE HINT BANNER — content injected by JS based on device/browser -->
-<div id="translate-hint" style="display:none;">
-  <span class="hint-icon">🌐</span>
-  <span class="hint-text" id="hint-text"></span>
+<!-- TRANSLATE BANNER -->
+<div id="translate-hint">
+  <span>🌐 ¿Otro idioma? / Need another language?</span>
+  <button id="translate-now-btn" onclick="translatePage()">Translate this page</button>
   <button id="translate-hint-close" onclick="dismissHint()" aria-label="Dismiss">✕</button>
 </div>
 
@@ -3421,52 +3420,22 @@ document.addEventListener('DOMContentLoaded', applyConfig);
 
 
 <script>
-  (function() {
-    if (localStorage.getItem('hintDismissed')) return;
+  // Show banner once per session (not localStorage — so it shows again after closing browser)
+  if (!sessionStorage.getItem('hintDismissed')) {
+    document.getElementById('translate-hint').classList.add('visible');
+  }
 
-    var ua = navigator.userAgent;
-    var isIOS = /iPhone|iPad|iPod/.test(ua);
-    var isAndroid = /Android/.test(ua);
-    var isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
-    var isChrome = /Chrome/.test(ua) && !/Edg|OPR/.test(ua);
-    var isEdge = /Edg\//.test(ua);
-    var isFirefox = /Firefox/.test(ua);
-
-    var msg = '';
-
-    if (isIOS && isSafari) {
-      // iPhone/iPad Safari — share button at bottom
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>Share</strong> ⬆️ → <strong>Translate</strong></span>&nbsp; at the bottom of your screen.';
-    } else if (isIOS && isChrome) {
-      // iPhone Chrome — three-dot menu
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>⋮</strong> → <strong>Translate…</strong></span>&nbsp; at the top right.';
-    } else if (isAndroid && isChrome) {
-      // Android Chrome — three-dot menu
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>⋮</strong> → <strong>Translate…</strong></span>&nbsp; in the top-right menu.';
-    } else if (isChrome) {
-      // Desktop Chrome — translate icon in address bar
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click the <strong>translate icon</strong> 🌐 in your address bar</span>&nbsp; to translate this page.';
-    } else if (isEdge) {
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click <strong>Translate this page</strong> in your address bar</span>.';
-    } else if (isFirefox) {
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click the <strong>translate icon</strong> 🌐 in the address bar</span>&nbsp; to translate this page.';
-    } else {
-      // Fallback for any other browser
-      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Use your browser\'s <strong>Translate</strong> option</span>&nbsp; to translate this page.';
-    }
-
-    var textEl = document.getElementById('hint-text');
-    var banner = document.getElementById('translate-hint');
-    if (textEl && banner) {
-      textEl.innerHTML = msg;
-      banner.style.display = 'flex';
-    }
-  })();
+  function translatePage() {
+    // Opens current page in Google Translate targeting English
+    var url = 'https://translate.google.com/translate?sl=es&tl=en&u=' + encodeURIComponent(window.location.href);
+    window.open(url, '_blank');
+    dismissHint();
+  }
 
   function dismissHint() {
     var el = document.getElementById('translate-hint');
-    if (el) el.style.display = 'none';
-    try { localStorage.setItem('hintDismissed', '1'); } catch(e) {}
+    if (el) el.classList.remove('visible');
+    try { sessionStorage.setItem('hintDismissed', '1'); } catch(e) {}
   }
 </script>
 </body>
