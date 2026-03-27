@@ -1132,29 +1132,65 @@
 </style>
 
 <style>
-  /* ── GOOGLE TRANSLATE WIDGET OVERRIDES ── */
-  #google_translate_element { display: flex; align-items: center; margin-left: 0.75rem; }
+  /* ── GOOGLE TRANSLATE FLOATING WIDGET ── */
+  #translate-fab {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+  #translate-fab-btn {
+    background: var(--ocean);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.6rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  #translate-fab-btn:hover {
+    background: var(--ocean-deep);
+    transform: translateY(-2px);
+  }
+  #translate-fab-panel {
+    display: none;
+    background: var(--ocean-deep);
+    border-radius: 14px;
+    padding: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  #translate-fab-panel.open { display: block; }
+  /* Style the actual Google dropdown inside the panel */
+  #google_translate_element { display: block; }
   .goog-te-gadget { font-family: 'DM Sans', sans-serif !important; font-size: 0 !important; }
   .goog-te-gadget .goog-te-combo {
     font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.78rem !important;
-    background: rgba(255,255,255,0.15) !important;
+    font-size: 0.85rem !important;
+    background: rgba(255,255,255,0.12) !important;
     color: #fff !important;
-    border: 1px solid rgba(255,255,255,0.4) !important;
-    border-radius: 20px !important;
-    padding: 0.28rem 0.7rem !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 10px !important;
+    padding: 0.5rem 0.85rem !important;
     cursor: pointer !important;
     outline: none !important;
-    appearance: none !important;
+    width: 180px !important;
     -webkit-appearance: none !important;
-  }
-  .goog-te-gadget .goog-te-combo:hover {
-    background: rgba(255,255,255,0.25) !important;
+    appearance: none !important;
   }
   .goog-te-gadget .goog-te-combo option { background: #1a5270 !important; color: #fff !important; }
-  /* Hide the "Powered by Google" text */
   .goog-te-gadget > span { display: none !important; }
-  /* Hide the top banner Google Translate adds */
   .goog-te-banner-frame { display: none !important; }
   body { top: 0 !important; }
 </style>
@@ -1162,11 +1198,25 @@
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
       pageLanguage: 'es',
-      includedLanguages: 'en,es,fr,de,it,pt,zh-CN,ja,ko,ar,ru,tl',
+      includedLanguages: 'en,fr,de,it,pt,zh-CN,ja,ko,ar,ru,tl',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
       autoDisplay: false
     }, 'google_translate_element');
   }
+
+  // Add Español back as the first option (resets to original Spanish)
+  function addSpanishOption() {
+    var select = document.querySelector('.goog-te-combo');
+    if (!select) { setTimeout(addSpanishOption, 500); return; }
+    var hasEs = Array.from(select.options).some(function(o){ return o.value === '' || o.text.toLowerCase().includes('español'); });
+    if (!hasEs) {
+      var opt = document.createElement('option');
+      opt.value = '';
+      opt.text = 'Español (original)';
+      select.insertBefore(opt, select.firstChild);
+    }
+  }
+  window.addEventListener('load', function(){ setTimeout(addSpanishOption, 1000); });
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
@@ -1183,7 +1233,7 @@
     <li><a href="bares.html" id="nav-link-bars">Bares & Cervecerías</a></li>
     <li><a href="services.html" id="nav-link-services">Servicios</a></li>
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
-  </ul>  <div id="google_translate_element"></div>
+  </ul>
   <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -3393,6 +3443,16 @@ document.addEventListener('DOMContentLoaded', applyConfig);
 <button class="cart-badge" id="cart-badge" onclick="openMerchCart()">
   🛒 View Cart <span class="cart-count" id="cart-count">0</span>
 </button>
+
+<!-- FLOATING TRANSLATE BUTTON -->
+<div id="translate-fab">
+  <div id="translate-fab-panel">
+    <div id="google_translate_element"></div>
+  </div>
+  <button id="translate-fab-btn" onclick="document.getElementById('translate-fab-panel').classList.toggle('open')">
+    🌐 Translate
+  </button>
+</div>
 
 </body>
 </html>
