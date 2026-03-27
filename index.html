@@ -1156,10 +1156,26 @@
   .goog-te-gadget > span { display: none !important; }
   .goog-te-banner-frame { display: none !important; }
   body { top: 0 !important; }
-  /* Mobile: hide widget in collapsed nav, show in hamburger menu */
+  /* Español reset button */
+  #espanol-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 0.35rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 0.4rem;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  #espanol-btn:hover { background: rgba(255,255,255,0.25); }
   @media (max-width: 768px) {
     #google_translate_element { margin-left: 0.25rem; }
     .goog-te-gadget .goog-te-combo { font-size: 0.72rem !important; padding: 0.3rem 0.6rem !important; }
+    #espanol-btn { font-size: 0.72rem; padding: 0.3rem 0.6rem; margin-left: 0.25rem; }
   }
   .goog-te-gadget { font-family: 'DM Sans', sans-serif !important; font-size: 0 !important; }
   .goog-te-gadget .goog-te-combo {
@@ -1221,6 +1237,23 @@
     });
   }
   window.addEventListener('load', function(){ setTimeout(injectSpanish, 800); });
+
+  // Español button — clears Google translation and reloads in original Spanish
+  function resetToSpanish() {
+    var domains = [
+      '.miplayasdetijuana.com',
+      'miplayasdetijuana.com',
+      window.location.hostname
+    ];
+    var paths = ['/', window.location.pathname];
+    domains.forEach(function(d) {
+      paths.forEach(function(p) {
+        document.cookie = 'googtrans=; path=' + p + '; domain=' + d + '; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      });
+    });
+    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    location.reload();
+  }
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
@@ -1239,6 +1272,7 @@
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
   </ul>
   <div id="google_translate_element"></div>
+  <button id="espanol-btn" onclick="resetToSpanish()" title="Ver en Español">🌐 Español</button>
   <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
