@@ -1132,48 +1132,35 @@
 </style>
 
 <style>
-  /* ── GOOGLE TRANSLATE FLOATING WIDGET ── */
-  #translate-fab {
-    position: fixed;
-    bottom: 5rem;
-    right: 1.5rem;
-    z-index: 9998;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
+  /* ── GOOGLE TRANSLATE NAV WIDGET ── */
+  #google_translate_element { display: flex; align-items: center; margin-left: 0.5rem; }
+  .goog-te-gadget { font-size: 0 !important; font-family: 'DM Sans', sans-serif !important; }
+  .goog-te-gadget .goog-te-combo {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+    background: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    border-radius: 20px !important;
+    padding: 0.35rem 0.9rem !important;
+    cursor: pointer !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    white-space: nowrap !important;
+    transition: background 0.2s !important;
   }
-  #translate-fab-btn {
-    background: var(--ocean);
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 0.6rem 1.1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: background 0.2s, transform 0.2s;
-    white-space: nowrap;
+  .goog-te-gadget .goog-te-combo:hover { background: rgba(255,255,255,0.25) !important; }
+  .goog-te-gadget .goog-te-combo option { background: #1a5270 !important; color: #fff !important; }
+  .goog-te-gadget > span { display: none !important; }
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+  /* Mobile: hide widget in collapsed nav, show in hamburger menu */
+  @media (max-width: 768px) {
+    #google_translate_element { margin-left: 0.25rem; }
+    .goog-te-gadget .goog-te-combo { font-size: 0.72rem !important; padding: 0.3rem 0.6rem !important; }
   }
-  #translate-fab-btn:hover {
-    background: var(--ocean-deep);
-    transform: translateY(-2px);
-  }
-  #translate-fab-panel {
-    display: none;
-    background: var(--ocean-deep);
-    border-radius: 14px;
-    padding: 0.75rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  }
-  #translate-fab-panel.open { display: block; }
-  /* Style the actual Google dropdown inside the panel */
-  #google_translate_element { display: block; }
   .goog-te-gadget { font-family: 'DM Sans', sans-serif !important; font-size: 0 !important; }
   .goog-te-gadget .goog-te-combo {
     font-family: 'DM Sans', sans-serif !important;
@@ -1204,19 +1191,36 @@
     }, 'google_translate_element');
   }
 
-  // Add Español back as the first option (resets to original Spanish)
-  function addSpanishOption() {
+  // Poll until Google widget is ready, then inject Español as first option
+  function injectSpanish() {
     var select = document.querySelector('.goog-te-combo');
-    if (!select) { setTimeout(addSpanishOption, 500); return; }
-    var hasEs = Array.from(select.options).some(function(o){ return o.value === '' || o.text.toLowerCase().includes('español'); });
-    if (!hasEs) {
-      var opt = document.createElement('option');
-      opt.value = '';
-      opt.text = 'Español (original)';
-      select.insertBefore(opt, select.firstChild);
-    }
+    if (!select) { setTimeout(injectSpanish, 400); return; }
+    // Remove any stale injected option first
+    Array.from(select.options).forEach(function(o){
+      if (o.getAttribute('data-injected')) o.remove();
+    });
+    var opt = document.createElement('option');
+    opt.value = '/es/es';
+    opt.text = '🌐 Español (original)';
+    opt.setAttribute('data-injected', '1');
+    select.insertBefore(opt, select.firstChild);
+    select.value = '/es/es';
+    // When user picks Español, restore original page
+    select.addEventListener('change', function() {
+      if (this.value === '/es/es') {
+        var frame = document.querySelector('.goog-te-banner-frame');
+        if (frame) frame.contentDocument.querySelector('.goog-close-link').click();
+        // Fallback: reload without translation cookie
+        var cookie = document.cookie.match(/googtrans=([^;]+)/);
+        if (cookie) {
+          document.cookie = 'googtrans=; path=/; domain=.miplayasdetijuana.com; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+          document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+          location.reload();
+        }
+      }
+    });
   }
-  window.addEventListener('load', function(){ setTimeout(addSpanishOption, 1000); });
+  window.addEventListener('load', function(){ setTimeout(injectSpanish, 800); });
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
@@ -1234,6 +1238,7 @@
     <li><a href="services.html" id="nav-link-services">Servicios</a></li>
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
   </ul>
+  <div id="google_translate_element"></div>
   <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
@@ -3444,15 +3449,7 @@ document.addEventListener('DOMContentLoaded', applyConfig);
   🛒 View Cart <span class="cart-count" id="cart-count">0</span>
 </button>
 
-<!-- FLOATING TRANSLATE BUTTON -->
-<div id="translate-fab">
-  <div id="translate-fab-panel">
-    <div id="google_translate_element"></div>
-  </div>
-  <button id="translate-fab-btn" onclick="document.getElementById('translate-fab-panel').classList.toggle('open')">
-    🌐 Translate
-  </button>
-</div>
+
 
 </body>
 </html>
