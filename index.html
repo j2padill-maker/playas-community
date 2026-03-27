@@ -1130,6 +1130,45 @@
     z-index: 1;
   }
 </style>
+
+<style>
+  /* ── GOOGLE TRANSLATE WIDGET OVERRIDES ── */
+  #google_translate_element { display: flex; align-items: center; margin-left: 0.75rem; }
+  .goog-te-gadget { font-family: 'DM Sans', sans-serif !important; font-size: 0 !important; }
+  .goog-te-gadget .goog-te-combo {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.78rem !important;
+    background: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    border-radius: 20px !important;
+    padding: 0.28rem 0.7rem !important;
+    cursor: pointer !important;
+    outline: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+  }
+  .goog-te-gadget .goog-te-combo:hover {
+    background: rgba(255,255,255,0.25) !important;
+  }
+  .goog-te-gadget .goog-te-combo option { background: #1a5270 !important; color: #fff !important; }
+  /* Hide the "Powered by Google" text */
+  .goog-te-gadget > span { display: none !important; }
+  /* Hide the top banner Google Translate adds */
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+</style>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'es',
+      includedLanguages: 'en,es,fr,de,it,pt,zh-CN,ja,ko,ar,ru,tl',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 
@@ -1144,7 +1183,8 @@
     <li><a href="bares.html" id="nav-link-bars">Bares & Cervecerías</a></li>
     <li><a href="services.html" id="nav-link-services">Servicios</a></li>
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
-  </ul>  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+  </ul>  <div id="google_translate_element"></div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
 </nav>
