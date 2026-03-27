@@ -1132,130 +1132,47 @@
 </style>
 
 <style>
-  /* ── GOOGLE TRANSLATE NAV WIDGET ── */
-  #google_translate_element { display: flex; align-items: center; margin-left: 0.5rem; }
-  .goog-te-gadget { font-size: 0 !important; font-family: 'DM Sans', sans-serif !important; }
-  .goog-te-gadget .goog-te-combo {
-    font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.78rem !important;
-    font-weight: 500 !important;
-    background: rgba(255,255,255,0.15) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255,255,255,0.4) !important;
-    border-radius: 20px !important;
-    padding: 0.35rem 0.9rem !important;
-    cursor: pointer !important;
-    outline: none !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    white-space: nowrap !important;
-    transition: background 0.2s !important;
-  }
-  .goog-te-gadget .goog-te-combo:hover { background: rgba(255,255,255,0.25) !important; }
-  .goog-te-gadget .goog-te-combo option { background: #1a5270 !important; color: #fff !important; }
-  .goog-te-gadget > span { display: none !important; }
-  .goog-te-banner-frame { display: none !important; }
-  body { top: 0 !important; }
-  /* Español reset button */
-  #espanol-btn {
-    background: rgba(255,255,255,0.15);
+  /* ── TRANSLATE HINT BANNER ── */
+  #translate-hint {
+    position: fixed;
+    top: 70px;
+    left: 0; right: 0;
+    z-index: 999;
+    background: var(--ocean);
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 20px;
-    padding: 0.35rem 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.5rem;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    animation: slideDown 0.4s ease both;
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+  #translate-hint a {
+    color: var(--sand);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  #translate-hint-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
     cursor: pointer;
-    margin-left: 0.4rem;
-    white-space: nowrap;
-    transition: background 0.2s;
+    padding: 0 0.25rem;
+    margin-left: 0.5rem;
+    line-height: 1;
+    font-family: 'DM Sans', sans-serif;
   }
-  #espanol-btn:hover { background: rgba(255,255,255,0.25); }
-  @media (max-width: 768px) {
-    #google_translate_element { margin-left: 0.25rem; }
-    .goog-te-gadget .goog-te-combo { font-size: 0.72rem !important; padding: 0.3rem 0.6rem !important; }
-    #espanol-btn { font-size: 0.72rem; padding: 0.3rem 0.6rem; margin-left: 0.25rem; }
-  }
-  .goog-te-gadget { font-family: 'DM Sans', sans-serif !important; font-size: 0 !important; }
-  .goog-te-gadget .goog-te-combo {
-    font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.85rem !important;
-    background: rgba(255,255,255,0.12) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255,255,255,0.3) !important;
-    border-radius: 10px !important;
-    padding: 0.5rem 0.85rem !important;
-    cursor: pointer !important;
-    outline: none !important;
-    width: 180px !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-  }
-  .goog-te-gadget .goog-te-combo option { background: #1a5270 !important; color: #fff !important; }
-  .goog-te-gadget > span { display: none !important; }
-  .goog-te-banner-frame { display: none !important; }
-  body { top: 0 !important; }
+  #translate-hint-close:hover { color: #fff; }
 </style>
-<script>
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'es',
-      includedLanguages: 'en,fr,de,it,pt,zh-CN,ja,ko,ar,ru,tl',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false
-    }, 'google_translate_element');
-  }
-
-  // Poll until Google widget is ready, then inject Español as first option
-  function injectSpanish() {
-    var select = document.querySelector('.goog-te-combo');
-    if (!select) { setTimeout(injectSpanish, 400); return; }
-    // Remove any stale injected option first
-    Array.from(select.options).forEach(function(o){
-      if (o.getAttribute('data-injected')) o.remove();
-    });
-    var opt = document.createElement('option');
-    opt.value = '/es/es';
-    opt.text = '🌐 Español (original)';
-    opt.setAttribute('data-injected', '1');
-    select.insertBefore(opt, select.firstChild);
-    select.value = '/es/es';
-    // When user picks Español, restore original page
-    select.addEventListener('change', function() {
-      if (this.value === '/es/es') {
-        var frame = document.querySelector('.goog-te-banner-frame');
-        if (frame) frame.contentDocument.querySelector('.goog-close-link').click();
-        // Fallback: reload without translation cookie
-        var cookie = document.cookie.match(/googtrans=([^;]+)/);
-        if (cookie) {
-          document.cookie = 'googtrans=; path=/; domain=.miplayasdetijuana.com; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-          document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-          location.reload();
-        }
-      }
-    });
-  }
-  window.addEventListener('load', function(){ setTimeout(injectSpanish, 800); });
-
-  // Español button — clears Google translation and reloads in original Spanish
-  function resetToSpanish() {
-    var domains = [
-      '.miplayasdetijuana.com',
-      'miplayasdetijuana.com',
-      window.location.hostname
-    ];
-    var paths = ['/', window.location.pathname];
-    domains.forEach(function(d) {
-      paths.forEach(function(p) {
-        document.cookie = 'googtrans=; path=' + p + '; domain=' + d + '; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-      });
-    });
-    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-    location.reload();
-  }
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<meta name="google" content="notranslate">
 </head>
 <body>
 
@@ -1271,12 +1188,17 @@
     <li><a href="services.html" id="nav-link-services">Servicios</a></li>
     <li><a href="add-business.html" id="nav-link-addbiz" style="background:rgba(76,175,136,0.25); color:#a8d8c2;">➕ Tu Negocio</a></li>
   </ul>
-  <div id="google_translate_element"></div>
-  <button id="espanol-btn" onclick="resetToSpanish()" title="Ver en Español">🌐 Español</button>
   <div class="hamburger" id="hamburger" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- TRANSLATE HINT BANNER -->
+<div id="translate-hint">
+  <span>🌐</span>
+  <span>¿Prefieres otro idioma? / Need another language? Use your browser's <strong>Translate</strong> button in the address bar.</span>
+  <button id="translate-hint-close" onclick="dismissHint()" aria-label="Dismiss">✕</button>
+</div>
 
 <!-- HERO -->
 <section id="home">
@@ -3485,5 +3407,19 @@ document.addEventListener('DOMContentLoaded', applyConfig);
 
 
 
+<script>
+  // Translate hint banner — show once, dismiss forever
+  (function() {
+    if (localStorage.getItem('hintDismissed')) {
+      var el = document.getElementById('translate-hint');
+      if (el) el.style.display = 'none';
+    }
+  })();
+  function dismissHint() {
+    var el = document.getElementById('translate-hint');
+    if (el) el.style.display = 'none';
+    try { localStorage.setItem('hintDismissed', '1'); } catch(e) {}
+  }
+</script>
 </body>
 </html>
