@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Playas de Tijuana — Community Hub</title>
+<title>Playas de Tijuana — Centro Comunitario</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1138,37 +1138,51 @@
     top: 70px;
     left: 0; right: 0;
     z-index: 999;
-    background: var(--ocean);
+    background: var(--ocean-deep);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    padding: 0.6rem 1.5rem;
+    padding: 0.7rem 1.5rem;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    font-size: 0.88rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
     animation: slideDown 0.4s ease both;
+    flex-wrap: wrap;
+    text-align: center;
   }
   @keyframes slideDown {
     from { transform: translateY(-100%); opacity: 0; }
     to   { transform: translateY(0);     opacity: 1; }
   }
-  #translate-hint a {
-    color: var(--sand);
-    font-weight: 600;
-    text-decoration: none;
+  .hint-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .hint-text { line-height: 1.5; }
+  .hint-text strong { color: var(--sand); }
+  .hint-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
   }
   #translate-hint-close {
     background: none;
     border: none;
-    color: rgba(255,255,255,0.7);
-    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.2rem;
     cursor: pointer;
     padding: 0 0.25rem;
-    margin-left: 0.5rem;
+    margin-left: 0.25rem;
     line-height: 1;
     font-family: 'DM Sans', sans-serif;
+    flex-shrink: 0;
   }
   #translate-hint-close:hover { color: #fff; }
 </style>
@@ -1193,10 +1207,10 @@
   </div>
 </nav>
 
-<!-- TRANSLATE HINT BANNER -->
-<div id="translate-hint">
-  <span>🌐</span>
-  <span>¿Prefieres otro idioma? / Need another language? Use your browser's <strong>Translate</strong> button in the address bar.</span>
+<!-- TRANSLATE HINT BANNER — content injected by JS based on device/browser -->
+<div id="translate-hint" style="display:none;">
+  <span class="hint-icon">🌐</span>
+  <span class="hint-text" id="hint-text"></span>
   <button id="translate-hint-close" onclick="dismissHint()" aria-label="Dismiss">✕</button>
 </div>
 
@@ -1276,22 +1290,22 @@
 
 <!-- MISSION STATEMENT -->
 <section class="mission-section">
-  <p class="mission-tag" id="mission-tag">Our Mission</p>
-  <h2 class="mission-title" id="mission-title">Connecting Playas de Tijuana</h2>
-  <p class="mission-text" id="mission-text">At www.miplayasdetijuana.com, we bridge the gap between the vibrant &amp; hardworking entrepreneurs of Playas de Tijuana and the individuals who need their products and services. We invite you to add your business, share your passions, and join a movement rooted in profound community connectivity. By standing together to support local commerce, we don't just find the solutions we need — we empower our neighbors, discover new experiences, and build a beautiful, thriving community for everyone.</p>
+  <p class="mission-tag" id="mission-tag">Nuestra Misión</p>
+  <h2 class="mission-title" id="mission-title">Conectando Playas de Tijuana</h2>
+  <p class="mission-text" id="mission-text">En www.miplayasdetijuana.com, tendemos el puente entre los vibrantes y trabajadores emprendedores de Playas de Tijuana y las personas que necesitan sus productos y servicios. Te invitamos a agregar tu negocio, compartir tus pasiones y unirte a un movimiento arraigado en una profunda conectividad comunitaria. Al apoyar juntos el comercio local, no solo encontramos las soluciones que necesitamos — empoderamos a nuestros vecinos, descubrimos nuevas experiencias y construimos una comunidad bella y próspera para todos.</p>
 </section>
 
 <!-- FEATURED BUSINESSES SECTION -->
 <section class="featured-section" id="featured">
   <div class="featured-header">
-    <div class="featured-eyebrow">⭐ Featured Businesses</div>
-    <h2 class="featured-title" id="featured-title">Spotlight on Playas</h2>
-    <p class="featured-sub" id="featured-sub">Discover top-rated local businesses across every category. Featured placements are paid sponsorships that help keep this directory free for the community.</p>
+    <div class="featured-eyebrow">⭐ Negocios Destacados</div>
+    <h2 class="featured-title" id="featured-title">Lo Mejor de Playas</h2>
+    <p class="featured-sub" id="featured-sub">Los negocios mejor valorados de Playas en cada categoría. Los espacios destacados son patrocinios que ayudan a mantener este directorio gratuito para la comunidad.</p>
   </div>
 
   <div class="featured-category re-section-bg">
     <div class="featured-cat-label">
-      <span>📅 Events <span class="featured-badge">⭐ Featured</span></span>
+      <span>📅 Eventos <span class="featured-badge">⭐ Destacado</span></span>
     </div>
 
 <div class="section-inner">
@@ -1320,15 +1334,15 @@
         <div class="event-date"><div class="month">Mar</div><div class="day">22</div></div>
         <div class="event-info">
           <h3>Feria Gastronómica 🍽️</h3>
-          <p>Local restaurants showcase their best dishes at Plaza Coronado. Tastings, music, and family fun.</p>
+          <p>Los mejores restaurantes locales presentan sus platillos en Plaza Coronado. Degustaciones, música y diversión familiar.</p>
         </div>
         <span class="event-badge">Food & Fun</span>
       </div>
       <div class="event-item">
         <div class="event-date"><div class="month">Apr</div><div class="day">5</div></div>
         <div class="event-info">
-          <h3>Kids Art Fair 🎨</h3>
-          <p>Young artists display their creations at Parque de la Amistad. Drop-in painting and craft stations all day.</p>
+          <h3>Feria de Arte Infantil 🎨</h3>
+          <p>Jóvenes artistas exhiben sus creaciones en el Parque de la Amistad. Estaciones de pintura y manualidades todo el día.</p>
         </div>
         <span class="event-badge">Kids</span>
       </div>
@@ -1424,7 +1438,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Sweet Martha</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1505,7 +1519,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Tacos El Poblano</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1560,7 +1574,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Café Ilustre</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1641,7 +1655,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>El Tubo Tama</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1683,7 +1697,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Llantera Pacífico</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1725,7 +1739,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Carrocería Playa</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1784,7 +1798,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Dental Playas</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1828,7 +1842,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Clínica Familiar Playas</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1872,7 +1886,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Vet Playas</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -1972,7 +1986,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Karate Kids Dojo</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2014,7 +2028,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Taller de Arte Infantil</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2070,7 +2084,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Beach Yoga Collective</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2112,7 +2126,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Escuela de Música Pacífico</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2154,7 +2168,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Escuela de Surf Playas</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2209,7 +2223,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Arena Playas MMA</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2252,7 +2266,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Studio Sol</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2295,7 +2309,7 @@
             <div class="card-video-placeholder">
               <div class="play-icon">▶️</div>
               <span>Box Pacífico CrossFit</span>
-              <p>Add a YouTube video via the Admin Panel</p>
+              <p>Agrega un video de YouTube en el Panel de Administración</p>
             </div>
           </div>
           <div class="review-section">
@@ -2419,10 +2433,10 @@
 <!-- FOOTER -->
 <!-- DISCLAIMER -->
 <div class="disclaimer-section">
-  <p><strong>Disclaimer & Limitation of Liability</strong></p>
-  <p>The listings, information, and content on this website are provided by community members and third parties for general informational purposes only. Playas de Tijuana Community Hub does not verify, endorse, or guarantee the accuracy, quality, safety, legality, or availability of any business, service, event, or listing featured on this site.</p>
-  <p>We are not responsible for any transactions, agreements, or interactions between users and listed businesses. Your use of any information or services found through this site is at your own risk. Featured placements are paid sponsorships and do not constitute an endorsement or recommendation by this site.</p>
-  <p>By using this site, you agree that Playas de Tijuana Community Hub, its owners, and contributors shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use of, or inability to use, information or services obtained through this website.</p>
+  <p><strong>Aviso Legal y Limitación de Responsabilidad</strong></p>
+  <p>Los listados, la información y el contenido de este sitio son proporcionados por miembros de la comunidad y terceros con fines informativos generales. Playas de Tijuana Community Hub no verifica, respalda ni garantiza la exactitud, calidad, seguridad, legalidad o disponibilidad de ningún negocio, servicio, evento o listado publicado en este sitio.</p>
+  <p>No somos responsables de ninguna transacción, acuerdo o interacción entre usuarios y negocios listados. El uso de cualquier información o servicio encontrado a través de este sitio es bajo su propio riesgo. Los espacios destacados son patrocinios pagados y no constituyen un respaldo o recomendación de este sitio.</p>
+  <p>Al usar este sitio, usted acepta que Playas de Tijuana Community Hub, sus propietarios y colaboradores no serán responsables de daños directos, indirectos, incidentales o consecuentes derivados del uso, o la imposibilidad de uso, de la información o servicios obtenidos a través de este sitio web.</p>
   <p style="margin-top:0.75rem; font-size:0.72rem; opacity:0.6;">For questions or to report an inaccurate listing, contact us at <a href="/cdn-cgi/l/email-protection#c2a8f0b2a3a6abaeae82a5afa3abaeeca1adaf" style="color:rgba(255,255,255,0.5);"><span class="__cf_email__" data-cfemail="f19bc3819095989d9db1969c90989ddf929e9c">[email&#160;protected]</span></a></p>
 </div>
 
@@ -2437,8 +2451,8 @@
 <!-- ADMIN PANEL -->
 <div id="admin-panel">
   <div class="admin-box">
-    <h2>⚙️ Site Admin Panel</h2>
-    <p>Add or update content across all sections. Password protected — for site owners only.</p>
+    <h2>⚙️ Panel de Administración</h2>
+    <p>Agrega o actualiza contenido en todas las secciones. Protegido con contraseña — solo para propietarios del sitio.</p>
 
     <div id="admin-login">
       <div class="admin-form-group">
@@ -3307,8 +3321,8 @@ document.addEventListener('DOMContentLoaded', applyConfig);
       container.innerHTML = `
         <div class="card-video-placeholder">
           <div class="play-icon">▶️</div>
-          <span>No video yet</span>
-          <p>Add a YouTube video via the Admin Panel</p>
+          <span>Sin video aún</span>
+          <p>Agrega un video de YouTube en el Panel de Administración</p>
         </div>`;
     }
   }
@@ -3408,13 +3422,48 @@ document.addEventListener('DOMContentLoaded', applyConfig);
 
 
 <script>
-  // Translate hint banner — show once, dismiss forever
   (function() {
-    if (localStorage.getItem('hintDismissed')) {
-      var el = document.getElementById('translate-hint');
-      if (el) el.style.display = 'none';
+    if (localStorage.getItem('hintDismissed')) return;
+
+    var ua = navigator.userAgent;
+    var isIOS = /iPhone|iPad|iPod/.test(ua);
+    var isAndroid = /Android/.test(ua);
+    var isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
+    var isChrome = /Chrome/.test(ua) && !/Edg|OPR/.test(ua);
+    var isEdge = /Edg\//.test(ua);
+    var isFirefox = /Firefox/.test(ua);
+
+    var msg = '';
+
+    if (isIOS && isSafari) {
+      // iPhone/iPad Safari — share button at bottom
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>Share</strong> ⬆️ → <strong>Translate</strong></span>&nbsp; at the bottom of your screen.';
+    } else if (isIOS && isChrome) {
+      // iPhone Chrome — three-dot menu
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>⋮</strong> → <strong>Translate…</strong></span>&nbsp; at the top right.';
+    } else if (isAndroid && isChrome) {
+      // Android Chrome — three-dot menu
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Tap <strong>⋮</strong> → <strong>Translate…</strong></span>&nbsp; in the top-right menu.';
+    } else if (isChrome) {
+      // Desktop Chrome — translate icon in address bar
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click the <strong>translate icon</strong> 🌐 in your address bar</span>&nbsp; to translate this page.';
+    } else if (isEdge) {
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click <strong>Translate this page</strong> in your address bar</span>.';
+    } else if (isFirefox) {
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Click the <strong>translate icon</strong> 🌐 in the address bar</span>&nbsp; to translate this page.';
+    } else {
+      // Fallback for any other browser
+      msg = '¿Otro idioma? / Need another language? &nbsp;<span class="hint-step">Use your browser\'s <strong>Translate</strong> option</span>&nbsp; to translate this page.';
+    }
+
+    var textEl = document.getElementById('hint-text');
+    var banner = document.getElementById('translate-hint');
+    if (textEl && banner) {
+      textEl.innerHTML = msg;
+      banner.style.display = 'flex';
     }
   })();
+
   function dismissHint() {
     var el = document.getElementById('translate-hint');
     if (el) el.style.display = 'none';
