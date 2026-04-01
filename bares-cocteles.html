@@ -399,12 +399,17 @@
       const img = new Image();
       img.onload = function() {
         const canvas = document.createElement('canvas');
-        const MAX = 1200;
+        const MAX = 400;
         let w = img.width, h = img.height;
         if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        const data = canvas.toDataURL('image/jpeg', 0.82);
+        let data = canvas.toDataURL('image/jpeg', 0.5);
+        // Safety net: if still over ~40k chars, compress harder
+        if (data.length > 40000) {
+          data = canvas.toDataURL('image/jpeg', 0.3);
+        }
         formPhotos[i] = data;
         const slot = document.getElementById('formPhotoGrid').children[i];
         let imgEl = slot.querySelector('img');
