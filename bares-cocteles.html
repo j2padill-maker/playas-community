@@ -103,7 +103,7 @@
 
 <div class="breadcrumb">
   <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> ›
-  <a href="bares.html" data-es="Restaurantes" data-en="Restaurants">Restaurantes</a> ›
+  <a href="bares.html" data-es="Restaurantes" data-en="Restaurants">Bares &amp; Cervecerías</a> ›
   <span data-es="Cocteles" data-en="Cocktails">Cocteles</span>
 </div>
 
@@ -113,7 +113,7 @@
       <h3 data-es="¿Tienes un bar de cocteles en Playas?" data-en="Own a cocktail bar in Playas?">¿Tienes un bar de cocteles en Playas?</h3>
       <p data-es="Mezcal, tequila, gin y cocteles de autor con ingredientes frescos." data-en="Mezcal, tequila, gin, and signature cocktails with fresh ingredients.">Mezcal, tequila, gin y cocteles de autor con ingredientes frescos.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Restaurante" data-en="+ Add Your Restaurant">+ Agregar tu Restaurante</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Bar" data-en="+ Add Your Restaurant">+ Agregar tu Bar</button>
   </div>
 
   <!-- Approved Listings -->
@@ -130,11 +130,11 @@
     <div class="form-row">
       <div class="form-group">
         <label data-es="Nombre del Bar" data-en="Bar Name">Nombre del Bar</label>
-        <input id="restName" type="text" placeholder="ej. Tacos El Güero" data-placeholder-es="ej. Tacos El Güero" data-placeholder-en="e.g. Tacos El Güero">
+        <input id="barName" type="text" placeholder="ej. Tacos El Güero" data-placeholder-es="ej. Tacos El Güero" data-placeholder-en="e.g. Tacos El Güero">
       </div>
       <div class="form-group">
         <label data-es="Categoría" data-en="Category">Categoría</label>
-        <select id="restCategory">
+        <select id="barCategory">
           <option value="Cocktail Bar">Bar de Cocteles / Cocktail Bar</option>
         </select>
       </div>
@@ -142,40 +142,40 @@
     <div class="form-row">
       <div class="form-group">
         <label data-es="Dirección" data-en="Address">Dirección</label>
-        <input id="restAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address in Playas" placeholder="Dirección en Playas">
+        <input id="barAddress" type="text" data-placeholder-es="Dirección en Playas" data-placeholder-en="Street address in Playas" placeholder="Dirección en Playas">
       </div>
       <div class="form-group">
         <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
-        <input id="restPhone" type="text" placeholder="664-xxx-xxxx">
+        <input id="barPhone" type="text" placeholder="664-xxx-xxxx">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Horario" data-en="Hours">Horario</label>
-        <input id="restHours" type="text" data-placeholder-es="ej. Lun–Dom 8am–2am" data-placeholder-en="e.g. Mon–Sun 8am–2am" placeholder="ej. Lun–Dom 8am–2am">
+        <input id="barHours" type="text" data-placeholder-es="ej. Lun–Dom 8am–2am" data-placeholder-en="e.g. Mon–Sun 8am–2am" placeholder="ej. Lun–Dom 8am–2am">
       </div>
       <div class="form-group">
         <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes</label>
-        <input id="restSocial" type="text" placeholder="@turestaurante">
+        <input id="barSocial" type="text" placeholder="@turestaurante">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Sitio Web" data-en="Website">Sitio Web</label>
-        <input id="restWebsite" type="url" placeholder="https://turestaurante.com">
+        <input id="barWebsite" type="url" placeholder="https://turestaurante.com">
       </div>
       <div class="form-group">
         <label data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
-        <input id="restEmail" type="email" placeholder="hola@turestaurante.com">
+        <input id="barEmail" type="email" placeholder="hola@turestaurante.com">
       </div>
     </div>
     <div class="form-group">
       <label data-es="Descripción *" data-en="Description *">Descripción *</label>
-      <textarea id="restDesc" data-placeholder-es="Cuéntanos sobre tu bar — especialidades, ambiente, cocteles destacados..." data-placeholder-en="Tell us about your bar — specialties, atmosphere, signature cocktails..." placeholder="Cuéntanos sobre tu bar — especialidades, ambiente, cocteles destacados..."></textarea>
+      <textarea id="barDesc" data-placeholder-es="Cuéntanos sobre tu bar — especialidades, ambiente, cocteles destacados..." data-placeholder-en="Tell us about your bar — specialties, atmosphere, signature cocktails..." placeholder="Cuéntanos sobre tu bar — especialidades, ambiente, cocteles destacados..."></textarea>
     </div>
     <div class="form-group">
       <label data-es="Tu Nombre y Contacto" data-en="Your Name & Contact">Tu Nombre y Contacto <span style="font-weight:400;opacity:0.75;" data-es="(no se publica)" data-en="(not published)">(no se publica)</span></label>
-      <input id="restContact" type="text" data-placeholder-es="Nombre · email o teléfono" data-placeholder-en="Name · email or phone" placeholder="Nombre · email o teléfono">
+      <input id="barContact" type="text" data-placeholder-es="Nombre · email o teléfono" data-placeholder-en="Name · email or phone" placeholder="Nombre · email o teléfono">
     </div>
     <div class="form-group">
       <label><span data-es="Fotos" data-en="Photos">Fotos</span> <span style="font-weight:400;opacity:0.75;" data-es="(opcional — hasta 5)" data-en="(optional — up to 5)">(opcional — hasta 5)</span></label>
