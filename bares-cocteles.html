@@ -103,7 +103,7 @@
 
 <div class="breadcrumb">
   <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a> ›
-  <a href="bares.html" data-es="Restaurantes" data-en="Restaurants">Bares &amp; Cervecerías</a> ›
+  <a href="bares.html" data-es="Bares &amp; Cervecerías" data-en="Bars &amp; Breweries">Bares &amp; Cervecerías</a> ›
   <span data-es="Cocteles" data-en="Cocktails">Cocteles</span>
 </div>
 
@@ -111,9 +111,9 @@
   <div class="submit-banner">
     <div>
       <h3 data-es="¿Tienes un bar de cocteles en Playas?" data-en="Own a cocktail bar in Playas?">¿Tienes un bar de cocteles en Playas?</h3>
-      <p data-es="Mezcal, tequila, gin y cocteles de autor con ingredientes frescos." data-en="Mezcal, tequila, gin, and signature cocktails with fresh ingredients.">Mezcal, tequila, gin y cocteles de autor con ingredientes frescos.</p>
+      <p data-es="Lista tu bar gratis y conéctate con los amantes de los buenos tragos." data-en="List your bar for free and connect with cocktail enthusiasts.">Lista tu bar gratis y conéctate con los amantes de los buenos tragos.</p>
     </div>
-    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Bar" data-en="+ Add Your Restaurant">+ Agregar tu Bar</button>
+    <button class="submit-btn" onclick="document.getElementById('submit-listing').scrollIntoView({behavior:'smooth'})" data-es="+ Agregar tu Bar" data-en="+ Add Your Bar">+ Agregar tu Bar</button>
   </div>
 
   <!-- Approved Listings -->
@@ -126,11 +126,11 @@
   <!-- Submission Form -->
   <div class="submit-section" id="submit-listing">
     <h2 data-es="➕ Agregar un Bar de Cocteles" data-en="➕ Add a Cocktail Bar">➕ Agregar un Bar de Cocteles</h2>
-    <p data-es="Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your listing for review. We'll add it once approved — free community listing.">Envía tu listado para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
+    <p data-es="Envía tu bar para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito." data-en="Submit your bar for review. We'll add it once approved — free community listing.">Envía tu bar para revisión. Lo agregaremos una vez aprobado — listado comunitario gratuito.</p>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Nombre del Bar" data-en="Bar Name">Nombre del Bar</label>
-        <input id="barName" type="text" placeholder="ej. Tacos El Güero" data-placeholder-es="ej. Tacos El Güero" data-placeholder-en="e.g. Tacos El Güero">
+        <input id="barName" type="text" placeholder="ej. Bar El Pacífico" data-placeholder-es="ej. Bar El Pacífico" data-placeholder-en="e.g. Bar El Pacifico">
       </div>
       <div class="form-group">
         <label data-es="Categoría" data-en="Category">Categoría</label>
@@ -156,17 +156,17 @@
       </div>
       <div class="form-group">
         <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes</label>
-        <input id="barSocial" type="text" placeholder="@turestaurante">
+        <input id="barSocial" type="text" placeholder="@tubar">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Sitio Web" data-en="Website">Sitio Web</label>
-        <input id="barWebsite" type="url" placeholder="https://turestaurante.com">
+        <input id="barWebsite" type="url" placeholder="https://tubar.com">
       </div>
       <div class="form-group">
         <label data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
-        <input id="barEmail" type="email" placeholder="hola@turestaurante.com">
+        <input id="barEmail" type="email" placeholder="hola@tubar.com">
       </div>
     </div>
     <div class="form-group">
@@ -203,7 +203,7 @@
   </div>
 
   <div class="info-banner">
-    <h2 data-es="🍽️ Come Local en Playas" data-en="🍽️ Eat Local in Playas">🍽️ Come Local en Playas</h2>
+    <h2 data-es="🍹 Bebe Local en Playas" data-en="🍹 Drink Local in Playas">🍹 Bebe Local en Playas</h2>
     <p data-es="Todos los bares listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local." data-en="All bars listed here are local businesses in Playas de Tijuana. Support your community by choosing to drink local.">Todos los bares listados aquí son negocios locales en Playas de Tijuana. Apoya a tu comunidad eligiendo beber local.</p>
   </div>
 
@@ -440,7 +440,7 @@
   async function submitBarForm() {
     const name = (document.getElementById('barName').value || '').trim();
     const desc = (document.getElementById('barDesc').value || '').trim();
-    if (!name) { alert('Please enter the restaurant name.'); return; }
+    if (!name) { alert('Please enter the bar name.'); return; }
     if (!desc) { alert('Please enter a description.'); return; }
     const btn = document.getElementById('barSubmitBtn');
     btn.disabled = true;
