@@ -14,7 +14,7 @@
   .nav-brand { font-family:'Playfair Display',serif; color:var(--sand); font-size:1.3rem; font-weight:700; text-decoration:none; }
   .nav-back { margin-left:auto; color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.82rem; font-weight:500; padding:0.4rem 1rem; border:1px solid rgba(255,255,255,0.3); border-radius:20px; transition:all 0.2s; }
   .nav-back:hover { background:rgba(255,255,255,0.15); color:var(--sand); }
-  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(26,42,90,0.85),rgba(42,74,154,0.75)), url('https://images.unsplash.com/558618666-fcd25c85cd64?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
+  .page-hero { min-height:340px; background:linear-gradient(135deg,rgba(26,42,90,0.85),rgba(42,74,154,0.75)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:calc(var(--nav-h) + 3rem) 2rem 3rem; }
   .page-hero-tag { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--seafoam-light); font-weight:600; margin-bottom:0.6rem; }
   .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); color:#fff; margin-bottom:0.75rem; }
   .page-hero p { color:rgba(255,255,255,0.8); max-width:520px; line-height:1.7; font-size:0.97rem; }
@@ -130,7 +130,7 @@
     <div class="form-row">
       <div class="form-group">
         <label data-es="Nombre de la Cervecería" data-en="Brewery Name">Nombre de la Cervecería</label>
-        <input id="barName" type="text" placeholder="ej. Cervecería del Pacífico" data-placeholder-es="ej. Cervecería del Pacífico" data-placeholder-en="e.g. Pacific Craft Brewery">
+        <input id="barName" type="text" placeholder="ej. Cervecería del Pacífico" data-placeholder-es="ej. Bar El Pacífico" data-placeholder-en="e.g. Bar El Pacifico">
       </div>
       <div class="form-group">
         <label data-es="Categoría" data-en="Category">Categoría</label>
@@ -156,17 +156,17 @@
       </div>
       <div class="form-group">
         <label data-es="Instagram / Redes" data-en="Instagram / Social">Instagram / Redes</label>
-        <input id="barSocial" type="text" placeholder="@tucerveceria">
+        <input id="barSocial" type="text" placeholder="@tubar">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label data-es="Sitio Web" data-en="Website">Sitio Web</label>
-        <input id="barWebsite" type="url" placeholder="https://tucerveceria.com">
+        <input id="barWebsite" type="url" placeholder="https://tubar.com">
       </div>
       <div class="form-group">
         <label data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
-        <input id="barEmail" type="email" placeholder="hola@tucerveceria.com">
+        <input id="barEmail" type="email" placeholder="hola@tubar.com">
       </div>
     </div>
     <div class="form-group">
@@ -440,7 +440,7 @@
   async function submitBarForm() {
     const name = (document.getElementById('barName').value || '').trim();
     const desc = (document.getElementById('barDesc').value || '').trim();
-    if (!name) { alert('Please enter the brewery name.'); return; }
+    if (!name) { alert('Please enter the bar name.'); return; }
     if (!desc) { alert('Please enter a description.'); return; }
     const btn = document.getElementById('barSubmitBtn');
     btn.disabled = true;
