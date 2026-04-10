@@ -415,6 +415,7 @@
           rmBtn.className = 'rm-btn';
           rmBtn.textContent = '✕';
           rmBtn.onclick = function(ev) {
+            ev.preventDefault();
             ev.stopPropagation();
             formPhotos[i] = null;
             imgEl.remove();
