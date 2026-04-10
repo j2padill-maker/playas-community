@@ -221,56 +221,27 @@
 
   // CSV Parser
   function parseCSV(text) {
-    const rows = [];
-    let i = 0;
-    while (i < text.length) {
-      const row = [];
-      while (i < text.length) {
-        if (text[i] === '"') {
-          // Quoted field - read until closing quote
-          i++; // skip opening quote
-          let val = '';
-          while (i < text.length) {
-            if (text[i] === '"' && text[i+1] === '"') {
-              val += '"'; i += 2; // escaped quote
-            } else if (text[i] === '"') {
-              i++; break; // closing quote
-            } else {
-              val += text[i++];
-            }
-          }
-          row.push(val);
-          // skip comma or newline after closing quote
-          if (text[i] === ',') i++;
-        } else {
-          // Unquoted field - read until comma or newline
-          let val = '';
-          while (i < text.length && text[i] !== ',' && text[i] !== '
-' && text[i] !== '
-') {
-            val += text[i++];
-          }
-          row.push(val.trim());
-          if (text[i] === ',') i++;
-        }
-        // End of row
-        if (i >= text.length || text[i] === '
-' || text[i] === '
-') {
-          if (text[i] === '
-') i++;
-          if (text[i] === '
-') i++;
-          break;
-        }
-      }
-      if (row.length > 1 || (row.length === 1 && row[0] !== '')) rows.push(row);
+    const lines = text.replace(/\r/g, '').split('\n');
+    const rawHeaders = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < lines[0].length; i++) {
+      if (lines[0][i] === '"') { inQ = !inQ; }
+      else if (lines[0][i] === ',' && !inQ) { rawHeaders.push(cur.trim()); cur = ''; }
+      else { cur += lines[0][i]; }
     }
-    if (rows.length === 0) return [];
-    const headers = rows[0].map(h => h.trim());
-    return rows.slice(1).map(function(values) {
+    rawHeaders.push(cur.trim());
+    const headers = rawHeaders.map(h => h.replace(/"/g,'').trim());
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+      const values = [];
+      let current = '', inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        if (line[i] === '"') { inQuotes = !inQuotes; }
+        else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
+        else { current += line[i]; }
+      }
+      values.push(current.trim());
       const obj = {};
-      headers.forEach(function(h, i) { obj[h] = (values[i] || '').trim(); });
+      headers.forEach((h, i) => { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
       return obj;
     });
   }
@@ -385,6 +356,10 @@
   // Form photo upload
   const formPhotos = [null,null,null,null,null];
   let formProfilePhoto = 1;
+
+  function triggerFormPhoto(i) {
+    document.getElementById('formPhotoGrid').children[i].querySelector('input[type=file]').click();
+  }
 
   function triggerFormPhoto(i) {
     document.getElementById('formPhotoGrid').children[i].querySelector('input[type=file]').click();
