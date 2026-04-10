@@ -408,7 +408,7 @@
         let imgEl = slot.querySelector('img');
         if (!imgEl) { imgEl = document.createElement('img'); slot.appendChild(imgEl); }
         imgEl.src = data;
-        var icon = slot.querySelector('.slot-icon'); if (icon) icon.style.display = 'none';
+        var icon = slot.querySelector('.slot-icon'); if (icon) { icon.style.display = 'none'; icon.textContent = ''; }
         let rmBtn = slot.querySelector('.rm-btn');
         if (!rmBtn) {
           rmBtn = document.createElement('button');
@@ -420,7 +420,7 @@
             formPhotos[i] = null;
             imgEl.remove();
             rmBtn.remove();
-            var icon = slot.querySelector('.slot-icon'); if (icon) icon.style.display = '';
+            var icon = slot.querySelector('.slot-icon'); if (icon) { icon.style.display = ''; icon.textContent = '📷'; }
             updateFormProfilePicker();
           };
           slot.appendChild(rmBtn);
