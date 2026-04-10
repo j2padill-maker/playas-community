@@ -180,11 +180,11 @@
     <div class="form-group">
       <label><span data-es="Fotos" data-en="Photos">Fotos</span> <span style="font-weight:400;opacity:0.75;" data-es="(opcional — hasta 5)" data-en="(optional — up to 5)">(opcional — hasta 5)</span></label>
       <div class="form-photo-grid" id="formPhotoGrid">
-        <label class="form-photo-slot"><span class="slot-icon">📷</span><input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,0)"></label>
-        <label class="form-photo-slot"><span class="slot-icon">📷</span><input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,1)"></label>
-        <label class="form-photo-slot"><span class="slot-icon">📷</span><input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,2)"></label>
-        <label class="form-photo-slot"><span class="slot-icon">📷</span><input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,3)"></label>
-        <label class="form-photo-slot"><span class="slot-icon">📷</span><input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,4)"></label>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(0)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,0)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(1)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,1)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(2)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,2)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(3)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,3)"></div>
+        <div class="form-photo-slot" onclick="triggerFormPhoto(4)">📷<input type="file" accept="image/*" style="display:none" onchange="handleFormPhoto(this,4)"></div>
       </div>
       <div class="profile-picker" id="formProfilePicker">
         <label data-es="★ Elige tu foto de perfil (se muestra en la tarjeta)" data-en="★ Choose your profile photo (shown on the listing card)">★ Elige tu foto de perfil (se muestra en la tarjeta)</label>
@@ -404,23 +404,22 @@
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
         const data = canvas.toDataURL('image/jpeg', 0.82);
         formPhotos[i] = data;
-        const slot = document.getElementById('formPhotoGrid').querySelectorAll('.form-photo-slot')[i];
+        const slot = document.getElementById('formPhotoGrid').children[i];
         let imgEl = slot.querySelector('img');
         if (!imgEl) { imgEl = document.createElement('img'); slot.appendChild(imgEl); }
         imgEl.src = data;
-        var icon = slot.querySelector('.slot-icon'); if (icon) { icon.style.display = 'none'; icon.textContent = ''; }
+        slot.childNodes[0].textContent = '';
         let rmBtn = slot.querySelector('.rm-btn');
         if (!rmBtn) {
           rmBtn = document.createElement('button');
           rmBtn.className = 'rm-btn';
           rmBtn.textContent = '✕';
           rmBtn.onclick = function(ev) {
-            ev.preventDefault();
             ev.stopPropagation();
             formPhotos[i] = null;
             imgEl.remove();
             rmBtn.remove();
-            var icon = slot.querySelector('.slot-icon'); if (icon) { icon.style.display = ''; icon.textContent = '📷'; }
+            slot.childNodes[0].textContent = '📷';
             updateFormProfilePicker();
           };
           slot.appendChild(rmBtn);
