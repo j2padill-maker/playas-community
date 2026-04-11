@@ -251,29 +251,42 @@
 
   // CSV Parser
   function parseCSV(text) {
-    const lines = text.replace(/\r/g, '').split('\n');
-    const rawHeaders = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < lines[0].length; i++) {
-      if (lines[0][i] === '"') { inQ = !inQ; }
-      else if (lines[0][i] === ',' && !inQ) { rawHeaders.push(cur.trim()); cur = ''; }
-      else { cur += lines[0][i]; }
-    }
-    rawHeaders.push(cur.trim());
-    const headers = rawHeaders.map(h => h.replace(/"/g,'').trim());
-    return lines.slice(1).filter(l => l.trim()).map(line => {
-      const values = [];
-      let current = '', inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        if (line[i] === '"') { inQuotes = !inQuotes; }
-        else if (line[i] === ',' && !inQuotes) { values.push(current.trim()); current = ''; }
-        else { current += line[i]; }
+    text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    const headers = [];
+    let i = 0;
+    function parseField() {
+      if (text[i] === '"') {
+        i++;
+        let val = '';
+        while (i < text.length) {
+          if (text[i] === '"' && text[i+1] === '"') { val += '"'; i += 2; }
+          else if (text[i] === '"') { i++; break; }
+          else { val += text[i++]; }
+        }
+        return val.trim();
+      } else {
+        let val = '';
+        while (i < text.length && text[i] !== ',' && text[i] !== '\n') { val += text[i++]; }
+        return val.trim();
       }
-      values.push(current.trim());
+    }
+    while (i < text.length && text[i] !== '\n') {
+      headers.push(parseField().replace(/"/g,'').trim());
+      if (text[i] === ',') i++;
+    }
+    if (text[i] === '\n') i++;
+    const rows = [];
+    while (i < text.length) {
+      if (text.slice(i).trim() === '') break;
       const obj = {};
-      headers.forEach((h, i) => { obj[h] = (values[i] || '').replace(/"/g,'').trim(); });
-      return obj;
-    });
+      headers.forEach(function(h, hi) {
+        obj[h] = parseField().replace(/"/g,'').trim();
+        if (hi < headers.length - 1 && text[i] === ',') i++;
+      });
+      if (text[i] === '\n') i++;
+      if (Object.values(obj).some(function(v){ return v !== ''; })) rows.push(obj);
+    }
+    return rows;
   }
 
   // Build listing card
